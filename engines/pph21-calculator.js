@@ -9,7 +9,7 @@ const pphRulesData = require('./rules/pph21.json');
 const { verifyRulesetIntegrity } = require('./rules/integrity');
 
 // Enforce runtime integrity validation on load
-verifyRulesetIntegrity('pph21.json', pphRulesData);
+verifyRulesetIntegrity('pph21.json');
 
 function getRulesForDate(dateStr) {
   const activeDateStr = dateStr || '2026-03-01';

@@ -11,7 +11,7 @@ const bpjsRules = require('./rules/bpjs.json');
 const { verifyRulesetIntegrity } = require('./rules/integrity');
 
 // Enforce runtime integrity validation on load
-verifyRulesetIntegrity('bpjs.json', bpjsRules);
+verifyRulesetIntegrity('bpjs.json');
 
 function getRulesForDate(dateStr) {
   if (!dateStr) {

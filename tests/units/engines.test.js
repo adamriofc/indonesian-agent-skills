@@ -1,4 +1,5 @@
 const assert = require('assert');
+const fs = require('fs');
 const path = require('path');
 const { calculatePPh21Monthly, calculateArticle17AnnualTax, calculatePPh21DecemberReconciliation } = require('../../engines/pph21-calculator');
 const { calculateBpjs, getRulesForDate } = require('../../engines/bpjs-calculator');
@@ -15,7 +16,7 @@ function runUnitTests() {
   console.log("⚡ Running Deterministic Engine Math & Golden Corpus Tests...\n");
 
   // ----------------------------------------------------
-  // 1. Test Cryptographic Ruleset Integrity Verification
+  // 1. Test Cryptographic Ruleset Integrity & Tampering
   // ----------------------------------------------------
   console.log("  [1/6] Testing Cryptographic SHA-256 Ruleset Integrity & Tamper Protection...");
   const bpjsCheck = verifyRulesetIntegrity('bpjs.json');
@@ -26,10 +27,29 @@ function runUnitTests() {
   assert.strictEqual(pph21Check.status, 'VERIFIED');
   assert.strictEqual(pph21Check.hash.length, 64);
 
-  // Assert tamper detection throws an explicit violation
+  // Assert tamper detection throws on unregistered ruleset files
   assert.throws(() => {
-    verifyRulesetIntegrity('unregistered_ruleset.json', {});
+    verifyRulesetIntegrity('unregistered_ruleset.json');
   }, /No registered hash manifest for/, "Failed to detect unregistered ruleset tampering");
+
+  // Real Tampered-File Byte Modification Test (Audit P1)
+  const bpjsPath = path.join(__dirname, '../../engines/rules/bpjs.json');
+  const bpjsContent = fs.readFileSync(bpjsPath, 'utf8');
+  // Inject a single byte modification (change "rulesets" key to "rulesetx")
+  const tamperedContent = bpjsContent.replace('"rulesets"', '"rulesetx"');
+  
+  const tempPath = path.join('/tmp', 'tampered_bpjs_test.json');
+  fs.writeFileSync(tempPath, tamperedContent, 'utf8');
+
+  // Verify that tampering is successfully caught and throws
+  assert.throws(() => {
+    verifyRulesetIntegrity('bpjs.json', tempPath);
+  }, /Cryptographic Integrity Violation.*tampered/, "Failed to throw on byte-level tampered ruleset file");
+
+  // Clean up temporary file
+  if (fs.existsSync(tempPath)) {
+    fs.unlinkSync(tempPath);
+  }
 
   // ----------------------------------------------------
   // 2. Test Golden Corpus PPh 21 Scenarios & Metadata
