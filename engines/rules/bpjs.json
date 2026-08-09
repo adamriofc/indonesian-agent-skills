@@ -7,6 +7,15 @@
       "effective_to": "2024-02-29",
       "kesCap": 12000000,
       "jpCap": 10042300,
+      "rates": {
+        "kesEmployer": 0.04,
+        "kesEmployee": 0.01,
+        "jhtEmployer": 0.037,
+        "jhtEmployee": 0.02,
+        "jpEmployer": 0.02,
+        "jpEmployee": 0.01,
+        "jkmEmployer": 0.003
+      },
       "jkkRates": {
         "very_low": 0.0024,
         "low": 0.0054,
@@ -26,6 +35,15 @@
       "effective_to": "2025-02-28",
       "kesCap": 12000000,
       "jpCap": 10042300,
+      "rates": {
+        "kesEmployer": 0.04,
+        "kesEmployee": 0.01,
+        "jhtEmployer": 0.037,
+        "jhtEmployee": 0.02,
+        "jpEmployer": 0.02,
+        "jpEmployee": 0.01,
+        "jkmEmployer": 0.003
+      },
       "jkkRates": {
         "very_low": 0.0024,
         "low": 0.0054,
@@ -45,6 +63,15 @@
       "effective_to": "2026-02-28",
       "kesCap": 12000000,
       "jpCap": 10547400,
+      "rates": {
+        "kesEmployer": 0.04,
+        "kesEmployee": 0.01,
+        "jhtEmployer": 0.037,
+        "jhtEmployee": 0.02,
+        "jpEmployer": 0.02,
+        "jpEmployee": 0.01,
+        "jkmEmployer": 0.003
+      },
       "jkkRates": {
         "very_low": 0.0024,
         "low": 0.0054,
@@ -64,6 +91,15 @@
       "effective_to": "Infinity",
       "kesCap": 12000000,
       "jpCap": 11086300,
+      "rates": {
+        "kesEmployer": 0.04,
+        "kesEmployee": 0.01,
+        "jhtEmployer": 0.037,
+        "jhtEmployee": 0.02,
+        "jpEmployer": 0.02,
+        "jpEmployee": 0.01,
+        "jkmEmployer": 0.003
+      },
       "jkkRates": {
         "very_low": 0.0024,
         "low": 0.0054,

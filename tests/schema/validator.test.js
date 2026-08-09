@@ -17,6 +17,37 @@ function discoverPlugins(rootDir) {
   return plugins;
 }
 
+function parseYamlFrontmatter(yamlStr) {
+  const lines = yamlStr.split('\n');
+  const result = {};
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    
+    const colonIdx = trimmed.indexOf(':');
+    if (colonIdx === -1) {
+      throw new Error(`Malformed YAML frontmatter line: "${line}"`);
+    }
+    
+    const key = trimmed.slice(0, colonIdx).trim();
+    const value = trimmed.slice(colonIdx + 1).trim();
+    
+    if (!key) {
+      throw new Error(`Empty key in YAML frontmatter line: "${line}"`);
+    }
+    if (result.hasOwnProperty(key)) {
+      throw new Error(`Duplicate YAML frontmatter key: "${key}"`);
+    }
+    
+    // Strip surrounding quotes if present
+    const cleanValue = value.replace(/^['"]|['"]$/g, '');
+    result[key] = cleanValue;
+  }
+  
+  return result;
+}
+
 function validate() {
   console.log("🔍 Running Dynamic Plugin & Skill Schema Validation...\n");
   let errors = 0;
@@ -35,12 +66,29 @@ function validate() {
   plugins.forEach(plugin => {
     const pluginDir = path.join(rootDir, plugin);
 
-    // Validate plugin.json
+    // Validate plugin.json Manifest Schema
     const manifestPath = path.join(pluginDir, '.claude-plugin', 'plugin.json');
     try {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      if (!manifest.name || !manifest.version || !manifest.description) {
-        console.error(`❌ Invalid required manifest fields in ${manifestPath}`);
+      
+      // Strict Manifest Keys Validation
+      if (!manifest.name || typeof manifest.name !== 'string' || manifest.name.trim() === '') {
+        console.error(`❌ Manifest Schema Violation in ${manifestPath}: 'name' is required and must be a non-empty string.`);
+        errors++;
+      }
+      
+      if (!manifest.version || !/^\d+\.\d+\.\d+$/.test(manifest.version)) {
+        console.error(`❌ Manifest Schema Violation in ${manifestPath}: 'version' must follow strict SemVer formatting (e.g. 1.0.0). Got: "${manifest.version}"`);
+        errors++;
+      }
+      
+      if (!manifest.description || typeof manifest.description !== 'string' || manifest.description.length < 10) {
+        console.error(`❌ Manifest Schema Violation in ${manifestPath}: 'description' is too short or missing.`);
+        errors++;
+      }
+
+      if (!manifest.author || typeof manifest.author !== 'object' || !manifest.author.name) {
+        console.error(`❌ Manifest Schema Violation in ${manifestPath}: 'author.name' is required.`);
         errors++;
       }
     } catch (e) {
@@ -48,7 +96,7 @@ function validate() {
       errors++;
     }
 
-    // Validate Skills
+    // Validate Skills Frontmatter Schemas
     const skillsDir = path.join(pluginDir, 'skills');
     if (fs.existsSync(skillsDir)) {
       const skills = fs.readdirSync(skillsDir);
@@ -74,9 +122,21 @@ function validate() {
           return;
         }
 
-        const frontmatter = parts[1];
-        if (!frontmatter.includes('name:') || !frontmatter.includes('description:')) {
-          console.error(`❌ Frontmatter missing required 'name' or 'description' in ${skillFilePath}`);
+        // Strict YAML Frontmatter Parser
+        try {
+          const frontmatter = parseYamlFrontmatter(parts[1]);
+          
+          if (!frontmatter.name || frontmatter.name.trim() === '') {
+            console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'name' must be a non-empty string in frontmatter.`);
+            errors++;
+          }
+          
+          if (!frontmatter.description || frontmatter.description.trim() === '') {
+            console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'description' must be a non-empty string in frontmatter.`);
+            errors++;
+          }
+        } catch (err) {
+          console.error(`❌ YAML Frontmatter parse error in ${skillFilePath}: ${err.message}`);
           errors++;
         }
 
@@ -89,7 +149,7 @@ function validate() {
     console.error(`\n❌ Schema Validation failed with ${errors} error(s).`);
     process.exit(1);
   } else {
-    console.log(`✅ Schema Validation Passed: Discovered ${plugins.length} plugins & ${totalSkills} skills cleanly with zero errors.`);
+    console.log(`✅ Schema Validation Passed: Discovered ${plugins.length} plugins & ${totalSkills} skills verified against strict schemas.`);
   }
 }
 

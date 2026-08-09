@@ -1,7 +1,7 @@
 /**
  * Deterministic BPJS Contribution Calculator Engine
  * Supports temporal rulesets with effective dates (e.g. March 1st transitions)
- * to ensure regulatory precision and prevent calculation drift.
+ * and extracts all rates dynamically from engines/rules/bpjs.json (Single Source of Truth).
  */
 
 const bpjsRules = require('./rules/bpjs.json');
@@ -32,25 +32,34 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   const activeDateStr = dateStr || new Date().toISOString().split('T')[0];
   const wage = Math.max(0, Number(baseWage) || 0);
   const rules = getRulesForDate(activeDateStr);
+  const rates = rules.rates || {
+    kesEmployer: 0.04,
+    kesEmployee: 0.01,
+    jhtEmployer: 0.037,
+    jhtEmployee: 0.02,
+    jpEmployer: 0.02,
+    jpEmployee: 0.01,
+    jkmEmployer: 0.003
+  };
 
   // 1. BPJS Kesehatan (5% total: 4% Employer, 1% Employee)
   const kesBaseWage = Math.min(wage, rules.kesCap);
-  const kesEmployer = Math.round(kesBaseWage * 0.04);
-  const kesEmployee = Math.round(kesBaseWage * 0.01);
+  const kesEmployer = Math.round(kesBaseWage * rates.kesEmployer);
+  const kesEmployee = Math.round(kesBaseWage * rates.kesEmployee);
   const kesTotal = kesEmployer + kesEmployee;
 
   // 2. BPJS TK - JHT (5.7% total: 3.7% Employer, 2% Employee)
-  const jhtEmployer = Math.round(wage * 0.037);
-  const jhtEmployee = Math.round(wage * 0.02);
+  const jhtEmployer = Math.round(wage * rates.jhtEmployer);
+  const jhtEmployee = Math.round(wage * rates.jhtEmployee);
   const jhtTotal = jhtEmployer + jhtEmployee;
 
   // 3. BPJS TK - JP (3% total: 2% Employer, 1% Employee, Capped)
   const jpBaseWage = Math.min(wage, rules.jpCap);
-  const jpEmployer = Math.round(jpBaseWage * 0.02);
-  const jpEmployee = Math.round(jpBaseWage * 0.01);
+  const jpEmployer = Math.round(jpBaseWage * rates.jpEmployer);
+  const jpEmployee = Math.round(jpBaseWage * rates.jpEmployee);
   const jpTotal = jpEmployer + jpEmployee;
 
-  // 4. BPJS TK - JKK (Employer Only, extracted from ruleset SSOT)
+  // 4. BPJS TK - JKK (Employer Only)
   const jkkRates = rules.jkkRates || {
     very_low: 0.0024,
     low: 0.0054,
@@ -62,7 +71,7 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   const jkkEmployer = Math.round(wage * jkkRate);
 
   // 5. BPJS TK - JKM (Employer Only 0.3%)
-  const jkmEmployer = Math.round(wage * 0.003);
+  const jkmEmployer = Math.round(wage * rates.jkmEmployer);
 
   const totalEmployer = kesEmployer + jhtEmployer + jpEmployer + jkkEmployer + jkmEmployer;
   const totalEmployee = kesEmployee + jhtEmployee + jpEmployee;
