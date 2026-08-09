@@ -1,0 +1,75 @@
+[
+  {
+    "caseId": "PPH21-TER-A-001",
+    "description": "Monthly salary below TER A minimum threshold (5M, TK/0)",
+    "input": {
+      "grossSalary": 5000000,
+      "ptkpStatus": "TK/0",
+      "hasNpwp": true
+    },
+    "expected": {
+      "terCategory": "A",
+      "effectiveRatePercent": "0.00%",
+      "monthlyTaxWithheld": 0
+    }
+  },
+  {
+    "caseId": "PPH21-TER-A-002",
+    "description": "Monthly salary at 10M, TK/0 (TER Category A)",
+    "input": {
+      "grossSalary": 10000000,
+      "ptkpStatus": "TK/0",
+      "hasNpwp": true
+    },
+    "expected": {
+      "terCategory": "A",
+      "effectiveRatePercent": "2.00%",
+      "monthlyTaxWithheld": 200000
+    }
+  },
+  {
+    "caseId": "PPH21-TER-B-001",
+    "description": "Monthly salary at 10M, K/1 (TER Category B)",
+    "input": {
+      "grossSalary": 10000000,
+      "ptkpStatus": "K/1",
+      "hasNpwp": true
+    },
+    "expected": {
+      "terCategory": "B",
+      "effectiveRatePercent": "1.50%",
+      "monthlyTaxWithheld": 150000
+    }
+  },
+  {
+    "caseId": "PPH21-PENALTY-001",
+    "description": "20% Penalty applied for unvalidated NPWP",
+    "input": {
+      "grossSalary": 10000000,
+      "ptkpStatus": "TK/0",
+      "hasNpwp": false
+    },
+    "expected": {
+      "penaltyApplied": true,
+      "monthlyTaxWithheld": 240000
+    }
+  },
+  {
+    "caseId": "PPH21-DEC-RECON-001",
+    "description": "December Reconciliation for 120M annual gross salary",
+    "input": {
+      "annualGrossIncome": 120000000,
+      "ptkpStatus": "TK/0",
+      "janToNovTaxWithheld": 2000000,
+      "monthlyJhtEmployeeDeduction": 200000,
+      "hasNpwp": true
+    },
+    "expected": {
+      "biayaJabatan": 6000000,
+      "netAnnualIncome": 111600000,
+      "pkp": 57600000,
+      "totalAnnualTaxArt17": 2880000,
+      "decemberTaxWithheld": 880000
+    }
+  }
+]

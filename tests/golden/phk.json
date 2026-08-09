@@ -1,0 +1,33 @@
+[
+  {
+    "caseId": "PHK-EFFICIENCY-001",
+    "description": "Efficiency loss termination (PP 35/2021 Art. 43) for 5 years tenure",
+    "input": {
+      "monthlyWage": 10000000,
+      "tenureYears": 5,
+      "reasonKey": "efficiency_loss",
+      "remainingLeaveDays": 12
+    },
+    "expected": {
+      "uangPesangon": 30000000,
+      "uangPenghargaanMasaKerja": 20000000,
+      "uangPenggantianHak": 4800000,
+      "totalPayout": 54800000
+    }
+  },
+  {
+    "caseId": "PHK-RETIREMENT-001",
+    "description": "Retirement termination (PP 35/2021 Art. 56) for 8 years tenure",
+    "input": {
+      "monthlyWage": 10000000,
+      "tenureYears": 8,
+      "reasonKey": "retirement",
+      "remainingLeaveDays": 0
+    },
+    "expected": {
+      "uangPesangon": 157500000,
+      "uangPenghargaanMasaKerja": 30000000,
+      "totalPayout": 187500000
+    }
+  }
+]

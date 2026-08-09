@@ -1,0 +1,47 @@
+[
+  {
+    "caseId": "BPJS-JP-2024-FEB",
+    "description": "BPJS JP Wage Cap before March 2025 transition",
+    "input": {
+      "baseWage": 20000000,
+      "jkkHazardLevel": "low",
+      "dateStr": "2025-02-28"
+    },
+    "expected": {
+      "kesCappedWage": 12000000,
+      "jpCappedWage": 10042300,
+      "jpEmployer": 200846,
+      "jpEmployee": 100423
+    }
+  },
+  {
+    "caseId": "BPJS-JP-2025-MAR",
+    "description": "BPJS JP Wage Cap after March 2025 transition (SE B/726/022025)",
+    "input": {
+      "baseWage": 20000000,
+      "jkkHazardLevel": "low",
+      "dateStr": "2025-03-01"
+    },
+    "expected": {
+      "kesCappedWage": 12000000,
+      "jpCappedWage": 10547400,
+      "jpEmployer": 210948,
+      "jpEmployee": 105474
+    }
+  },
+  {
+    "caseId": "BPJS-JP-2026-MAR",
+    "description": "BPJS JP Wage Cap after March 2026 transition (SE B/3307/022026)",
+    "input": {
+      "baseWage": 20000000,
+      "jkkHazardLevel": "low",
+      "dateStr": "2026-03-01"
+    },
+    "expected": {
+      "kesCappedWage": 12000000,
+      "jpCappedWage": 11086300,
+      "jpEmployer": 221726,
+      "jpEmployee": 110863
+    }
+  }
+]
