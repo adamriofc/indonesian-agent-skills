@@ -1,40 +1,76 @@
 {
   "rulesets": [
     {
+      "rulesetId": "BPJS-2015",
+      "rulesetVersion": "1.0.0",
       "effective_from": "2015-07-01",
       "effective_to": "2024-02-29",
       "kesCap": 12000000,
       "jpCap": 10042300,
+      "jkkRates": {
+        "very_low": 0.0024,
+        "low": 0.0054,
+        "medium": 0.0089,
+        "high": 0.0127,
+        "very_high": 0.0174
+      },
       "source": {
         "regulation": "PP 45/2015",
         "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
       }
     },
     {
+      "rulesetId": "BPJS-2024",
+      "rulesetVersion": "1.0.0",
       "effective_from": "2024-03-01",
       "effective_to": "2025-02-28",
       "kesCap": 12000000,
       "jpCap": 10042300,
+      "jkkRates": {
+        "very_low": 0.0024,
+        "low": 0.0054,
+        "medium": 0.0089,
+        "high": 0.0127,
+        "very_high": 0.0174
+      },
       "source": {
         "regulation": "BPJS Ketenagakerjaan SE 2024",
         "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
       }
     },
     {
+      "rulesetId": "BPJS-2025",
+      "rulesetVersion": "1.0.0",
       "effective_from": "2025-03-01",
       "effective_to": "2026-02-28",
       "kesCap": 12000000,
       "jpCap": 10547400,
+      "jkkRates": {
+        "very_low": 0.0024,
+        "low": 0.0054,
+        "medium": 0.0089,
+        "high": 0.0127,
+        "very_high": 0.0174
+      },
       "source": {
         "regulation": "BPJS Ketenagakerjaan B/726/022025",
-        "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+        "url": "https://www.ptgasi.co.id/wp-content/uploads/2025/05/B-726-022025-PERUBAHAN-BATASAN-UPAH-DAN-MANFAAT-JP-2025.pdf"
       }
     },
     {
+      "rulesetId": "BPJS-2026",
+      "rulesetVersion": "1.0.0",
       "effective_from": "2026-03-01",
       "effective_to": "Infinity",
       "kesCap": 12000000,
       "jpCap": 11086300,
+      "jkkRates": {
+        "very_low": 0.0024,
+        "low": 0.0054,
+        "medium": 0.0089,
+        "high": 0.0127,
+        "very_high": 0.0174
+      },
       "source": {
         "regulation": "BPJS Ketenagakerjaan B/3307/022026",
         "url": "https://faq-int.bpjsketenagakerjaan.go.id/"

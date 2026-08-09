@@ -11,7 +11,7 @@
 
 Production-oriented compliance, tax, legal, and operational domain-intelligence infrastructure for AI agents operating in the Indonesian business ecosystem. Fully compatible with **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, and other agentic environments.
 
-Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structured LLM instruction packs with **deterministic Node.js calculation engines** (`engines/`), single-source-of-truth JSON rulesets (`engines/rules/`), granular statutory provenance metadata (`PROVENANCE.md`), and regulatory changelog tracking (`REGULATORY_CHANGELOG.md`).
+Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structured LLM instruction packs with **deterministic Node.js calculation engines** (`engines/`), temporal JSON rulesets (`engines/rules/`), granular statutory provenance metadata (`PROVENANCE.md`), and regulatory changelog tracking (`REGULATORY_CHANGELOG.md`).
 
 ---
 
@@ -26,7 +26,7 @@ Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structure
 | **VS Code Agent** | System Prompt Context | Markdown Reference | 🟡 Compatible |
 | **ChatGPT / Custom GPTs** | Knowledge Attachment | Static Reference | 🟡 Manual Import |
 
-*Note: Engine math calculation unit assertions and schema manifests are 100% CI-verified on every push via Node 20 GitHub Actions.*
+*Note: Engine math calculation unit assertions, schema manifests, and adversarial injection tests are 100% CI-verified across Node.js versions 18, 20, and 22 on every push via GitHub Actions.*
 
 ---
 
@@ -75,6 +75,7 @@ To eliminate LLM math hallucinations on financial and legal figures, sensitive c
 * **Tax Period**: Jan-Nov Monthly Withholding
 * **Effective TER Rate**: 2.00%
 * **Monthly Tax Withheld**: Rp 200.000
+* **Ruleset Version**: 1.0.0 (PPH21-2024)
 * **Regulatory Authority**: DJP RI (PP 58/2023)
 ```
 
@@ -109,7 +110,7 @@ To eliminate LLM math hallucinations on financial and legal figures, sensitive c
 * `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.
 * `shopee-live-script`: Retention and flash-sale hosting scripts for live streaming.
 * `tokopedia-seo-optimizer`: Algorithmic title formula generator (`[Product] + [Brand] + [Spec] + [Keywords]`).
-* `buyer-negotiator`: Grosir wholesale B2B trade terms negotiation guidelines.
+* `buyer-negotiator`: Wholesale (grosir) B2B trade terms negotiation guidelines.
 
 ### 5. `content-lokal-id` — Local Copywriting
 * `whatsapp-broadcast`: High-conversion anti-spam WhatsApp Business copy.

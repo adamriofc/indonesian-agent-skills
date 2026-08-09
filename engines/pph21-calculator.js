@@ -41,9 +41,11 @@ function getTerCategory(ptkp, pphRules) {
 // Monthly TER Calculation (Jan-Nov)
 function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', taxpayerIdentity = true, dateStr) {
   const salary = Math.max(0, Number(grossSalary) || 0);
-  const pphRules = getRulesForDate(dateStr);
+  const activeDateStr = dateStr || '2026-03-01';
+  const pphRules = getRulesForDate(activeDateStr);
   const { category, table } = getTerCategory(ptkpStatus, pphRules);
 
+  // Normalize identity parameter (boolean or string enum)
   let isNPWPValid = true;
   let identityStatusStr = 'validated_nik_npwp';
 
@@ -82,13 +84,17 @@ function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', taxpayerIdentit
     identityStatus: identityStatusStr,
     penaltyApplied,
     monthlyTaxWithheld: baseWithholding,
+    calculationDate: activeDateStr,
+    rulesetId: pphRules.rulesetId,
+    rulesetVersion: pphRules.rulesetVersion,
     statutoryReference: pphRules.statute
   };
 }
 
 // Article 17 UU HPP Progressive Rates for Annual Tax
 function calculateArticle17AnnualTax(netTaxableIncome, dateStr) {
-  const pphRules = getRulesForDate(dateStr);
+  const activeDateStr = dateStr || '2026-03-01';
+  const pphRules = getRulesForDate(activeDateStr);
   let pkp = Math.max(0, Math.floor(Number(netTaxableIncome) / 1000) * 1000);
   if (pkp <= 0) return 0;
 
@@ -111,7 +117,8 @@ function calculateArticle17AnnualTax(netTaxableIncome, dateStr) {
 
 // December Annual Reconciliation
 function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'TK/0', janToNovTaxWithheld = 0, monthlyJhtEmployeeDeduction = 0, taxpayerIdentity = true, dateStr) {
-  const pphRules = getRulesForDate(dateStr);
+  const activeDateStr = dateStr || '2026-03-01';
+  const pphRules = getRulesForDate(activeDateStr);
   const annualGross = Math.max(0, Number(annualGrossIncome) || 0);
   const ptkpAmount = pphRules.ptkp_thresholds[ptkpStatus.toUpperCase()] || pphRules.ptkp_thresholds['TK/0'];
 
@@ -130,7 +137,7 @@ function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'T
     isNPWPValid = ['validated_nik_npwp', 'npwp', 'validated'].includes(taxpayerIdentity.toLowerCase().trim());
   }
 
-  let totalAnnualTax = calculateArticle17AnnualTax(pkp, dateStr);
+  let totalAnnualTax = calculateArticle17AnnualTax(pkp, activeDateStr);
   if (!isNPWPValid) {
     totalAnnualTax = Math.round(totalAnnualTax * pphRules.non_npwp_penalty_rate);
   }
@@ -149,7 +156,10 @@ function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'T
     janToNovTaxWithheld: Number(janToNovTaxWithheld),
     decemberTaxWithheld: decTaxToWithhold,
     hasNpwp: isNPWPValid,
-    statutoryReference: "PMK No. 168/2023 (Masa Pajak Terakhir / Rekonsiliasi Desember)"
+    calculationDate: activeDateStr,
+    rulesetId: pphRules.rulesetId,
+    rulesetVersion: pphRules.rulesetVersion,
+    statutoryReference: `PMK No. 168/2023 (Masa Pajak Terakhir / Rekonsiliasi Desember) - Ruleset: ${pphRules.statute}`
   };
 }
 

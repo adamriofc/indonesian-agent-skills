@@ -29,7 +29,6 @@ function getRulesForDate(dateStr) {
 }
 
 function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
-  // Default to today if dateStr is omitted
   const activeDateStr = dateStr || new Date().toISOString().split('T')[0];
   const wage = Math.max(0, Number(baseWage) || 0);
   const rules = getRulesForDate(activeDateStr);
@@ -51,8 +50,8 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   const jpEmployee = Math.round(jpBaseWage * 0.01);
   const jpTotal = jpEmployer + jpEmployee;
 
-  // 4. BPJS TK - JKK (Employer Only)
-  const jkkRates = {
+  // 4. BPJS TK - JKK (Employer Only, extracted from ruleset SSOT)
+  const jkkRates = rules.jkkRates || {
     very_low: 0.0024,
     low: 0.0054,
     medium: 0.0089,
@@ -71,7 +70,11 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   return {
     baseWage: wage,
     calculationDate: activeDateStr,
+    rulesetId: rules.rulesetId,
+    rulesetVersion: rules.rulesetVersion,
     ruleset: {
+      id: rules.rulesetId,
+      version: rules.rulesetVersion,
       effectiveFrom: rules.effective_from,
       effectiveTo: rules.effective_to,
       source: rules.source
