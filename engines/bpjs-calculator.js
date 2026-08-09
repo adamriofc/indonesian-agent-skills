@@ -2,9 +2,16 @@
  * Deterministic BPJS Contribution Calculator Engine
  * Supports temporal rulesets with effective dates (e.g. March 1st transitions)
  * and extracts all rates dynamically from engines/rules/bpjs.json (Single Source of Truth).
+ * Enforces cryptographic ruleset runtime integrity and fail-closed validation.
  */
 
+const fs = require('fs');
+const path = require('path');
 const bpjsRules = require('./rules/bpjs.json');
+const { verifyRulesetIntegrity } = require('./rules/integrity');
+
+// Enforce runtime integrity validation on load
+verifyRulesetIntegrity('bpjs.json', bpjsRules);
 
 function getRulesForDate(dateStr) {
   if (!dateStr) {
@@ -32,15 +39,16 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   const activeDateStr = dateStr || new Date().toISOString().split('T')[0];
   const wage = Math.max(0, Number(baseWage) || 0);
   const rules = getRulesForDate(activeDateStr);
-  const rates = rules.rates || {
-    kesEmployer: 0.04,
-    kesEmployee: 0.01,
-    jhtEmployer: 0.037,
-    jhtEmployee: 0.02,
-    jpEmployer: 0.02,
-    jpEmployee: 0.01,
-    jkmEmployer: 0.003
-  };
+
+  // Strict Fail-Closed Verification (Audit P1): No silent fallback objects
+  if (!rules.rates) {
+    throw new Error(`[Regulatory Schema Failure] Missing mandatory rates definition in ruleset: ${rules.rulesetId}`);
+  }
+  if (!rules.jkkRates) {
+    throw new Error(`[Regulatory Schema Failure] Missing mandatory jkkRates definition in ruleset: ${rules.rulesetId}`);
+  }
+
+  const rates = rules.rates;
 
   // 1. BPJS Kesehatan (5% total: 4% Employer, 1% Employee)
   const kesBaseWage = Math.min(wage, rules.kesCap);
@@ -60,14 +68,11 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   const jpTotal = jpEmployer + jpEmployee;
 
   // 4. BPJS TK - JKK (Employer Only)
-  const jkkRates = rules.jkkRates || {
-    very_low: 0.0024,
-    low: 0.0054,
-    medium: 0.0089,
-    high: 0.0127,
-    very_high: 0.0174
-  };
-  const jkkRate = jkkRates[jkkHazardLevel] || jkkRates.low;
+  const jkkRates = rules.jkkRates;
+  const jkkRate = jkkRates[jkkHazardLevel];
+  if (jkkRate === undefined) {
+    throw new Error(`[Regulatory Execution Failure] Invalid jkkHazardLevel provided: ${jkkHazardLevel}`);
+  }
   const jkkEmployer = Math.round(wage * jkkRate);
 
   // 5. BPJS TK - JKM (Employer Only 0.3%)

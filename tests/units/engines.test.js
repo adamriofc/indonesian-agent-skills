@@ -4,6 +4,7 @@ const { calculatePPh21Monthly, calculateArticle17AnnualTax, calculatePPh21Decemb
 const { calculateBpjs, getRulesForDate } = require('../../engines/bpjs-calculator');
 const { calculateThr } = require('../../engines/thr-calculator');
 const { calculatePhk, REASON_MULTIPLIERS } = require('../../engines/phk-calculator');
+const { verifyRulesetIntegrity } = require('../../engines/rules/integrity');
 
 // Load Golden Datasets
 const goldenPph21 = require('../golden/pph21.json');
@@ -14,9 +15,26 @@ function runUnitTests() {
   console.log("⚡ Running Deterministic Engine Math & Golden Corpus Tests...\n");
 
   // ----------------------------------------------------
-  // 1. Test Golden Corpus PPh 21 Scenarios & Metadata
+  // 1. Test Cryptographic Ruleset Integrity Verification
   // ----------------------------------------------------
-  console.log("  [1/5] Testing PPh 21 Golden Corpus Datasets...");
+  console.log("  [1/6] Testing Cryptographic SHA-256 Ruleset Integrity & Tamper Protection...");
+  const bpjsCheck = verifyRulesetIntegrity('bpjs.json');
+  assert.strictEqual(bpjsCheck.status, 'VERIFIED');
+  assert.strictEqual(bpjsCheck.hash.length, 64);
+
+  const pph21Check = verifyRulesetIntegrity('pph21.json');
+  assert.strictEqual(pph21Check.status, 'VERIFIED');
+  assert.strictEqual(pph21Check.hash.length, 64);
+
+  // Assert tamper detection throws an explicit violation
+  assert.throws(() => {
+    verifyRulesetIntegrity('unregistered_ruleset.json', {});
+  }, /No registered hash manifest for/, "Failed to detect unregistered ruleset tampering");
+
+  // ----------------------------------------------------
+  // 2. Test Golden Corpus PPh 21 Scenarios & Metadata
+  // ----------------------------------------------------
+  console.log("  [2/6] Testing PPh 21 Golden Corpus Datasets...");
   goldenPph21.forEach(tc => {
     if (tc.caseId.includes('DEC')) {
       const res = calculatePPh21DecemberReconciliation(
@@ -46,9 +64,9 @@ function runUnitTests() {
   });
 
   // ----------------------------------------------------
-  // 2. Test Golden Corpus BPJS Scenarios & Error Fallback
+  // 3. Test Golden Corpus BPJS Scenarios & Error Fallback
   // ----------------------------------------------------
-  console.log("  [2/5] Testing BPJS Golden Corpus Datasets & Temporal Transitions...");
+  console.log("  [3/6] Testing BPJS Golden Corpus Datasets & Temporal Transitions...");
   goldenBpjs.forEach(tc => {
     const res = calculateBpjs(tc.input.baseWage, tc.input.jkkHazardLevel, tc.input.dateStr);
     assert.strictEqual(res.calculationDate, tc.input.dateStr, `Failed ${tc.caseId} calculationDate`);
@@ -74,9 +92,9 @@ function runUnitTests() {
   }, /No regulatory BPJS ruleset available for date/, "Failed to throw on unsupported historical date");
 
   // ----------------------------------------------------
-  // 3. Test Golden Corpus PHK Scenarios
+  // 4. Test Golden Corpus PHK Scenarios
   // ----------------------------------------------------
-  console.log("  [3/5] Testing PHK Golden Corpus Datasets...");
+  console.log("  [4/6] Testing PHK Golden Corpus Datasets...");
   goldenPhk.forEach(tc => {
     const res = calculatePhk(tc.input.monthlyWage, tc.input.tenureYears, tc.input.reasonKey, tc.input.remainingLeaveDays);
     assert.strictEqual(res.breakdown.uangPesangon.amount, tc.expected.uangPesangon, `Failed ${tc.caseId} UP`);
@@ -86,9 +104,9 @@ function runUnitTests() {
   });
 
   // ----------------------------------------------------
-  // 4. Test Invariant & Boundary Assertions
+  // 5. Test Invariant & Boundary Assertions
   // ----------------------------------------------------
-  console.log("  [4/5] Testing Regulatory Invariant & Boundary Assertions...");
+  console.log("  [5/6] Testing Regulatory Invariant & Boundary Assertions...");
   
   // Boundary Testing: TER A boundary checks
   const pphBoundary1 = calculatePPh21Monthly(5400001, 'TK/0', true, '2026-03-01');
@@ -104,16 +122,16 @@ function runUnitTests() {
   assert.ok(bpjsLowSalary.summary.totalEmployeeDeduction >= 0);
 
   // ----------------------------------------------------
-  // 5. Test THR Engine
+  // 6. Test THR Engine
   // ----------------------------------------------------
-  console.log("  [5/5] Testing THR Payout Engine (Permenaker 6/2016)...");
+  console.log("  [6/6] Testing THR Payout Engine (Permenaker 6/2016)...");
   const thrUnderOneMonth = calculateThr(10000000, 0, 0.8);
   assert.strictEqual(thrUnderOneMonth.isEligible, false);
 
   const thrOneMonth = calculateThr(12000000, 0, 1);
   assert.strictEqual(thrOneMonth.statutoryThrPayout, 1000000);
 
-  console.log("\n✅ All 5 Test Modules & Golden Corpus Cases Passed 100% of Assertions!");
+  console.log("\n✅ All 6 Test Modules & Golden Corpus Cases Passed 100% of Assertions!");
 }
 
 runUnitTests();

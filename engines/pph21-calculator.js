@@ -2,9 +2,14 @@
  * Deterministic PPh 21 Calculator Engine (PP 58/2023 & PMK 168/2023)
  * Supports Monthly TER withholding (Jan-Nov) and December Annual Tax Reconciliation (Art. 17 UU PPh).
  * Dynamically evaluates temporal rulesets loaded from engines/rules/pph21.json.
+ * Enforces cryptographic ruleset runtime integrity and fail-closed validation.
  */
 
 const pphRulesData = require('./rules/pph21.json');
+const { verifyRulesetIntegrity } = require('./rules/integrity');
+
+// Enforce runtime integrity validation on load
+verifyRulesetIntegrity('pph21.json', pphRulesData);
 
 function getRulesForDate(dateStr) {
   const activeDateStr = dateStr || '2026-03-01';
@@ -35,7 +40,7 @@ function getTerCategory(ptkp, pphRules) {
   if (pphRules.ter_categories.A.includes(ptkpUpper)) return { category: 'A', table: pphRules.ter_tables.A };
   if (pphRules.ter_categories.B.includes(ptkpUpper)) return { category: 'B', table: pphRules.ter_tables.B };
   if (pphRules.ter_categories.C.includes(ptkpUpper)) return { category: 'C', table: pphRules.ter_tables.C };
-  return { category: 'A', table: pphRules.ter_tables.A };
+  throw new Error(`[Regulatory Execution Failure] Invalid PTKP status provided: ${ptkp}`);
 }
 
 // Monthly TER Calculation (Jan-Nov)
@@ -45,7 +50,6 @@ function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', taxpayerIdentit
   const pphRules = getRulesForDate(activeDateStr);
   const { category, table } = getTerCategory(ptkpStatus, pphRules);
 
-  // Normalize identity parameter (boolean or string enum)
   let isNPWPValid = true;
   let identityStatusStr = 'validated_nik_npwp';
 
