@@ -1,13 +1,5 @@
 # Indonesian Agent Skills (`indonesian-agent-skills`) 🇮🇩
 
-```text
- ___ _   _ ____   ___  _   _ _____ ____  _       _     ____ _____  _    ____ _  __
-|_ _| \ | |  _ \ / _ \| \ | | ____/ ___|(_) __ _| |   / ___|_   _|/ \  / ___| |/ /
- | ||  \| | | | | | | |  \| |  _| \___ \| |/ _` | |   \___ \ | | / _ \| |   | ' / 
- | || |\  | |_| | |_| | |\  | |___ ___) | | (_| | |___ ___) || |/ ___ \ |___| . \ 
-|___|_| \_|____/ \___/|_| \_|_____|____/|_|\__,_|_____|____/ |_/_/   \_\____|_|\_\
-```
-
 <p align="center">
   <img src="docs/indonesian-agent-skills-hero.svg" alt="Indonesian Agent Skills Banner" width="100%">
 </p>
@@ -22,16 +14,22 @@
 
 ---
 
-## ⚡ The Unfair Advantage (Why This Exists)
+## Overview
 
-In the Indonesian business landscape, compliance is governed by highly localized, frequently amended laws (such as PP 58/2023 for tax, PP 35/2021 for employment, and UU 27/2022 for PDP). 
+A domain-intelligence infrastructure for AI agents operating within the Indonesian business ecosystem. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, and custom agent frameworks, this repository pairs structured instruction packs with deterministic calculation engines (`engines/`) and temporal JSON rulesets (`engines/rules/`).
 
-Standard AI LLMs (like GPT-4, Gemini, or Claude) are probabilistic; they predict the next token based on statistical patterns. When asked to draft contracts, calculate withholdings, or process severance, LLMs suffer from three critical failures:
-1. **Mathematical Hallucination**: LLMs do not execute calculations; they guess the output. This results in inaccurate tax calculations (e.g. wrong TER bracket matching) and incorrect severance payouts.
-2. **Lack of Temporal Awareness**: An LLM cannot inherently distinguish between a BPJS wage cap in January 2025 vs. March 2025. It will silently apply outdated rules.
-3. **No Chain of Custody (Provenance)**: Outputs lack references to official gazettes (Lembaran Negara), making them unverifiable in audits.
+---
 
-`indonesian-agent-skills` provides a **moat for AI agents** by wrapping standard LLM instructions around **deterministic Node.js calculation engines** (`engines/`) and versioned regulatory rulesets (`engines/rules/`). The LLM is used strictly for parameter extraction and narrative synthesis, guaranteeing **100% mathematical accuracy and legal traceability**.
+## ⚡ Why You Need This
+
+In Indonesia, compliance is governed by specific, frequently amended statutory frameworks such as PP 58/2023 for PPh 21 tax TER, PP 35/2021 for labor severance, and UU 27/2022 for personal data protection.
+
+Standard Large Language Models (LLMs) predict text probabilistically. When evaluating tax withholdings, contract risks, or statutory severance payouts, unassisted LLMs present three core failure modes:
+1. **Arithmetic Hallucination**: LLMs predict tokens rather than computing equations, resulting in inaccurate tax category lookups and faulty severance math.
+2. **Temporal Ambiguity**: LLMs cannot reliably distinguish between statutory wage caps in different effective date windows (such as BPJS JP wage cap adjustments in March 2025 vs March 2026).
+3. **Unverifiable Lineage**: Output responses lack traceable links to official government gazettes, making them unsuited for corporate audits.
+
+`indonesian-agent-skills` resolves these failure modes by executing mathematical operations inside pure Node.js calculation engines (`engines/`) backed by single-source-of-truth rulesets (`engines/rules/`). The agent extracts parameters from natural language inputs, passes them to the engine, and formats the verified calculation into a clear explanation.
 
 ---
 
@@ -77,12 +75,12 @@ Standard AI LLMs (like GPT-4, Gemini, or Claude) are probabilistic; they predict
 ## ⚖️ Comparative Scenarios: Pure LLM vs. Hybrid Engine
 
 ### Scenario 1: PPh 21 Calculation for Gross Salary Rp 10.000.000 (TK/0 PTKP)
-* **Pure LLM Output**: Usually guesses the tax rate as a flat 5% or applies an outdated PTKP deduction first, resulting in incorrect calculations.
-* **Hybrid Engine Output**: The LLM extracts `{ grossSalary: 10000000, ptkpStatus: "TK/0" }` and passes it to the engine. The engine matches the salary to **TER Category A (2.0%)** per PP 58/2023, returning exactly **Rp 200.000** with a cryptographic audit trail.
+* **Pure LLM Output**: Guesses the tax rate as a flat 5% or applies an outdated PTKP deduction first, resulting in incorrect withholdings.
+* **Hybrid Engine Output**: Extracts `{ grossSalary: 10000000, ptkpStatus: "TK/0" }` and evaluates it against `engines/pph21-calculator.js`. Matches **TER Category A (2.0%)** per PP 58/2023, returning exactly **Rp 200.000** with ruleset version tracking.
 
 ### Scenario 2: BPJS Wage Cap Transition on March 15, 2025
-* **Pure LLM Output**: Hallucinates the BPJS JP Cap as Rp 10.042.300 (the 2024 cap) or Rp 12.000.000.
-* **Hybrid Engine Output**: The engine checks the transition date (`2025-03-15`) against `bpjs.json` and automatically pulls the correct updated cap of **Rp 10.547.400** per Surat Edaran BPJS Ketenagakerjaan B/726/022025.
+* **Pure LLM Output**: Uses outdated BPJS JP Cap of Rp 10.042.300 or Rp 12.000.000.
+* **Hybrid Engine Output**: Evaluates the date (`2025-03-15`) against `engines/rules/bpjs.json` and pulls the updated cap of **Rp 10.547.400** per BPJS SE B/726/022025.
 
 ---
 
@@ -103,7 +101,7 @@ Standard AI LLMs (like GPT-4, Gemini, or Claude) are probabilistic; they predict
 ## 🛠️ Installation & Setup Guide
 
 ### 1. OpenWork Desktop & Cloud
-OpenWork automatically registers the plugins upon adding the repository:
+OpenWork registers the plugins upon adding the repository:
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-agent-skills`.
@@ -116,21 +114,20 @@ opencode plugins add adamriofc/indonesian-agent-skills
 ```
 
 ### 3. Claude Code (CLI)
-Link the skills directory to Claude Code's config context:
+Link the skills directory to Claude Code config context:
 ```bash
 claude plugins add adamriofc/indonesian-agent-skills
 ```
 
 ### 4. Cursor IDE
-To instruct Cursor's agent to use these rules, copy `.cursorrules` configurations to your project root:
+To instruct Cursor agent to use these rules, copy `.cursorrules` configurations to your project root:
 ```bash
 mkdir -p .cursorrules.d
 cp -r /tmp/opencode/indonesian-agent-skills/legal-id/skills/ .cursorrules.d/
 ```
-Or create a `.cursorrules` file pointing to this repository as a submodule.
 
 ### 5. VS Code Agent (Copilot / Cline / Roo Code)
-Configure VS Code's system instructions by adding the path to your settings:
+Configure VS Code system instructions by adding the path to your settings:
 ```json
 {
   "roo-code.systemPromptPath": "/absolute/path/to/indonesian-agent-skills/legal-id/skills/contract-reviewer/SKILL.md"
@@ -141,28 +138,28 @@ Configure VS Code's system instructions by adding the path to your settings:
 
 ## 📦 Plugin Inventory & Skill Catalog
 
-### 1. `legal-id` — Commercial Law & Compliance
+### 1. `legal-id`: Commercial Law & Compliance
 * `contract-reviewer`: Audits agreements and outputs a **Contract Risk Score (0-100)** with redlines.
 * `spk-generator`: Drafts bilateral service contracts compliant with KUHPerdata Arts. 1320 & 1338.
 * `nda-indonesia`: Drafts NDAs with liquidated damages under Indonesian jurisdiction.
 * `pdp-compliance`: Audits processing workflows against all 6 Lawful Bases of UU PDP No. 27/2022.
 * `legal-memo-id`: Formats disputes into structured Legal Memos (*Posita*, *Legal Basis*, *Analysis*).
 
-### 2. `tax-payroll-id` — Indonesian Tax Engine
+### 2. `tax-payroll-id`: Indonesian Tax Engine
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `efaktur-helper`: Validates e-Faktur 4.0 transaction codes (010-090) and PPN 11% matching.
 * `thr-calculator`: Payout engine for religious holiday allowances.
 * `bpjs-calculator`: Calculations for health and social security contribution splits.
 * `spt-tahunan-guide`: Filing workflow for individual tax returns via DJP Online.
 
-### 3. `hr-id` — Labor & Employment Compliance
+### 3. `hr-id`: Labor & Employment Compliance
 * `surat-peringatan`: Drafts SP1, SP2, and SP3 warning letters following 6-month statutory windows.
 * `sop-perusahaan`: Generates SOPs enforcing overtime limits (Perpu 2/2022 max 4h/day, 18h/week).
 * `interview-id`: Candidate scorecards evaluating technical skills and local cultural fit.
 * `bpjs-tenagakerja-admin`: SIPP BPJS portal administration workflow guide.
 * `phk-calculator`: Statutory severance payout engine under PP 35/2021.
 
-### 4. `ecommerce-id` — Marketplace Operations & SEO
+### 4. `ecommerce-id`: Marketplace Operations & SEO
 * `deskripsi-produk-seo`: Structural product copy optimized for Shopee & Tokopedia search.
 * `cs-komplain-handler`: Customer service protocols for negative reviews and damaged packages.
 * `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.
@@ -170,7 +167,7 @@ Configure VS Code's system instructions by adding the path to your settings:
 * `tokopedia-seo-optimizer`: Algorithmic title formula generator (`[Product] + [Brand] + [Spec] + [Keywords]`).
 * `buyer-negotiator`: Wholesale (grosir) B2B trade terms negotiation guidelines.
 
-### 5. `content-lokal-id` — Local Copywriting
+### 5. `content-lokal-id`: Local Copywriting
 * `whatsapp-broadcast`: High-conversion anti-spam WhatsApp Business copy.
 * `linkedin-x-thread-id`: B2B executive narrative storytelling formats.
 * `script-reels-tiktok`: Short-video scripts with visual directions and audio overlays.
@@ -179,35 +176,81 @@ Configure VS Code's system instructions by adding the path to your settings:
 
 ---
 
-## 🧪 Testing & Conformance Suite
+## 📊 Real-World Execution Examples
 
-Verify the deterministic engine and golden corpus tests locally:
-```bash
-npm install
-npm test
+### 1. PPh 21 TER & December Reconciliation Example
+
+```javascript
+const { calculatePPh21DecemberReconciliation } = require('./engines/pph21-calculator');
+
+// Calculate December Annual Reconciliation for Annual Gross Rp 120M (TK/0)
+const result = calculatePPh21DecemberReconciliation(120000000, 'TK/0', 2000000, 200000, true, '2026-03-01');
+console.log(result);
+```
+**Output**:
+```json
+{
+  "annualGrossIncome": 120000000,
+  "ptkpStatus": "TK/0",
+  "ptkpAmount": 54000000,
+  "biayaJabatan": 6000000,
+  "annualJhtDeduction": 2400000,
+  "netAnnualIncome": 111600000,
+  "pkp": 57600000,
+  "totalAnnualTaxArt17": 2880000,
+  "janToNovTaxWithheld": 2000000,
+  "decemberTaxWithheld": 880000,
+  "hasNpwp": true,
+  "calculationDate": "2026-03-01",
+  "rulesetId": "PPH21-2024",
+  "rulesetVersion": "1.0.0"
+}
 ```
 
-Our test harness executes over **700+ individual test assertions** across 7 automated test modules:
-1. **Dynamic Schema Validation (`tests/schema/validator.test.js`)**: Verifies plugin manifests and checks YAML frontmatter tags for duplicate keys.
-2. **Cryptographic Checksums (`tests/units/engines.test.js`)**: Asserts that ruleset files match expected SHA-256 hashes and verifies that tampered files fail closed.
-3. **PPh 21 TER Matrix Test (`tests/units/pph21-matrix.test.js`)**: **425 test cases** verifying every bracket boundary across TER Category A, B, and C.
-4. **PHK Severance Matrix Test (`tests/units/phk-matrix.test.js`)**: **225 test cases** evaluating 25 tenure years across all 9 statutory reasons under PP 35/2021.
-5. **E2E Integration Test (`tests/integration/workflow.test.js`)**: Evaluates complete employee lifecycle calculations.
-6. **Prompt Injection Defense Test (`tests/security/injection.test.js`)**: Confirms prompt boundaries are present in ingestion skills.
-7. **Adversarial Ingestion Test (`tests/security/adversarial.test.js`)**: Asserts that parameter hijacking, negative inputs, and scripts are neutralized.
+### 2. BPJS Temporal Wage Cap Transition Example
+
+```javascript
+const { calculateBpjs } = require('./engines/bpjs-calculator');
+
+// Salary: Rp 20,000,000
+// Date: March 1, 2025 (SE B/726/022025 transition -> JP Cap Rp 10,547,400)
+const res2025 = calculateBpjs(20000000, 'low', '2025-03-01');
+console.log(res2025.bpjsKetenagakerjaan.jp.cappedWage); // Outputs: 10547400
+
+// Date: March 1, 2026 (SE B/3307/022026 transition -> JP Cap Rp 11,086,300)
+const res2026 = calculateBpjs(20000000, 'low', '2026-03-01');
+console.log(res2026.bpjsKetenagakerjaan.jp.cappedWage); // Outputs: 11086300
+```
 
 ---
 
-## ❓ FAQ (Frequently Asked Questions)
+## 🧪 Comprehensive Test & Verification Suite
 
-### Q: Does this repository require external API keys?
-**A**: No. The calculators run natively in JavaScript, and the instruction files use markdown. The system uses the active LLM of your agent runtime (Claude, GPT, Gemini).
+Our test harness executes over **700+ individual test assertions** across 7 automated test modules:
 
-### Q: How do you handle changes in tax or employment laws?
-**A**: All statutory parameters are stored in versioned JSON rulesets under `engines/rules/`. When a law changes, we add the new ruleset with its corresponding `effective_from` date and update its SHA-256 checksum.
+```bash
+# Run full test pipeline
+npm test
+```
 
-### Q: Why throw errors on unsupported dates rather than fall back?
-**A**: For regulatory compliance, silent fallbacks are dangerous. It is better to fail loudly than to compute incorrect taxes or severance calculations under the wrong legal era.
+### Test Module Breakdown
+1. **Dynamic Plugin & Skill Schema Validation (`tests/schema/validator.test.js`)**: Auto-discovers all subdirectories, parses YAML frontmatter using a strict parser, and validates SemVer manifests.
+2. **Cryptographic SHA-256 Ruleset Integrity (`tests/units/engines.test.js`)**: Asserts that ruleset checksums match expected manifests and verifies that modified byte-level files fail closed.
+3. **PPh 21 Comprehensive TER Matrix Test (`tests/units/pph21-matrix.test.js`)**: **425 test cases** verifying every bracket boundary across TER Category A, B, C, and December reconciliations.
+4. **PHK Severance Statutory Matrix Test (`tests/units/phk-matrix.test.js`)**: **225 test cases** evaluating 25 tenure years across all 9 statutory termination reasons under PP 35/2021.
+5. **End-to-End Integration Workflow (`tests/integration/workflow.test.js`)**: 20 assertions evaluating complete employee lifecycles (Onboarding -> Payroll -> BPJS -> THR -> Severance).
+6. **Prompt Injection Defense Test (`tests/security/injection.test.js`)**: Asserts that skills handling external documents implement `[UNTRUSTED DATA PAYLOAD]` isolation boundaries.
+7. **Adversarial Input Sanitization Test (`tests/security/adversarial.test.js`)**: Verifies that parameter hijacking, negative inputs, and exfiltration scripts are safely neutralized without code execution.
+
+---
+
+## 🛠️ Installation & Setup
+
+Add the repository directly to your OpenCode or OpenWork environment:
+
+```bash
+opencode plugins add adamriofc/indonesian-agent-skills
+```
 
 ---
 
