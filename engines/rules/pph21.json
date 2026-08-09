@@ -1,0 +1,25 @@
+{
+  "statute": "PP No. 58/2023 & PMK No. 168/2023",
+  "effective_from": "2024-01-01",
+  "ptkp_thresholds": {
+    "TK/0": 54000000,
+    "TK/1": 58500000,
+    "TK/2": 63000000,
+    "TK/3": 67500000,
+    "K/0": 58500000,
+    "K/1": 63000000,
+    "K/2": 67500000,
+    "K/3": 72000000
+  },
+  "ter_categories": {
+    "A": ["TK/0", "TK/1", "K/0"],
+    "B": ["TK/2", "TK/3", "K/1", "K/2"],
+    "C": ["K/3"]
+  },
+  "biaya_jabatan": {
+    "monthly_max": 500000,
+    "annual_max": 6000000,
+    "rate": 0.05
+  },
+  "non_npwp_penalty_rate": 1.20
+}

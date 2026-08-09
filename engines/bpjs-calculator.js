@@ -1,18 +1,37 @@
 /**
  * Deterministic BPJS Contribution Calculator Engine
- * Supports temporal rulesets (2024, 2025, 2026) for wage cap adjustments.
+ * Supports temporal rulesets with effective dates (e.g. March 1st transitions)
+ * to ensure regulatory precision and prevent calculation drift.
  */
 
-// Temporal Rule Snapshots
-const BPJS_RULES = {
-  2024: { kesCap: 12000000, jpCap: 10042300 },
-  2025: { kesCap: 12000000, jpCap: 10042300 },
-  2026: { kesCap: 12000000, jpCap: 10042300 }
-};
+const bpjsRules = require('./rules/bpjs.json');
 
-function calculateBpjs(baseWage, jkkHazardLevel = 'low', year = 2026) {
+function getRulesForDate(dateStr) {
+  // Parse date or fallback to default current date (2026-03-01)
+  let checkDate = new Date('2026-03-01');
+  if (dateStr) {
+    const parsed = new Date(dateStr);
+    if (!isNaN(parsed.getTime())) {
+      checkDate = parsed;
+    }
+  }
+
+  for (const r of bpjsRules.rulesets) {
+    const fromDate = new Date(r.effective_from);
+    const toDate = r.effective_to === 'Infinity' ? new Date('9999-12-31') : new Date(r.effective_to);
+    
+    if (checkDate >= fromDate && checkDate <= toDate) {
+      return r;
+    }
+  }
+
+  // Fallback to the latest ruleset
+  return bpjsRules.rulesets[bpjsRules.rulesets.length - 1];
+}
+
+function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr = '2026-03-01') {
   const wage = Math.max(0, Number(baseWage) || 0);
-  const rules = BPJS_RULES[year] || BPJS_RULES[2026];
+  const rules = getRulesForDate(dateStr);
 
   // 1. BPJS Kesehatan (5% total: 4% Employer, 1% Employee)
   const kesBaseWage = Math.min(wage, rules.kesCap);
@@ -50,7 +69,7 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', year = 2026) {
 
   return {
     baseWage: wage,
-    applicableYear: year,
+    effectiveDate: dateStr,
     bpjsKesehatan: {
       cappedWage: kesBaseWage,
       employer: kesEmployer,
@@ -68,11 +87,11 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', year = 2026) {
       totalEmployeeDeduction: totalEmployee,
       grandTotalContribution: totalEmployer + totalEmployee
     },
-    statutoryReference: "Perpres 64/2020 (Kes) & PP 44/2015, PP 45/2015 (TK)"
+    statutoryReference: `Perpres 64/2020 (Kes) & PP 45/2015 (TK) - Ruleset: ${rules.source.regulation}`
   };
 }
 
 module.exports = {
   calculateBpjs,
-  BPJS_RULES
+  getRulesForDate
 };

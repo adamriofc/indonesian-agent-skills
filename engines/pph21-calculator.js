@@ -1,19 +1,10 @@
 /**
  * Deterministic PPh 21 Calculator Engine (PP 58/2023 & PMK 168/2023)
- * Supports both Monthly TER withholding (Jan-Nov) and December Annual Tax Reconciliation (Art. 17 UU PPh).
+ * Supports Monthly TER withholding (Jan-Nov) and December Annual Tax Reconciliation (Art. 17 UU PPh).
+ * Grounded in engines/rules/pph21.json ruleset.
  */
 
-// PTKP Values (Tahun Pajak 2024-2026)
-const PTKP_VALUES = {
-  'TK/0': 54000000,
-  'TK/1': 58500000,
-  'TK/2': 63000000,
-  'TK/3': 67500000,
-  'K/0': 58500000,
-  'K/1': 63000000,
-  'K/2': 67500000,
-  'K/3': 72000000
-};
+const pphRules = require('./rules/pph21.json');
 
 // TER Kategori A Table (TK/0, TK/1, K/0)
 const TER_A = [
@@ -144,16 +135,28 @@ const TER_C = [
 
 function getTerCategory(ptkp) {
   const ptkpUpper = (ptkp || 'TK/0').toUpperCase().trim();
-  if (['TK/0', 'TK/1', 'K/0'].includes(ptkpUpper)) return { category: 'A', table: TER_A };
-  if (['TK/2', 'TK/3', 'K/1', 'K/2'].includes(ptkpUpper)) return { category: 'B', table: TER_B };
-  if (['K/3'].includes(ptkpUpper)) return { category: 'C', table: TER_C };
+  if (pphRules.ter_categories.A.includes(ptkpUpper)) return { category: 'A', table: TER_A };
+  if (pphRules.ter_categories.B.includes(ptkpUpper)) return { category: 'B', table: TER_B };
+  if (pphRules.ter_categories.C.includes(ptkpUpper)) return { category: 'C', table: TER_C };
   return { category: 'A', table: TER_A };
 }
 
 // Monthly TER Calculation (Jan-Nov)
-function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', hasNpwp = true) {
+function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', taxpayerIdentity = true) {
   const salary = Math.max(0, Number(grossSalary) || 0);
   const { category, table } = getTerCategory(ptkpStatus);
+
+  // Normalize identity parameter (boolean or string enum)
+  let isNPWPValid = true;
+  let identityStatusStr = 'validated_nik_npwp';
+
+  if (typeof taxpayerIdentity === 'boolean') {
+    isNPWPValid = taxpayerIdentity;
+    identityStatusStr = isNPWPValid ? 'validated_nik_npwp' : 'unvalidated';
+  } else if (typeof taxpayerIdentity === 'string') {
+    identityStatusStr = taxpayerIdentity.toLowerCase().trim();
+    isNPWPValid = ['validated_nik_npwp', 'npwp', 'validated'].includes(identityStatusStr);
+  }
 
   let appliedRate = 0;
   for (const entry of table) {
@@ -166,8 +169,8 @@ function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', hasNpwp = true)
   let baseWithholding = Math.round(salary * appliedRate);
   let penaltyApplied = false;
 
-  if (!hasNpwp) {
-    baseWithholding = Math.round(baseWithholding * 1.20);
+  if (!isNPWPValid) {
+    baseWithholding = Math.round(baseWithholding * pphRules.non_npwp_penalty_rate);
     penaltyApplied = true;
   }
 
@@ -177,16 +180,17 @@ function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', hasNpwp = true)
     terCategory: category,
     effectiveRate: appliedRate,
     effectiveRatePercent: `${(appliedRate * 100).toFixed(2)}%`,
-    hasNpwp,
+    hasNpwp: isNPWPValid,
+    identityStatus: identityStatusStr,
     penaltyApplied,
     monthlyTaxWithheld: baseWithholding,
-    statutoryReference: "PP No. 58/2023 & PMK No. 168/2023 (Masa Selain Masa Pajak Terakhir)"
+    statutoryReference: pphRules.statute
   };
 }
 
 // Article 17 UU HPP Progressive Rates for Annual Tax
 function calculateArticle17AnnualTax(netTaxableIncome) {
-  let pkp = Math.max(0, Math.floor(Number(netTaxableIncome) / 1000) * 1000); // Rounded down to thousands
+  let pkp = Math.max(0, Math.floor(Number(netTaxableIncome) / 1000) * 1000);
   if (pkp <= 0) return 0;
 
   let totalTax = 0;
@@ -213,13 +217,12 @@ function calculateArticle17AnnualTax(netTaxableIncome) {
 }
 
 // December Annual Reconciliation
-function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'TK/0', janToNovTaxWithheld = 0, monthlyJhtEmployeeDeduction = 0, hasNpwp = true) {
+function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'TK/0', janToNovTaxWithheld = 0, monthlyJhtEmployeeDeduction = 0, taxpayerIdentity = true) {
   const annualGross = Math.max(0, Number(annualGrossIncome) || 0);
-  const ptkpAmount = PTKP_VALUES[ptkpStatus.toUpperCase()] || PTKP_VALUES['TK/0'];
+  const ptkpAmount = pphRules.ptkp_thresholds[ptkpStatus.toUpperCase()] || pphRules.ptkp_thresholds['TK/0'];
 
   // Biaya Jabatan: 5% of Gross, Max Rp 500.000/month or Rp 6.000.000/year
-  const maxBiayaJabatanAnnual = 6000000;
-  const calculatedBiayaJabatan = Math.min(annualGross * 0.05, maxBiayaJabatanAnnual);
+  const calculatedBiayaJabatan = Math.min(annualGross * pphRules.biaya_jabatan.rate, pphRules.biaya_jabatan.annual_max);
   
   // Total Annual Deductions (Biaya Jabatan + JHT Employee)
   const annualJhtDeduction = Math.max(0, Number(monthlyJhtEmployeeDeduction) || 0) * 12;
@@ -228,9 +231,16 @@ function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'T
   const netAnnualIncome = Math.max(0, annualGross - totalDeductions);
   const pkp = Math.max(0, netAnnualIncome - ptkpAmount);
 
+  let isNPWPValid = true;
+  if (typeof taxpayerIdentity === 'boolean') {
+    isNPWPValid = taxpayerIdentity;
+  } else if (typeof taxpayerIdentity === 'string') {
+    isNPWPValid = ['validated_nik_npwp', 'npwp', 'validated'].includes(taxpayerIdentity.toLowerCase().trim());
+  }
+
   let totalAnnualTax = calculateArticle17AnnualTax(pkp);
-  if (!hasNpwp) {
-    totalAnnualTax = Math.round(totalAnnualTax * 1.20);
+  if (!isNPWPValid) {
+    totalAnnualTax = Math.round(totalAnnualTax * pphRules.non_npwp_penalty_rate);
   }
 
   const decTaxToWithhold = Math.max(0, totalAnnualTax - Number(janToNovTaxWithheld));
@@ -246,7 +256,7 @@ function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'T
     totalAnnualTaxArt17: totalAnnualTax,
     janToNovTaxWithheld: Number(janToNovTaxWithheld),
     decemberTaxWithheld: decTaxToWithhold,
-    hasNpwp,
+    hasNpwp: isNPWPValid,
     statutoryReference: "PMK No. 168/2023 (Masa Pajak Terakhir / Rekonsiliasi Desember)"
   };
 }
@@ -256,5 +266,5 @@ module.exports = {
   calculateArticle17AnnualTax,
   calculatePPh21DecemberReconciliation,
   getTerCategory,
-  PTKP_VALUES
+  PTKP_VALUES: pphRules.ptkp_thresholds
 };

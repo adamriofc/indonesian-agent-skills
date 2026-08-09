@@ -1,6 +1,6 @@
 const assert = require('assert');
 const { calculatePPh21Monthly, calculateArticle17AnnualTax, calculatePPh21DecemberReconciliation } = require('../../engines/pph21-calculator');
-const { calculateBpjs, BPJS_RULES } = require('../../engines/bpjs-calculator');
+const { calculateBpjs, getRulesForDate } = require('../../engines/bpjs-calculator');
 const { calculateThr } = require('../../engines/thr-calculator');
 const { calculatePhk, REASON_MULTIPLIERS } = require('../../engines/phk-calculator');
 
@@ -29,11 +29,20 @@ function runUnitTests() {
   const pphBoundary4 = calculatePPh21Monthly(5650001, 'TK/0', true); // Bracket rate 0.5%
   assert.strictEqual(pphBoundary4.effectiveRatePercent, '0.50%');
 
-  // Test Kategori B PTKP Statuses
+  // Test Category B PTKP Statuses
   const pphCatB = calculatePPh21Monthly(10000000, 'K/1', true); // Category B, Rate 1.5%
   assert.strictEqual(pphCatB.terCategory, 'B');
   assert.strictEqual(pphCatB.effectiveRatePercent, '1.50%');
   assert.strictEqual(pphCatB.monthlyTaxWithheld, 150000);
+
+  // Test Identity Status Parameter Enums (Anti-AI Slop)
+  const pphNikValid = calculatePPh21Monthly(10000000, 'TK/0', 'validated_nik_npwp');
+  assert.strictEqual(pphNikValid.hasNpwp, true);
+  assert.strictEqual(pphNikValid.penaltyApplied, false);
+
+  const pphUnvalidated = calculatePPh21Monthly(10000000, 'TK/0', 'unvalidated');
+  assert.strictEqual(pphUnvalidated.hasNpwp, false);
+  assert.strictEqual(pphUnvalidated.penaltyApplied, true);
 
   // Test Non-NPWP 20% Penalty
   const pphNoNpwp = calculatePPh21Monthly(10000000, 'TK/0', false); // 200,000 * 1.2 = 240,000
@@ -65,26 +74,48 @@ function runUnitTests() {
   assert.strictEqual(decRecon.totalAnnualTaxArt17, 2880000);
   assert.strictEqual(decRecon.decemberTaxWithheld, 880000);
 
+  // Invariant check: December withholding + prior withholdings === total progressive tax
+  assert.strictEqual(decRecon.decemberTaxWithheld + decRecon.janToNovTaxWithheld, decRecon.totalAnnualTaxArt17);
+
   // ----------------------------------------------------
   // 2. Test BPJS Engine & Temporal Wage Caps
   // ----------------------------------------------------
   console.log("  [2/4] Testing BPJS Split & Temporal Wage Ceiling Engine...");
-  
-  // Test BPJS splits below ceiling
-  const bpjsLowSalary = calculateBpjs(5000000, 'low', 2026);
+
+  // Test ruleset lookups based on effective dates
+  const rule2024_Feb = getRulesForDate('2024-02-15');
+  assert.strictEqual(rule2024_Feb.jpCap, 10042300);
+
+  const rule2025_Feb = getRulesForDate('2025-02-28');
+  assert.strictEqual(rule2025_Feb.jpCap, 10042300);
+
+  const rule2025_Mar = getRulesForDate('2025-03-01');
+  assert.strictEqual(rule2025_Mar.jpCap, 10547400); // BPJS TK JP March 2025 increase!
+
+  const rule2026_Feb = getRulesForDate('2026-02-28');
+  assert.strictEqual(rule2026_Feb.jpCap, 10547400);
+
+  const rule2026_Mar = getRulesForDate('2026-03-01');
+  assert.strictEqual(rule2026_Mar.jpCap, 11086300); // BPJS TK JP March 2026 increase!
+
+  // Test BPJS splits below ceiling (5M base)
+  const bpjsLowSalary = calculateBpjs(5000000, 'low', '2026-03-01');
   assert.strictEqual(bpjsLowSalary.bpjsKesehatan.employer, 200000); // 4% of 5M
   assert.strictEqual(bpjsLowSalary.bpjsKesehatan.employee, 50000);  // 1% of 5M
   assert.strictEqual(bpjsLowSalary.bpjsKetenagakerjaan.jht.employer, 185000); // 3.7% of 5M
   assert.strictEqual(bpjsLowSalary.bpjsKetenagakerjaan.jht.employee, 100000); // 2% of 5M
 
-  // Test BPJS splits above ceiling limits
-  const bpjsHighSalary = calculateBpjs(20000000, 'low', 2026);
-  assert.strictEqual(bpjsHighSalary.bpjsKesehatan.cappedWage, 12000000); // Cap 12M
-  assert.strictEqual(bpjsHighSalary.bpjsKetenagakerjaan.jp.cappedWage, 10042300); // Cap 10.042.300
-  
-  // Test Temporal year cap changes (checking structure)
-  assert.strictEqual(BPJS_RULES[2024].kesCap, 12000000);
-  assert.strictEqual(BPJS_RULES[2025].jpCap, 10042300);
+  // Test BPJS splits above ceiling limits for 2026-03-01 (20M salary)
+  const bpjsHighSalary2026 = calculateBpjs(20000000, 'low', '2026-03-15');
+  assert.strictEqual(bpjsHighSalary2026.bpjsKesehatan.cappedWage, 12000000); // Cap 12M
+  assert.strictEqual(bpjsHighSalary2026.bpjsKetenagakerjaan.jp.cappedWage, 11086300); // Capped at 11.086.300
+  assert.strictEqual(bpjsHighSalary2026.bpjsKetenagakerjaan.jp.employer, Math.round(11086300 * 0.02));
+  assert.strictEqual(bpjsHighSalary2026.bpjsKetenagakerjaan.jp.employee, Math.round(11086300 * 0.01));
+
+  // Invariant checks: contributions should never be negative or exceed wage cap bounds
+  assert.ok(bpjsLowSalary.summary.totalEmployerContribution >= 0);
+  assert.ok(bpjsLowSalary.summary.totalEmployeeDeduction >= 0);
+  assert.ok(bpjsHighSalary2026.bpjsKetenagakerjaan.jp.cappedWage <= 11086300);
 
   // ----------------------------------------------------
   // 3. Test THR Engine

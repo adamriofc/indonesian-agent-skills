@@ -1,0 +1,44 @@
+{
+  "rulesets": [
+    {
+      "effective_from": "2015-07-01",
+      "effective_to": "2024-02-29",
+      "kesCap": 12000000,
+      "jpCap": 10042300,
+      "source": {
+        "regulation": "PP 45/2015",
+        "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      }
+    },
+    {
+      "effective_from": "2024-03-01",
+      "effective_to": "2025-02-28",
+      "kesCap": 12000000,
+      "jpCap": 10042300,
+      "source": {
+        "regulation": "BPJS Ketenagakerjaan SE 2024",
+        "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      }
+    },
+    {
+      "effective_from": "2025-03-01",
+      "effective_to": "2026-02-28",
+      "kesCap": 12000000,
+      "jpCap": 10547400,
+      "source": {
+        "regulation": "BPJS Ketenagakerjaan B/726/022025",
+        "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      }
+    },
+    {
+      "effective_from": "2026-03-01",
+      "effective_to": "Infinity",
+      "kesCap": 12000000,
+      "jpCap": 11086300,
+      "source": {
+        "regulation": "BPJS Ketenagakerjaan B/3307/022026",
+        "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      }
+    }
+  ]
+}
