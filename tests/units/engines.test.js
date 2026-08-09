@@ -24,7 +24,8 @@ function runUnitTests() {
         tc.input.ptkpStatus,
         tc.input.janToNovTaxWithheld,
         tc.input.monthlyJhtEmployeeDeduction,
-        tc.input.hasNpwp
+        tc.input.hasNpwp,
+        tc.input.dateStr
       );
       assert.strictEqual(res.biayaJabatan, tc.expected.biayaJabatan, `Failed ${tc.caseId} biayaJabatan`);
       assert.strictEqual(res.netAnnualIncome, tc.expected.netAnnualIncome, `Failed ${tc.caseId} netAnnualIncome`);
@@ -32,24 +33,31 @@ function runUnitTests() {
       assert.strictEqual(res.totalAnnualTaxArt17, tc.expected.totalAnnualTaxArt17, `Failed ${tc.caseId} totalAnnualTaxArt17`);
       assert.strictEqual(res.decemberTaxWithheld, tc.expected.decemberTaxWithheld, `Failed ${tc.caseId} decemberTaxWithheld`);
     } else {
-      const res = calculatePPh21Monthly(tc.input.grossSalary, tc.input.ptkpStatus, tc.input.hasNpwp);
-      if (tc.expected.terCategory) assert.strictEqual(res.terCategory, tc.expected.terCategory, `Failed ${tc.caseId} terCategory`);
-      if (tc.expected.effectiveRatePercent) assert.strictEqual(res.effectiveRatePercent, tc.expected.effectiveRatePercent, `Failed ${tc.caseId} rate`);
+      const res = calculatePPh21Monthly(tc.input.grossSalary, tc.input.ptkpStatus, tc.input.hasNpwp, tc.input.dateStr);
+      assert.strictEqual(res.terCategory, tc.expected.terCategory, `Failed ${tc.caseId} terCategory`);
+      assert.strictEqual(res.effectiveRatePercent, tc.expected.effectiveRatePercent, `Failed ${tc.caseId} rate`);
+      assert.strictEqual(res.penaltyApplied, tc.expected.penaltyApplied, `Failed ${tc.caseId} penaltyApplied`);
       assert.strictEqual(res.monthlyTaxWithheld, tc.expected.monthlyTaxWithheld, `Failed ${tc.caseId} taxWithheld`);
     }
   });
 
   // ----------------------------------------------------
-  // 2. Test Golden Corpus BPJS Scenarios
+  // 2. Test Golden Corpus BPJS Scenarios & Error Fallback
   // ----------------------------------------------------
   console.log("  [2/5] Testing BPJS Golden Corpus Datasets & Temporal Transitions...");
   goldenBpjs.forEach(tc => {
     const res = calculateBpjs(tc.input.baseWage, tc.input.jkkHazardLevel, tc.input.dateStr);
+    assert.strictEqual(res.calculationDate, tc.input.dateStr, `Failed ${tc.caseId} calculationDate`);
     assert.strictEqual(res.bpjsKesehatan.cappedWage, tc.expected.kesCappedWage, `Failed ${tc.caseId} kesCap`);
     assert.strictEqual(res.bpjsKetenagakerjaan.jp.cappedWage, tc.expected.jpCappedWage, `Failed ${tc.caseId} jpCap`);
     assert.strictEqual(res.bpjsKetenagakerjaan.jp.employer, tc.expected.jpEmployer, `Failed ${tc.caseId} jpEmployer`);
     assert.strictEqual(res.bpjsKetenagakerjaan.jp.employee, tc.expected.jpEmployee, `Failed ${tc.caseId} jpEmployee`);
   });
+
+  // Verify that BPJS engine throws on unsupported historical dates (Audit P0)
+  assert.throws(() => {
+    getRulesForDate('2010-01-01');
+  }, /No regulatory BPJS ruleset available for date/, "Failed to throw on unsupported historical date");
 
   // ----------------------------------------------------
   // 3. Test Golden Corpus PHK Scenarios
@@ -59,9 +67,7 @@ function runUnitTests() {
     const res = calculatePhk(tc.input.monthlyWage, tc.input.tenureYears, tc.input.reasonKey, tc.input.remainingLeaveDays);
     assert.strictEqual(res.breakdown.uangPesangon.amount, tc.expected.uangPesangon, `Failed ${tc.caseId} UP`);
     assert.strictEqual(res.breakdown.uangPenghargaanMasaKerja.amount, tc.expected.uangPenghargaanMasaKerja, `Failed ${tc.caseId} UPMK`);
-    if (tc.expected.uangPenggantianHak !== undefined) {
-      assert.strictEqual(res.breakdown.uangPenggantianHak.totalUphAmount, tc.expected.uangPenggantianHak, `Failed ${tc.caseId} UPH`);
-    }
+    assert.strictEqual(res.breakdown.uangPenggantianHak.totalUphAmount, tc.expected.uangPenggantianHak, `Failed ${tc.caseId} UPH`);
     assert.strictEqual(res.totalPayout, tc.expected.totalPayout, `Failed ${tc.caseId} Total`);
   });
 
@@ -71,11 +77,11 @@ function runUnitTests() {
   console.log("  [4/5] Testing Regulatory Invariant & Boundary Assertions...");
   
   // Boundary Testing: TER A boundary checks
-  const pphBoundary1 = calculatePPh21Monthly(5400001, 'TK/0', true);
+  const pphBoundary1 = calculatePPh21Monthly(5400001, 'TK/0', true, '2026-03-01');
   assert.strictEqual(pphBoundary1.effectiveRatePercent, '0.25%');
 
   // Invariant check: December withholding + prior withholdings === total progressive tax
-  const decRecon = calculatePPh21DecemberReconciliation(120000000, 'TK/0', 2000000, 200000, true);
+  const decRecon = calculatePPh21DecemberReconciliation(120000000, 'TK/0', 2000000, 200000, true, '2026-03-01');
   assert.strictEqual(decRecon.decemberTaxWithheld + decRecon.janToNovTaxWithheld, decRecon.totalAnnualTaxArt17);
 
   // Invariant check: BPJS contributions cannot be negative

@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Production-oriented AI compliance & domain-intelligence infrastructure for Indonesian legal, tax, HR, e-commerce, and business operations.",
   "scripts": {
-    "test": "node tests/schema/validator.test.js && node tests/units/engines.test.js",
+    "test": "node tests/schema/validator.test.js && node tests/units/engines.test.js && node tests/security/injection.test.js",
     "test:schema": "node tests/schema/validator.test.js",
-    "test:engines": "node tests/units/engines.test.js"
+    "test:engines": "node tests/units/engines.test.js",
+    "test:security": "node tests/security/injection.test.js"
   },
   "author": "adamriofc",
   "license": "MIT"

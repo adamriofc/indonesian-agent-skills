@@ -27,7 +27,24 @@
     "expected": {
       "uangPesangon": 157500000,
       "uangPenghargaanMasaKerja": 30000000,
+      "uangPenggantianHak": 0,
       "totalPayout": 187500000
+    }
+  },
+  {
+    "caseId": "PHK-RESIGNATION-001",
+    "description": "Resignation termination (PP 35/2021 Art. 50) - 0 UP, 0 UPMK",
+    "input": {
+      "monthlyWage": 10000000,
+      "tenureYears": 4,
+      "reasonKey": "resignation",
+      "remainingLeaveDays": 10
+    },
+    "expected": {
+      "uangPesangon": 0,
+      "uangPenghargaanMasaKerja": 0,
+      "uangPenggantianHak": 4000000,
+      "totalPayout": 4000000
     }
   }
 ]

@@ -1,38 +1,51 @@
 const fs = require('fs');
 const path = require('path');
 
-const PLUGINS = ['legal-id', 'tax-payroll-id', 'hr-id', 'ecommerce-id', 'content-lokal-id'];
+function discoverPlugins(rootDir) {
+  const entries = fs.readdirSync(rootDir, { withFileTypes: true });
+  const plugins = [];
 
-function runSchemaTests() {
-  console.log("🔍 Running Schema & Manifest Validation Tests...\n");
+  for (const entry of entries) {
+    if (entry.isDirectory() && !['engines', 'scripts', 'tests', 'fixtures', 'docs', '.git', '.github', 'node_modules'].includes(entry.name)) {
+      const manifestPath = path.join(rootDir, entry.name, '.claude-plugin', 'plugin.json');
+      if (fs.existsSync(manifestPath)) {
+        plugins.push(entry.name);
+      }
+    }
+  }
+
+  return plugins;
+}
+
+function validate() {
+  console.log("🔍 Running Dynamic Plugin & Skill Schema Validation...\n");
   let errors = 0;
   let totalSkills = 0;
 
-  PLUGINS.forEach(plugin => {
-    const pluginDir = path.join(__dirname, '../..', plugin);
-    
-    if (!fs.existsSync(pluginDir)) {
-      console.error(`❌ Plugin directory missing: ${plugin}`);
-      errors++;
-      return;
-    }
+  const rootDir = path.join(__dirname, '../..');
+  const plugins = discoverPlugins(rootDir);
+
+  if (plugins.length === 0) {
+    console.error("❌ No plugin directories discovered!");
+    process.exit(1);
+  }
+
+  console.log(`  Discovered ${plugins.length} plugin(s): ${plugins.join(', ')}`);
+
+  plugins.forEach(plugin => {
+    const pluginDir = path.join(rootDir, plugin);
 
     // Validate plugin.json
     const manifestPath = path.join(pluginDir, '.claude-plugin', 'plugin.json');
-    if (!fs.existsSync(manifestPath)) {
-      console.error(`❌ Missing plugin.json in ${plugin}`);
-      errors++;
-    } else {
-      try {
-        const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-        if (!manifest.name || !manifest.version || !manifest.description) {
-          console.error(`❌ Invalid fields in ${manifestPath}`);
-          errors++;
-        }
-      } catch (e) {
-        console.error(`❌ JSON syntax error in ${manifestPath}: ${e.message}`);
+    try {
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      if (!manifest.name || !manifest.version || !manifest.description) {
+        console.error(`❌ Invalid required manifest fields in ${manifestPath}`);
         errors++;
       }
+    } catch (e) {
+      console.error(`❌ JSON syntax error in ${manifestPath}: ${e.message}`);
+      errors++;
     }
 
     // Validate Skills
@@ -49,14 +62,14 @@ function runSchemaTests() {
 
         const content = fs.readFileSync(skillFilePath, 'utf8');
         if (!content.startsWith('---')) {
-          console.error(`❌ Missing frontmatter block in ${skillFilePath}`);
+          console.error(`❌ Missing YAML frontmatter block in ${skillFilePath}`);
           errors++;
           return;
         }
 
         const parts = content.split('---');
         if (parts.length < 3) {
-          console.error(`❌ Invalid frontmatter delimiters in ${skillFilePath}`);
+          console.error(`❌ Invalid YAML frontmatter delimiters in ${skillFilePath}`);
           errors++;
           return;
         }
@@ -76,8 +89,8 @@ function runSchemaTests() {
     console.error(`\n❌ Schema Validation failed with ${errors} error(s).`);
     process.exit(1);
   } else {
-    console.log(`✅ Schema Validation Passed: 5 plugins & ${totalSkills} skills verified cleanly.`);
+    console.log(`✅ Schema Validation Passed: Discovered ${plugins.length} plugins & ${totalSkills} skills cleanly with zero errors.`);
   }
 }
 
-runSchemaTests();
+validate();

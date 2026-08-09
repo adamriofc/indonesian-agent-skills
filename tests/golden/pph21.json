@@ -5,11 +5,13 @@
     "input": {
       "grossSalary": 5000000,
       "ptkpStatus": "TK/0",
-      "hasNpwp": true
+      "hasNpwp": true,
+      "dateStr": "2026-03-01"
     },
     "expected": {
       "terCategory": "A",
       "effectiveRatePercent": "0.00%",
+      "penaltyApplied": false,
       "monthlyTaxWithheld": 0
     }
   },
@@ -19,11 +21,13 @@
     "input": {
       "grossSalary": 10000000,
       "ptkpStatus": "TK/0",
-      "hasNpwp": true
+      "hasNpwp": true,
+      "dateStr": "2026-03-01"
     },
     "expected": {
       "terCategory": "A",
       "effectiveRatePercent": "2.00%",
+      "penaltyApplied": false,
       "monthlyTaxWithheld": 200000
     }
   },
@@ -33,12 +37,30 @@
     "input": {
       "grossSalary": 10000000,
       "ptkpStatus": "K/1",
-      "hasNpwp": true
+      "hasNpwp": true,
+      "dateStr": "2026-03-01"
     },
     "expected": {
       "terCategory": "B",
       "effectiveRatePercent": "1.50%",
+      "penaltyApplied": false,
       "monthlyTaxWithheld": 150000
+    }
+  },
+  {
+    "caseId": "PPH21-TER-C-001",
+    "description": "Monthly salary at 15M, K/3 (TER Category C)",
+    "input": {
+      "grossSalary": 15000000,
+      "ptkpStatus": "K/3",
+      "hasNpwp": true,
+      "dateStr": "2026-03-01"
+    },
+    "expected": {
+      "terCategory": "C",
+      "effectiveRatePercent": "3.00%",
+      "penaltyApplied": false,
+      "monthlyTaxWithheld": 450000
     }
   },
   {
@@ -47,9 +69,12 @@
     "input": {
       "grossSalary": 10000000,
       "ptkpStatus": "TK/0",
-      "hasNpwp": false
+      "hasNpwp": false,
+      "dateStr": "2026-03-01"
     },
     "expected": {
+      "terCategory": "A",
+      "effectiveRatePercent": "2.00%",
       "penaltyApplied": true,
       "monthlyTaxWithheld": 240000
     }
@@ -62,7 +87,8 @@
       "ptkpStatus": "TK/0",
       "janToNovTaxWithheld": 2000000,
       "monthlyJhtEmployeeDeduction": 200000,
-      "hasNpwp": true
+      "hasNpwp": true,
+      "dateStr": "2026-03-01"
     },
     "expected": {
       "biayaJabatan": 6000000,

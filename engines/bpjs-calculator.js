@@ -7,13 +7,13 @@
 const bpjsRules = require('./rules/bpjs.json');
 
 function getRulesForDate(dateStr) {
-  // Parse date or fallback to default current date (2026-03-01)
-  let checkDate = new Date('2026-03-01');
-  if (dateStr) {
-    const parsed = new Date(dateStr);
-    if (!isNaN(parsed.getTime())) {
-      checkDate = parsed;
-    }
+  if (!dateStr) {
+    throw new Error("effectiveDate (dateStr) is a required parameter.");
+  }
+  
+  const checkDate = new Date(dateStr);
+  if (isNaN(checkDate.getTime())) {
+    throw new Error(`Invalid date format provided: ${dateStr}`);
   }
 
   for (const r of bpjsRules.rulesets) {
@@ -25,13 +25,14 @@ function getRulesForDate(dateStr) {
     }
   }
 
-  // Fallback to the latest ruleset
-  return bpjsRules.rulesets[bpjsRules.rulesets.length - 1];
+  throw new Error(`No regulatory BPJS ruleset available for date: ${dateStr}`);
 }
 
-function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr = '2026-03-01') {
+function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
+  // Default to today if dateStr is omitted
+  const activeDateStr = dateStr || new Date().toISOString().split('T')[0];
   const wage = Math.max(0, Number(baseWage) || 0);
-  const rules = getRulesForDate(dateStr);
+  const rules = getRulesForDate(activeDateStr);
 
   // 1. BPJS Kesehatan (5% total: 4% Employer, 1% Employee)
   const kesBaseWage = Math.min(wage, rules.kesCap);
@@ -69,7 +70,12 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr = '2026-03-01')
 
   return {
     baseWage: wage,
-    effectiveDate: dateStr,
+    calculationDate: activeDateStr,
+    ruleset: {
+      effectiveFrom: rules.effective_from,
+      effectiveTo: rules.effective_to,
+      source: rules.source
+    },
     bpjsKesehatan: {
       cappedWage: kesBaseWage,
       employer: kesEmployer,
