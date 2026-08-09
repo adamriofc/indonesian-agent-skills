@@ -1,9 +1,21 @@
 /**
  * Deterministic PPh 21 Calculator Engine (PP 58/2023 & PMK 168/2023)
- * Provides exact TER monthly rate lookup and calculation without LLM math hallucinations.
+ * Supports both Monthly TER withholding (Jan-Nov) and December Annual Tax Reconciliation (Art. 17 UU PPh).
  */
 
-// Complete TER Kategori A Table (TK/0, TK/1, K/0)
+// PTKP Values (Tahun Pajak 2024-2026)
+const PTKP_VALUES = {
+  'TK/0': 54000000,
+  'TK/1': 58500000,
+  'TK/2': 63000000,
+  'TK/3': 67500000,
+  'K/0': 58500000,
+  'K/1': 63000000,
+  'K/2': 67500000,
+  'K/3': 72000000
+};
+
+// TER Kategori A Table (TK/0, TK/1, K/0)
 const TER_A = [
   { max: 5400000, rate: 0.00 },
   { max: 5650000, rate: 0.0025 },
@@ -51,7 +63,7 @@ const TER_A = [
   { max: Infinity, rate: 0.3400 }
 ];
 
-// Complete TER Kategori B Table (TK/2, TK/3, K/1, K/2)
+// TER Kategori B Table (TK/2, TK/3, K/1, K/2)
 const TER_B = [
   { max: 6200000, rate: 0.00 },
   { max: 6500000, rate: 0.0025 },
@@ -89,7 +101,7 @@ const TER_B = [
   { max: Infinity, rate: 0.2900 }
 ];
 
-// Complete TER Kategori C Table (K/3)
+// TER Kategori C Table (K/3)
 const TER_C = [
   { max: 6600000, rate: 0.00 },
   { max: 6950000, rate: 0.0025 },
@@ -135,9 +147,10 @@ function getTerCategory(ptkp) {
   if (['TK/0', 'TK/1', 'K/0'].includes(ptkpUpper)) return { category: 'A', table: TER_A };
   if (['TK/2', 'TK/3', 'K/1', 'K/2'].includes(ptkpUpper)) return { category: 'B', table: TER_B };
   if (['K/3'].includes(ptkpUpper)) return { category: 'C', table: TER_C };
-  return { category: 'A', table: TER_A }; // default fallback
+  return { category: 'A', table: TER_A };
 }
 
+// Monthly TER Calculation (Jan-Nov)
 function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', hasNpwp = true) {
   const salary = Math.max(0, Number(grossSalary) || 0);
   const { category, table } = getTerCategory(ptkpStatus);
@@ -167,11 +180,81 @@ function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', hasNpwp = true)
     hasNpwp,
     penaltyApplied,
     monthlyTaxWithheld: baseWithholding,
-    statutoryReference: "PP No. 58/2023 & PMK No. 168/2023"
+    statutoryReference: "PP No. 58/2023 & PMK No. 168/2023 (Masa Selain Masa Pajak Terakhir)"
+  };
+}
+
+// Article 17 UU HPP Progressive Rates for Annual Tax
+function calculateArticle17AnnualTax(netTaxableIncome) {
+  let pkp = Math.max(0, Math.floor(Number(netTaxableIncome) / 1000) * 1000); // Rounded down to thousands
+  if (pkp <= 0) return 0;
+
+  let totalTax = 0;
+  const brackets = [
+    { limit: 60000000, rate: 0.05 },
+    { limit: 250000000, rate: 0.15 },
+    { limit: 500000000, rate: 0.25 },
+    { limit: 5000000000, rate: 0.30 },
+    { limit: Infinity, rate: 0.35 }
+  ];
+
+  let prevLimit = 0;
+  for (const b of brackets) {
+    if (pkp > prevLimit) {
+      const taxableInBracket = Math.min(pkp - prevLimit, b.limit - prevLimit);
+      totalTax += taxableInBracket * b.rate;
+      prevLimit = b.limit;
+    } else {
+      break;
+    }
+  }
+
+  return Math.round(totalTax);
+}
+
+// December Annual Reconciliation
+function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'TK/0', janToNovTaxWithheld = 0, monthlyJhtEmployeeDeduction = 0, hasNpwp = true) {
+  const annualGross = Math.max(0, Number(annualGrossIncome) || 0);
+  const ptkpAmount = PTKP_VALUES[ptkpStatus.toUpperCase()] || PTKP_VALUES['TK/0'];
+
+  // Biaya Jabatan: 5% of Gross, Max Rp 500.000/month or Rp 6.000.000/year
+  const maxBiayaJabatanAnnual = 6000000;
+  const calculatedBiayaJabatan = Math.min(annualGross * 0.05, maxBiayaJabatanAnnual);
+  
+  // Total Annual Deductions (Biaya Jabatan + JHT Employee)
+  const annualJhtDeduction = Math.max(0, Number(monthlyJhtEmployeeDeduction) || 0) * 12;
+  const totalDeductions = calculatedBiayaJabatan + annualJhtDeduction;
+
+  const netAnnualIncome = Math.max(0, annualGross - totalDeductions);
+  const pkp = Math.max(0, netAnnualIncome - ptkpAmount);
+
+  let totalAnnualTax = calculateArticle17AnnualTax(pkp);
+  if (!hasNpwp) {
+    totalAnnualTax = Math.round(totalAnnualTax * 1.20);
+  }
+
+  const decTaxToWithhold = Math.max(0, totalAnnualTax - Number(janToNovTaxWithheld));
+
+  return {
+    annualGrossIncome: annualGross,
+    ptkpStatus: ptkpStatus.toUpperCase(),
+    ptkpAmount,
+    biayaJabatan: calculatedBiayaJabatan,
+    annualJhtDeduction,
+    netAnnualIncome,
+    pkp,
+    totalAnnualTaxArt17: totalAnnualTax,
+    janToNovTaxWithheld: Number(janToNovTaxWithheld),
+    decemberTaxWithheld: decTaxToWithhold,
+    hasNpwp,
+    statutoryReference: "PMK No. 168/2023 (Masa Pajak Terakhir / Rekonsiliasi Desember)"
   };
 }
 
 module.exports = {
   calculatePPh21Monthly,
-  getTerCategory
+  calculateArticle17AnnualTax,
+  calculatePPh21DecemberReconciliation,
+  getTerCategory,
+  PTKP_VALUES
 };

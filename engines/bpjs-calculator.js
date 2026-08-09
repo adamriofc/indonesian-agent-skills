@@ -1,16 +1,21 @@
 /**
  * Deterministic BPJS Contribution Calculator Engine
- * Calculates statutory BPJS Ketenagakerjaan & BPJS Kesehatan contribution splits and caps.
+ * Supports temporal rulesets (2024, 2025, 2026) for wage cap adjustments.
  */
 
-const BPJS_KES_MAX_WAGE = 12000000;
-const BPJS_JP_MAX_WAGE = 10042300;
+// Temporal Rule Snapshots
+const BPJS_RULES = {
+  2024: { kesCap: 12000000, jpCap: 10042300 },
+  2025: { kesCap: 12000000, jpCap: 10042300 },
+  2026: { kesCap: 12000000, jpCap: 10042300 }
+};
 
-function calculateBpjs(baseWage, jkkHazardLevel = 'low') {
+function calculateBpjs(baseWage, jkkHazardLevel = 'low', year = 2026) {
   const wage = Math.max(0, Number(baseWage) || 0);
+  const rules = BPJS_RULES[year] || BPJS_RULES[2026];
 
   // 1. BPJS Kesehatan (5% total: 4% Employer, 1% Employee)
-  const kesBaseWage = Math.min(wage, BPJS_KES_MAX_WAGE);
+  const kesBaseWage = Math.min(wage, rules.kesCap);
   const kesEmployer = Math.round(kesBaseWage * 0.04);
   const kesEmployee = Math.round(kesBaseWage * 0.01);
   const kesTotal = kesEmployer + kesEmployee;
@@ -21,7 +26,7 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low') {
   const jhtTotal = jhtEmployer + jhtEmployee;
 
   // 3. BPJS TK - JP (3% total: 2% Employer, 1% Employee, Capped)
-  const jpBaseWage = Math.min(wage, BPJS_JP_MAX_WAGE);
+  const jpBaseWage = Math.min(wage, rules.jpCap);
   const jpEmployer = Math.round(jpBaseWage * 0.02);
   const jpEmployee = Math.round(jpBaseWage * 0.01);
   const jpTotal = jpEmployer + jpEmployee;
@@ -45,6 +50,7 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low') {
 
   return {
     baseWage: wage,
+    applicableYear: year,
     bpjsKesehatan: {
       cappedWage: kesBaseWage,
       employer: kesEmployer,
@@ -68,6 +74,5 @@ function calculateBpjs(baseWage, jkkHazardLevel = 'low') {
 
 module.exports = {
   calculateBpjs,
-  BPJS_KES_MAX_WAGE,
-  BPJS_JP_MAX_WAGE
+  BPJS_RULES
 };

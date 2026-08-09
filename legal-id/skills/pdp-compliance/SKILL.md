@@ -6,25 +6,41 @@ argument-hint: "<process_description>"
 
 # UU PDP Compliance Engine (UU No. 27/2022)
 
-Audits enterprise data pipelines, customer onboarding forms, and data retention rules against the Indonesian Personal Data Protection Act.
+Audits personal data processing activities against the Indonesian Personal Data Protection Act.
 
-## Governance & Statute
-* **Statute**: UU No. 27 Year 2022 (Pasal 20: Dasar Hukum Pemrosesan Data Pribadi).
+## Legal Provenance & Governance
+* **Statutory Basis**: UU No. 27 Year 2022 (Pasal 20: Dasar Hukum Pemrosesan Data Pribadi).
 
-## Core Evaluation Matrix
+## Processing Basis Decision Tree (Pasal 20 UU PDP)
+Do not default to Consent. Evaluate the 6 Lawful Bases in hierarchical sequence:
 
-### 1. Classification of Data (Pasal 4 UU PDP)
-* **Data Spesifik (Sensitive)**: Health data, biometrics, genetics, criminal records, child data, personal financial records. Requires explicit consent and mandatory Data Protection Impact Assessment (DPIA).
-* **Data Umum (General)**: Full name, gender, nationality, religion, martial status.
+```text
+                       [ Personal Data Processing ]
+                                    │
+                                    ▼
+                      1. Is there explicit consent? ──(Yes)──► [ Consent Basis ]
+                                    │(No)
+                                    ▼
+                 2. Necessary for contract execution? ──(Yes)──► [ Contract Necessity ]
+                                    │(No)
+                                    ▼
+                  3. Required by statutory law/tax? ──(Yes)──► [ Legal Obligation ]
+                                    │(No)
+                                    ▼
+                  4. Life or health vital interest? ──(Yes)──► [ Vital Interest ]
+                                    │(No)
+                                    ▼
+                5. Public task or state authority? ──(Yes)──► [ Public Task ]
+                                    │(No)
+                                    ▼
+              6. Legitimate interest with subject rights? ──(Yes)──► [ Legitimate Interest ]
+                                    │(No)
+                                    ▼
+                         [ INVALID BASE / VIOLATION ]
+```
 
-### 2. The 6 Lawful Bases of Processing (Pasal 20 UU PDP)
-Do not default to Consent. Check which basis applies:
-1. **Persetujuan Eksplisit (Consent)**: Explicit, revocable opt-in.
-2. **Kewajiban Perjanjian (Contractual Necessity)**: Processing necessary to fulfill an agreement with the data subject.
-3. **Kewajiban Hukum (Legal Obligation)**: Compliance with statutory tax, banking, or labor reporting.
-4. **Kepentingan Vital (Vital Interests)**: Protecting life and safety.
-5. **Kepentingan Umum (Public Interest)**: Statutory public authority mandate.
-6. **Kepentingan yang Sah (Legitimate Interests)**: Balancing controller interest against subject rights.
-
-### 3. Breach Notification Protocol (Pasal 46)
-* Data controllers must notify affected subjects and the PDP Authority in writing within **3 x 24 hours (72 hours)** of identifying a data protection failure.
+## Data Classification Audit Rules
+1. **Data Pribadi yang Bersifat Spesifik (Sensitive)**: Health data, biometrics, genetics, criminal records, child data, personal financial records (Pasal 4 ayat (2)).
+   * *Requirement*: High-security encryption + mandatory Data Protection Impact Assessment (DPIA).
+2. **Data Pribadi yang Bersifat Umum (General)**: Full name, gender, nationality, religion, marital status (Pasal 4 ayat (3)).
+   * *Requirement*: Standard data security.

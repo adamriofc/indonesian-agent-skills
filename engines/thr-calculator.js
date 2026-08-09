@@ -15,7 +15,7 @@ function calculateThr(monthlyBaseSalary, fixedAllowance = 0, tenureMonths = 12) 
       isEligible: false,
       tenureMonths: tenure,
       reason: "Continuous service period is less than 1 month (Permenaker 6/2016 Art. 2)",
-      thrPayout: 0
+      statutoryThrPayout: 0
     };
   }
 

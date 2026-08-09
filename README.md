@@ -5,12 +5,13 @@
 </p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![CI Pipeline](https://github.com/adamriofc/indonesian-agent-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/adamriofc/indonesian-agent-skills/actions/workflows/ci.yml)
 [![OpenCode Compatibility](https://img.shields.io/badge/OpenCode-Compatible-brightgreen.svg)](https://app.openworklabs.com/)
-[![Zero Hallucination Engine](https://img.shields.io/badge/Hybrid%20Engine-Deterministic-orange.svg)](engines/)
+[![LLM-Safe Engine](https://img.shields.io/badge/Hybrid%20Engine-LLM--Safe-orange.svg)](engines/)
 
-Production-grade compliance, tax, legal, and operational domain-intelligence infrastructure for AI agents operating in the Indonesian business ecosystem. Fully compatible with **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, and other agentic environments.
+Production-oriented compliance, tax, legal, and operational domain-intelligence infrastructure for AI agents operating in the Indonesian business ecosystem. Fully compatible with **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, and other agentic environments.
 
-Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structured LLM instruction packs with **deterministic Node.js calculation engines** (`engines/`) and explicit statutory provenance metadata (`PROVENANCE.md`).
+Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structured LLM instruction packs with **deterministic Node.js calculation engines** (`engines/`), granular statutory provenance metadata (`PROVENANCE.md`), and regulatory changelog tracking (`REGULATORY_CHANGELOG.md`).
 
 ---
 
@@ -18,9 +19,9 @@ Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structure
 
 | Environment | Integration Mode | Native / Adapter | Tested Status |
 |---|---|---|---|
-| **OpenWork Desktop** | Native Plugin Manifest | `plugin.json` | 🟢 100% Tested |
-| **OpenCode CLI** | Native Plugin Import | `opencode plugins add` | 🟢 100% Tested |
-| **Claude Code / Cowork** | Knowledge Plugin | Native `.claude-plugin` | 🟢 100% Tested |
+| **OpenWork Desktop** | Native Plugin Manifest | `plugin.json` | 🟢 Verified |
+| **OpenCode CLI** | Native Plugin Import | `opencode plugins add` | 🟢 Verified |
+| **Claude Code / Cowork** | Knowledge Plugin | Native `.claude-plugin` | 🟢 Verified |
 | **Cursor IDE** | Rule Context Adapter | `.cursorrules` / `.mdc` | 🟡 Community Adapter |
 | **VS Code Agent** | System Prompt Context | Markdown Reference | 🟡 Compatible |
 | **ChatGPT / Custom GPTs** | Knowledge Attachment | Static Reference | 🟡 Manual Import |
@@ -31,10 +32,43 @@ Unlike probabilistic prompt shortcuts, `indonesian-agent-skills` pairs structure
 
 To eliminate LLM math hallucinations on financial and legal figures, sensitive calculations are computed deterministically by Node.js modules before narrative synthesis:
 
-1. **`pph21-calculator.js`**: Calculates monthly withholding using complete TER Kategori A, B, and C tables (PP 58/2023 & PMK 168/2023) and handles NPWP penalty math.
-2. **`bpjs-calculator.js`**: Computes employer/employee contribution splits for BPJS Kesehatan (Cap Rp 12M) and BPJS TK (JHT, JP Cap Rp 10.042.300, JKK, JKM).
+1. **`pph21-calculator.js`**: Calculates monthly withholding using complete TER Kategori A, B, and C tables (PP 58/2023 & PMK 168/2023) and performs December Annual Tax Reconciliation using progressive Article 17 UU HPP tariffs with Biaya Jabatan deductions.
+2. **`bpjs-calculator.js`**: Computes employer/employee contribution splits for BPJS Kesehatan (Cap Rp 12M) and BPJS TK (JHT, JP Cap Rp 10.042.300, JKK, JKM) with temporal ruleset support.
 3. **`thr-calculator.js`**: Computes statutory prorated THR payouts under Permenaker No. 6/2016.
 4. **`phk-calculator.js`**: Evaluates severance payouts (UP, UPMK, UPH) per PP No. 35/2021 across 10+ termination causes.
+
+---
+
+## 📋 Real Output Examples
+
+### 1. `contract-reviewer` Output
+```markdown
+# CONTRACT AUDIT REPORT
+
+## EXECUTIVE SUMMARY
+* **Contract Risk Score**: 68/100
+* **Overall Risk Assessment**: HIGH RISK
+
+## FINDINGS BY LEGAL TAXONOMY LAYER
+1. **Clause 12.2 (Limitation of Liability)**
+   * **Taxonomy Layer**: COMMERCIAL RECOMMENDATION
+   * **Issue Identified**: Pihak Kedua holds unlimited liability while Pihak Pertama liability is capped at Rp 0.
+   * **Recommended Redline**:
+```diff
+- Pihak Kedua bertanggung jawab secara penuh tanpa batasan (unlimited liability).
++ Tanggung jawab masing-masing Pihak dibatasi maksimal sebesar nilai total Kontrak yang dibayarkan.
+```
+```
+
+### 2. `pph21-calculator` Output
+```markdown
+### PPh 21 Monthly Tax Breakdown (PP 58/2023)
+* **Monthly Gross Salary**: Rp 10.000.000
+* **PTKP Status**: TK/0 (Kategori TER A)
+* **Effective TER Rate**: 2.00%
+* **NPWP Status**: Valid (No 20% penalty applied)
+* **Monthly Tax Withheld**: Rp 200.000
+```
 
 ---
 
@@ -48,7 +82,7 @@ To eliminate LLM math hallucinations on financial and legal figures, sensitive c
 * `legal-memo-id`: Formats disputes into structured Legal Memos (*Posita*, *Legal Basis*, *Analysis*).
 
 ### 2. `tax-payroll-id` — Indonesian Tax Engine
-* `pph21-calculator`: TER monthly calculation engine (PP 58/2023).
+* `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `efaktur-helper`: Validates e-Faktur 4.0 transaction codes (010-090) and PPN 11% matching.
 * `thr-calculator`: Payout engine for religious holiday allowances.
 * `bpjs-calculator`: Calculations for health and social security contribution splits.
@@ -62,7 +96,7 @@ To eliminate LLM math hallucinations on financial and legal figures, sensitive c
 * `phk-calculator`: Statutory severance payout engine under PP 35/2021.
 
 ### 4. `ecommerce-id` — Marketplace Operations & SEO
-* `deskripsi-produk-seo`: Structural product copy optimized for Tokopedia/Shopee search.
+* `deskripsi-produk-seo`: Structural product copy optimized for Shopee & Tokopedia search.
 * `cs-komplain-handler`: Customer service protocols for negative reviews and damaged packages.
 * `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.
 * `shopee-live-script`: Retention and flash-sale hosting scripts for live streaming.
@@ -97,7 +131,7 @@ npm test
 
 ## 🛡️ Security & Disclaimers
 
-See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines.
+See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines and [`PROVENANCE.md`](PROVENANCE.md) for statutory gazette registers.
 
 **Statutory Disclaimer**: *This project provides decision-support tools and deterministic calculation models. Outputs do not constitute formal legal, tax, or accounting advice. High-risk decisions (such as PHK severance execution or contract execution) require review by a licensed advocate or tax consultant.*
 

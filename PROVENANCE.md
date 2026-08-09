@@ -1,15 +1,20 @@
-# Regulatory Provenance & Statute Register (`PROVENANCE.md`)
+# Granular Statutory Provenance Register (`PROVENANCE.md`)
 
-All legal, tax, labor, and compliance skills in `indonesian-agent-skills` are directly grounded in active statutory gazettes of the Republic of Indonesia.
+Every computational rule and legal prompt instruction is traceably linked to official Indonesian government gazettes.
 
-| Domain | Regulation / Statute | Effective Date | Regulatory Body / Authority | Last Verified |
+---
+
+## 1. Rule Lineage Register
+
+| Rule ID | Statute / Gazette | Article / Section | Engine / Skill File | Direct Verification Link |
 |---|---|---|---|---|
-| **Taxation** | Peraturan Pemerintah (PP) No. 58 Tahun 2023 | 2024-01-01 | Direktorat Jenderal Pajak (DJP) | 2026-08-10 |
-| **Taxation** | Peraturan Menteri Keuangan (PMK) No. 168 Tahun 2023 | 2024-01-01 | Kementerian Keuangan RI | 2026-08-10 |
-| **Taxation** | UU No. 7 Tahun 2021 (Harmonisasi Peraturan Perpajakan) | 2021-10-29 | DPR RI / Kemenkeu | 2026-08-10 |
-| **Labor & Severance** | Peraturan Pemerintah (PP) No. 35 Tahun 2021 | 2021-02-02 | Kementerian Ketenagakerjaan RI | 2026-08-10 |
-| **Holiday Allowance** | Peraturan Menteri Ketenagakerjaan No. 6 Tahun 2016 | 2016-03-08 | Kementerian Ketenagakerjaan RI | 2026-08-10 |
-| **Data Protection** | UU No. 27 Tahun 2022 (Perlindungan Data Pribadi) | 2022-10-17 | Kementerian Kominfo / DPR RI | 2026-08-10 |
-| **Contract Law** | Kitab Undang-Undang Hukum Perdata (KUHPerdata) | Active | Mahkamah Agung RI | 2026-08-10 |
-| **BPJS Healthcare** | Peraturan Presiden (Perpres) No. 64 Tahun 2020 | 2020-05-06 | BPJS Kesehatan | 2026-08-10 |
-| **BPJS Pensions** | Peraturan Pemerintah No. 45 Tahun 2015 | 2015-06-30 | BPJS Ketenagakerjaan | 2026-08-10 |
+| `PPH21-TER-A-01` | PP No. 58/2023 | Lampiran Kategori A | `engines/pph21-calculator.js` | [Pajak.go.id - PMK 168/2023](https://www.pajak.go.id/id/peraturan/petunjuk-pelaksanaan-pemotongan-pajak-atas-penghasilan-sehubungan-dengan-pekerjaan-jasa-1) |
+| `PPH21-ART17-01` | UU No. 7/2021 | Pasal 17 ayat (1) huruf a | `engines/pph21-calculator.js` | [Kemenkeu JDIH - UU 7/2021](https://jdih.kemenkeu.go.id/) |
+| `BPJS-KES-01` | Perpres No. 64/2020 | Pasal 28 | `engines/bpjs-calculator.js` | [BPJS Kesehatan Official](https://bpjs-kesehatan.go.id/) |
+| `BPJS-JP-01` | PP No. 45/2015 | Pasal 29 | `engines/bpjs-calculator.js` | [BPJS Ketenagakerjaan FAQ](https://faq-int.bpjsketenagakerjaan.go.id/) |
+| `PHK-UP-01` | PP No. 35/2021 | Pasal 40 ayat (2) | `engines/phk-calculator.js` | [Kemnaker JDIH - PP 35/2021](https://jdih.kemnaker.go.id/peraturan/detail/1723/peraturan-pemerintah-nomor-35-tahun-2021) |
+| `PHK-UPMK-01` | PP No. 35/2021 | Pasal 40 ayat (3) | `engines/phk-calculator.js` | [Kemnaker JDIH - PP 35/2021](https://jdih.kemnaker.go.id/peraturan/detail/1723/peraturan-pemerintah-nomor-35-tahun-2021) |
+| `THR-PERMEN-01` | Permenaker No. 6/2016 | Pasal 2 & Pasal 3 | `engines/thr-calculator.js` | [Kemnaker JDIH](https://jdih.kemnaker.go.id/) |
+| `PDP-BASES-01` | UU No. 27/2022 | Pasal 20 | `legal-id/skills/pdp-compliance` | [Kominfo JDIH - UU PDP](https://jdih.kominfo.go.id/) |
+| `KUHPER-1320-01` | KUHPerdata | Pasal 1320 | `legal-id/skills/spk-generator` | [MA RI JDIH](https://jdih.mahkamahagung.go.id/) |
+| `KUHPER-1266-01` | KUHPerdata | Pasal 1266 | `legal-id/skills/contract-reviewer` | [MA RI JDIH](https://jdih.mahkamahagung.go.id/) |
