@@ -2,6 +2,8 @@
 name: spt-tahunan-guide
 description: Step-by-step guidance for filing individual annual tax returns (SPT Tahunan Wajib Pajak Orang Pribadi) on DJP Online.
 argument-hint: "<spt_form_type> <has_1721_a1>"
+risk_level: MEDIUM
+rule_type: statutory
 ---
 
 # Individual SPT Tahunan Filing Engine

@@ -2,6 +2,8 @@
 name: bpjs-tenagakerja-admin
 description: Guide for HR administrators managing the BPJS Ketenagakerjaan corporate portal (SIPP).
 argument-hint: "<task_description_e_g_register_new_hire>"
+risk_level: MEDIUM
+rule_type: statutory
 ---
 
 # SIPP BPJS Portal Administration Guide

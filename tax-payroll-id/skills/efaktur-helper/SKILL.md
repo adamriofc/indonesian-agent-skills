@@ -2,6 +2,8 @@
 name: efaktur-helper
 description: Validate and audit e-Faktur taxation invoices (Faktur Pajak) for PPN 11% filings.
 argument-hint: "<paste_invoice_details_or_qr_url>"
+risk_level: MEDIUM
+rule_type: statutory
 ---
 
 # e-Faktur Invoice Auditor & Helper

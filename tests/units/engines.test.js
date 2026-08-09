@@ -27,6 +27,10 @@ function runUnitTests() {
   assert.strictEqual(pph21Check.status, 'VERIFIED');
   assert.strictEqual(pph21Check.hash.length, 64);
 
+  const marketplaceCheck = verifyRulesetIntegrity('marketplace.json');
+  assert.strictEqual(marketplaceCheck.status, 'VERIFIED');
+  assert.strictEqual(marketplaceCheck.hash.length, 64);
+
   // Assert tamper detection throws on unregistered ruleset files
   assert.throws(() => {
     verifyRulesetIntegrity('unregistered_ruleset.json');

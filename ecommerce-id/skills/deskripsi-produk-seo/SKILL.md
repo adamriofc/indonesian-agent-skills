@@ -2,6 +2,8 @@
 name: deskripsi-produk-seo
 description: Generate high-converting and SEO-friendly product descriptions optimized for Shopee, Tokopedia, and TikTok Shop.
 argument-hint: "<product_name> <features_specs> <brand>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # E-Commerce SEO Product Description Generator

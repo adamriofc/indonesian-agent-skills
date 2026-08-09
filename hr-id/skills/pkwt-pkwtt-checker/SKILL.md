@@ -2,6 +2,8 @@
 name: pkwt-pkwtt-checker
 description: Audit contract employment limits (PKWT max 5 years) and calculate mandatory PKWT Compensation Payout under PP No. 35/2021.
 argument-hint: "<monthly_wage> <tenure_months>"
+risk_level: HIGH
+rule_type: statutory
 ---
 
 # PKWT Contract & Compensation Auditor (PP 35/2021)
@@ -18,3 +20,14 @@ Pass parameters to `engines/pkwt-compensation-calculator.js`:
 * Tenure < 1 month: Not eligible (Rp 0).
 * Tenure 12 months: `1 x Monthly Wage`.
 * Tenure 1 - 11 months or > 12 months: `(Masa Kerja / 12) x Monthly Wage`.
+
+## Trust Envelope (Confidence Contract)
+Every engine output must be wrapped in a structured envelope declaring production trust attributes:
+* **`regulatory_framework`**: Applying regulation with article references (e.g. `PP No. 58/2023 jo. PMK 168/2023 - TER`).
+* **`ruleset_version`**: Versioned Id of the `engines/rules/*.json` ruleset consulted (e.g. `PPH21-2024 v1.0.0`).
+* **`effective_window`**: `[effective_from] – [effective_to]` of the applied ruleset.
+* **`integrity_status`**: `VERIFIED` after SHA-256 ruleset check, or `UNVERIFIED` — never present silent calculations when UNVERIFIED.
+* **`risk_level`**: Contextual `LOW / MEDIUM / HIGH` per skill risk metadata.
+* **`requires_human_review`**: `true` for HIGH risk outputs — mandatory professional sign-off before filing, payment, or execution.
+* **`currency`**: IDR, rounded to the nearest whole Rupiah unless another precision is stated.
+* **`as_of`**: The simulation/effective date used to select the ruleset.

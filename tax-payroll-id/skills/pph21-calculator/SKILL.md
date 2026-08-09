@@ -2,6 +2,8 @@
 name: pph21-calculator
 description: Calculate Indonesian monthly income tax (PPh Pasal 21) based on the TER (Tarif Efektif Rata-Rata) per PP 58/2023 and PMK 168/2023, supporting December Annual Reconciliation.
 argument-hint: "<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]"
+risk_level: HIGH
+rule_type: statutory
 ---
 
 # PPh 21 TER Hybrid Tax Calculator
@@ -51,3 +53,14 @@ Ensure output matches the following structure:
 * **Tax Withheld**: Rp [Amount]
 * **Regulatory Authority**: DJP RI
 ```
+
+## Trust Envelope (Confidence Contract)
+Every engine output must be wrapped in a structured envelope declaring production trust attributes:
+* **`regulatory_framework`**: Applying regulation with article references (e.g. `PP No. 58/2023 jo. PMK 168/2023 - TER`).
+* **`ruleset_version`**: Versioned Id of the `engines/rules/*.json` ruleset consulted (e.g. `PPH21-2024 v1.0.0`).
+* **`effective_window`**: `[effective_from] – [effective_to]` of the applied ruleset.
+* **`integrity_status`**: `VERIFIED` after SHA-256 ruleset check, or `UNVERIFIED` — never present silent calculations when UNVERIFIED.
+* **`risk_level`**: Contextual `LOW / MEDIUM / HIGH` per skill risk metadata.
+* **`requires_human_review`**: `true` for HIGH risk outputs — mandatory professional sign-off before filing, payment, or execution.
+* **`currency`**: IDR, rounded to the nearest whole Rupiah unless another precision is stated.
+* **`as_of`**: The simulation/effective date used to select the ruleset.

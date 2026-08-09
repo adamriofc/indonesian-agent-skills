@@ -2,6 +2,8 @@
 name: sop-perusahaan
 description: Generate operational Standard Operating Procedures (SOPs) for local Indonesian workplace operations, shift plans, and leaves.
 argument-hint: "<department> <process_scope>"
+risk_level: LOW
+rule_type: internal-policy
 ---
 
 # Statutory Company SOP Generator

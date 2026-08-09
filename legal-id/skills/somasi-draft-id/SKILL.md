@@ -2,6 +2,8 @@
 name: somasi-draft-id
 description: Draft formal legal warning letters (Surat Somasi 1, 2, 3) for breach of contract, unpaid invoices, or NDA violations under KUHPerdata.
 argument-hint: "<debtor_party> <breach_facts> <demanded_action> <deadline_days>"
+risk_level: HIGH
+rule_type: statutory
 ---
 
 # Somasi Legal Warning Letter Generator

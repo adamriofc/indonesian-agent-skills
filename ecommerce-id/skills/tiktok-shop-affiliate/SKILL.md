@@ -2,6 +2,8 @@
 name: tiktok-shop-affiliate
 description: Plan TikTok Shop Affiliate campaigns, target/open commission structures, and creator briefing templates.
 argument-hint: "<product_category> <target_sales_volume> <margin_allowance>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # TikTok Shop Affiliate Campaign Strategy

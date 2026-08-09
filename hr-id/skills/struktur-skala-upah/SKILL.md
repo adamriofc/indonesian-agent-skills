@@ -2,6 +2,8 @@
 name: struktur-skala-upah
 description: Build statutory Wage Structure and Scale (Struktur dan Skala Upah) compliant with Permenaker No. 1/2017.
 argument-hint: "<job_positions_list> <ump_umr_minimum>"
+risk_level: MEDIUM
+rule_type: statutory
 ---
 
 # Wage Structure & Scale Builder (Permenaker 1/2017)

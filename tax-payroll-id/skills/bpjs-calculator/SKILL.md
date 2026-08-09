@@ -2,6 +2,8 @@
 name: bpjs-calculator
 description: Calculate monthly employer and employee contributions for BPJS Ketenagakerjaan and BPJS Kesehatan.
 argument-hint: "<base_salary>"
+risk_level: HIGH
+rule_type: statutory
 ---
 
 # BPJS Split & Contribution Calculator
@@ -14,3 +16,14 @@ Computes precise monthly payments for BPJS Kesehatan and BPJS Ketenagakerjaan us
 * **BPJS TK - JP**: 2% Employer, 1% Employee. Max wage cap: **Rp 10.042.300**.
 * **BPJS TK - JKK**: Employer only (0.24% to 1.74% depending on risk level).
 * **BPJS TK - JKM**: Employer only (0.3%).
+
+## Trust Envelope (Confidence Contract)
+Every engine output must be wrapped in a structured envelope declaring production trust attributes:
+* **`regulatory_framework`**: Applying regulation with article references (e.g. `PP No. 58/2023 jo. PMK 168/2023 - TER`).
+* **`ruleset_version`**: Versioned Id of the `engines/rules/*.json` ruleset consulted (e.g. `PPH21-2024 v1.0.0`).
+* **`effective_window`**: `[effective_from] – [effective_to]` of the applied ruleset.
+* **`integrity_status`**: `VERIFIED` after SHA-256 ruleset check, or `UNVERIFIED` — never present silent calculations when UNVERIFIED.
+* **`risk_level`**: Contextual `LOW / MEDIUM / HIGH` per skill risk metadata.
+* **`requires_human_review`**: `true` for HIGH risk outputs — mandatory professional sign-off before filing, payment, or execution.
+* **`currency`**: IDR, rounded to the nearest whole Rupiah unless another precision is stated.
+* **`as_of`**: The simulation/effective date used to select the ruleset.

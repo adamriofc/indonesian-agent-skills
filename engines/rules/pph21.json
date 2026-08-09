@@ -156,6 +156,17 @@
           { "max": 1319000000, "rate": 0.2800 },
           { "max": "Infinity", "rate": 0.2900 }
         ]
+      },
+      "source": {
+        "regulation": "PP No. 58/2023 jo. PMK No. 168/2023",
+        "article": "Pasal 3 ayat (1) huruf a s/d c (TER)",
+        "url": "https://www.pajak.go.id/sites/default/files/2024-02/PMK%20168%20Tahun%202023%20Tentang%20PPh%20Pasal%2021%20TER.pdf"
+      },
+      "lifecycle": {
+        "status": "RELEASED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12
       }
     }
   ]

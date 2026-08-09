@@ -25,7 +25,15 @@
       },
       "source": {
         "regulation": "PP 45/2015",
+        "article": "Pasal 29 (Program JP, JHT, JKK, JKM)",
         "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      },
+      "lifecycle": {
+        "status": "ARCHIVED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12,
+        "superseded_by": "BPJS-2024"
       }
     },
     {
@@ -53,7 +61,15 @@
       },
       "source": {
         "regulation": "BPJS Ketenagakerjaan SE 2024",
+        "article": "Surat Edaran Kenaikan Batas Upah JP",
         "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      },
+      "lifecycle": {
+        "status": "ARCHIVED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12,
+        "superseded_by": "BPJS-2025"
       }
     },
     {
@@ -81,7 +97,15 @@
       },
       "source": {
         "regulation": "BPJS Ketenagakerjaan B/726/022025",
+        "article": "Surat Edaran Perubahan Batasan Upah Dan Manfaat JP 2025",
         "url": "https://www.ptgasi.co.id/wp-content/uploads/2025/05/B-726-022025-PERUBAHAN-BATASAN-UPAH-DAN-MANFAAT-JP-2025.pdf"
+      },
+      "lifecycle": {
+        "status": "ARCHIVED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12,
+        "superseded_by": "BPJS-2026"
       }
     },
     {
@@ -109,7 +133,14 @@
       },
       "source": {
         "regulation": "BPJS Ketenagakerjaan B/3307/022026",
+        "article": "Surat Edaran Perubahan Batasan Upah Dan Manfaat JP 2026",
         "url": "https://faq-int.bpjsketenagakerjaan.go.id/"
+      },
+      "lifecycle": {
+        "status": "RELEASED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12
       }
     }
   ]

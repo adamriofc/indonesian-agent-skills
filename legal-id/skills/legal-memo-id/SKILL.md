@@ -2,6 +2,8 @@
 name: legal-memo-id
 description: Format disputes or commercial conflicts into structured legal opinions (Memorandum Hukum) following Indonesian court formats.
 argument-hint: "<dispute_facts> <questions_of_law>"
+risk_level: MEDIUM
+rule_type: statutory
 ---
 
 # Legal Opinion (Memorandum Hukum) Generator

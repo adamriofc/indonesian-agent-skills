@@ -2,6 +2,8 @@
 name: instagram-reels-carousel
 description: Draft high-engagement Instagram Reels visual hooks and multi-slide Carousel scripts tailored for Indonesian D2C and service brands.
 argument-hint: "<topic_or_product> <target_audience> <post_format_reels_or_carousel>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # Instagram Reels & Carousel Content Script Writer

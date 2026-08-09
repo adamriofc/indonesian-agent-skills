@@ -2,6 +2,8 @@
 name: youtube-shorts-script
 description: Write retention-focused YouTube Shorts scripts (0-60s) and long-form video outlines with localized title/SEO formulas.
 argument-hint: "<video_topic> <video_format_shorts_or_longform>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # YouTube Shorts & Video SEO Scriptwriter

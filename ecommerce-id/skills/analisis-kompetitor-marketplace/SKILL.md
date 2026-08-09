@@ -2,6 +2,8 @@
 name: analisis-kompetitor-marketplace
 description: Analyze competitor listings, customer review complaints, and pricing to find market gaps and optimization opportunities.
 argument-hint: "<paste_competitor_reviews_or_specifications>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # Competitor Marketplace Analyzer

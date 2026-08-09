@@ -2,6 +2,8 @@
 name: shopee-live-script
 description: Generate high-engagement hosting scripts and voucher-drop routines for live stream shopping.
 argument-hint: "<product_details> <discount_rate> <campaign_type>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # Shopee & TikTok Live Stream Script Generator

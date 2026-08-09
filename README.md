@@ -86,15 +86,23 @@ Standard Large Language Models (LLMs) predict text probabilistically. When evalu
 
 ## 🔌 Compatibility & Integration Directory
 
-| Application / Platform | Native Support | Integration Method | Verified Status |
-|---|---|---|---|
-| **OpenWork Desktop & Cloud** | Yes | Native manifest (`plugin.json`) load. | 🟢 Native |
-| **OpenCode CLI** | Yes | Direct terminal import via `opencode plugins add`. | 🟢 Native |
-| **Claude Code (CLI) & Cowork** | Yes | Loadable as custom tools or knowledge bases. | 🟢 Native |
-| **Cursor IDE** | Yes | Context file loading via `.cursorrules` or `.mdc`. | 🟡 Adapter |
-| **VS Code Agent** | Yes | Workspace prompt rules under `.vscode/settings.json`. | 🟡 Compatible |
-| **Gemini CLI & Codex** | Yes | Imported as external system prompts. | 🟡 Compatible |
-| **ChatGPT / Custom GPTs** | Yes | Upload files in the GPT Builder knowledge database. | 🟡 Manual |
+Compatibility classes (audit-grade, no overclaim):
+
+| Class | Meaning |
+|---|---|
+| 🟢 **Verified** | Exercised end-to-end against this repository (tests, registration, or live import) |
+| 🟡 **Adapter** | Works through a bridge configuration (cursorrules, system prompts); requires setup, not independently tested in this repo |
+| 🔵 **Manual** | Supported via manual file upload/copy; no automation contract, user executes the steps |
+
+| Application / Platform | Integration Method | Compatibility Class |
+|---|---|---|
+| **OpenWork Desktop & Cloud** | Native manifest (`plugin.json`) registration; 5 plugins + 42 skills registered and synced via Cloud API | 🟢 **Verified** |
+| **OpenCode CLI** | Import via `opencode plugins add` or local copy of the plugin folder | 🟡 **Adapter** (no E2E run in this repo) |
+| **Claude Code (CLI) & Cowork** | Native `.claude-plugin` manifest format; `claude plugins add` | 🟡 **Adapter** (format-native, E2E pending) |
+| **Cursor IDE** | Context loading via `.cursorrules` / `.mdc` copies | 🟡 **Adapter** |
+| **VS Code Agent (Copilot / Cline / Roo Code)** | Workspace prompt rules under `.vscode/settings.json` / `systemPromptPath` | 🔵 **Manual** |
+| **Gemini CLI & Codex** | Imported as external system prompts | 🔵 **Manual** |
+| **ChatGPT / Custom GPTs** | Upload skill files in GPT Builder knowledge database | 🔵 **Manual** |
 
 ---
 
@@ -234,7 +242,9 @@ npm test
 
 ## 🛡️ Security & Disclaimers
 
-See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines and [`PROVENANCE.md`](PROVENANCE.md) for statutory gazette registers.
+See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines, [`PROVENANCE.md`](PROVENANCE.md) for the granular statutory gazette register, [`REGULATORY_PIPELINE.md`](REGULATORY_PIPELINE.md) for the official update procedure, and [`REGULATORY_CHANGELOG.md`](REGULATORY_CHANGELOG.md) for regulatory amendments.
+
+Governance and community files: [`CONTRIBUTING.md`](CONTRIBUTING.md), [`ROADMAP.md`](ROADMAP.md), [`CHANGELOG.md`](CHANGELOG.md).
 
 **Statutory Disclaimer**: *This project provides decision-support tools and deterministic calculation models. Outputs do not constitute formal legal, tax, or accounting advice. High-risk decisions (such as PHK severance execution or contract execution) require review by a licensed advocate or tax consultant.*
 

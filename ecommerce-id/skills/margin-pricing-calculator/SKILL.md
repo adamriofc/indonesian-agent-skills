@@ -2,6 +2,8 @@
 name: margin-pricing-calculator
 description: Calculate net seller payout and profit margins after marketplace admin fees (Shopee Star/Mall, Tokopedia Power Merchant, TikTok Shop), extra shipping fees, and ad budgets.
 argument-hint: "<selling_price> <platform> <seller_tier> [free_shipping_extra] [ad_budget]"
+risk_level: MEDIUM
+rule_type: platform-policy
 ---
 
 # Marketplace Fee & Net Margin Calculator
@@ -14,3 +16,14 @@ Pass parameters to `engines/marketplace-fee-calculator.js`:
 * **Shopee**: Non-Star (4.0%), Star (6.0%), Star+ (6.5%), Mall (8.5%).
 * **TikTok Shop**: Standard (4.5%), Mall (6.5%).
 * **Gratis Ongkir Extra**: 4% capped at Rp 10.000 per item.
+
+## Trust Envelope (Confidence Contract)
+Every engine output must be wrapped in a structured envelope declaring production trust attributes:
+* **`regulatory_framework`**: Applying regulation with article references (e.g. `PP No. 58/2023 jo. PMK 168/2023 - TER`).
+* **`ruleset_version`**: Versioned Id of the `engines/rules/*.json` ruleset consulted (e.g. `PPH21-2024 v1.0.0`).
+* **`effective_window`**: `[effective_from] – [effective_to]` of the applied ruleset.
+* **`integrity_status`**: `VERIFIED` after SHA-256 ruleset check, or `UNVERIFIED` — never present silent calculations when UNVERIFIED.
+* **`risk_level`**: Contextual `LOW / MEDIUM / HIGH` per skill risk metadata.
+* **`requires_human_review`**: `true` for HIGH risk outputs — mandatory professional sign-off before filing, payment, or execution.
+* **`currency`**: IDR, rounded to the nearest whole Rupiah unless another precision is stated.
+* **`as_of`**: The simulation/effective date used to select the ruleset.

@@ -7,10 +7,11 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-// Expected SHA-256 Hashes for Version 1.0.0 Rulesets
+// Expected SHA-256 Hashes for Version 1.1.0 Rulesets (release 590da88 + lifecycle fields)
 const RULESET_CHECKSUMS = {
-  'bpjs.json': 'b7a7d5c8266a22a5f1c390f0894bfdad532dce744d72f6a179689cfd56ead723',
-  'pph21.json': 'ebe2c10c9852c38cd14f2c91e22532da04f523cfcbd79a721ee49e0553045d9a'
+  'bpjs.json': '19b84496bae079edf10ff96ef72a8df6ed6bd050529d2f1096989865a9a8a298',
+  'pph21.json': 'faec8d0b221ab8f730b0d79d75ae66e76e21bbc781040d81662948c90a9562b0',
+  'marketplace.json': 'ae5167b48cc70b2148d6a860ab8ed515d61f77824799bb35c3f49939ec0e2615'
 };
 
 function verifyRulesetIntegrity(filename, filePathOverride) {

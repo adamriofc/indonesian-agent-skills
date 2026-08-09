@@ -2,6 +2,8 @@
 name: shopee-video-creator
 description: Optimize short promotional video scripts and product tagging strategies for Shopee Video.
 argument-hint: "<product_name> <promo_angle>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # Shopee Video Script & Tagging Optimizer

@@ -2,6 +2,8 @@
 name: contract-reviewer
 description: Audit commercial and vendor agreements to identify hidden risks, asymmetrical clauses, and compliance issues under Indonesian law, outputting a Contract Risk Score (0-100).
 argument-hint: "<paste_contract_text>"
+risk_level: HIGH
+rule_type: statutory
 ---
 
 # Expert Contract Auditor (Indonesian Commercial Law)

@@ -2,6 +2,8 @@
 name: buyer-negotiator
 description: Strategy and communication templates for negotiating wholesale (grosir) and distribution terms with local Indonesian B2B buyers.
 argument-hint: "<buyer_type_distributor_retailer> <order_volume> <target_margin>"
+risk_level: LOW
+rule_type: commercial
 ---
 
 # B2B Grosir Trade Negotiator

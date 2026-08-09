@@ -2,6 +2,8 @@
 name: pdp-compliance
 description: Assess corporate business processes against Indonesian UU No. 27/2022 on Personal Data Protection (UU PDP) across all 6 Lawful Bases.
 argument-hint: "<process_description>"
+risk_level: HIGH
+rule_type: statutory
 ---
 
 # Enterprise UU PDP Compliance Audit Engine (UU No. 27/2022)
