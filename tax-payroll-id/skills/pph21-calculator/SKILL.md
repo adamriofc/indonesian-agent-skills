@@ -6,7 +6,7 @@ argument-hint: "<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_w
 
 # PPh 21 TER Hybrid Tax Calculator
 
-A hybrid precision engine for withholding employee PPh 21 monthly taxes (Jan-Nov) and December annual reconciliation.
+A hybrid precision engine for calculating employee PPh 21 monthly taxes (Jan-Nov) and December annual reconciliation.
 
 ## Statutory Provenance
 * **Primary Regulation**: Peraturan Pemerintah (PP) No. 58 Tahun 2023 & Peraturan Menteri Keuangan (PMK) No. 168 Tahun 2023.
@@ -14,18 +14,40 @@ A hybrid precision engine for withholding employee PPh 21 monthly taxes (Jan-Nov
 * **Authority**: Direktorat Jenderal Pajak (DJP), Kementerian Keuangan RI.
 
 ## Execution Model (Hybrid Engine)
-Do not guess tax amounts using probabilistic LLM math. Follow this hybrid pattern:
+Do not perform mathematical computations using the probabilistic LLM. Instead, extract parameters and feed them to the deterministic engine (`engines/pph21-calculator.js`).
 
 ### 1. Monthly Withholding (Jan-Nov)
-Extract parameters and run lookup via `calculatePPh21Monthly` in `engines/pph21-calculator.js`:
-* Match PTKP to TER Category: A (TK/0, TK/1, K/0), B (TK/2, TK/3, K/1, K/2), C (K/3).
+* Match PTKP to TER Category:
+  * **Category A**: TK/0 (54M), TK/1 (58.5M), K/0 (58.5M).
+  * **Category B**: TK/2 (63M), TK/3 (67.5M), K/1 (63M), K/2 (67.5M).
+  * **Category C**: K/3 (72M).
 * Multiply gross monthly salary by matched bracket rate.
-* Apply 20% penalty if `hasNpwp` is `false`.
+* Apply 20% penalty if `hasNpwp` is `false` or NIK is not validated.
 
 ### 2. December Annual Reconciliation (Masa Pajak Terakhir)
-If `is_december` is `true`, execute `calculatePPh21DecemberReconciliation`:
-* Determine PTKP threshold deduction (TK/0 = 54M, K/0 = 58.5M, etc.).
+* Determine PTKP threshold deduction.
 * Deduct Biaya Jabatan (5% of gross, capped at Rp 500.000/month or Rp 6.000.000/year).
 * Deduct employee BPJS JHT (2%) and JP (1%).
-* Compute progressive Article 17 progressive tax on Net Taxable Income (PKP).
-* Subtract tax already withheld during Jan-Nov (`jan_nov_withheld`) to yield December tax.
+* Compute progressive Article 17 progressive tax on Net Taxable Income (PKP):
+  * Up to Rp 60M: 5%
+  * > Rp 60M to Rp 250M: 15%
+  * > Rp 250M to Rp 500M: 25%
+  * > Rp 500M to Rp 5B: 30%
+  * Above Rp 5B: 35%
+* Subtract tax already withheld during Jan-Nov to yield December tax.
+
+## Standardized Output Schema
+Ensure output matches the following structure:
+```markdown
+### PPh 21 Tax Calculation Report
+
+#### Parameter Summary
+* **Monthly Gross Salary / Annual**: Rp [Amount]
+* **PTKP Status**: [Status]
+* **Identity Validation**: [validated_nik_npwp / unvalidated] (Penalty applied: [Yes/No])
+
+#### Calculation Details
+* **Tax Period**: [Jan-Nov / December Reconciliation]
+* **Tax Withheld**: Rp [Amount]
+* **Regulatory Authority**: DJP RI
+```

@@ -4,43 +4,56 @@ description: Assess corporate business processes against Indonesian UU No. 27/20
 argument-hint: "<process_description>"
 ---
 
-# UU PDP Compliance Engine (UU No. 27/2022)
+# Enterprise UU PDP Compliance Audit Engine (UU No. 27/2022)
 
-Audits personal data processing activities against the Indonesian Personal Data Protection Act.
+Audits personal data processing activities, data architectures, customer onboarding flows, and cross-border transfers against the Indonesian Personal Data Protection Act.
 
 ## Legal Provenance & Governance
 * **Statutory Basis**: UU No. 27 Year 2022 (Pasal 20: Dasar Hukum Pemrosesan Data Pribadi).
+* **Authority**: Lembaga Perlindungan Data Pribadi (Kominfo / Kemenkominfo RI).
 
-## Processing Basis Decision Tree (Pasal 20 UU PDP)
+## Hierarchical 6 Lawful Bases Decision Tree (Pasal 20 UU PDP)
 Do not default to Consent. Evaluate the 6 Lawful Bases in hierarchical sequence:
 
 ```text
-                       [ Personal Data Processing ]
-                                    │
-                                    ▼
-                      1. Is there explicit consent? ──(Yes)──► [ Consent Basis ]
-                                    │(No)
-                                    ▼
-                 2. Necessary for contract execution? ──(Yes)──► [ Contract Necessity ]
-                                    │(No)
-                                    ▼
-                  3. Required by statutory law/tax? ──(Yes)──► [ Legal Obligation ]
-                                    │(No)
-                                    ▼
-                  4. Life or health vital interest? ──(Yes)──► [ Vital Interest ]
-                                    │(No)
-                                    ▼
-                5. Public task or state authority? ──(Yes)──► [ Public Task ]
-                                    │(No)
-                                    ▼
-              6. Legitimate interest with subject rights? ──(Yes)──► [ Legitimate Interest ]
-                                    │(No)
-                                    ▼
-                         [ INVALID BASE / VIOLATION ]
+                       [ Personal Data Processing Activity ]
+                                         │
+                                         ▼
+                      1. Is there explicit consent? ──(Yes)──► [ Basis 1: Persetujuan / Consent ]
+                                         │(No)
+                                         ▼
+                 2. Necessary to fulfill a contract? ──(Yes)──► [ Basis 2: Perjanjian / Contract ]
+                                         │(No)
+                                         ▼
+                  3. Mandatory statutory obligation? ──(Yes)──► [ Basis 3: Kewajiban Hukum ]
+                                         │(No)
+                                         ▼
+                  4. Protecting vital life/health? ──(Yes)──► [ Basis 4: Kepentingan Vital ]
+                                         │(No)
+                                         ▼
+                5. Public interest/state authority? ──(Yes)──► [ Basis 5: Kepentingan Umum ]
+                                         │(No)
+                                         ▼
+              6. Legitimate interest (balanced)? ──(Yes)──► [ Basis 6: Kepentingan Legitimat ]
+                                         │(No)
+                                         ▼
+                         [ INVALID BASE / NON-COMPLIANT ]
 ```
 
-## Data Classification Audit Rules
-1. **Data Pribadi yang Bersifat Spesifik (Sensitive)**: Health data, biometrics, genetics, criminal records, child data, personal financial records (Pasal 4 ayat (2)).
-   * *Requirement*: High-security encryption + mandatory Data Protection Impact Assessment (DPIA).
-2. **Data Pribadi yang Bersifat Umum (General)**: Full name, gender, nationality, religion, marital status (Pasal 4 ayat (3)).
-   * *Requirement*: Standard data security.
+## Detailed Data Classification Audit Rules (Pasal 4 UU PDP)
+
+### 1. Data Pribadi yang Bersifat Spesifik (Sensitive Personal Data)
+* **Categories**: Health data, biometrics, genetic data, sexual orientation/life, criminal records, child data, personal financial records.
+* **Mandatory Controls**:
+  * Explicit, written/recorded consent (cannot be bundled in general T&C).
+  * Mandatory Data Protection Impact Assessment (DPIA / Analisis Dampak PDP) prior to processing.
+  * Enhanced encryption at rest (AES-256) and in transit (TLS 1.3).
+
+### 2. Data Pribadi yang Bersifat Umum (General Personal Data)
+* **Categories**: Full name, gender, nationality, religion, marital status, combined data identifying an individual.
+* **Mandatory Controls**: Standard security measures, clear privacy notice, and opt-out options.
+
+## Statutory Compliance Checkpoints
+1. **Breach Notification (Pasal 46)**: Notification to data subjects and PDP Authority within **3 x 24 hours (72 hours)** of identifying a data security breach.
+2. **Cross-Border Data Transfer (Pasal 56)**: Ensure the recipient country has an equal/higher level of PDP protection, or obtain explicit subject consent, or execute Binding Corporate Rules (BCR).
+3. **Data Protection Officer (DPO) Appointment (Pasal 53)**: Required if processing data on a large scale or processing specific/sensitive personal data as a primary activity.

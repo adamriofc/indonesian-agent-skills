@@ -20,26 +20,33 @@ Every audited issue must be categorized into one of four distinct layers:
 4. **`NEGOTIATION POSITION`**: Tactical negotiation points for client protection.
 
 ## Risk Scoring Evaluation Matrix (0 - 100 Total Risk Score)
+Calculate the final score deterministically by evaluating the following 5 dimensions:
 
-### 1. Tanggung Jawab & Batasan Ganti Rugi (Liability Caps) - Weight: 25%
-* **High Risk Trigger**: Pihak Kedua holds unlimited liability while Pihak Pertama liability is capped or excluded.
+### 1. Tanggung Jawab & Batasan Ganti Rugi (Liability Caps) - Max Weight: 25
+* **Score 25 (CRITICAL RISK)**: Pihak Kedua holds unlimited liability for indirect, consequential, or incidental damages, while Pihak Pertama's liability is capped at zero or excluded.
+* **Score 15 (HIGH RISK)**: No liability cap specified for either party.
+* **Score 5 (LOW RISK)**: Liability is capped at the total contract value actually paid in the preceding 12 months, with mutual exclusions for consequential damages.
 * **Classification**: `COMMERCIAL RECOMMENDATION`
 
-### 2. Mekanisme Pengakhiran & Pasal 1266 KUHPerdata - Weight: 25%
-* **High Risk Trigger**: Missing explicit waiver of Article 1266 KUHPerdata, or unilateral instant termination without cause (*termination for convenience*) with 0 days notice.
-* **Legal Nuance**: Article 1266 requires judicial dissolution unless explicitly waived. However, waiving Art 1266 must be accompanied by explicit breach definitions, cure periods (min 14 days), and notice mechanics.
+### 2. Mekanisme Pengakhiran & Pasal 1266 KUHPerdata - Max Weight: 25
+* **Score 25 (CRITICAL RISK)**: Unilateral termination for convenience allowed instantly with 0 days notice. No waiver of Article 1266 KUHPerdata, meaning termination requires a court order.
+* **Score 15 (HIGH RISK)**: Article 1266 waived, but no cure period or notice period is specified.
+* **Score 5 (LOW RISK)**: Article 1266 waived, with a clear written notice period (min 14 or 30 days) and a 14-day cure period (*waktu perbaikan*) for default.
 * **Classification**: `STATUTORY REQUIREMENT` & `MARKET PRACTICE`
 
-### 3. Keadaan Memaksa (Force Majeure) - Weight: 15%
-* **High Risk Trigger**: Omission of government regulatory changes, epidemics, or failure to specify notification deadlines (3x24 hours).
+### 3. Keadaan Memaksa (Force Majeure) - Max Weight: 15
+* **Score 15 (HIGH RISK)**: Omission of government regulatory changes, pandemic/epidemic clauses, or failure to specify notification timelines.
+* **Score 5 (LOW RISK)**: Force majeure is defined including government action, with a strict notification window of 3x24 hours (72 hours) and mutual negotiation after 30 days of suspension.
 * **Classification**: `MARKET PRACTICE`
 
-### 4. Penyelesaian Sengketa & Yurisdiksi - Weight: 15%
-* **High Risk Trigger**: Foreign arbitration (SIAC/LCIA) for domestic small-scale agreements.
+### 4. Penyelesaian Sengketa & Yurisdiksi - Max Weight: 15
+* **Score 15 (HIGH RISK)**: Specifying foreign court/arbitration (e.g. SIAC Singapore, LCIA London) for small-scale local domestic contracts (value < Rp 1 Billion).
+* **Score 5 (LOW RISK)**: Choosing BANI (Badan Arbitrase Nasional Indonesia) or local District Court (Pengadilan Negeri) matching the parties' domicile.
 * **Classification**: `COMMERCIAL RECOMMENDATION`
 
-### 5. Perlindungan Data Pribadi (UU PDP 27/2022) - Weight: 20%
-* **High Risk Trigger**: Personal data processing without defining Data Controller/Processor roles or breach notification protocols.
+### 5. Perlindungan Data Pribadi (UU PDP 27/2022) - Max Weight: 20
+* **Score 20 (CRITICAL RISK)**: Processing personal data without defining Controller vs Processor roles or omitting data breach notification obligations.
+* **Score 5 (LOW RISK)**: Dedicated Data Processing Addendum (DPA) included, specifying data processor security standards and mandatory breach notification within 72 hours.
 * **Classification**: `STATUTORY REQUIREMENT`
 
 ## Standardized Output Schema
@@ -48,15 +55,20 @@ Every audited issue must be categorized into one of four distinct layers:
 # CONTRACT AUDIT REPORT
 
 ## EXECUTIVE SUMMARY
-* **Contract Risk Score**: [Score]/100
-* **Overall Risk Assessment**: [LOW / MEDIUM / HIGH / CRITICAL]
+* **Contract Risk Score**: [Sum of Scores]/100
+* **Overall Risk Assessment**: [0-30: LOW / 31-60: MEDIUM / 61-85: HIGH / 86-100: CRITICAL]
 
-## FINDINGS BY LEGAL TAXONOMY LAYER
+## DETAILED FINDINGS BY LEGAL TAXONOMY
 1. **[Clause Number / Title]**
    * **Taxonomy Layer**: [STATUTORY REQUIREMENT / MARKET PRACTICE / COMMERCIAL RECOMMENDATION / NEGOTIATION POSITION]
-   * **Issue Identified**: [Description of legal/commercial risk]
-   * **Statutory Source**: [Reference to KUHPerdata or statutory gazette]
-   * **Recommended Redline**: [Proposed revision]
+   * **Observed Clause**: "[Quote original text]"
+   * **Issue Identified**: [Description of risk]
+   * **Risk Penalty Score Contribution**: +[Score]
+   * **Recommended Redline**:
+```diff
+- Original: [Original text]
++ Proposed Redline: [Revised text]
+```
 
 ## STATUTORY DISCLAIMER
 This audit is an automated preliminary review and does not substitute formal legal advice from a licensed Indonesian advocate.
