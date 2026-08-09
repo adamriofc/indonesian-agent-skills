@@ -1,0 +1,8 @@
+{
+  "name": "hr-id",
+  "version": "1.0.0",
+  "description": "Production-grade Indonesian HR administration, compliant SP warning letters, SOP generation, BPJS SIPP portal setup, and severance calculations per PP 35/2021.",
+  "author": {
+    "name": "adamriofc"
+  }
+}

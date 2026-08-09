@@ -1,0 +1,16 @@
+[
+  {
+    "employeeId": "EMP-001",
+    "name": "Budi Santoso",
+    "ptkpStatus": "K/1",
+    "grossSalary": 12500000,
+    "hasNpwp": true
+  },
+  {
+    "employeeId": "EMP-002",
+    "name": "Siti Rahma",
+    "ptkpStatus": "TK/0",
+    "grossSalary": 8500000,
+    "hasNpwp": false
+  }
+]
