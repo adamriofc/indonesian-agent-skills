@@ -14,7 +14,7 @@ function runUnitTests() {
   console.log("⚡ Running Deterministic Engine Math & Golden Corpus Tests...\n");
 
   // ----------------------------------------------------
-  // 1. Test Golden Corpus PPh 21 Scenarios
+  // 1. Test Golden Corpus PPh 21 Scenarios & Metadata
   // ----------------------------------------------------
   console.log("  [1/5] Testing PPh 21 Golden Corpus Datasets...");
   goldenPph21.forEach(tc => {
@@ -32,12 +32,16 @@ function runUnitTests() {
       assert.strictEqual(res.pkp, tc.expected.pkp, `Failed ${tc.caseId} pkp`);
       assert.strictEqual(res.totalAnnualTaxArt17, tc.expected.totalAnnualTaxArt17, `Failed ${tc.caseId} totalAnnualTaxArt17`);
       assert.strictEqual(res.decemberTaxWithheld, tc.expected.decemberTaxWithheld, `Failed ${tc.caseId} decemberTaxWithheld`);
+      assert.strictEqual(res.rulesetId, "PPH21-2024", `Failed ${tc.caseId} rulesetId`);
+      assert.strictEqual(res.rulesetVersion, "1.0.0", `Failed ${tc.caseId} rulesetVersion`);
     } else {
       const res = calculatePPh21Monthly(tc.input.grossSalary, tc.input.ptkpStatus, tc.input.hasNpwp, tc.input.dateStr);
       assert.strictEqual(res.terCategory, tc.expected.terCategory, `Failed ${tc.caseId} terCategory`);
       assert.strictEqual(res.effectiveRatePercent, tc.expected.effectiveRatePercent, `Failed ${tc.caseId} rate`);
       assert.strictEqual(res.penaltyApplied, tc.expected.penaltyApplied, `Failed ${tc.caseId} penaltyApplied`);
       assert.strictEqual(res.monthlyTaxWithheld, tc.expected.monthlyTaxWithheld, `Failed ${tc.caseId} taxWithheld`);
+      assert.strictEqual(res.rulesetId, "PPH21-2024", `Failed ${tc.caseId} rulesetId`);
+      assert.strictEqual(res.rulesetVersion, "1.0.0", `Failed ${tc.caseId} rulesetVersion`);
     }
   });
 
@@ -52,7 +56,17 @@ function runUnitTests() {
     assert.strictEqual(res.bpjsKetenagakerjaan.jp.cappedWage, tc.expected.jpCappedWage, `Failed ${tc.caseId} jpCap`);
     assert.strictEqual(res.bpjsKetenagakerjaan.jp.employer, tc.expected.jpEmployer, `Failed ${tc.caseId} jpEmployer`);
     assert.strictEqual(res.bpjsKetenagakerjaan.jp.employee, tc.expected.jpEmployee, `Failed ${tc.caseId} jpEmployee`);
+    assert.ok(res.rulesetId.startsWith("BPJS-"), `Failed ${tc.caseId} rulesetId format`);
+    assert.strictEqual(res.rulesetVersion, "1.0.0", `Failed ${tc.caseId} rulesetVersion`);
   });
+
+  // Assert correct rulesetId mapping for BPJS transitions
+  const bpjs2025Res = calculateBpjs(10000000, 'low', '2025-05-01');
+  assert.strictEqual(bpjs2025Res.rulesetId, "BPJS-2025");
+  assert.strictEqual(bpjs2025Res.ruleset.version, "1.0.0");
+
+  const bpjs2026Res = calculateBpjs(10000000, 'low', '2026-05-01');
+  assert.strictEqual(bpjs2026Res.rulesetId, "BPJS-2026");
 
   // Verify that BPJS engine throws on unsupported historical dates (Audit P0)
   assert.throws(() => {
