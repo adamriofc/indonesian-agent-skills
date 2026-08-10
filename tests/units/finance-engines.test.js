@@ -144,12 +144,56 @@ function testLoan() {
   console.log('  [5/8] loan-amortization engine: LOAN-001 schedule + edge cases passed');
 }
 
+function testRatios() {
+  const fr = require('../../engines/financial-ratios');
+
+  const input = {
+    currentAssets: 500000000,
+    currentLiabilities: 250000000,
+    inventory: 150000000,
+    cash: 80000000,
+    totalLiabilities: 600000000,
+    totalEquity: 400000000,
+    revenue: 1200000000,
+    cogs: 800000000,
+    netIncome: 120000000,
+    totalAssets: 1000000000,
+    avgInventory: 200000000,
+    avgReceivables: 150000000,
+    avgPayables: 100000000
+  };
+
+  assert.strictEqual(fr.currentRatio(input.currentAssets, input.currentLiabilities), 2);
+  assert.strictEqual(fr.quickRatio(input.currentAssets, input.inventory, input.currentLiabilities), 1.4);
+  assert.strictEqual(fr.cashRatio(input.cash, input.currentLiabilities), 0.32);
+  assert.strictEqual(fr.debtToEquity(input.totalLiabilities, input.totalEquity), 1.5);
+  assert.strictEqual(fr.grossMargin(input.revenue, input.cogs), 0.3333);
+  assert.strictEqual(fr.netMargin(input.netIncome, input.revenue), 0.1);
+  assert.strictEqual(fr.roa(input.netIncome, input.totalAssets), 0.12);
+  assert.strictEqual(fr.roe(input.netIncome, input.totalEquity), 0.3);
+  assert.strictEqual(fr.inventoryTurnover(input.cogs, input.avgInventory), 4);
+  assert.strictEqual(fr.receivablesTurnover(input.revenue, input.avgReceivables), 8);
+  assert.strictEqual(fr.daysSalesOutstanding(input.revenue, input.avgReceivables), 45.625);
+  assert.strictEqual(fr.daysPayablesOutstanding(input.cogs, input.avgPayables), 45.625);
+  assert.strictEqual(fr.daysInventoryOutstanding(input.cogs, input.avgInventory), 91.25);
+  assert.strictEqual(fr.cashConversionCycle(91.25, 45.625, 45.625), 91.25);
+
+  assert.throws(() => fr.currentRatio(500000000, 0), /Denominator cannot be zero/);
+  assert.throws(() => fr.quickRatio(500000000, 150000000, 0), /Denominator cannot be zero/);
+  assert.throws(() => fr.roe(120000000, 0), /Denominator cannot be zero/);
+  assert.throws(() => fr.daysSalesOutstanding(0, 150000000), /Denominator cannot be zero/);
+
+  assertDeterministic(() => fr.cashConversionCycle(91.25, 45.625, 45.625), 'ratios determinism');
+  console.log('  [6/8] financial-ratios engine: RAT-001 14 ratios passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
   testNpv();
   testIrr();
   testLoan();
+  testRatios();
 }
 
 runAll();
