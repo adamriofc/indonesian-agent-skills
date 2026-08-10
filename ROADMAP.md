@@ -2,7 +2,16 @@
 
 Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 
-## Shipped (`v1.0.0`)
+## Shipped (`v1.1.0`)
+
+- [x] **Release Trust Anchor** — `SHA256SUMS.txt` + `scripts/sha256sums.sh`, diverifikasi di CI
+- [x] **Benchmark harness** — `scripts/benchmark.js` + `docs/BENCHMARK.md` (akurasi corpus 100%, determinisme, throughput; LLM baseline siap pakai, menunggu run eksternal)
+- [x] **Provenance precision** — Access Path per rule, Audit Scope & Non-Claims, perbaikan 2 link mati + 5 link presisi
+- [x] **15 skill pendek diperkaya** (Scope & Safety + Worked Example) — konsistensi kedalaman konten
+- [x] **Community readiness** — CODE_OF_CONDUCT, issue template regulasi, GitHub topics
+- [x] **Compatibility matrix ber-metadata** — kolom Verification Method + Last Verified per platform (jujur: OpenWork 🟢 schema-validated; lainnya 🟡 Adapter / 🔵 Manual)
+
+## Shipping (`v1.0.0`)
 
 - [x] 42 enterprise skills across 5 domain plugins (legal-id, tax-payroll-id, hr-id, ecommerce-id, content-lokal-id)
 - [x] 8 deterministic calculation engines with hybrid execution (LLM extraction + Node.js math)
@@ -18,11 +27,11 @@ Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 
 - [→] Ruleset lifecycle promotion tooling (scripted `DRAFT → VERIFIED → RELEASED`)
 - [→] Signed manifest anchoring (Git tag signing / attestation for integrity chain-of-custody)
+- [→] **LLM baseline benchmark run** — `scripts/benchmark.js --llm` dengan model produksi + publikasi hasil di `docs/BENCHMARK.md` (no-fiction: tabel baru terisi setelah run nyata)
 
 ## Planned
 
-- [ ] **Compatibility verification levels** — per-platform tested status (verified / adapter / manual) documented in a living compatibility matrix
-- [ ] **Benchmark suite** — head-to-head accuracy benchmark: generic LLM vs `indonesian-agent-skills` on 1,000+ statutory scenarios
+- [ ] **Compatibility verification levels** — E2E register untuk OpenCode CLI & Claude Code (mengubah 🟡 → 🟢 dengan bukti run)
 - [ ] **Regional derivatives** — Malaysia, Singapore, Philippines statutory modules reusing the same ruleset architecture (preview: architecture is domain-agnostic)
 - [ ] **Ruleset UI/diff tooling** — human-readable diff between effective windows and changelog automation from `REGULATORY_CHANGELOG.md`
 - [ ] **Plugin registry sync automation** — one-command publish of skill updates to OpenWork Cloud

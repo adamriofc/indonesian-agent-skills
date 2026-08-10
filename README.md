@@ -33,6 +33,32 @@ Standard Large Language Models (LLMs) predict text probabilistically. When evalu
 
 ---
 
+## 🚀 Quickstart (< 60 detik)
+
+```bash
+# 1. Clone (5 detik)
+git clone https://github.com/adamriofc/indonesian-agent-skills.git && cd indonesian-agent-skills
+
+# 2. Install (10 detik, tanpa dependensi pihak ketiga)
+npm ci
+
+# 3. Jalankan engine dan lihat output terverifikasi (2 detik)
+node -e "
+const { calculatePPh21Monthly } = require('./engines/pph21-calculator');
+console.log(calculatePPh21Monthly(10000000, 'TK/0', true, '2026-03-01'));
+"
+
+# 4. Verifikasi integritas (2 detik)
+./scripts/sha256sums.sh verify
+
+# 5. Tes penuh: 900+ asersi (30-60 detik)
+npm test
+```
+
+Setelah itu: salin folder skill yang dibutuhkan ke agent Anda (lihat tabel Compatibility & Integration Directory di bawah).
+
+---
+
 ## 🏗️ System Architecture
 
 ```text
@@ -94,15 +120,15 @@ Compatibility classes (audit-grade, no overclaim):
 | 🟡 **Adapter** | Works through a bridge configuration (cursorrules, system prompts); requires setup, not independently tested in this repo |
 | 🔵 **Manual** | Supported via manual file upload/copy; no automation contract, user executes the steps |
 
-| Application / Platform | Integration Method | Compatibility Class |
-|---|---|---|
-| **OpenWork Desktop & Cloud** | Native manifest (`plugin.json`) registration; 5 plugins + 42 skills registered and synced via Cloud API | 🟢 **Verified** |
-| **OpenCode CLI** | Import via `opencode plugins add` or local copy of the plugin folder | 🟡 **Adapter** (no E2E run in this repo) |
-| **Claude Code (CLI) & Cowork** | Native `.claude-plugin` manifest format; `claude plugins add` | 🟡 **Adapter** (format-native, E2E pending) |
-| **Cursor IDE** | Context loading via `.cursorrules` / `.mdc` copies | 🟡 **Adapter** |
-| **VS Code Agent (Copilot / Cline / Roo Code)** | Workspace prompt rules under `.vscode/settings.json` / `systemPromptPath` | 🔵 **Manual** |
-| **Gemini CLI & Codex** | Imported as external system prompts | 🔵 **Manual** |
-| **ChatGPT / Custom GPTs** | Upload skill files in GPT Builder knowledge database | 🔵 **Manual** |
+| Application / Platform | Integration Method | Compatibility Class | Verification Method | Last Verified |
+|---|---|---|---|---|
+| **OpenWork Desktop & Cloud** | Native `plugin.json` manifest; 5 plugins + 42 skills divalidasi schema validator di CI | 🟢 **Verified** | CI schema validation (`tests/schema/`) + `npm test` | 2026-08-10 |
+| **OpenCode CLI** | `opencode` mendukung plugin pihak ketiga; cara impor tercatat di dokumentasi; tidak ada E2E run dalam repo ini | 🟡 **Adapter** | Dokumentasi + format analysis (tidak di-E2E-kan di CI repo ini) | 2026-08-10 |
+| **Claude Code (CLI) & Cowork** | Native `.claude-plugin` manifest format; `claude plugins add` | 🟡 **Adapter** | Format-native (manifest tervalidasi CI); E2E register pending | 2026-08-10 |
+| **Cursor IDE** | Context loading via `.cursorrules` / `.mdc` copies | 🟡 **Adapter** | Dokumentasi; tidak diuji otomatis di repo ini | 2026-08-10 |
+| **VS Code Agent (Copilot / Cline / Roo Code)** | Workspace prompt rules under `.vscode/settings.json` / `systemPromptPath` | 🔵 **Manual** | Langkah manual pengguna; tanpa kontrak otomasi | 2026-08-10 |
+| **Gemini CLI & Codex** | Imported as external system prompts | 🔵 **Manual** | Langkah manual pengguna | 2026-08-10 |
+| **ChatGPT / Custom GPTs** | Upload skill files in GPT Builder knowledge database | 🔵 **Manual** | Langkah manual pengguna | 2026-08-10 |
 
 ---
 
@@ -202,30 +228,57 @@ Configure VS Code system instructions by adding the path to your settings:
 
 ## 📊 Real-World Execution Examples
 
-### 1. PPh 21 TER & December Reconciliation Example
+Semua output di bawah adalah **output engine aktual** (dijalankan 2026-08-10, Node.js 18+, `npm test` hijau).
+
+### 1. PPh 21 TER Monthly — Output Engine Aktual
 
 ```javascript
-const { calculatePPh21DecemberReconciliation } = require('./engines/pph21-calculator');
-
-// Calculate December Annual Reconciliation for Annual Gross Rp 120M (TK/0)
-const result = calculatePPh21DecemberReconciliation(120000000, 'TK/0', 2000000, 200000, true, '2026-03-01');
+const { calculatePPh21Monthly } = require('./engines/pph21-calculator');
+const result = calculatePPh21Monthly(10000000, 'TK/0', true, '2026-03-01');
 console.log(result);
 ```
 
-### 2. BPJS Temporal Wage Cap Transition Example
+```json
+{
+  "grossSalary": 10000000,
+  "ptkpStatus": "TK/0",
+  "terCategory": "A",
+  "effectiveRate": 0.02,
+  "effectiveRatePercent": "2.00%",
+  "hasNpwp": true,
+  "identityStatus": "validated_nik_npwp",
+  "penaltyApplied": false,
+  "monthlyTaxWithheld": 200000,
+  "calculationDate": "2026-03-01",
+  "rulesetId": "PPH21-2024",
+  "rulesetVersion": "1.0.0",
+  "statutoryReference": "PP No. 58/2023 & PMK No. 168/2023"
+}
+```
+
+### 2. BPJS Temporal Wage Cap Transition — Output Engine Aktual
 
 ```javascript
 const { calculateBpjs } = require('./engines/bpjs-calculator');
-
-// Salary: Rp 20,000,000
-// Date: March 1, 2025 (SE B/726/022025 transition -> JP Cap Rp 10,547,400)
-const res2025 = calculateBpjs(20000000, 'low', '2025-03-01');
-console.log(res2025.bpjsKetenagakerjaan.jp.cappedWage); // Outputs: 10547400
-
-// Date: March 1, 2026 (SE B/3307/022026 transition -> JP Cap Rp 11,086,300)
 const res2026 = calculateBpjs(20000000, 'low', '2026-03-01');
-console.log(res2026.bpjsKetenagakerjaan.jp.cappedWage); // Outputs: 11086300
+console.log(res2026.rulesetId);                                    // BPJS-2026
+console.log(res2026.bpjsKetenagakerjaan.jp.cappedWage);            // 11086300
+console.log(res2026.bpjsKetenagakerjaan.jp.employer);              // 221726
 ```
+
+```json
+{
+  "rulesetId": "BPJS-2026",
+  "bpjsKetenagakerjaan": {
+    "jht": { "employer": 740000, "employee": 400000, "total": 1140000 },
+    "jp":  { "cappedWage": 11086300, "employer": 221726, "employee": 110863, "total": 332589 },
+    "jkk": { "hazardLevel": "low", "ratePercent": "0.54%", "employer": 108000 },
+    "jkm": { "employer": 60000 }
+  }
+}
+```
+
+Perhatikan bahwa mesin memilih ruleset **secara temporal**: dengan tanggal `2026-03-01` engine otomatis beralih dari `BPJS-2025` (cap Rp 10.547.400) ke `BPJS-2026` (cap Rp 11.086.300) — diuji oleh 425 asersi PPh 21 dan 225 asersi PHK di CI.
 
 ---
 
@@ -243,6 +296,8 @@ npm test
 ## 🛡️ Security & Disclaimers
 
 See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines, [`PROVENANCE.md`](PROVENANCE.md) for the granular statutory gazette register, [`REGULATORY_PIPELINE.md`](REGULATORY_PIPELINE.md) for the official update procedure, and [`REGULATORY_CHANGELOG.md`](REGULATORY_CHANGELOG.md) for regulatory amendments.
+
+**Release Trust Anchor**: `SHA256SUMS.txt` (di-root repo) memuat checksum SHA-256 seluruh ruleset; regenerasi/verifikasi via `./scripts/sha256sums.sh generate|verify` dan dijalankan otomatis di CI setiap push.
 
 Governance and community files: [`CONTRIBUTING.md`](CONTRIBUTING.md), [`ROADMAP.md`](ROADMAP.md), [`CHANGELOG.md`](CHANGELOG.md).
 

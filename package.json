@@ -1,6 +1,6 @@
 {
   "name": "indonesian-agent-skills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Production-oriented AI compliance & domain-intelligence infrastructure for Indonesian legal, tax, HR, e-commerce, and business operations.",
   "scripts": {
     "test": "node tests/schema/validator.test.js && node tests/units/engines.test.js && node tests/units/new-engines.test.js && node tests/units/pph21-matrix.test.js && node tests/units/phk-matrix.test.js && node tests/integration/workflow.test.js && node tests/security/injection.test.js && node tests/security/adversarial.test.js",

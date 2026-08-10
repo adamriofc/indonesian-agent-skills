@@ -14,3 +14,19 @@ Translates product specifications into search-ranking title formulas.
 `[Jenis Produk / Keyword Utama] + [Merek/Brand] + [Spesifikasi / Tipe / Warna] + [Secondary Keyword]`
 
 *Example*: `Kemeja Pria Kasual Polos Pendek Katun Premium Slimfit - Hitam M`
+
+## Metadata Checklist
+1. **Title**: 60-70 characters (Tokopedia) / 120 max (Shopee); keyword utama di depan; no ALL-CAPS spam.
+2. **Description**: first 150 chars contain primary keyword + benefit; bullet points for specs.
+3. **Category & Attributes**: fill 100% mandatory attributes — compatibility with search filters.
+4. **Tags**: 2-3 semantic variants, not keyword stuffing of the same phrase.
+5. **Images**: first image = white/light background product shot for category thumbnails.
+
+## Scope & Safety
+* **Use for**: listing optimization, A/B testing title variants.
+* **Do not use for**: black-hat tactics — keyword stuffing, fake reviews, brand-baiting (mentioning competitor brands) violate platform ToS and perjanjian keanggotaan toko.
+* **Honesty**: never embed unverifiable claims ("anti-banjir", "murah 90%") in titles; use price & spec facts.
+
+## Worked Example
+Input: `brand: "Everlane ID" / product: "tas backpack anti-air" / specs: "30L, laptop 15 inch, hitam" / keywords: "tas kerja pria"`
+Output: `Tas Ransel Pria Anti Air Everlane 30L Saku Laptop 15 Inch - Backpack Kerja Hitam` — description opens with: *"Tas ransel pria anti air kapasitas 30L…"*.

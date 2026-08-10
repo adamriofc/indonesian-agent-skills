@@ -25,5 +25,8 @@ jobs:
     - name: Install Dependencies
       run: npm ci
 
+    - name: Verify Release Trust Anchor (SHA256SUMS.txt)
+      run: ./scripts/sha256sums.sh verify
+
     - name: Run Schema, Engine & Security Tests
       run: npm test
