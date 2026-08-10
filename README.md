@@ -202,9 +202,9 @@ cp -r .agents/skills/* .cursor/skills/
 ### 2. `tax-payroll-id`: Indonesian Tax Engine (8 Skills)
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `pph23-26-calculator`: Calculates PPh 23 (2% service) and PPh 26 (20% offshore / Tax Treaty DGT).
-* `pph-final-umkm`: Calculates 0.5% UMKM final tax with Rp 500M non-taxable threshold exemption (PP 55/2022).
+* `pph-final-umkm`: Calculates 0.5% UMKM final tax with Rp 500M OP threshold exemption (PP 55/2022 & PP 20/2026).
 * `laporan-keuangan-psak`: Formats trial balances into SAK EMKM / SAK EP compliant financial statements.
-* `efaktur-helper`: Validates e-Faktur 4.0 transaction codes (010-090) and PPN 11% matching.
+* `efaktur-helper`: Validates e-Faktur & DJP Coretax tax invoices for statutory PPN 12% & 11/12 DPP Nilai Lain (effective 11% burden).
 * `thr-calculator`: Payout engine for religious holiday allowances.
 * `bpjs-calculator`: Calculations for health and social security contribution splits.
 * `spt-tahunan-guide`: Filing workflow for individual tax returns via DJP Online.

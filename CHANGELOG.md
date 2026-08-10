@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.0.1] - 2026-08-10
+
+### Fixed
+- **Claude Code Marketplace Schema**: `.claude-plugin/marketplace.json` updated with `$schema`, object `owner`, and `source` plugin declarations.
+- **e-Faktur & Coretax PPN 12% Update**: `tax-payroll-id/skills/efaktur-helper/SKILL.md` updated for statutory 12% PPN rate and 11/12 DPP Nilai Lain (effective 11% burden).
+- **UMKM Skill Synchronization**: `tax-payroll-id/skills/pph-final-umkm/SKILL.md` updated to reflect PP 20/2026 ruleset and Rp 4.8B turnover cap.
+- **README Skill Inventory**: fixed stale descriptions for `pph-final-umkm` and `efaktur-helper` in the catalog.
+- **CI Node Matrix**: updated to Node 20, 22, and 24 LTS runtimes.
+- **Dependabot**: added `.github/dependabot.yml` for automated npm & GitHub Actions dependency tracking.
+
 ## [2.0.0] - 2026-08-10
 
 ### Added
