@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.6.0] - 2026-08-10
+
+### Refined & Hardened
+- **MCDA Benefit vs Cost Normalization (P0 Fix)**: Refactored `engines/decision-analysis-engine.js` to explicitly support criterion direction (`'benefit'` where higher is better vs `'cost'` where lower is better with `10 - rawScore` normalization).
+- **KBLI Context Router Engine**: Added `engines/kbli-context-router.js` mapping 5-digit Indonesian KBLI 2020 codes to canonical Business Archetypes (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`) for contextual strategic adaptation.
+- **Configurable Portfolio Thresholds & GE 9-Box Cell Bands**: Refactored `engines/strategic-framework-engine.js` to support industry-configurable BCG thresholds (`highGrowthThresholdPercent`, `highRelativeShareThreshold`) and explicit 3x3 GE-McKinsey cell coordinates (`HIGH_HIGH`, `HIGH_MEDIUM`, etc.).
+- **Docstring Accuracy Cleanup**: Cleaned up docstrings in `engines/scenario-analysis-engine.js` and `decision-analysis-engine.js` to strictly match implemented features.
+- **25-Domain Golden Benchmark**: Expanded static golden corpus (`tests/golden/`) to **92 golden cases across 32 engine modules** (25 benchmark domains at 100.00% accuracy).
+
 ## [2.5.1] - 2026-08-10
 
 ### Fixed & Hardened

@@ -1,0 +1,14 @@
+[
+  {
+    "caseId": "KBLI-ROUTER-PROF-SERVICE-001",
+    "description": "KBLI 70209 (Konsultasi Manajemen) maps to PROFESSIONAL_SERVICE archetype",
+    "input": { "kbliCode": "70209", "activityName": "Konsultasi Manajemen" },
+    "expected": { "businessArchetype": "PROFESSIONAL_SERVICE", "hasPhysicalInventory": false }
+  },
+  {
+    "caseId": "KBLI-ROUTER-MFG-001",
+    "description": "KBLI 10710 (Industri Makanan) maps to PRODUCT_MANUFACTURING archetype",
+    "input": { "kbliCode": "10710", "activityName": "Industri Makanan" },
+    "expected": { "businessArchetype": "PRODUCT_MANUFACTURING", "hasPhysicalInventory": true }
+  }
+]

@@ -1,49 +1,68 @@
 /**
  * Multi-Criteria Decision Analysis (MCDA) & Weighted Decision Engine
- * Evaluates strategic decision alternatives against weighted criteria (ROI, Risk, Cost, Strategic Fit),
- * computes deterministic weighted scores, rankings, and sensitivity analysis.
+ * Evaluates strategic decision alternatives against weighted criteria with explicit
+ * direction semantics ('benefit' where higher is better vs 'cost' where lower is better).
+ * Computes deterministic composite weighted scores and rankings.
  */
 
 function evaluateStrategicDecisionAlternatives({
   decisionTitle = 'Market Expansion Strategy Options',
-  criteriaWeights = {
-    strategicFit: 0.35,
-    expectedRoi: 0.30,
-    financialCost: 0.20,
-    operationalRisk: 0.15
+  criteriaConfig = {
+    strategicFit: { weight: 0.35, direction: 'benefit' },
+    expectedRoi: { weight: 0.30, direction: 'benefit' },
+    financialCost: { weight: 0.20, direction: 'cost' },
+    operationalRisk: { weight: 0.15, direction: 'cost' }
   },
   alternatives = [
     {
       optionName: 'Option A: Direct Subsidiary Expansion',
-      scores: { strategicFit: 9, expectedRoi: 8, financialCost: 4, operationalRisk: 5 } // 1-10 scores (lower financialCost/risk = worse or raw input)
+      scores: { strategicFit: 9, expectedRoi: 8, financialCost: 8, operationalRisk: 7 } // High cost (8/10) -> normalized to (2/10)
     },
     {
       optionName: 'Option B: Joint Venture Partnership',
-      scores: { strategicFit: 7, expectedRoi: 7, financialCost: 8, operationalRisk: 7 }
+      scores: { strategicFit: 7, expectedRoi: 7, financialCost: 3, operationalRisk: 3 } // Low cost (3/10) -> normalized to (7/10)
     }
   ]
 }) {
   const options = Array.isArray(alternatives) ? alternatives : [];
+  const config = criteriaConfig || {};
 
-  // Normalize criteria weights to sum to 1.0
-  const rawWeights = criteriaWeights || {};
-  const totalWeight = Object.values(rawWeights).reduce((a, b) => a + (Number(b) || 0), 0) || 1.0;
-  const normalizedWeights = {};
-  for (const k of Object.keys(rawWeights)) {
-    normalizedWeights[k] = Number(rawWeights[k]) / totalWeight;
+  // Normalize criteria config & weights
+  const normalizedCriteria = {};
+  let totalWeight = 0;
+
+  for (const k of Object.keys(config)) {
+    const val = config[k];
+    const weight = typeof val === 'object' ? Math.max(0, Number(val.weight) || 0) : Math.max(0, Number(val) || 0);
+    const direction = (typeof val === 'object' && val.direction ? String(val.direction) : 'benefit').toLowerCase().trim();
+    normalizedCriteria[k] = { weight, direction: direction === 'cost' ? 'cost' : 'benefit' };
+    totalWeight += weight;
+  }
+
+  if (totalWeight === 0) totalWeight = 1.0;
+
+  // Scale weights to sum to 1.0
+  for (const k of Object.keys(normalizedCriteria)) {
+    normalizedCriteria[k].weight = normalizedCriteria[k].weight / totalWeight;
   }
 
   const evaluatedOptions = options.map((opt) => {
     let weightedScore = 0;
     const scoreBreakdown = {};
 
-    for (const key of Object.keys(normalizedWeights)) {
-      const weight = normalizedWeights[key];
+    for (const key of Object.keys(normalizedCriteria)) {
+      const { weight, direction } = normalizedCriteria[key];
       const rawScore = Math.max(0, Math.min(10, Number(opt.scores[key]) || 0));
-      const scoreContribution = rawScore * weight;
+      
+      // Invert score if direction is 'cost' (lower cost/risk is better)
+      const effectiveScore = direction === 'cost' ? 10 - rawScore : rawScore;
+      const scoreContribution = effectiveScore * weight;
       weightedScore += scoreContribution;
+
       scoreBreakdown[key] = {
         rawScore,
+        effectiveScore,
+        direction,
         weight: Number(weight.toFixed(4)),
         weightedContribution: Number(scoreContribution.toFixed(2))
       };
@@ -68,11 +87,11 @@ function evaluateStrategicDecisionAlternatives({
 
   return {
     decisionTitle,
-    normalizedWeights,
+    normalizedCriteria,
     rankedOptions,
     topRecommendedOption: recommendedOption,
     scoreMarginToSecond: rankedOptions.length > 1 ? Number((rankedOptions[0].compositeWeightedScore - rankedOptions[1].compositeWeightedScore).toFixed(2)) : 0,
-    methodology: 'Multi-Criteria Decision Analysis (MCDA) Weighted Scoring'
+    methodologyNote: "Multi-Criteria Decision Analysis (MCDA) Weighted Scoring with Benefit vs Cost Direction Normalization"
   };
 }
 

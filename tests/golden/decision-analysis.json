@@ -1,15 +1,18 @@
 [
   {
-    "caseId": "MCDA-DECISION-001",
-    "description": "Multi-criteria evaluation selecting Target B based on weighted score (9.0 vs 7.0)",
+    "caseId": "MCDA-DECISION-COST-NORM-001",
+    "description": "MCDA selecting Target A (Cheap) by normalizing cost direction (lower cost 2/10 -> effective 8/10)",
     "input": {
       "decisionTitle": "Acquisition Target Evaluation",
-      "criteriaWeights": { "fit": 0.5, "roi": 0.5 },
+      "criteriaConfig": {
+        "strategicFit": { "weight": 0.5, "direction": "benefit" },
+        "financialCost": { "weight": 0.5, "direction": "cost" }
+      },
       "alternatives": [
-        { "optionName": "Target A", "scores": { "fit": 8, "roi": 6 } },
-        { "optionName": "Target B", "scores": { "fit": 9, "roi": 9 } }
+        { "optionName": "Target A (Cheap)", "scores": { "strategicFit": 8, "financialCost": 2 } },
+        { "optionName": "Target B (Expensive)", "scores": { "strategicFit": 8, "financialCost": 8 } }
       ]
     },
-    "expected": { "topRecommendedOption": "Target B", "topScore": 9.0 }
+    "expected": { "topRecommendedOption": "Target A (Cheap)", "topScore": 8.0 }
   }
 ]

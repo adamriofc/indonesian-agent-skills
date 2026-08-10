@@ -55,6 +55,7 @@ const { evaluateBcgMatrix } = require(path.join(ROOT, 'engines/strategic-framewo
 const { evaluateStrategicDecisionAlternatives } = require(path.join(ROOT, 'engines/decision-analysis-engine'));
 const { simulateScenarioImpact } = require(path.join(ROOT, 'engines/scenario-analysis-engine'));
 const { evaluateStrategicRisks } = require(path.join(ROOT, 'engines/strategic-risk-engine'));
+const { resolveBusinessArchetype } = require(path.join(ROOT, 'engines/kbli-context-router'));
 
 function loadGolden(name) {
   const raw = fs.readFileSync(path.join(ROOT, 'tests/golden', `${name}.json`), 'utf8');
@@ -371,6 +372,12 @@ function runStrategicRisk(c) {
   return { overallRiskTier: r.overallRiskTier, criticalRisksCount: r.criticalRisksCount, topRiskTitle: r.evaluatedRisks[0].riskTitle };
 }
 
+
+function runKbliContext(c) {
+  const r = resolveBusinessArchetype(c.input);
+  return { businessArchetype: r.businessArchetype, hasPhysicalInventory: r.archetypeCharacteristics.hasPhysicalInventory };
+}
+
 const DOMAINS = [
   { name: 'pph21', label: 'PPh 21 (TER PP 58/2023)', golden: 'pph21', run: runPph21 },
   { name: 'bpjs', label: 'BPJS (Perpres 64/2020 + PP 45/2015)', golden: 'bpjs', run: runBpjs },
@@ -395,6 +402,7 @@ const DOMAINS = [
   { name: 'decision-analysis', label: 'Decision Analysis Engine (MCDA)', golden: 'decision-analysis', run: runDecisionAnalysis },
   { name: 'scenario-analysis', label: 'Scenario & Sensitivity Analysis Engine', golden: 'scenario-analysis', run: runScenarioAnalysis },
   { name: 'strategic-risk', label: 'Strategic Risk Scoring & Heatmap Engine', golden: 'strategic-risk', run: runStrategicRisk },
+  { name: 'kbli-context', label: 'KBLI Context Router & Business Archetype Classifier Engine', golden: 'kbli-context', run: runKbliContext },
   { name: 'finance', label: 'Finance (8 deterministic engines)', golden: 'finance', run: runFinance },
 ];
 

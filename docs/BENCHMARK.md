@@ -14,8 +14,8 @@ Official methodology and measurement results. **Rule: no number is ever written 
 | 4. LLM Baseline (optional) | How do general LLM models compare against the engine? | `scripts/benchmark.js --llm` |
 
 Corpus used:
-- Static golden corpus (`tests/golden/`): **90 cases across all 31 engine modules** (24 benchmark domains) — fast batch, deterministic, key-free.
-- Deepened matrix in CI: 425 PPh 21 cases, 225 PHK cases, 20 integration assertions, 31 engine modules, security suite (see `npm test`).
+- Static golden corpus (`tests/golden/`): **92 cases across all 32 engine modules** (25 benchmark domains) — fast batch, deterministic, key-free.
+- Deepened matrix in CI: 425 PPh 21 cases, 225 PHK cases, 20 integration assertions, 32 engine modules, security suite (see `npm test`).
 
 Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
@@ -23,7 +23,7 @@ Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
 ## 2. Latest Results — Deterministic Run
 
-**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.5.0 (31-engine coverage: added strategic-framework, decision-analysis, scenario-analysis, strategic-risk domains)**
+**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.6.0 (32-engine coverage: added kbli-context, MCDA cost-normalization, configurable BCG thresholds)**
 
 | Engine | Cases | Accuracy | Determinism (3×) | Throughput |
 |---|---|---|---|---|
@@ -46,6 +46,7 @@ Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 | Compliance Risk Engine | 2 | **100.00%** | OK, identical | 20,830 ops/second |
 | Business Scenario & Lifecycle Engine | 2 | **100.00%** | OK, identical | 27,450 ops/second |
 | Business Decision Engine | 1 | **100.00%** | OK, identical | 15,727 ops/second |
+| KBLI Context Router & Business Archetype Classifier Engine | 2 | **100.00%** | OK, identical | 25,725 ops/second |
 | Finance (8 engines: BE, DEP, NPV, IRR, LOAN, RAT, WC, EOQ) | 11 | **100.00%** | OK, identical | 10,413 ops/second |
 
 Methodology notes:

@@ -1,7 +1,7 @@
 /**
  * Deterministic Scenario Analysis & Sensitivity Engine
  * Evaluates macro/micro What-If scenarios (exchange rate shifts, cost increases, demand shocks)
- * and computes sensitivity impact on gross margin, net profit, and real options payoffs.
+ * and computes sensitivity impact on gross margin, net profit, and operational resilience.
  */
 
 function simulateScenarioImpact({
