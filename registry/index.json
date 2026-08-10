@@ -3,8 +3,8 @@
   "generated_at": "2026-08-10T00:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
-  "total_skills": 60,
-  "total_engines": 17,
+  "total_skills": 61,
+  "total_engines": 18,
   "quality_tiers": {
     "expert-reviewed": 9,
     "tested": 25,
@@ -41,6 +41,7 @@
     { "id": "bpjs-tenagakerja-admin", "name": "bpjs-tenagakerja-admin", "plugin": "hr-id", "domain": "hr", "type": "guidance", "quality_tier": "source-verified", "risk_level": "MEDIUM", "rule_type": "statutory", "engine": null },
     { "id": "phk-calculator", "name": "phk-calculator", "plugin": "hr-id", "domain": "hr", "type": "calculation", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/phk-calculator.js" },
     { "id": "pkwt-pkwtt-checker", "name": "pkwt-pkwtt-checker", "plugin": "hr-id", "domain": "hr", "type": "audit", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pkwt-compensation-calculator.js" },
+    { "id": "pkwtt-checker", "name": "pkwtt-checker", "plugin": "hr-id", "domain": "hr", "type": "audit", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pkwtt-calculator.js" },
     { "id": "struktur-skala-upah", "name": "struktur-skala-upah", "plugin": "hr-id", "domain": "hr", "type": "calculation", "quality_tier": "source-verified", "risk_level": "MEDIUM", "rule_type": "statutory", "engine": null },
 
     { "id": "deskripsi-produk-seo", "name": "deskripsi-produk-seo", "plugin": "ecommerce-id", "domain": "commerce", "type": "copywriting", "quality_tier": "source-verified", "risk_level": "LOW", "rule_type": "commercial-policy", "engine": null },

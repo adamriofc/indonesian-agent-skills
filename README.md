@@ -20,7 +20,7 @@
 
 ## 📌 Overview & Value Proposition (Apa Ini & Untuk Siapa?)
 
-**Indonesian Business Agent Skills** adalah infrastruktur *domain intelligence* sumber terbuka (*open-source*) yang memberikan "otak bisnis dan regulasi Indonesia" kepada agen AI. Dirancang untuk **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, dan *framework* agen kustom, repositori ini mengintegrasikan **60 Agent Skills** dengan **17 Mesin Kalkulasi Deterministik & Regulatory Diff Engine** (`engines/`) serta *ruleset* JSON berbasis waktu (*temporal SSOT* di `engines/rules/`).
+**Indonesian Business Agent Skills** adalah infrastruktur *domain intelligence* sumber terbuka (*open-source*) yang memberikan "otak bisnis dan regulasi Indonesia" kepada agen AI. Dirancang untuk **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, dan *framework* agen kustom, repositori ini mengintegrasikan **61 Agent Skills** dengan **18 Mesin Kalkulasi Deterministik & Regulatory Diff Engine** (`engines/`) serta *ruleset* JSON berbasis waktu (*temporal SSOT* di `engines/rules/`).
 
 ### 💡 Mengapa AI Biasa (Tanpa Engine) Sering Salah Hitung?
 Model AI generik (seperti ChatGPT atau Claude tanpa *tooling*) memprediksi kata berdasarkan probabilitas (*token prediction*). Ketika diminta menghitung pajak PPh 21 TER, kompensasi PHK, atau bunga pinjaman, AI biasa mengalami 3 kegagalan utama:
@@ -149,7 +149,7 @@ cp -r .agents/skills/* .cursor/skills/
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (60 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (61 Skills Across 6 Plugins)
 
 Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/index.json`)** dengan *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
@@ -179,13 +179,14 @@ Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/
 * `bpjs-calculator`: Calculations for health and social security contribution splits.
 * `spt-tahunan-guide`: Filing workflow for individual tax returns via DJP Online.
 
-### 3. `hr-id`: Labor & Employment Compliance (7 Skills)
+### 3. `hr-id`: Labor & Employment Compliance (8 Skills)
 * `surat-peringatan`: Drafts SP1, SP2, and SP3 warning letters following 6-month statutory windows.
 * `sop-perusahaan`: Generates SOPs enforcing overtime limits (Perpu 2/2022 max 4h/day, 18h/week).
 * `interview-id`: Candidate scorecards evaluating technical skills and local cultural fit.
 * `bpjs-tenagakerja-admin`: SIPP BPJS portal administration workflow guide.
 * `phk-calculator`: Statutory severance payout engine under PP 35/2021.
 * `pkwt-pkwtt-checker`: Audits contract worker duration (max 5 yrs) and computes statutory PKWT compensation.
+* `pkwtt-checker`: Audits permanent employment (PKWTT) contracts, probation rules (max 3 months), and automatic conversion triggers.
 * `struktur-skala-upah`: Builds statutory Wage Structure and Scale frameworks per Permenaker 1/2017.
 
 ### 4. `ecommerce-id`: Marketplace Operations & SEO (10 Skills)

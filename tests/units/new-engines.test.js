@@ -3,10 +3,11 @@ const { calculatePPh23And26 } = require('../../engines/pph23-26-calculator');
 const { calculateUmkmFinalTax, UMKM_FREE_THRESHOLD_OP } = require('../../engines/umkm-tax-calculator');
 const { calculateMarketplaceFee, MARKETPLACE_FEE_RATES, FREE_SHIPPING_POLICY, resolveRuleset } = require('../../engines/marketplace-fee-calculator');
 const { calculatePkwtCompensation } = require('../../engines/pkwt-compensation-calculator');
+const { auditPkwttStatus } = require('../../engines/pkwtt-calculator');
 const { compareRulesets } = require('../../engines/regulatory-diff');
 
 function runNewEnginesTests() {
-  console.log("⚡ Running Deepened Math Unit Tests for 5 Deterministic Engines (incl. Regulatory Diff)...\n");
+  console.log("⚡ Running Deepened Math Unit Tests for 6 Deterministic Engines (incl. PKWTT & Regulatory Diff)...\n");
 
   // ------------------------------------------------------
   // 1. PPh 23 & 26 Engine: statutory rates, penalty, treaty
@@ -295,6 +296,38 @@ function runNewEnginesTests() {
 
   // Determinism under repeated invocation
   assert.deepStrictEqual(calculatePkwtCompensation(12000000, 6), calculatePkwtCompensation(12000000, 6));
+
+  // ------------------------------------------------------
+  // 4b. PKWTT Compliance & Auto-Conversion Audit Engine
+  // ------------------------------------------------------
+  console.log("  [4b/5] PKWTT Compliance & Auto-Conversion Audit Engine (PP 35/2021)...");
+  
+  // Valid PKWTT with 3 months probation
+  const pkwttValid = auditPkwttStatus({ monthlyWage: 10000000, probationMonths: 3, minimumWage: 5000000, contractType: 'pkwtt' });
+  assert.strictEqual(pkwttValid.effectiveContractStatus, 'PKWTT (Permanent Employment)');
+  assert.strictEqual(pkwttValid.isConvertedToPkwttByLaw, false);
+  assert.strictEqual(pkwttValid.probationAudit.isCompliant, true);
+
+  // PKWT with illegal probation -> auto converts to PKWTT
+  const pkwtProbationViolation = auditPkwttStatus({ monthlyWage: 10000000, probationMonths: 2, contractType: 'pkwt' });
+  assert.strictEqual(pkwtProbationViolation.isConvertedToPkwttByLaw, true);
+  assert.strictEqual(pkwtProbationViolation.effectiveContractStatus, 'PKWTT (Permanent Employment)');
+  assert.ok(pkwtProbationViolation.conversionTriggers.includes('PROBATION_IN_PKWT'));
+
+  // PKWT for permanent job nature -> auto converts to PKWTT
+  const pkwtPermanentJob = auditPkwttStatus({ monthlyWage: 10000000, jobType: 'permanent', contractType: 'pkwt' });
+  assert.strictEqual(pkwtPermanentJob.isConvertedToPkwttByLaw, true);
+  assert.ok(pkwtPermanentJob.conversionTriggers.includes('PERMANENT_JOB_IN_PKWT'));
+
+  // PKWT tenure > 60 months -> auto converts to PKWTT
+  const pkwtTenureExceeded = auditPkwttStatus({ monthlyWage: 10000000, totalTenureMonths: 61, contractType: 'pkwt' });
+  assert.strictEqual(pkwtTenureExceeded.isConvertedToPkwttByLaw, true);
+  assert.ok(pkwtTenureExceeded.conversionTriggers.includes('TENURE_EXCEEDED_5_YEARS'));
+
+  // PKWTT probation > 3 months -> violation warning flag
+  const pkwttProbationExceeded = auditPkwttStatus({ monthlyWage: 10000000, probationMonths: 4, contractType: 'pkwtt' });
+  assert.strictEqual(pkwttProbationExceeded.probationAudit.validProbationMonths, 3);
+  assert.ok(pkwttProbationExceeded.violations.length > 0);
 
   // ------------------------------------------------------
   // 5. Regulatory Diff Engine — SSOT transition comparison
