@@ -1,0 +1,39 @@
+{
+  "goldenCases": [
+    {
+      "caseId": "UMKM-HISTORICAL-001",
+      "engine": "umkm",
+      "description": "Historical corporate PT under PP 55/2022 (2025 date)",
+      "input": { "grossRevenueYtd": 100000000, "currentMonthRevenue": 50000000, "taxpayerType": "corporate", "dateStr": "2025-01-01" },
+      "expected": { "isEligible": true, "taxableRevenue": 50000000, "finalTaxDue": 250000, "rulesetId": "UMKM-2022" }
+    },
+    {
+      "caseId": "UMKM-CURRENT-OP-001",
+      "engine": "umkm",
+      "description": "Current OP under PP 20/2026 under 500M threshold (2026 date)",
+      "input": { "grossRevenueYtd": 200000000, "currentMonthRevenue": 50000000, "taxpayerType": "individual", "dateStr": "2026-05-01" },
+      "expected": { "isEligible": true, "taxableRevenue": 0, "finalTaxDue": 0, "rulesetId": "UMKM-2026" }
+    },
+    {
+      "caseId": "UMKM-CURRENT-PT-PERORANGAN-001",
+      "engine": "umkm",
+      "description": "Current PT Perorangan under PP 20/2026 (no 500M threshold)",
+      "input": { "grossRevenueYtd": 100000000, "currentMonthRevenue": 50000000, "taxpayerType": "perseroan_perorangan", "dateStr": "2026-05-01" },
+      "expected": { "isEligible": true, "taxableRevenue": 50000000, "finalTaxDue": 250000, "rulesetId": "UMKM-2026" }
+    },
+    {
+      "caseId": "UMKM-CURRENT-PT-INELIGIBLE-001",
+      "engine": "umkm",
+      "description": "Current general corporate PT under PP 20/2026 (not eligible)",
+      "input": { "grossRevenueYtd": 100000000, "currentMonthRevenue": 50000000, "taxpayerType": "corporate", "dateStr": "2026-05-01" },
+      "expected": { "isEligible": false, "taxableRevenue": 0, "finalTaxDue": 0, "rulesetId": "UMKM-2026" }
+    },
+    {
+      "caseId": "UMKM-OVER-48B-INELIGIBLE-001",
+      "engine": "umkm",
+      "description": "Turnover exceeding 4.8 Billion ceiling under PP 20/2026",
+      "input": { "grossRevenueYtd": 4800000000, "currentMonthRevenue": 50000000, "taxpayerType": "individual", "dateStr": "2026-05-01" },
+      "expected": { "isEligible": false, "taxableRevenue": 0, "finalTaxDue": 0, "rulesetId": "UMKM-2026" }
+    }
+  ]
+}

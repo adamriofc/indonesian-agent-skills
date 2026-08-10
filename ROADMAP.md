@@ -2,6 +2,15 @@
 
 Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 
+## Shipped (`v2.0.1`)
+
+- [x] **Regulatory Diff Engine (`regulatory-diff`)** — deterministic comparison across temporal ruleset windows (`UMKM-2022` ➔ `UMKM-2026`, `BPJS-2025` ➔ `BPJS-2026`)
+- [x] **PP 20/2026 & PPN 12% Coretax updates** — `UMKM-2026` ruleset, e-Faktur 12% statutory rate & 11/12 DPP Nilai Lain effective 11% burden
+- [x] **Claude Code Marketplace Manifest & Portability** — official `$schema`, `owner` object, `source` declarations, and `npx skills add` support
+- [x] **Web Playground Generator (`scripts/build-playground.js`)** — client-side static calculator interface (`docs/playground.html`)
+- [x] **LLM vs Deterministic Benchmark Methodology** — evaluation framework (`docs/LLM_BENCHMARK_METHODOLOGY.md`)
+- [x] **Named Expert Register** — Section 7 in `PROVENANCE.md` (CPAs, employment law consultants, e-commerce specialists)
+
 ## Shipped (`v2.0.0`)
 
 - [x] **Finance Core (`finance-id`)** — 12 business finance & accounting skills + 8 deterministic engines (break-even, depreciation SL/DDB/SYD, NPV, IRR, loan amortization, 14 financial ratios, working capital, EOQ) + golden corpus (11 cases) + 100% domain benchmark

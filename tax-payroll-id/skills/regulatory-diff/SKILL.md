@@ -1,0 +1,31 @@
+---
+name: regulatory-diff
+description: Compare Indonesian statutory and platform ruleset transitions across effective date windows (e.g. PP 55/2022 vs PP 20/2026 or BPJS 2025 vs 2026).
+argument-hint: "<domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>"
+metadata:
+  risk_level: MEDIUM
+  rule_type: statutory
+---
+
+# Regulatory & Ruleset Diff Engine
+
+Compares versioned Single-Source-of-Truth (SSOT) rulesets across temporal transition windows to generate auditable diffs.
+
+## Supported Domains & Ruleset Transition History
+* **`umkm`**: Compare `UMKM-2022` (PP 55/2022) ➔ `UMKM-2026` (PP 20/2026, effective 2026-04-22).
+* **`bpjs`**: Compare `BPJS-2025` ➔ `BPJS-2026` (effective 2026-03-01 wage cap changes).
+* **`pph21`**: Compare `PPH21-2024` TER tables & Article 17 brackets.
+* **`marketplace`**: Compare platform fee policy versions (`MKPL-FEE-2024`).
+
+## Hybrid Execution Model
+Pass parameters to `engines/regulatory-diff.js`:
+* `compareRulesets(domain, oldRulesetId, newRulesetId)`
+* Returns structured diff including:
+  - **`effectiveTransitionDate`**: Date the amendment or new regulation took force.
+  - **`removedEntities` / `addedEntities`**: Eligibility changes (e.g. PT/CV removal under PP 20/2026).
+  - **`totalChanges`**: Number of modified statutory parameters.
+  - **`lifecycle_status`**: Status transitions (`ARCHIVED` ➔ `RELEASED` / `SUPERSEDED`).
+
+## Trust Envelope & Provenance
+* Outputs link directly to official gazette sources cited in `PROVENANCE.md`.
+* Verified against cryptographic ruleset hashes in `engines/rules/integrity.js`.

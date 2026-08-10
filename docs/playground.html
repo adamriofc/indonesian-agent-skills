@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indonesian Business Agent Skills — Interactive Playground</title>
+  <style>
+    :root { --bg: #0B0F19; --card: #111827; --border: #1F2937; --text: #F8FAFC; --muted: #94A3B8; --primary: #38BDF8; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { color: var(--primary); margin-bottom: 5px; }
+    p.sub { color: var(--muted); margin-top: 0; margin-bottom: 30px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; }
+    input, select { width: 100%; box-sizing: border-box; padding: 10px; background: #1E293B; border: 1px solid #334155; border-radius: 6px; color: #FFF; font-size: 14px; margin-bottom: 15px; }
+    button { background: var(--primary); color: #000; font-weight: 700; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; width: 100%; }
+    button:hover { opacity: 0.9; }
+    pre { background: #070A10; padding: 15px; border-radius: 6px; overflow-x: auto; color: #34D399; font-size: 13px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🇮🇩 Indonesian Business Agent Skills Playground</h1>
+    <p class="sub">Interactive Client-Side Engine Calculators (PPh 21, UMKM PP 20/2026, Break-Even, Loan Amortization)</p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>PPh Final UMKM (PP 20/2026)</h3>
+        <label>YTD Gross Revenue (IDR)</label>
+        <input type="number" id="umkmYtd" value="200000000">
+        
+        <label>Current Month Revenue (IDR)</label>
+        <input type="number" id="umkmCurrent" value="50000000">
+        
+        <label>Taxpayer Entity Type</label>
+        <select id="umkmType">
+          <option value="individual">Orang Pribadi (Individual)</option>
+          <option value="perseroan_perorangan">PT Perorangan (Single-Person PT)</option>
+          <option value="koperasi">Koperasi (Cooperative)</option>
+          <option value="corporate">PT / CV (General Corporate - Not Eligible)</option>
+        </select>
+        
+        <button onclick="calcUmkm()">Calculate UMKM Tax</button>
+      </div>
+
+      <div class="card">
+        <h3>Break-Even Analysis</h3>
+        <label>Fixed Costs (IDR)</label>
+        <input type="number" id="beFixed" value="20000000">
+        
+        <label>Price Per Unit (IDR)</label>
+        <input type="number" id="bePrice" value="25000">
+        
+        <label>Variable Cost Per Unit (IDR)</label>
+        <input type="number" id="beVc" value="15000">
+        
+        <button onclick="calcBreakEven()">Calculate Break-Even</button>
+      </div>
+    </div>
+
+    <h3 style="margin-top: 30px;">Engine Calculation Output (Structured JSON)</h3>
+    <pre id="output">// Results will appear here after calculation...</pre>
+  </div>
+
+  <script>
+    function calcUmkm() {
+      const ytd = parseFloat(document.getElementById('umkmYtd').value) || 0;
+      const cur = parseFloat(document.getElementById('umkmCurrent').value) || 0;
+      const type = document.getElementById('umkmType').value;
+      
+      const total = ytd + cur;
+      const isEligible = (type !== 'corporate') && (total <= 4800000000);
+      
+      let taxable = 0;
+      let exempt = 0;
+      if (isEligible) {
+        if (type === 'individual') {
+          if (total <= 500000000) { exempt = cur; taxable = 0; }
+          else if (ytd < 500000000) { exempt = 500000000 - ytd; taxable = cur - exempt; }
+          else { taxable = cur; }
+        } else { taxable = cur; }
+      } else { exempt = cur; }
+
+      const taxDue = isEligible ? Math.round(taxable * 0.005) : 0;
+      
+      document.getElementById('output').innerText = JSON.stringify({
+        engine: "umkm-tax-calculator",
+        statute: "PP No. 20/2026",
+        isEligible: isEligible,
+        taxpayerType: type,
+        totalYtdTurnover: total,
+        taxableRevenue: taxable,
+        taxExemptRevenue: exempt,
+        finalTaxDue: taxDue,
+        currency: "IDR"
+      }, null, 2);
+    }
+
+    function calcBreakEven() {
+      const fixed = parseFloat(document.getElementById('beFixed').value) || 0;
+      const price = parseFloat(document.getElementById('bePrice').value) || 0;
+      const vc = parseFloat(document.getElementById('beVc').value) || 0;
+
+      const cm = price - vc;
+      const cmRatio = price > 0 ? (cm / price) : 0;
+      const beUnits = cm > 0 ? Math.ceil(fixed / cm) : 0;
+      const beRevenue = cmRatio > 0 ? Math.round(fixed / cmRatio) : 0;
+
+      document.getElementById('output').innerText = JSON.stringify({
+        engine: "break-even",
+        fixedCosts: fixed,
+        pricePerUnit: price,
+        variableCostPerUnit: vc,
+        contributionMargin: cm,
+        contributionMarginRatio: parseFloat(cmRatio.toFixed(4)),
+        breakEvenUnits: beUnits,
+        breakEvenRevenue: beRevenue
+      }, null, 2);
+    }
+  </script>
+</body>
+</html>

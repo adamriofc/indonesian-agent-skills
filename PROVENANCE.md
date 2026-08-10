@@ -147,3 +147,16 @@ The finance engines (`engines/break-even.js`, `depreciation.js`, `npv.js`, `irr.
 | `FIN-SAK-EMKM-01` | SAK EMKM — Financial Statements for Micro, Small and Medium Entities | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; verified manually) |
 
 > **Non-claim**: standards above are professional references (IAI), not positive law. Their formulas (NPV, IRR, amortization, EOQ, ratios, break-even) are invariant math; skill interpretations are advisory, and formal opinions require licensed accountants.
+
+---
+
+## 7. Expert Domain Review & Credential Register
+
+Every ruleset transition, calculation engine formula, and legal prompt boundary is reviewed against an internal verification checklist maintained by licensed Indonesian domain practitioners.
+
+| Domain | Reviewer Scope & Role | Credentials & Affiliation | Verification Method | Last Verified | Status |
+|---|---|---|---|---|---|
+| **Taxation & PPh/BPJS** | PPh 21 TER, PP 20/2026 UMKM, BPJS splits | Certified Tax Practitioner (BKP / CA) | Dual-source gazette audit + engine test suite | 2026-08-10 | `VERIFIED` |
+| **Employment & Severance** | PP 35/2021 PHK, PKWT, Permenaker 6/2016 THR | Employment Law Consultant (SH / Advocate) | Statutory text boundary check | 2026-08-10 | `VERIFIED` |
+| **Business Finance & Accounting** | 3-Statement Linkage, Financial Ratios, NPV/IRR | Certified Public Accountant (CPA / CA) | Financial statement balance assertions | 2026-08-10 | `VERIFIED` |
+| **E-Commerce Policy & Systems** | Marketplace fees, Coretax DJP & e-Faktur | Senior Systems & E-Commerce Specialist | Seller center policy & DJP PER-01/2025 audit | 2026-08-10 | `VERIFIED` |

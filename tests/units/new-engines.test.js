@@ -3,9 +3,10 @@ const { calculatePPh23And26 } = require('../../engines/pph23-26-calculator');
 const { calculateUmkmFinalTax, UMKM_FREE_THRESHOLD_OP } = require('../../engines/umkm-tax-calculator');
 const { calculateMarketplaceFee, MARKETPLACE_FEE_RATES, FREE_SHIPPING_POLICY, resolveRuleset } = require('../../engines/marketplace-fee-calculator');
 const { calculatePkwtCompensation } = require('../../engines/pkwt-compensation-calculator');
+const { compareRulesets } = require('../../engines/regulatory-diff');
 
 function runNewEnginesTests() {
-  console.log("⚡ Running Deepened Math Unit Tests for 4 New Deterministic Engines...\n");
+  console.log("⚡ Running Deepened Math Unit Tests for 5 Deterministic Engines (incl. Regulatory Diff)...\n");
 
   // ------------------------------------------------------
   // 1. PPh 23 & 26 Engine: statutory rates, penalty, treaty
@@ -295,7 +296,25 @@ function runNewEnginesTests() {
   // Determinism under repeated invocation
   assert.deepStrictEqual(calculatePkwtCompensation(12000000, 6), calculatePkwtCompensation(12000000, 6));
 
-  console.log("\n✅ All 4 New Deterministic Calculation Engines Passed 100% of Deepened Unit Assertions!");
+  // ------------------------------------------------------
+  // 5. Regulatory Diff Engine — SSOT transition comparison
+  // ------------------------------------------------------
+  console.log("  [5/5] Regulatory Diff Engine — SSOT temporal transition comparison...");
+  const umkmDiff = compareRulesets('umkm', 'UMKM-2022', 'UMKM-2026');
+  assert.strictEqual(umkmDiff.domain, 'umkm');
+  assert.strictEqual(umkmDiff.comparison, 'UMKM-2022 ➔ UMKM-2026');
+  assert.strictEqual(umkmDiff.effectiveTransitionDate, '2026-04-22');
+  assert.ok(umkmDiff.totalChanges > 0);
+
+  const eligibleChange = umkmDiff.changes.find(c => c.field === 'eligible_taxpayers');
+  assert.ok(eligibleChange);
+  assert.deepStrictEqual(eligibleChange.removedEntities, ['corporate', 'pt', 'cv', 'firma']);
+
+  const bpjsDiff = compareRulesets('bpjs', 'BPJS-2025', 'BPJS-2026');
+  assert.strictEqual(bpjsDiff.domain, 'bpjs');
+  assert.strictEqual(bpjsDiff.effectiveTransitionDate, '2026-03-01');
+
+  console.log("\n✅ All 5 Deterministic Calculation & Regulatory Diff Engines Passed 100% of Assertions!");
 }
 
 runNewEnginesTests();
