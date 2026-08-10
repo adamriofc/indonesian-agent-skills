@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.1.0] - 2026-08-10
+
+### Added
+- **Tax Engineering & Strategic Planning Skills**: 5 new flagship tax engineering, planning, and cross-border skills (`tax-planning`, `tax-optimization`, `tax-risk-analysis`, `tax-audit-preparation`, `tax-cross-border`) under `tax-payroll-id` (bringing total skill count to 60).
+- **Machine-Readable Skill Registry**: `registry/index.json` machine-readable index mapping all 60 skills across 6 plugins with `quality_tier` classification (`source-verified`, `tested`, `expert-reviewed`).
+- **Optional Integrations Architecture**: `integrations/README.md` defining static knowledge ➔ skill, calculation ➔ engine, live state ➔ API/tool principles.
+
 ## [2.0.1] - 2026-08-10
 
 ### Fixed

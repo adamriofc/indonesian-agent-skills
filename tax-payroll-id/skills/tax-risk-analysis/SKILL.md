@@ -1,0 +1,28 @@
+---
+name: tax-risk-analysis
+description: Analyze Indonesian corporate tax compliance risks, transfer pricing / affiliate transaction indicators (PMK 172/2023), and SP2DK audit triggers.
+argument-hint: "<financial_data_or_affiliate_transactions>"
+metadata:
+  risk_level: HIGH
+  rule_type: statutory
+  quality_tier: expert-reviewed
+---
+
+# Corporate Tax Risk & SP2DK Trigger Analysis
+
+Detects compliance red flags, non-deductible expense risks, transfer pricing triggers under PMK 172/2023, and DJP audit indicators.
+
+## Primary Tax Risk Indicators & SP2DK Triggers
+1. **DJP Equalisation Discrepancies**:
+   - Mismatch between Turnover reported on Corporate Income Tax Return (SPT Tahunan PPh Badan) and PPN Tax Invoices reported on e-Faktur (SPT Masa PPN).
+   - Discrepancy between salary expense on Income Statement and total gross wage base reported on monthly PPh 21 returns.
+2. **Transfer Pricing & Affiliate Transactions (PMK 172/2023)**:
+   - Transactions with related parties (*hubungan istimewa*) exceeding statutory thresholds requiring Transfer Pricing Documentation (TP Doc / Master File & Local File).
+   - Royalty, management fee, or intercompany loan interest paid to offshore affiliates without Arm's Length Principle (PKPM) justification.
+3. **Unusual Financial Ratios**:
+   - Gross profit margin significantly lower than regional industry benchmarks.
+   - Operating at a continuous fiscal loss for > 3 consecutive years while expanding operational capacity.
+
+## Mitigation Framework
+* Pre-audit document checklist (TP Doc, Bukti Potong, Equalisation Statement).
+* Risk Scoring: Categorizes compliance risk into `LOW`, `MEDIUM`, or `HIGH (SP2DK Risk)`.

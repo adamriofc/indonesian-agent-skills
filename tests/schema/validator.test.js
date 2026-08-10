@@ -157,7 +157,7 @@ function validate() {
           }
 
           // 3. Frontmatter Keys & Metadata Validation
-          const ALLOWED_KEYS = ['name', 'description', 'argument-hint', 'risk_level', 'rule_type', 'metadata', 'allowed-tools', 'license', 'compatibility'];
+          const ALLOWED_KEYS = ['name', 'description', 'argument-hint', 'risk_level', 'rule_type', 'quality_tier', 'metadata', 'allowed-tools', 'license', 'compatibility'];
           Object.keys(frontmatter).forEach(key => {
             if (!ALLOWED_KEYS.includes(key)) {
               console.warn(`⚠️ Warning in ${skillFilePath}: non-standard frontmatter key '${key}'. Custom metadata should be placed inside 'metadata:'.`);
@@ -172,6 +172,26 @@ function validate() {
       });
     }
   });
+
+  // Validate registry/index.json machine-readable index
+  const registryPath = path.join(rootDir, 'registry', 'index.json');
+  if (fs.existsSync(registryPath)) {
+    try {
+      const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      if (!registry.skills || !Array.isArray(registry.skills)) {
+        console.error(`❌ Machine-Readable Registry Violation in ${registryPath}: 'skills' array is required.`);
+        errors++;
+      } else if (registry.skills.length !== totalSkills) {
+        console.error(`❌ Machine-Readable Registry Mismatch: registry index has ${registry.skills.length} skills, but discovered ${totalSkills} skill files.`);
+        errors++;
+      } else {
+        console.log(`  Machine-readable skill registry verified (${registry.skills.length} registered skills).`);
+      }
+    } catch (e) {
+      console.error(`❌ Machine-Readable Registry JSON error in ${registryPath}: ${e.message}`);
+      errors++;
+    }
+  }
 
   if (errors > 0) {
     console.error(`\n❌ Schema Validation failed with ${errors} error(s).`);

@@ -22,7 +22,7 @@
 
 A domain-intelligence infrastructure for AI agents operating within the Indonesian business ecosystem. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, and custom agent frameworks, this repository pairs structured instruction packs with **17 deterministic calculation & regulatory diff engines** (`engines/`) and temporal JSON rulesets (`engines/rules/`).
 
-**Scope: 6 business domains · 55 agent skills · 17 deterministic engines** — core (legal, tax, finance, HR), business (e-commerce), and creative (local content).
+**Scope: 6 business domains · 60 agent skills · 17 deterministic engines** — core (legal, tax, finance, HR), business (e-commerce), and creative (local content).
 
 ---
 
@@ -187,7 +187,7 @@ cp -r .agents/skills/* .cursor/skills/
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (55 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (60 Skills Across 6 Plugins)
 
 ### 1. `legal-id`: Commercial Law & Compliance (8 Skills)
 * `contract-reviewer`: Audits agreements and outputs a **Contract Risk Score (0-100)** with redlines.
@@ -199,10 +199,15 @@ cp -r .agents/skills/* .cursor/skills/
 * `oss-kbli-navigator`: Maps business activities to KBLI 2020 codes and OSS-RBA risk levels.
 * `somasi-draft-id`: Drafts formal advocate-standard legal warning letters (Somasi 1, 2, 3).
 
-### 2. `tax-payroll-id`: Indonesian Tax Engine (9 Skills)
+### 2. `tax-payroll-id`: Indonesian Tax Engine (14 Skills)
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `pph23-26-calculator`: Calculates PPh 23 (2% service) and PPh 26 (20% offshore / Tax Treaty DGT).
 * `pph-final-umkm`: Calculates 0.5% UMKM final tax with Rp 500M OP threshold exemption (PP 55/2022 & PP 20/2026).
+* `tax-planning`: Evaluates entity tax regime efficiency (PP 20/2026 vs General PPh, Gross vs Gross-Up, Dividend vs Salary).
+* `tax-optimization`: Deductible expense optimization (Pasal 6 vs Pasal 9 UU PPh), PPh 21 Dec reconciliation, and PPh 23/26 invoice splits.
+* `tax-risk-analysis`: Detects DJP equalisation discrepancies, transfer pricing indicators (PMK 172/2023), and SP2DK audit triggers.
+* `tax-audit-preparation`: Assembles SP2DK audit response packages, tax equalisation reconciliation statements, and document indexes.
+* `tax-cross-border`: Evaluates offshore withholding (PPh 26 20% vs Tax Treaty DGT form rate optimization) and Permanent Establishment (BUT) risk.
 * `laporan-keuangan-psak`: Formats trial balances into SAK EMKM / SAK EP compliant financial statements.
 * `efaktur-helper`: Validates e-Faktur & DJP Coretax tax invoices for statutory PPN 12% & 11/12 DPP Nilai Lain (effective 11% burden).
 * `regulatory-diff`: Compares versioned SSOT ruleset transitions across effective date windows (e.g. PP 55/2022 ➔ PP 20/2026).
