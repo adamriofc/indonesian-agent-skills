@@ -50,6 +50,12 @@ function assertNumericMatch(expected, actual) {
   return expected === actual;
 }
 
+function matches(exp, actual) {
+  if (typeof exp === 'number') return numericTolerance(exp, actual);
+  if (Array.isArray(exp)) return JSON.stringify(exp) === JSON.stringify(actual);
+  return exp === actual;
+}
+
 function runPph21(c) {
   const { calculatePPh21DecemberReconciliation } = require(path.join(ROOT, 'engines/pph21-calculator'));
   const r =
@@ -94,10 +100,119 @@ function runPhk(c) {
   return checks;
 }
 
+function runFinance(c) {
+  const i = c.input;
+  let checks = {};
+  switch (c.engine) {
+    case 'break-even': {
+      const be = require(path.join(ROOT, 'engines/break-even'));
+      const revenue = be.breakEvenRevenue(i.fixedCosts, i.pricePerUnit, i.variableCostPerUnit);
+      checks = {
+        contributionMargin: be.contributionMargin(i.pricePerUnit, i.variableCostPerUnit),
+        contributionMarginRatio: be.contributionMarginRatio(i.pricePerUnit, i.variableCostPerUnit),
+        breakEvenUnits: be.breakEvenUnits(i.fixedCosts, i.pricePerUnit, i.variableCostPerUnit),
+        breakEvenRevenue: revenue,
+        marginOfSafety: be.marginOfSafety(i.actualRevenue, revenue),
+      };
+      break;
+    }
+    case 'depreciation': {
+      const dep = require(path.join(ROOT, 'engines/depreciation'));
+      const r = dep[c.method](i.cost, i.salvage, i.lifeYears);
+      checks = {
+        annual: r.annual,
+        totalDepreciation: r.totalDepreciation,
+        netBookValue: r.netBookValue,
+      };
+      break;
+    }
+    case 'npv': {
+      const npvEng = require(path.join(ROOT, 'engines/npv'));
+      checks = { npv: npvEng.npv(i.rate, i.cashflows) };
+      break;
+    }
+    case 'npvWithTerminalValue': {
+      const npvEng = require(path.join(ROOT, 'engines/npv'));
+      checks = { npv: npvEng.npvWithTerminalValue(i.rate, i.cashflows, i.terminalValue, i.terminalYearIndex) };
+      break;
+    }
+    case 'irr': {
+      const irrEng = require(path.join(ROOT, 'engines/irr'));
+      const npvEng = require(path.join(ROOT, 'engines/npv'));
+      const r = irrEng.irr(i.cashflows, { tolerance: 1e-9 });
+      const pass =
+        r.irr >= c.expected.irrMin &&
+        r.irr <= c.expected.irrMax &&
+        Math.abs(npvEng.npv(r.irr, i.cashflows)) < 0.02;
+      checks = { irrMin: pass ? c.expected.irrMin : NaN, irrMax: pass ? c.expected.irrMax : NaN };
+      break;
+    }
+    case 'loan-amortization': {
+      const la = require(path.join(ROOT, 'engines/loan-amortization'));
+      const sched = la.amortizationSchedule(i.principal, i.annualRate, i.months);
+      checks = {
+        monthlyPayment: la.monthlyPayment(i.principal, i.annualRate, i.months),
+        totalInterest: sched.totalInterest,
+        finalBalance: sched.schedule[sched.schedule.length - 1].balance,
+      };
+      break;
+    }
+    case 'financial-ratios': {
+      const fr = require(path.join(ROOT, 'engines/financial-ratios'));
+      checks = {
+        currentRatio: fr.currentRatio(i.currentAssets, i.currentLiabilities),
+        quickRatio: fr.quickRatio(i.currentAssets, i.inventory, i.currentLiabilities),
+        cashRatio: fr.cashRatio(i.cash, i.currentLiabilities),
+        debtToEquity: fr.debtToEquity(i.totalLiabilities, i.totalEquity),
+        grossMargin: fr.grossMargin(i.revenue, i.cogs),
+        netMargin: fr.netMargin(i.netIncome, i.revenue),
+        roa: fr.roa(i.netIncome, i.totalAssets),
+        roe: fr.roe(i.netIncome, i.totalEquity),
+        inventoryTurnover: fr.inventoryTurnover(i.cogs, i.avgInventory),
+        receivablesTurnover: fr.receivablesTurnover(i.revenue, i.avgReceivables),
+        daysSalesOutstanding: fr.daysSalesOutstanding(i.revenue, i.avgReceivables),
+        daysPayablesOutstanding: fr.daysPayablesOutstanding(i.cogs, i.avgPayables),
+        daysInventoryOutstanding: fr.daysInventoryOutstanding(i.cogs, i.avgInventory),
+        cashConversionCycle: fr.cashConversionCycle(
+          fr.daysInventoryOutstanding(i.cogs, i.avgInventory),
+          fr.daysSalesOutstanding(i.revenue, i.avgReceivables),
+          fr.daysPayablesOutstanding(i.cogs, i.avgPayables)
+        ),
+      };
+      break;
+    }
+    case 'working-capital': {
+      const wc = require(path.join(ROOT, 'engines/working-capital'));
+      checks = {
+        netWorkingCapital: wc.netWorkingCapital(i.currentAssets, i.currentLiabilities),
+        workingCapitalRatio: wc.workingCapitalRatio(i.currentAssets, i.currentLiabilities),
+        cashConversionCycle: wc.cashConversionCycle(i.daysInventory, i.daysSalesOutstanding, i.daysPayables),
+        workingCapitalRequirement: wc.workingCapitalRequirement(i.cashCycleDays, i.cogsPerDay),
+      };
+      break;
+    }
+    case 'eoq': {
+      const eoqEng = require(path.join(ROOT, 'engines/eoq'));
+      const q = eoqEng.eoq(i.annualDemand, i.orderCost, i.holdingCostPerUnit);
+      checks = {
+        eoq: q,
+        reorderPoint: eoqEng.reorderPoint(i.annualDemand, i.leadTimeDays, i.safetyStock),
+        annualHoldingCost: eoqEng.annualHoldingCost(q, i.holdingCostPerUnit),
+        annualOrderCost: eoqEng.annualOrderCost(i.annualDemand, q, i.orderCost),
+      };
+      break;
+    }
+    default:
+      throw new Error(`Unknown finance engine: ${c.engine}`);
+  }
+  return checks;
+}
+
 const DOMAINS = [
   { name: 'pph21', label: 'PPh 21 (TER PP 58/2023)', golden: 'pph21', run: runPph21 },
   { name: 'bpjs', label: 'BPJS (Perpres 64/2020 + PP 45/2015)', golden: 'bpjs', run: runBpjs },
   { name: 'phk', label: 'PHK (PP 35/2021)', golden: 'phk', run: runPhk },
+  { name: 'finance', label: 'Finance (8 deterministic engines)', golden: 'finance', run: runFinance },
 ];
 
 function buildLLMPrompt(c, checks) {
@@ -178,7 +293,7 @@ async function llmAsk(systemPrompt, userPrompt) {
       }
       const ok = Object.keys(expected).every((k) => {
         const exp = expected[k];
-        return typeof exp === 'number' ? numericTolerance(exp, checks[k]) : exp === checks[k];
+        return matches(exp, checks[k]);
       });
       if (ok) passed++;
       else mismatches.push({ caseId: c.caseId, expected, actual: checks });
@@ -231,7 +346,7 @@ async function llmAsk(systemPrompt, userPrompt) {
         const expected = c.expected;
         const engineChecks = domain.run(c);
         if (Object.keys(expected).every((k) =>
-          typeof expected[k] === 'number' ? numericTolerance(expected[k], engineChecks[k]) : expected[k] === engineChecks[k]
+          matches(expected[k], engineChecks[k])
         )) enginePassed++;
 
         try {
