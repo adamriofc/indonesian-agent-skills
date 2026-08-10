@@ -1,4 +1,4 @@
-# Benchmark Report — `indonesian-agent-skills`
+# Benchmark Report — `indonesian-business-agent-skills`
 
 Metodologi dan hasil pengukuran resmi. **Aturan: tidak ada angka yang ditulis tanpa pernah diukur.** Dokumen ini hanya memuat angka dari run aktual; setiap run baru yang berbeda wajib memperbarui tabel di bawah.
 
@@ -14,8 +14,8 @@ Metodologi dan hasil pengukuran resmi. **Aturan: tidak ada angka yang ditulis ta
 | 4. LLM Baseline (opsional) | Bagaimana model LLM umum dibandingkan dengan engine? | `scripts/benchmark.js --llm` |
 
 Corpus yang dipakai:
-- Golden corpus statis (`tests/golden/`): 6 kasus PPh 21, 3 kasus BPJS, 3 kasus PHK — batch cepat, deterministik, bebas key.
-- Matrix deepen di CI: 425 kasus PPh 21, 225 kasus PHK, 20 asersi integrasi, 4 engine baru, suite keamanan (lihat `npm test`).
+- Golden corpus statis (`tests/golden/`): 6 kasus PPh 21, 3 kasus BPJS, 3 kasus PHK, 11 kasus Finance (8 engine) — batch cepat, deterministik, bebas key.
+- Matrix deepen di CI: 425 kasus PPh 21, 225 kasus PHK, 20 asersi integrasi, 12 modul engine (4 statutory + 8 finance), suite keamanan (lihat `npm test`).
 
 Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
@@ -23,18 +23,19 @@ Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
 ## 2. Hasil Terakhir — Run Deterministik
 
-**Tanggal: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` (commit audit-hardening)**
+**Tanggal: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.0.0 (harness update: domain finance + deep-array match + parser `--json-report` space-tolerant)**
 
 | Engine | Kasus | Akurasi | Determinisme (3×) | Throughput |
 |---|---|---|---|---|
-| PPh 21 (TER PP 58/2023) | 6 | **100,00%** | OK, identik | 17.373 ops/detik |
-| BPJS (Perpres 64/2020 + PP 45/2015) | 3 | **100,00%** | OK, identik | 1.921 ops/detik |
-| PHK (PP 35/2021) | 3 | **100,00%** | OK, identik | 16.450 ops/detik |
+| PPh 21 (TER PP 58/2023) | 6 | **100,00%** | OK, identik | 3.907 ops/detik |
+| BPJS (Perpres 64/2020 + PP 45/2015) | 3 | **100,00%** | OK, identik | 13.100 ops/detik |
+| PHK (PP 35/2021) | 3 | **100,00%** | OK, identik | 22.083 ops/detik |
+| Finance (8 engine: BE, DEP, NPV, IRR, LOAN, RAT, WC, EOQ) | 11 | **100,00%** | OK, identik | 6.391 ops/detik |
 
 Catatan metodologi:
 - Toleransi numerik 1% atau Rp 1 (mana yang lebih besar) — standar yang lebih longgar daripada toleransi ketat repo (0) di `npm test`.
-- BPJS `ops/detik` lebih rendah karena beban komputasi temporal ruleset select + full breakdown.
-- Determinism diukur 3× eksekusi per kasus; 0 pelanggaran pada semua domain.
+- `ops/detik` noisy antar run pada mesin yang sama (variasi 3×–5×); hanya bandingkan dalam satu run yang sama. JSON report tiap run menyimpan angka aktual (`--json-report path`).
+- Determinism diukur 3× eksekusi per kasus; 0 pelanggaran pada semua domain (termasuk array multibaris seperti jadwal depresiasi, berkat deep-array match).
 
 ---
 
@@ -63,6 +64,6 @@ Prompt yang dipakai (per kasus): deskripsi kasus + input JSON + instruksi "jawab
 ## 4. Batas & Non-Claims
 
 - Benchmark ini mengukur **akurasi hitung deterministik**, bukan kualitas drafting/analisis kontrak (di luar lingkup numeric engine).
-- Golden corpus run cepat memakai 12 kasus; claim 100% merujuk corpus + matrix deepen CI (650 kasus) yang dijalankan setiap push.
+- Golden corpus run cepat memakai 23 kasus; claim 100% merujuk corpus + matrix deepen CI (±680 kasus) yang dijalankan setiap push.
 - Throughput bergantung hardware; hanya bandingkan run pada mesin yang sama.
 - Mode LLM tidak dijalankan secara default (butuh key) — angka yang muncul di README/PROVENANCE hanya berasal dari tabel di atas.

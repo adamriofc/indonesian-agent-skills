@@ -2,6 +2,13 @@
 
 Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 
+## Shipped (`v2.0.0`)
+
+- [x] **Finance Core (`finance-id`)** — 12 business finance & accounting skills + 8 deterministic engines (break-even, depreciation SL/DDB/SYD, NPV, IRR, loan amortization, 14 financial ratios, working capital, EOQ) + golden corpus (11 kasus) + benchmark domain 100%
+- [x] **Rebrand & repositioning** — nama repo `indonesian-business-agent-skills`, tagline *"Give AI agents a business brain for Indonesia."*, arsitektur CORE/BUSINESS/CREATIVE, scope 6 domains · 54 skills · 16 engines
+- [x] **Finance & Accounting Standard Register** — PROVENANCE.md section 6 (`STANDARD_REFERENCE` access path; PSAK 1/16/23, SAK EMKM dari IAI)
+- [x] **Benchmark harness** — domain finance + deep-array match + parser `--json-report` space-tolerant
+
 ## Shipped (`v1.1.0`)
 
 - [x] **Release Trust Anchor** — `SHA256SUMS.txt` + `scripts/sha256sums.sh`, diverifikasi di CI
@@ -25,6 +32,8 @@ Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 
 ## In Progress
 
+- [→] **Finance × Tax × HR integration** — cross-plugin workflows (finance output → tax entries via efaktur-helper → payroll via pph21/bpjs)
+- [→] **Operations domain (Phase 3)** — `operations-id` plugin (procurement, inventory, logistics SOP)
 - [→] Ruleset lifecycle promotion tooling (scripted `DRAFT → VERIFIED → RELEASED`)
 - [→] Signed manifest anchoring (Git tag signing / attestation for integrity chain-of-custody)
 - [→] **LLM baseline benchmark run** — `scripts/benchmark.js --llm` dengan model produksi + publikasi hasil di `docs/BENCHMARK.md` (no-fiction: tabel baru terisi setelah run nyata)
@@ -39,6 +48,7 @@ Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 
 ## Non-Goals
 
-- Replacing licensed tax/legal software. This is decision-support intelligence, not filing software.
+- Replacing licensed tax/legal/accounting software. This is decision-support intelligence, not filing software.
 - Non-Indonesian regulatory domains before the regional-derivatives milestone.
 - Fabricated historical rates: rulesets only exist for windows we can prove.
+- Trading & investment products (stock/crypto analysis) — out of the business-finance core scope.

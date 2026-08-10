@@ -28,9 +28,9 @@ const ROOT = path.join(__dirname, '..');
 const args = process.argv.slice(2);
 const withLLM = args.includes('--llm');
 const llmSampleArg = args.find((a) => a.startsWith('--llm-sample'));
-const llmSample = llmSampleArg ? parseInt(llmSampleArg.split('=')[1], 10) : 10;
+const llmSample = llmSampleArg ? parseInt(llmSampleArg.split('=')[1] ?? args[args.indexOf(llmSampleArg) + 1], 10) : 10;
 const jsonReportArg = args.find((a) => a.startsWith('--json-report'));
-const jsonReportPath = jsonReportArg ? jsonReportArg.split('=')[1] : null;
+const jsonReportPath = jsonReportArg ? (jsonReportArg.split('=')[1] ?? args[args.indexOf(jsonReportArg) + 1] ?? null) : null;
 
 const { calculatePPh21Monthly } = require(path.join(ROOT, 'engines/pph21-calculator'));
 const { calculateBpjs } = require(path.join(ROOT, 'engines/bpjs-calculator'));

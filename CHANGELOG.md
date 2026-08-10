@@ -2,6 +2,26 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.0.0] - 2026-08-10
+
+### Added
+- **Finance Core (`finance-id` plugin)**: 12 business finance & accounting skills — accounting-basics, financial-statements, cash-flow-analysis, budgeting-forecasting, financial-ratio-analysis, working-capital, cost-accounting, break-even-analysis, unit-economics, business-feasibility, financial-modeling, capital-budgeting.
+- **8 deterministic finance engines** (pure standard math, no ruleset): `engines/break-even.js`, `depreciation.js` (SL/DDB/SYD), `npv.js` (+ terminal value), `irr.js` (bisection, self-consistency), `loan-amortization.js`, `financial-ratios.js` (14 ratios), `working-capital.js`, `eoq.js` — each with golden corpus (`tests/golden/finance.json`, 11 kasus) + unit module (`tests/units/finance-engines.test.js`).
+- **Benchmark harness extended**: domain `finance` (8 engine, 11 golden cases) — semua domain 100% deterministik.
+- **PROVENANCE.md**: Access Path baru `STANDARD_REFERENCE` + section 6 Finance & Accounting Standard Register (PSAK 1/16/23, SAK EMKM; IAI — 404 klien otomatis, diverifikasi manual).
+
+### Changed
+- **Repo direname**: `indonesian-agent-skills` → `indonesian-business-agent-skills` (redirect GitHub otomatis).
+- **Rebrand**: judul "Indonesian Business Agent Skills", tagline *"Give AI agents a business brain for Indonesia."*; arsitektur CORE (legal/tax/finance/HR) · BUSINESS (commerce) · CREATIVE (content); scope "6 business domains · 54 agent skills · 16 deterministic engines".
+- `package.json`: name `indonesian-business-agent-skills`, version `2.0.0`; rantai `npm test` + `test:units` menyertakan `finance-engines.test.js` (9 modul).
+- README: contoh output engine aktual finance (break-even, amortization, IRR) ditambahkan; path absolut `/tmp/...` diganti `$PWD`.
+
+### Fixed
+- `scripts/benchmark.js`: parser argumen `--json-report`/`--llm-sample` kini menerima sintaks space (`--json-report path`) dan `=`; perbandingan kasus array (mis. `annual` depresiasi) memakai deep-match, bukan `===` referensi.
+
+### Benchmark (run aktual 2026-08-10, Node v26.5.1, `scripts/benchmark.js`)
+- PPh 21 100% (6 kasus, 14.649 ops/dtk) · BPJS 100% (3, 14.329) · PHK 100% (3, 27.028) · Finance 100% (11, 4.099) — determinisme 3× OK, 0 pelanggaran.
+
 ## [1.1.0] - 2026-08-10
 
 ### Added

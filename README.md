@@ -1,12 +1,16 @@
-# Indonesian Agent Skills (`indonesian-agent-skills`) 🇮🇩
+# Indonesian Business Agent Skills 🇮🇩
+
+*Give AI agents a business brain for Indonesia.*
+
+**Legal, tax, finance, HR, e-commerce, and content — grounded in Indonesian rules, workflows, and deterministic engines.**
 
 <p align="center">
-  <img src="docs/indonesian-agent-skills-hero.svg" alt="Indonesian Agent Skills Banner" width="100%">
+  <img src="docs/indonesian-business-agent-skills-hero.svg" alt="Indonesian Business Agent Skills Banner" width="100%">
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <a href="https://github.com/adamriofc/indonesian-agent-skills/actions/workflows/ci.yml"><img src="https://github.com/adamriofc/indonesian-agent-skills/actions/workflows/ci.yml/badge.svg" alt="CI Pipeline"></a>
+  <a href="https://github.com/adamriofc/indonesian-business-agent-skills/actions/workflows/ci.yml"><img src="https://github.com/adamriofc/indonesian-business-agent-skills/actions/workflows/ci.yml/badge.svg" alt="CI Pipeline"></a>
   <a href="https://app.openworklabs.com/"><img src="https://img.shields.io/badge/OpenCode-Compatible-brightgreen.svg" alt="OpenCode Compatibility"></a>
   <a href="engines/"><img src="https://img.shields.io/badge/Hybrid%20Engine-LLM--Safe-orange.svg" alt="LLM-Safe Hybrid Engine"></a>
   <a href="tests/"><img src="https://img.shields.io/badge/Test%20Suite-900%2B%20Assertions-success.svg" alt="900+ Test Assertions"></a>
@@ -16,7 +20,9 @@
 
 ## Overview
 
-A domain-intelligence infrastructure for AI agents operating within the Indonesian business ecosystem. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, and custom agent frameworks, this repository pairs structured instruction packs with 8 deterministic calculation engines (`engines/`) and temporal JSON rulesets (`engines/rules/`).
+A domain-intelligence infrastructure for AI agents operating within the Indonesian business ecosystem. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, and custom agent frameworks, this repository pairs structured instruction packs with **16 deterministic calculation engines** (`engines/`) and temporal JSON rulesets (`engines/rules/`).
+
+**Scope: 6 business domains · 54 agent skills · 16 deterministic engines** — core (legal, tax, finance, HR), business (e-commerce), and creative (local content).
 
 ---
 
@@ -29,7 +35,7 @@ Standard Large Language Models (LLMs) predict text probabilistically. When evalu
 2. **Temporal Ambiguity**: LLMs cannot reliably distinguish between statutory wage caps in different effective date windows (such as BPJS JP wage cap adjustments in March 2025 vs March 2026).
 3. **Unverifiable Lineage**: Output responses lack traceable links to official government gazettes, making them unsuited for corporate audits.
 
-`indonesian-agent-skills` resolves these failure modes by executing mathematical operations inside pure Node.js calculation engines (`engines/`) backed by single-source-of-truth rulesets (`engines/rules/`). The agent extracts parameters from natural language inputs, passes them to the engine, and formats the verified calculation into a clear explanation.
+This skill collection resolves these failure modes by executing mathematical operations inside pure Node.js calculation engines (`engines/`) backed by single-source-of-truth rulesets (`engines/rules/`). The agent extracts parameters from natural language inputs, passes them to the engine, and formats the verified calculation into a clear explanation.
 
 ---
 
@@ -37,7 +43,7 @@ Standard Large Language Models (LLMs) predict text probabilistically. When evalu
 
 ```bash
 # 1. Clone (5 detik)
-git clone https://github.com/adamriofc/indonesian-agent-skills.git && cd indonesian-agent-skills
+git clone https://github.com/adamriofc/indonesian-business-agent-skills.git && cd indonesian-business-agent-skills
 
 # 2. Install (10 detik, tanpa dependensi pihak ketiga)
 npm ci
@@ -62,38 +68,39 @@ Setelah itu: salin folder skill yang dibutuhkan ke agent Anda (lihat tabel Compa
 ## 🏗️ System Architecture
 
 ```text
-                                [ User / Agent Query ]
+                                 [ User / Agent Query ]
+                                           │
+                                           ▼
+                       ┌──────────────────────────────────────┐
+                       │    Skill Instruction Layer (MD)      │
+                       │ Extracts parameters & structured JSON│
+                       └──────────────────┬───────────────────┘
                                           │
                                           ▼
-                      ┌──────────────────────────────────────┐
-                      │    Skill Instruction Layer (MD)      │
-                      │ Extracts parameters & structured JSON│
-                      └──────────────────┬───────────────────┘
-                                         │
-                                         ▼
-                      ┌──────────────────────────────────────┐
-                      │ 8 Deterministic Node.js Engines      │
-                      │ (engines/*.js)                       │
-                      └──────────────────┬───────────────────┘
-                                         │
-               ┌─────────────────────────┴────────────────────────┐
-               ▼                                                  ▼
-┌──────────────────────────────┐              ┌──────────────────────────────────────┐
-│ Single Source of Truth Rules │              │ Cryptographic SHA-256 Checksums     │
-│ (engines/rules/*.json)       │              │ (engines/rules/integrity.js)         │
-└──────────────┬───────────────┘              └──────────────────┬───────────────────┘
-               │                                                 │
-               └─────────────────────────┬───────────────────────┘
-                                         │
-                                         ▼
-                      ┌──────────────────────────────────────┐
-                      │ Validated Statutory Output + Math    │
-                      └──────────────────┬───────────────────┘
-                                         │
-                                         ▼
-                      ┌──────────────────────────────────────┐
-                      │ LLM Narrative Synthesis & Formatting │
-                      └──────────────────────────────────────┘
+              ┌──────────────────────────────────────────────────────┐
+              │          16 Deterministic Node.js Engines            │
+              │ 8 statutory (engines/*.js + SSOT temporal rulesets)  │
+              │  8 finance (engines/*.js — pure standard math)       │
+              └──────────────────┬───────────────────┬───────────────┘
+                                 │                   │
+                                 ▼                   ▼
+      ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
+      │ Single Source of Truth Rules │   │ Cryptographic SHA-256 Checksums     │
+      │ (engines/rules/*.json)       │   │ (engines/rules/integrity.js +        │
+      │ — statutory & policy only    │   │  SHA256SUMS.txt)                     │
+      └──────────────┬───────────────┘   └──────────────────┬───────────────────┘
+                     │                                      │
+                     └──────────────────────────┬───────────┘
+                                                │
+                                                ▼
+                         ┌──────────────────────────────────────┐
+                         │  Validated Statutory Output + Math   │
+                         └──────────────────┬───────────────────┘
+                                            │
+                                            ▼
+                         ┌──────────────────────────────────────┐
+                         │ LLM Narrative Synthesis & Formatting │
+                         └──────────────────────────────────────┘
 ```
 
 ---
@@ -122,7 +129,7 @@ Compatibility classes (audit-grade, no overclaim):
 
 | Application / Platform | Integration Method | Compatibility Class | Verification Method | Last Verified |
 |---|---|---|---|---|
-| **OpenWork Desktop & Cloud** | Native `plugin.json` manifest; 5 plugins + 42 skills divalidasi schema validator di CI | 🟢 **Verified** | CI schema validation (`tests/schema/`) + `npm test` | 2026-08-10 |
+| **OpenWork Desktop & Cloud** | Native `plugin.json` manifest; 6 plugins + 54 skills divalidasi schema validator di CI | 🟢 **Verified** | CI schema validation (`tests/schema/`) + `npm test` | 2026-08-10 |
 | **OpenCode CLI** | `opencode` mendukung plugin pihak ketiga; cara impor tercatat di dokumentasi; tidak ada E2E run dalam repo ini | 🟡 **Adapter** | Dokumentasi + format analysis (tidak di-E2E-kan di CI repo ini) | 2026-08-10 |
 | **Claude Code (CLI) & Cowork** | Native `.claude-plugin` manifest format; `claude plugins add` | 🟡 **Adapter** | Format-native (manifest tervalidasi CI); E2E register pending | 2026-08-10 |
 | **Cursor IDE** | Context loading via `.cursorrules` / `.mdc` copies | 🟡 **Adapter** | Dokumentasi; tidak diuji otomatis di repo ini | 2026-08-10 |
@@ -138,39 +145,39 @@ Compatibility classes (audit-grade, no overclaim):
 OpenWork registers the plugins upon adding the repository:
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
-3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-agent-skills`.
-4. The 5 plugins and 42 skills will activate automatically in your workspace.
+3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
+4. The 6 plugins and 54 skills will activate automatically in your workspace.
 
 ### 2. OpenCode CLI
 Install the plugins directly from your terminal:
 ```bash
-opencode plugins add adamriofc/indonesian-agent-skills
+opencode plugins add adamriofc/indonesian-business-agent-skills
 ```
 
 ### 3. Claude Code (CLI)
 Link the skills directory to Claude Code config context:
 ```bash
-claude plugins add adamriofc/indonesian-agent-skills
+claude plugins add adamriofc/indonesian-business-agent-skills
 ```
 
 ### 4. Cursor IDE
 To instruct Cursor agent to use these rules, copy `.cursorrules` configurations to your project root:
 ```bash
 mkdir -p .cursorrules.d
-cp -r /tmp/opencode/indonesian-agent-skills/legal-id/skills/ .cursorrules.d/
+cp -r $PWD/legal-id/skills/ .cursorrules.d/
 ```
 
 ### 5. VS Code Agent (Copilot / Cline / Roo Code)
 Configure VS Code system instructions by adding the path to your settings:
 ```json
 {
-  "roo-code.systemPromptPath": "/absolute/path/to/indonesian-agent-skills/legal-id/skills/contract-reviewer/SKILL.md"
+  "roo-code.systemPromptPath": "/absolute/path/to/indonesian-business-agent-skills/legal-id/skills/contract-reviewer/SKILL.md"
 }
 ```
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (42 Skills Across 5 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (54 Skills Across 6 Plugins)
 
 ### 1. `legal-id`: Commercial Law & Compliance (8 Skills)
 * `contract-reviewer`: Audits agreements and outputs a **Contract Risk Score (0-100)** with redlines.
@@ -223,6 +230,20 @@ Configure VS Code system instructions by adding the path to your settings:
 * `youtube-shorts-script`: Retention scripts for 0-60s Shorts and long-form video outlines.
 * `kol-brief-contract`: KOL/Influencer campaign briefs, SOWs, and content usage rights contracts.
 * `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
+
+### 6. `finance-id`: Business Finance & Accounting (12 Skills)
+* `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.
+* `financial-statements`: 3-statement structure and PSAK 1 presentation principles.
+* `cash-flow-analysis`: OCF/ICF/FCF analysis and cash runway.
+* `budgeting-forecasting`: Top-down/bottom-up budgets, variance and rolling forecast.
+* `financial-ratio-analysis`: 14 ratios via `engines/financial-ratios.js`.
+* `working-capital`: NWC, CCC, and funding requirement via `engines/working-capital.js`.
+* `cost-accounting`: COGS, absorption vs variable costing, product costing.
+* `break-even-analysis`: BEP units/revenue and margin of safety via `engines/break-even.js`.
+* `unit-economics`: LTV, CAC, contribution margin, LTV:CAC heuristic.
+* `business-feasibility`: 5-aspect feasibility framework with consistent financial figures.
+* `financial-modeling`: 3-statement linkage and deterministic sensitivity tables.
+* `capital-budgeting`: NPV/IRR/payback via `engines/npv.js` & `engines/irr.js` vs simple WACC.
 
 ---
 
@@ -280,11 +301,55 @@ console.log(res2026.bpjsKetenagakerjaan.jp.employer);              // 221726
 
 Perhatikan bahwa mesin memilih ruleset **secara temporal**: dengan tanggal `2026-03-01` engine otomatis beralih dari `BPJS-2025` (cap Rp 10.547.400) ke `BPJS-2026` (cap Rp 11.086.300) — diuji oleh 425 asersi PPh 21 dan 225 asersi PHK di CI.
 
+### 3. Break-Even Analysis — Output Engine Aktual
+
+```javascript
+const { breakEvenUnits, breakEvenRevenue, contributionMargin, contributionMarginRatio, marginOfSafety } = require('./engines/break-even');
+const revenue = breakEvenRevenue(20000000, 25000, 15000);
+console.log({
+  contributionMargin: contributionMargin(25000, 15000),
+  contributionMarginRatio: contributionMarginRatio(25000, 15000),
+  breakEvenUnits: breakEvenUnits(20000000, 25000, 15000),
+  breakEvenRevenue: revenue,
+  marginOfSafety: marginOfSafety(60000000, revenue)
+});
+```
+
+```json
+{
+  "contributionMargin": 10000,
+  "contributionMarginRatio": 0.4,
+  "breakEvenUnits": 2000,
+  "breakEvenRevenue": 50000000,
+  "marginOfSafety": 10000000
+}
+```
+
+### 4. Amortization & IRR — Output Engine Aktual
+
+```javascript
+const { monthlyPayment, amortizationSchedule } = require('./engines/loan-amortization');
+const { irr } = require('./engines/irr');
+console.log({
+  monthlyPayment: monthlyPayment(100000000, 0.12, 24),
+  totalInterest: amortizationSchedule(100000000, 0.12, 24).totalInterest,
+  irrOfProject: irr([-100000, 30000, 40000, 50000]).irr.toFixed(4)
+});
+```
+
+```json
+{
+  "monthlyPayment": 4707347,
+  "totalInterest": 12976331,
+  "irrOfProject": "0.0890"
+}
+```
+
 ---
 
 ## 🧪 Comprehensive Test & Verification Suite
 
-Our test harness executes over **900+ individual test assertions** across 8 automated test modules:
+Our test harness executes over **900+ individual test assertions** across 9 automated test modules (schema validation, statutory engines, finance engines, PPh 21 & PHK matrices, integration, injection & adversarial security):
 
 ```bash
 # Run full test pipeline
