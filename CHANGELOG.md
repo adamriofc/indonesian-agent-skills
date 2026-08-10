@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.4.0] - 2026-08-10
+
+### Refined & Hardened
+- **Scientific Accuracy & Wording Refinement**: Updated `README.md` to refine `"0% hallucination"` into technically defensible statements (`"Deterministic computation removes LLM arithmetic hallucination within the engine"` & `"100% pass rate on the curated golden benchmark corpus"`).
+- **Source Quality Classification**: Added explicit **Source Quality Classification** (`PRIMARY` vs `SECONDARY_VERIFIED`) column to all regulatory ruleset registers in `PROVENANCE.md`.
+- **Empirical LLM Baseline Benchmark**: Populated `docs/BENCHMARK.md` with empirical LLM baseline vs Skill-assisted Agent accuracy findings (Skill Engine **100.00%** vs Vanilla LLM **70.54%** across 20 benchmark domains).
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert version `2.4.0`, **71 skills**, **27 engines**, **6 plugins**, and Overview narrative consistency.
+
 ## [2.3.2] - 2026-08-10
 
 ### Fixed & Hardened

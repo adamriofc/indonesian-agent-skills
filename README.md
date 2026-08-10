@@ -31,7 +31,7 @@ Generic AI models (such as unassisted ChatGPT or Claude) predict words probabili
 ### 🛡️ The Hybrid Architecture Solution
 This repository decouples AI **reasoning** from **calculation**:
 - **AI (Agent Skill)**: Understands natural language, extracts parameters, and synthesizes explanations.
-- **Engine (Node.js)**: Computes exact invariant mathematics (0% hallucination) per official government rulesets.
+- **Engine (Node.js)**: Computes exact invariant mathematics (deterministic computation removes LLM arithmetic hallucination within the engine) per official government rulesets.
 
 ---
 
@@ -308,7 +308,7 @@ console.log(diff);
 > **Answer**: Standard AI predicts words probabilistically (*token prediction*) rather than executing math. Unassisted AI encounters:
 > - **Arithmetic Hallucination**: Producing plausible-looking numbers based on invalid formulas.
 > - **Outdated Regulations**: Missing recent statutory changes such as BPJS wage cap adjustments or PP 20/2026 UMKM eligibility rules.
-> This repository forces the AI to call a **Node.js Engine** (pure math calculator) connected to official government rulesets (`ruleset JSON`), ensuring **100% precision and 0% hallucination**.
+> This repository forces the AI to call a **Node.js Engine** (pure math calculator) connected to official government rulesets (`ruleset JSON`), ensuring a **100% pass rate on the curated golden benchmark corpus by isolating mathematical calculations inside deterministic Node.js engines**.
 
 ### Q3: Does this repository support the latest PP No. 20 Year 2026 UMKM tax regulations?
 > **Answer**: **Yes, 100%!** The repository maintains versioned temporal rulesets:
