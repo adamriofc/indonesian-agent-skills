@@ -68,7 +68,7 @@ function testDepreciation() {
   assert.strictEqual(slResidual.netBookValue, 1000000);
 
   assert.throws(() => straightLine(1000000, 2000000, 5), /Invalid depreciation/);
-  assert.throws(() => straightLine(0, 0, 5), /Invalid depreciation/);
+  assert.throws(() => straightLine(10000000, 0, 1.5), /Invalid depreciation/);
   assert.throws(() => straightLine(10000000, 0, 0), /Invalid depreciation/);
   assert.throws(() => doubleDeclining(10000000, 0, -1), /Invalid depreciation/);
 
@@ -76,9 +76,28 @@ function testDepreciation() {
   console.log('  [2/8] depreciation engine: SL + DDB + SYD golden cases passed');
 }
 
+function testNpv() {
+  const { npv, npvWithTerminalValue } = require('../../engines/npv');
+
+  assertNear(npv(0.1, [-100000, 30000, 40000, 50000]), -2103.68, 0.02, 'NPV-001');
+  assertNear(npvWithTerminalValue(0.1, [-100000, 30000, 40000], 50000, 3), -2103.68, 0.02, 'NPV-TV-001');
+
+  assert.strictEqual(npv(0, [1000, 2000, 3000]), 6000);
+  assert.strictEqual(npv(0.1, []), 0);
+  assertNear(npv(0.1, [100000]), 100000, 0.0001, 't=0 undiscounted');
+
+  assert.throws(() => npv(-1.5, [100, 200]), /less than -1/);
+  assert.throws(() => npvWithTerminalValue(0.1, [100], 50, -1), /non-negative integer/);
+  assert.throws(() => npvWithTerminalValue(0.1, [100], 50, 1.5), /non-negative integer/);
+
+  assertDeterministic(() => npv(0.1, [-100000, 30000, 40000, 50000]), 'npv determinism');
+  console.log('  [3/8] npv engine: NPV-001 + NPV-TV-001 golden cases passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
+  testNpv();
 }
 
 runAll();
