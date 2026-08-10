@@ -1,0 +1,82 @@
+[
+  {
+    "caseId": "BE-001",
+    "engine": "break-even",
+    "description": "Break-even unit & revenue, price 25.000, vc 15.000, fixed 20.000.000",
+    "input": { "fixedCosts": 20000000, "pricePerUnit": 25000, "variableCostPerUnit": 15000, "actualRevenue": 60000000 },
+    "expected": { "contributionMargin": 10000, "contributionMarginRatio": 0.4, "breakEvenUnits": 2000, "breakEvenRevenue": 50000000, "marginOfSafety": 10000000 }
+  },
+  {
+    "caseId": "DEP-SL-001",
+    "engine": "depreciation",
+    "method": "straightLine",
+    "description": "Straight line: 120.000.000 cost, 0 salvage, 5 years",
+    "input": { "cost": 120000000, "salvage": 0, "lifeYears": 5 },
+    "expected": { "annual": [24000000, 24000000, 24000000, 24000000, 24000000], "totalDepreciation": 120000000, "netBookValue": 0 }
+  },
+  {
+    "caseId": "DEP-DDB-001",
+    "engine": "depreciation",
+    "method": "doubleDeclining",
+    "description": "Double declining balance: 120.000.000 cost, 0 salvage, 5 years",
+    "input": { "cost": 120000000, "salvage": 0, "lifeYears": 5 },
+    "expected": { "annual": [48000000, 28800000, 17280000, 10368000, 6220800], "totalDepreciation": 110668800, "netBookValue": 9331200 }
+  },
+  {
+    "caseId": "DEP-SYD-001",
+    "engine": "depreciation",
+    "method": "sumOfYearsDigits",
+    "description": "Sum of years digits: 120.000.000 cost, 0 salvage, 5 years",
+    "input": { "cost": 120000000, "salvage": 0, "lifeYears": 5 },
+    "expected": { "annual": [40000000, 32000000, 24000000, 16000000, 8000000], "totalDepreciation": 120000000, "netBookValue": 0 }
+  },
+  {
+    "caseId": "NPV-001",
+    "engine": "npv",
+    "description": "NPV at 10%: invest 100.000, inflows 30/40/50 ribu",
+    "input": { "rate": 0.1, "cashflows": [-100000, 30000, 40000, 50000] },
+    "expected": { "npv": -2103.68 }
+  },
+  {
+    "caseId": "NPV-TV-001",
+    "engine": "npvWithTerminalValue",
+    "description": "NPV with terminal value 50.000 at t=3 — identical to NPV-001",
+    "input": { "rate": 0.1, "cashflows": [-100000, 30000, 40000], "terminalValue": 50000, "terminalYearIndex": 3 },
+    "expected": { "npv": -2103.68 }
+  },
+  {
+    "caseId": "IRR-001",
+    "engine": "irr",
+    "description": "IRR of [-100.000, 30.000, 40.000, 50.000] must sit in [0.088, 0.090] and self-consistent",
+    "input": { "cashflows": [-100000, 30000, 40000, 50000] },
+    "expected": { "irrMin": 0.088, "irrMax": 0.09 }
+  },
+  {
+    "caseId": "LOAN-001",
+    "engine": "loan-amortization",
+    "description": "Amortization 100.000.000 at 12% annual for 24 months",
+    "input": { "principal": 100000000, "annualRate": 0.12, "months": 24 },
+    "expected": { "monthlyPayment": 4707347, "totalInterest": 12976331, "finalBalance": 0 }
+  },
+  {
+    "caseId": "RAT-001",
+    "engine": "financial-ratios",
+    "description": "14 ratios from one consistent balance sheet & income statement",
+    "input": { "currentAssets": 500000000, "currentLiabilities": 250000000, "inventory": 150000000, "cash": 80000000, "totalLiabilities": 600000000, "totalEquity": 400000000, "revenue": 1200000000, "cogs": 800000000, "netIncome": 120000000, "totalAssets": 1000000000, "avgInventory": 200000000, "avgReceivables": 150000000, "avgPayables": 100000000 },
+    "expected": { "currentRatio": 2.0, "quickRatio": 1.4, "cashRatio": 0.32, "debtToEquity": 1.5, "grossMargin": 0.3333, "netMargin": 0.1, "roa": 0.12, "roe": 0.3, "inventoryTurnover": 4.0, "receivablesTurnover": 8.0, "daysSalesOutstanding": 45.625, "daysPayablesOutstanding": 45.625, "daysInventoryOutstanding": 91.25, "cashConversionCycle": 91.25 }
+  },
+  {
+    "caseId": "WC-001",
+    "engine": "working-capital",
+    "description": "Working capital: NWC, ratio, CCC 60+45-30, requirement 75 days x 2 jt/day",
+    "input": { "currentAssets": 500000000, "currentLiabilities": 250000000, "daysInventory": 60, "daysSalesOutstanding": 45, "daysPayables": 30, "cashCycleDays": 75, "cogsPerDay": 2000000 },
+    "expected": { "netWorkingCapital": 250000000, "workingCapitalRatio": 2.0, "cashConversionCycle": 75, "workingCapitalRequirement": 150000000 }
+  },
+  {
+    "caseId": "EOQ-001",
+    "engine": "eoq",
+    "description": "EOQ: demand 12.000/yr, order cost 100.000, holding 6.000/unit, lead 7 days",
+    "input": { "annualDemand": 12000, "orderCost": 100000, "holdingCostPerUnit": 6000, "leadTimeDays": 7, "safetyStock": 0 },
+    "expected": { "eoq": 633, "reorderPoint": 230, "annualHoldingCost": 1899000, "annualOrderCost": 1895735 }
+  }
+]
