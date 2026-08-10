@@ -1,0 +1,64 @@
+{
+  "rulesets": [
+    {
+      "rulesetId": "UMKM-2022",
+      "rulesetVersion": "1.0.0",
+      "effective_from": "2022-01-01",
+      "effective_to": "2026-04-21",
+      "tax_rate": 0.005,
+      "individual_threshold": 500000000,
+      "max_turnover_limit": 4800000000,
+      "eligible_taxpayers": [
+        "individual",
+        "orang_pribadi",
+        "corporate",
+        "pt",
+        "cv",
+        "firma",
+        "koperasi",
+        "perseroan_perorangan",
+        "single_person_company"
+      ],
+      "source": {
+        "regulation": "PP No. 55 Tahun 2022",
+        "article": "Pasal 56-57",
+        "url": "https://peraturan.bpk.go.id/Details/234125/pp-no-55-tahun-2022"
+      },
+      "lifecycle": {
+        "status": "ARCHIVED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12,
+        "superseded_by": "UMKM-2026"
+      }
+    },
+    {
+      "rulesetId": "UMKM-2026",
+      "rulesetVersion": "1.0.0",
+      "effective_from": "2026-04-22",
+      "effective_to": "Infinity",
+      "tax_rate": 0.005,
+      "individual_threshold": 500000000,
+      "max_turnover_limit": 4800000000,
+      "eligible_taxpayers": [
+        "individual",
+        "orang_pribadi",
+        "single_person_company",
+        "perseroan_perorangan",
+        "cooperative",
+        "koperasi"
+      ],
+      "source": {
+        "regulation": "PP No. 20 Tahun 2026",
+        "article": "Pasal 56-57 (Amended)",
+        "url": "https://jdih.kemenkeu.go.id/dok/pp-20-tahun-2026"
+      },
+      "lifecycle": {
+        "status": "RELEASED",
+        "verified_at": "2026-08-10T00:00:00Z",
+        "verified_by": "Indonesian Agent Skills Review Board",
+        "review_interval_months": 12
+      }
+    }
+  ]
+}

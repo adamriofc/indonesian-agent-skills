@@ -27,5 +27,5 @@ Builds and links the three core statements: Income Statement, Balance Sheet, and
 * Accounting standards (PSAK/SAK EMKM) are not positive law — PSAK amendments are tracked in the PROVENANCE register, not the runtime ruleset.
 
 ## Worked Example
-Input: trial balance for the period (revenue 1.2 billion; COGS 800 million; operating expenses 200 million; cash 100 million; receivables 150 million; inventory 200 million; fixed assets 550 million; payables 250 million; capital 350 million).
+Input: trial balance for the period (revenue 1.2 billion; COGS 800 million; operating expenses 200 million; cash 100 million; receivables 150 million; inventory 200 million; fixed assets 550 million; payables 450 million; capital 350 million).
 Output: net income 200 million → ending equity 550 million; Balance Sheet: Assets 1 billion = Liabilities 450 million + Equity 550 million; Cash flow: OCF 150 million (net income + depreciation 50 million − increase in receivables 40 million − increase in inventory 60 million) → ending cash is consistent.

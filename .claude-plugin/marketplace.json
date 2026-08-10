@@ -1,0 +1,31 @@
+{
+  "name": "indonesian-business-agent-skills",
+  "owner": "adamriofc",
+  "description": "Production-oriented AI domain-intelligence infrastructure for Indonesian legal, tax, HR, finance, e-commerce, and content operations.",
+  "plugins": [
+    {
+      "name": "legal-id",
+      "path": "./legal-id"
+    },
+    {
+      "name": "tax-payroll-id",
+      "path": "./tax-payroll-id"
+    },
+    {
+      "name": "hr-id",
+      "path": "./hr-id"
+    },
+    {
+      "name": "finance-id",
+      "path": "./finance-id"
+    },
+    {
+      "name": "ecommerce-id",
+      "path": "./ecommerce-id"
+    },
+    {
+      "name": "content-lokal-id",
+      "path": "./content-lokal-id"
+    }
+  ]
+}

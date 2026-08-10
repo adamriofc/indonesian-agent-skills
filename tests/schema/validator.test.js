@@ -122,19 +122,47 @@ function validate() {
           return;
         }
 
-        // Strict YAML Frontmatter Parser
+        // Strict YAML Frontmatter & Agent Skills Standard Specification Parser
         try {
           const frontmatter = parseYamlFrontmatter(parts[1]);
           
+          // 1. Name validation: required, <= 64 chars, lowercase kebab-case, must match directory name
           if (!frontmatter.name || frontmatter.name.trim() === '') {
             console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'name' must be a non-empty string in frontmatter.`);
             errors++;
+          } else {
+            if (frontmatter.name.length > 64) {
+              console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'name' exceeds 64 characters (${frontmatter.name.length}).`);
+              errors++;
+            }
+            if (!/^[a-z0-9-]+$/.test(frontmatter.name)) {
+              console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'name' must be lowercase kebab-case. Got: "${frontmatter.name}"`);
+              errors++;
+            }
+            if (frontmatter.name !== skillDirName) {
+              console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'name' ("${frontmatter.name}") does not match directory name ("${skillDirName}").`);
+              errors++;
+            }
           }
           
+          // 2. Description validation: required, 10 to 1024 chars
           if (!frontmatter.description || frontmatter.description.trim() === '') {
             console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'description' must be a non-empty string in frontmatter.`);
             errors++;
+          } else {
+            if (frontmatter.description.length < 10 || frontmatter.description.length > 1024) {
+              console.error(`❌ Skill Schema Violation in ${skillFilePath}: 'description' length must be between 10 and 1024 characters. Got ${frontmatter.description.length}.`);
+              errors++;
+            }
           }
+
+          // 3. Frontmatter Keys & Metadata Validation
+          const ALLOWED_KEYS = ['name', 'description', 'argument-hint', 'risk_level', 'rule_type', 'metadata', 'allowed-tools', 'license', 'compatibility'];
+          Object.keys(frontmatter).forEach(key => {
+            if (!ALLOWED_KEYS.includes(key)) {
+              console.warn(`⚠️ Warning in ${skillFilePath}: non-standard frontmatter key '${key}'. Custom metadata should be placed inside 'metadata:'.`);
+            }
+          });
         } catch (err) {
           console.error(`❌ YAML Frontmatter parse error in ${skillFilePath}: ${err.message}`);
           errors++;

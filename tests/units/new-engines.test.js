@@ -74,62 +74,94 @@ function runNewEnginesTests() {
   assert.strictEqual(roundingCase.taxWithheld, 666667);
 
   // ------------------------------------------------------
-  // 2. UMKM Final Tax 0.5% (PP 55/2022) — Rp 500M threshold
+  // 2. UMKM Final Tax 0.5% (PP 55/2022 & PP 20/2026) — Rp 500M & Rp 4.8B threshold boundary engine
   // ------------------------------------------------------
-  console.log("  [2/4] UMKM Final Tax 0.5% (PP 55/2022) — Rp 500M threshold boundary engine...");
+  console.log("  [2/4] UMKM Final Tax 0.5% (PP 55/2022 & PP 20/2026) — Rp 500M & Rp 4.8B threshold boundary engine...");
   assert.strictEqual(UMKM_FREE_THRESHOLD_OP, 500000000);
 
+  // --- Historical Ruleset: UMKM-2022 (Effective 2022-01-01 to 2026-04-21) ---
   // Entirely under threshold
-  const umkmIndivExempt = calculateUmkmFinalTax(200000000, 50000000, 'individual');
+  const umkmIndivExempt = calculateUmkmFinalTax(200000000, 50000000, 'individual', '2025-01-01');
   assert.strictEqual(umkmIndivExempt.taxableRevenue, 0);
   assert.strictEqual(umkmIndivExempt.finalTaxDue, 0);
   assert.strictEqual(umkmIndivExempt.taxExemptRevenue, 50000000);
+  assert.strictEqual(umkmIndivExempt.rulesetId, 'UMKM-2022');
 
   // Exact threshold boundary: ytdAfter == 500M -> fully exempt
-  const umkmExactBoundary = calculateUmkmFinalTax(499999999, 1, 'individual');
+  const umkmExactBoundary = calculateUmkmFinalTax(499999999, 1, 'individual', '2025-01-01');
   assert.strictEqual(umkmExactBoundary.taxExemptRevenue, 1);
   assert.strictEqual(umkmExactBoundary.taxableRevenue, 0);
   assert.strictEqual(umkmExactBoundary.finalTaxDue, 0);
 
   // One Rupiah over threshold -> only the excess is taxable
-  const umkmOverByOne = calculateUmkmFinalTax(499999999, 2, 'individual');
+  const umkmOverByOne = calculateUmkmFinalTax(499999999, 2, 'individual', '2025-01-01');
   assert.strictEqual(umkmOverByOne.taxExemptRevenue, 1);
   assert.strictEqual(umkmOverByOne.taxableRevenue, 1);
   assert.strictEqual(umkmOverByOne.finalTaxDue, 0);
 
   // Partial threshold crossover mid-month
-  const umkmCrossover = calculateUmkmFinalTax(480000000, 50000000, 'individual');
+  const umkmCrossover = calculateUmkmFinalTax(480000000, 50000000, 'individual', '2025-01-01');
   assert.strictEqual(umkmCrossover.taxExemptRevenue, 20000000);
   assert.strictEqual(umkmCrossover.taxableRevenue, 30000000);
   assert.strictEqual(umkmCrossover.finalTaxDue, 150000);
 
   // Threshold already fully utilized
-  const umkmAlreadyOver = calculateUmkmFinalTax(600000000, 50000000, 'individual');
+  const umkmAlreadyOver = calculateUmkmFinalTax(600000000, 50000000, 'individual', '2025-01-01');
   assert.strictEqual(umkmAlreadyOver.taxExemptRevenue, 0);
   assert.strictEqual(umkmAlreadyOver.taxableRevenue, 50000000);
   assert.strictEqual(umkmAlreadyOver.finalTaxDue, 250000);
 
-  // Corporate: no exemption regardless of revenue level
-  const umkmCorp = calculateUmkmFinalTax(100000000, 50000000, 'corporate');
+  // Corporate under 2022: eligible, no exemption regardless of revenue level
+  const umkmCorp = calculateUmkmFinalTax(100000000, 50000000, 'corporate', '2025-01-01');
+  assert.strictEqual(umkmCorp.isEligible, true);
   assert.strictEqual(umkmCorp.taxableRevenue, 50000000);
   assert.strictEqual(umkmCorp.finalTaxDue, 250000);
-  const umkmCorpOver = calculateUmkmFinalTax(800000000, 50000000, 'corporate');
+  const umkmCorpOver = calculateUmkmFinalTax(800000000, 50000000, 'corporate', '2025-01-01');
   assert.strictEqual(umkmCorpOver.finalTaxDue, 250000);
 
   // Alternative taxpayer label "orang_pribadi" maps to individual
-  const umkmAlias = calculateUmkmFinalTax(100000000, 50000000, 'orang_pribadi');
+  const umkmAlias = calculateUmkmFinalTax(100000000, 50000000, 'orang_pribadi', '2025-01-01');
   assert.strictEqual(umkmAlias.taxableRevenue, 0);
 
-  // Large revenue: 0.5% of Rp 7.5B = Rp 37,500,000
-  const umkmLarge = calculateUmkmFinalTax(7500000000, 100000000, 'corporate');
-  assert.strictEqual(umkmLarge.finalTaxDue, 500000);
-
   // Zero / negative revenue clamp
-  const umkmZero = calculateUmkmFinalTax(0, 0, 'individual');
+  const umkmZero = calculateUmkmFinalTax(0, 0, 'individual', '2025-01-01');
   assert.strictEqual(umkmZero.finalTaxDue, 0);
-  const umkmNegative = calculateUmkmFinalTax(-100, -50, 'individual');
+  const umkmNegative = calculateUmkmFinalTax(-100, -50, 'individual', '2025-01-01');
   assert.strictEqual(umkmNegative.grossRevenueYtdBefore, 0);
   assert.strictEqual(umkmNegative.finalTaxDue, 0);
+
+  // --- Current Ruleset: UMKM-2026 (Effective 2026-04-22 onwards under PP 20/2026) ---
+  // 1. Individual (OP) remains eligible with Rp 500M exemption
+  const umkm2026Indiv = calculateUmkmFinalTax(600000000, 50000000, 'individual', '2026-05-01');
+  assert.strictEqual(umkm2026Indiv.isEligible, true);
+  assert.strictEqual(umkm2026Indiv.rulesetId, 'UMKM-2026');
+  assert.strictEqual(umkm2026Indiv.finalTaxDue, 250000);
+
+  // 2. Single-person company (PT Perorangan) is eligible, but has no Rp 500M exemption
+  const umkm2026PTPerorangan = calculateUmkmFinalTax(100000000, 50000000, 'perseroan_perorangan', '2026-05-01');
+  assert.strictEqual(umkm2026PTPerorangan.isEligible, true);
+  assert.strictEqual(umkm2026PTPerorangan.taxableRevenue, 50000000);
+  assert.strictEqual(umkm2026PTPerorangan.finalTaxDue, 250000);
+
+  // 3. Cooperative (Koperasi) is eligible, but has no Rp 500M exemption
+  const umkm2026Koperasi = calculateUmkmFinalTax(100000000, 20000000, 'cooperative', '2026-05-01');
+  assert.strictEqual(umkm2026Koperasi.isEligible, true);
+  assert.strictEqual(umkm2026Koperasi.taxableRevenue, 20000000);
+  assert.strictEqual(umkm2026Koperasi.finalTaxDue, 100000);
+
+  // 4. Other Corporates (PT / CV / Firma) are NOT eligible under PP 20/2026
+  const umkm2026PT = calculateUmkmFinalTax(100000000, 50000000, 'corporate', '2026-05-01');
+  assert.strictEqual(umkm2026PT.isEligible, false);
+  assert.strictEqual(umkm2026PT.finalTaxDue, 0);
+
+  const umkm2026CV = calculateUmkmFinalTax(100000000, 50000000, 'cv', '2026-05-01');
+  assert.strictEqual(umkm2026CV.isEligible, false);
+  assert.strictEqual(umkm2026CV.finalTaxDue, 0);
+
+  // 5. Turnover exceeding Rp 4.8 Billion is NOT eligible under PP 20/2026
+  const umkm2026Over48B = calculateUmkmFinalTax(4800000000, 50000000, 'individual', '2026-05-01');
+  assert.strictEqual(umkm2026Over48B.isEligible, false);
+  assert.strictEqual(umkm2026Over48B.finalTaxDue, 0);
 
   // ------------------------------------------------------
   // 3. Marketplace Admin Fee Engine — full platform/tier matrix

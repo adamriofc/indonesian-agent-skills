@@ -64,15 +64,19 @@ A candidate that fails the Rule of Two Sources is held in `SUPERSEDED`-check sta
 
 ## 4. Release
 
+Follow strict SemVer tag creation without deleting published release tags (ensuring immutable releases and cryptographic trust chain integrity):
+
 ```bash
 git add -A
-git commit -m "rules: (PPh21|BPJS|THR|PHK|PKWT|Marketplace) extend ruleset for <regulation>, update integrity hashes, extend golden corpus"
+git commit -m "rules: (PPh21|BPJS|THR|PHK|PKWT|Marketplace|UMKM) extend ruleset for <regulation>, update integrity hashes, extend golden corpus"
 git push origin master
-gh release delete v1.0.0 --yes
-gh release create v1.0.0 --title "v1.0.0 — ..." --notes "..."
+# Bump patch or minor version according to SemVer (e.g. v2.0.1 or v2.1.0)
+git tag -a v2.0.1 -m "Release v2.0.1"
+git push origin v2.0.1
+gh release create v2.0.1 SHA256SUMS.txt --title "v2.0.1 — ..." --notes "..."
 ```
 
-The tag is re-pointed only via `gh release create` after `gh release delete`; every release covers the full reproducible test suite.
+Never delete or recreate an existing release tag (`gh release delete`) in production. Published release tags are immutable trust anchors.
 
 ---
 
