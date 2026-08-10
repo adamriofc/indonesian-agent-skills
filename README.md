@@ -163,7 +163,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `oss-kbli-navigator`: Maps activities to 5-digit KBLI 2020 and OSS-RBA risk levels.
 * `somasi-draft-id`: Drafts formal advocate-standard legal warning letters (Somasi 1, 2, 3).
 
-### 2. `tax-payroll-id`: Tax Engineering & Payroll (19 Skills)
+### 2. `tax-payroll-id`: Tax Engineering & Payroll (18 Skills)
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `pph21-grossup`: Solves circular PPh 21 tax allowance equations (Gross-Up) and PMK 66/2023 Natura thresholds.
 * `pph23-26-calculator`: Calculates PPh 23 (2% service) and PPh 26 (20% offshore / Tax Treaty DGT).

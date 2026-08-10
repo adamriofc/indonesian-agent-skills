@@ -1,0 +1,14 @@
+[
+  {
+    "caseId": "GROSSUP-TK0-NATURA",
+    "description": "TK/0 with taxable natura 3M: iterative gross-up under PMK 66/2023",
+    "input": { "baseSalary": 15000000, "ptkpStatus": "TK/0", "naturaAmount": 3000000 },
+    "expected": { "grossUpTaxAllowance": 1391304, "taxableNatura": 1000000, "exemptNatura": 2000000, "grossTakeHomePay": 15000000, "netTaxWithheld": 1391304, "terCategory": "A" }
+  },
+  {
+    "caseId": "GROSSUP-K3-PLAIN",
+    "description": "K/3 no natura: plain TER gross-up",
+    "input": { "baseSalary": 10000000, "ptkpStatus": "K/3", "naturaAmount": 0 },
+    "expected": { "grossUpTaxAllowance": 152284, "grossTakeHomePay": 10000000, "netTaxWithheld": 152284, "terCategory": "C" }
+  }
+]

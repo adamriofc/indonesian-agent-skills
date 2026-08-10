@@ -3,7 +3,7 @@ name: margin-pricing-calculator
 description: Calculate net seller payout and profit margins after marketplace admin fees (Shopee Star/Mall, Tokopedia Power Merchant, TikTok Shop), extra shipping fees, and ad budgets.
 argument-hint: "<selling_price> <platform> <seller_tier> [free_shipping_extra] [ad_budget]"
 risk_level: MEDIUM
-rule_type: platform-policy
+rule_type: commercial-policy
 ---
 
 # Marketplace Fee & Net Margin Calculator

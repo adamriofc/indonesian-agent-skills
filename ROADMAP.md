@@ -34,7 +34,7 @@ Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
 - [x] SSOT rulesets with temporal versioning (`engines/rules/pph21.json`, `bpjs.json`)
 - [x] Cryptographic SHA-256 ruleset integrity with byte-level tamper detection
 - [x] Golden corpus, matrix tests (425 PPh21 + 225 PHK), injection & adversarial security tests
-- [x] CI matrix Node 18/20/22, full `npm test` green
+- [x] CI matrix Node 20/22/24, full `npm test` green
 - [x] Skill metadata: `risk_level` + `rule_type` on all 42 skills
 - [x] Trust Envelope (confidence contract) on flagship engine-driven skills
 - [x] Regulatory Update Pipeline, Granular Provenance Register, Community governance docs

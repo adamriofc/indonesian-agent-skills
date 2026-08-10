@@ -1,0 +1,8 @@
+[
+  {
+    "caseId": "TP-DER-EXCEEDED",
+    "description": "DER 5:1 exceeds 4:1 ceiling: non-deductible interest + secondary adjustment",
+    "input": { "totalInterestBearingDebt": 50000000000, "totalEquity": 10000000000, "annualInterestExpense": 5000000000, "isAffiliateLender": true, "isDomesticAffiliate": false, "hasValidDgtForm": true, "treatyRatePercent": 10 },
+    "expected": { "actualDerRatio": 5, "isDerExceeded": true, "maxAllowableDebt": 40000000000, "nonDeductibleInterestExpense": 1000000000, "secondaryAdjustmentTaxAmount": 100000000 }
+  }
+]

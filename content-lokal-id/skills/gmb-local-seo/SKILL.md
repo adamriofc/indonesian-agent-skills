@@ -3,7 +3,7 @@ name: gmb-local-seo
 description: Optimize Google Business Profile (GMB) listings, local search keywords, and customer review response strategies.
 argument-hint: "<business_name> <location_city> <service_category>"
 risk_level: LOW
-rule_type: commercial
+rule_type: commercial-policy
 ---
 
 # Google Business Profile & Local SEO Optimizer

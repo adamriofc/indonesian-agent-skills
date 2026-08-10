@@ -2,8 +2,8 @@
 name: kol-brief-contract
 description: Draft KOL/Influencer campaign briefs, Scope of Work (SOW), competitor exclusivity clauses, and content usage rights.
 argument-hint: "<kol_tier_nano_micro_macro> <deliverables_sow> <exclusivity_period>"
-risk_level: MEDIUM
-rule_type: commercial
+risk_level: LOW
+rule_type: commercial-policy
 ---
 
 # KOL & Influencer Briefing & Agreement Writer

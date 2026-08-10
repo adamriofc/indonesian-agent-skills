@@ -1,7 +1,7 @@
 {
   "name": "tax-payroll-id",
   "version": "2.0.0",
-  "description": "Production-grade Indonesian tax & payroll engine: TER PPh 21 (PP 58/2023), BPJS splits, PPN 11% e-Faktur, and statutory THR.",
+  "description": "Production-grade Indonesian tax & payroll engine: TER PPh 21 (PP 58/2023), BPJS splits, e-Faktur PPN/PPnBM validation (12% & 11/12 DPP), and statutory THR.",
   "author": {
     "name": "adamriofc"
   }

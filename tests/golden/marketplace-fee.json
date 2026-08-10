@@ -1,0 +1,44 @@
+[
+  {
+    "caseId": "MKPL-SHOPEE-STAR-FS",
+    "description": "Shopee Star 6% + free shipping extra 4%",
+    "input": { "sellingPrice": 100000, "platform": "shopee", "tier": "star", "usesFreeShipping": true, "adSpend": 0 },
+    "expected": { "adminFeeAmount": 6000, "freeShippingExtraFee": 4000, "netSellerPayout": 90000 }
+  },
+  {
+    "caseId": "MKPL-TOKOPEDIA-OFFICIAL",
+    "description": "Tokopedia Official Store 6.5%",
+    "input": { "sellingPrice": 1000000, "platform": "tokopedia", "tier": "official_store", "usesFreeShipping": false, "adSpend": 0 },
+    "expected": { "adminFeeAmount": 65000 }
+  },
+  {
+    "caseId": "MKPL-TIKTOK-STANDARD",
+    "description": "TikTok Shop standard 4.5%",
+    "input": { "sellingPrice": 1000000, "platform": "tiktok_shop", "tier": "standard", "usesFreeShipping": false, "adSpend": 0 },
+    "expected": { "adminFeeAmount": 45000 }
+  },
+  {
+    "caseId": "MKPL-FS-CAP",
+    "description": "Free shipping extra capped at Rp 10.000",
+    "input": { "sellingPrice": 10000000, "platform": "shopee", "tier": "star", "usesFreeShipping": true, "adSpend": 0 },
+    "expected": { "freeShippingExtraFee": 10000 }
+  },
+  {
+    "caseId": "MKPL-AD-SPEND",
+    "description": "Ad spend deducted from net payout",
+    "input": { "sellingPrice": 100000, "platform": "shopee", "tier": "star", "usesFreeShipping": false, "adSpend": 25000 },
+    "expected": { "adSpendBudget": 25000, "totalPlatformDeductions": 31000, "netSellerPayout": 69000 }
+  },
+  {
+    "caseId": "MKPL-ZERO-CLAMP",
+    "description": "Zero selling price: zero payout",
+    "input": { "sellingPrice": 0, "platform": "shopee", "tier": "star", "usesFreeShipping": true, "adSpend": 0 },
+    "expected": { "netSellerPayout": 0, "netMarginPercent": "0.00%" }
+  },
+  {
+    "caseId": "MKPL-FALLBACK-TIER",
+    "description": "Unregistered tier falls back to flat 5%",
+    "input": { "sellingPrice": 1000000, "platform": "shopee", "tier": "super_elite", "usesFreeShipping": false, "adSpend": 0 },
+    "expected": { "adminFeeAmount": 50000 }
+  }
+]

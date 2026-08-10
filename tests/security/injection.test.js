@@ -24,14 +24,17 @@ function runSecurityTests() {
 
     const content = fs.readFileSync(filePath, 'utf8');
 
-    // Assert that the file contains prompt isolation instructions outlined in SECURITY.md
-    const hasIsolationInstruction = content.includes('[SYSTEM INSTRUCTION]') || content.includes('[UNTRUSTED DATA PAYLOAD]');
-    
-    if (!hasIsolationInstruction) {
-      console.error(`❌ Security Violation: ${skillRelPath} does not implement untrusted payload delimiters or isolation rules.`);
+    // Assert that the file contains a COMPLETE prompt isolation boundary: the
+    // untrusted payload markers AND the closing [END PAYLOAD] delimiter
+    // (an open-ended marker without a close is a boundary-bypass vector).
+    const hasOpenMarker = content.includes('[UNTRUSTED DATA PAYLOAD]');
+    const hasCloseMarker = content.includes('[END PAYLOAD]');
+
+    if (!hasOpenMarker || !hasCloseMarker) {
+      console.error(`❌ Security Violation: ${skillRelPath} does not implement a CLOSED payload boundary (both '[UNTRUSTED DATA PAYLOAD]' and '[END PAYLOAD]' required).`);
       failures++;
     } else {
-      console.log(`✅ Security Verified: ${skillRelPath} implements prompt injection mitigation boundaries.`);
+      console.log(`✅ Security Verified: ${skillRelPath} implements a complete closed prompt injection mitigation boundary.`);
     }
   });
 

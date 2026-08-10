@@ -3,7 +3,7 @@ name: business-feasibility
 description: Structure Indonesian SME feasibility assessments across market, technical, financial, legal, and risk aspects with consistent financial figures.
 argument-hint: "<business_idea> <investment> <projections>"
 risk_level: MEDIUM
-rule_type: internal-policy
+rule_type: professional-standard
 ---
 
 # Business Feasibility Study

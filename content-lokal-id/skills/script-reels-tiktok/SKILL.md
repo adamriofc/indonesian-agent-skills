@@ -3,7 +3,7 @@ name: script-reels-tiktok
 description: Write highly engaging short-form video scripts (15-60s) complete with visual directions and audio overlays for TikTok/Reels.
 argument-hint: "<product_hook> <story_outline>"
 risk_level: LOW
-rule_type: commercial
+rule_type: commercial-policy
 ---
 
 # Short Video Script Writer

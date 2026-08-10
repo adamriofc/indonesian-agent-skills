@@ -35,10 +35,23 @@ const jsonReportPath = jsonReportArg ? (jsonReportArg.split('=')[1] ?? args[args
 const { calculatePPh21Monthly } = require(path.join(ROOT, 'engines/pph21-calculator'));
 const { calculateBpjs } = require(path.join(ROOT, 'engines/bpjs-calculator'));
 const { calculatePhk } = require(path.join(ROOT, 'engines/phk-calculator'));
+const { calculateThr } = require(path.join(ROOT, 'engines/thr-calculator'));
+const { calculatePPh23And26 } = require(path.join(ROOT, 'engines/pph23-26-calculator'));
+const { calculateUmkmFinalTax } = require(path.join(ROOT, 'engines/umkm-tax-calculator'));
+const { calculatePkwtCompensation } = require(path.join(ROOT, 'engines/pkwt-compensation-calculator'));
+const { auditPkwttStatus } = require(path.join(ROOT, 'engines/pkwtt-calculator'));
+const { compareRulesets } = require(path.join(ROOT, 'engines/regulatory-diff'));
+const { calculatePPh21GrossUp } = require(path.join(ROOT, 'engines/pph21-grossup-calculator'));
+const { calculateCorporateTax } = require(path.join(ROOT, 'engines/pph-badan-calculator'));
+const { auditTransferPricingThinCap } = require(path.join(ROOT, 'engines/transfer-pricing-engine'));
+const { calculatePpnAndPpnbm } = require(path.join(ROOT, 'engines/ppn-ppnbm-calculator'));
+const { calculateMarketplaceFee } = require(path.join(ROOT, 'engines/marketplace-fee-calculator'));
+const { calculateExitWaterfall } = require(path.join(ROOT, 'engines/term-sheet-waterfall'));
 
 function loadGolden(name) {
   const raw = fs.readFileSync(path.join(ROOT, 'tests/golden', `${name}.json`), 'utf8');
-  return JSON.parse(raw);
+  const data = JSON.parse(raw);
+  return Array.isArray(data) ? data : data.goldenCases;
 }
 
 function fmt(v) {
@@ -208,10 +221,122 @@ function runFinance(c) {
   return checks;
 }
 
+
+function runThr(c) {
+  const r = calculateThr(c.input.monthlyBaseSalary, c.input.fixedAllowance, c.input.tenureMonths);
+  return { isEligible: r.isEligible, statutoryThrPayout: r.statutoryThrPayout, monthlyBaseSalary: r.monthlyBaseSalary };
+}
+
+function runPph23And26(c) {
+  const r = calculatePPh23And26(c.input.grossAmount, c.input.type, c.input.hasNpwp, c.input.isTreaty, c.input.treatyRatePercent);
+  return {
+    taxType: r.taxType, taxWithheld: r.taxWithheld, netAmountReceived: r.netAmountReceived,
+    penaltyApplied: r.penaltyApplied, effectiveRatePercent: r.effectiveRatePercent, grossAmount: r.grossAmount
+  };
+}
+
+function runUmkm(c) {
+  const r = calculateUmkmFinalTax(c.input.grossRevenueYtd, c.input.currentMonthRevenue, c.input.taxpayerType, c.input.dateStr);
+  return { isEligible: r.isEligible, taxableRevenue: r.taxableRevenue, finalTaxDue: r.finalTaxDue, rulesetId: r.rulesetId };
+}
+
+function runPkwt(c) {
+  const r = calculatePkwtCompensation(c.input.monthlyWage, c.input.tenureMonths);
+  return {
+    isEligible: r.isEligible,
+    compensationPayout: r.statutoryCompensationPayout ?? r.compensationPayout ?? 0,
+    statutoryCompensationPayout: r.statutoryCompensationPayout,
+    formulaApplied: r.formulaApplied
+  };
+}
+
+function runPkwtt(c) {
+  const r = auditPkwttStatus(c.input);
+  return {
+    isConvertedToPkwttByLaw: r.isConvertedToPkwttByLaw,
+    effectiveContractStatus: r.effectiveContractStatus,
+    conversionTriggers: r.conversionTriggers,
+    probationAuditIsCompliant: r.probationAudit.isCompliant,
+    probationValidMonths: r.probationAudit.validProbationMonths,
+    hasViolations: r.violationsCount > 0
+  };
+}
+
+function runRegulatoryDiff(c) {
+  const r = compareRulesets(c.input.domain, c.input.from, c.input.to);
+  const eligibleChange = r.changes.find(ch => ch.field === 'eligible_taxpayers');
+  return {
+    domain: r.domain,
+    comparison: r.comparison,
+    effectiveTransitionDate: r.effectiveTransitionDate,
+    totalChanges: r.totalChanges,
+    totalChangesGreaterThanZero: r.totalChanges > 0,
+    removedEntities: eligibleChange ? eligibleChange.removedEntities : []
+  };
+}
+
+function runPph21GrossUp(c) {
+  const r = calculatePPh21GrossUp(c.input);
+  return {
+    grossUpTaxAllowance: r.grossUpTaxAllowance, taxableNatura: r.taxableNatura, exemptNatura: r.exemptNatura,
+    grossTakeHomePay: r.grossTakeHomePay, netTaxWithheld: r.netTaxWithheld, terCategory: r.terCategory
+  };
+}
+
+function runPphBadan(c) {
+  const r = calculateCorporateTax(c.input);
+  return {
+    appliedFacilityType: r.appliedFacilityType, totalCorporateTaxDue: r.totalCorporateTaxDue,
+    taxableIncome: r.taxableIncome, facilityTaxableIncome: r.facilityTaxableIncome, nonFacilityTaxableIncome: r.nonFacilityTaxableIncome
+  };
+}
+
+function runTransferPricing(c) {
+  const r = auditTransferPricingThinCap(c.input);
+  return {
+    actualDerRatio: r.actualDerRatio, isDerExceeded: r.isDerExceeded, maxAllowableDebt: r.maxAllowableDebt,
+    nonDeductibleInterestExpense: r.nonDeductibleInterestExpense, secondaryAdjustmentTaxAmount: r.secondaryAdjustmentTaxAmount
+  };
+}
+
+function runPpnPpnbm(c) {
+  const r = calculatePpnAndPpnbm(c.input);
+  return {
+    dppBase: r.dppBase, ppnAmount: r.ppnAmount, ppnbmAmount: r.ppnbmAmount, totalTaxes: r.totalTaxes,
+    effectivePpnBurdenPercent: r.effectivePpnBurdenPercent, ppnRatePercent: r.ppnRatePercent
+  };
+}
+
+function runMarketplaceFee(c) {
+  const r = calculateMarketplaceFee(c.input.sellingPrice, c.input.platform, c.input.tier, c.input.usesFreeShipping, c.input.adSpend);
+  return {
+    adminFeeAmount: r.adminFeeAmount, freeShippingExtraFee: r.freeShippingExtraFee, netSellerPayout: r.netSellerPayout,
+    netMarginPercent: r.netMarginPercent, adSpendBudget: r.adSpendBudget, totalPlatformDeductions: r.totalPlatformDeductions,
+    sellingPrice: r.sellingPrice
+  };
+}
+
+function runTermSheet(c) {
+  const r = calculateExitWaterfall(c.input);
+  return { totalInvestorPayout: r.totalInvestorPayout, commonShareholdersPayout: r.commonShareholdersPayout, remainingUnallocated: r.remainingUnallocated };
+}
+
 const DOMAINS = [
   { name: 'pph21', label: 'PPh 21 (TER PP 58/2023)', golden: 'pph21', run: runPph21 },
   { name: 'bpjs', label: 'BPJS (Perpres 64/2020 + PP 45/2015)', golden: 'bpjs', run: runBpjs },
   { name: 'phk', label: 'PHK (PP 35/2021)', golden: 'phk', run: runPhk },
+  { name: 'umkm', label: 'UMKM Final Tax (PP 55/2022 & PP 20/2026)', golden: 'umkm', run: runUmkm },
+  { name: 'thr', label: 'THR (Permenaker 6/2016)', golden: 'thr', run: runThr },
+  { name: 'pph23-26', label: 'PPh 23/26 (withholding & treaty)', golden: 'pph23-26', run: runPph23And26 },
+  { name: 'pkwt', label: 'PKWT Compensation (PP 35/2021)', golden: 'pkwt', run: runPkwt },
+  { name: 'pkwtt', label: 'PKWTT Audit & Conversion (PP 35/2021)', golden: 'pkwtt', run: runPkwtt },
+  { name: 'regulatory-diff', label: 'Regulatory Diff Engine', golden: 'regulatory-diff', run: runRegulatoryDiff },
+  { name: 'pph21-grossup', label: 'PPh 21 Gross-Up (PMK 66/2023)', golden: 'pph21-grossup', run: runPph21GrossUp },
+  { name: 'pph-badan', label: 'PPh Badan 22% & Pasal 31E', golden: 'pph-badan', run: runPphBadan },
+  { name: 'transfer-pricing', label: 'Thin Cap & TP Adjustment (PMK 172/2023)', golden: 'transfer-pricing', run: runTransferPricing },
+  { name: 'ppn-ppnbm', label: 'PPN 12% & PPnBM (UU HPP & PMK 131/2024)', golden: 'ppn-ppnbm', run: runPpnPpnbm },
+  { name: 'marketplace-fee', label: 'Marketplace Fee & Margin', golden: 'marketplace-fee', run: runMarketplaceFee },
+  { name: 'term-sheet', label: 'VC Term-Sheet Waterfall', golden: 'term-sheet', run: runTermSheet },
   { name: 'finance', label: 'Finance (8 deterministic engines)', golden: 'finance', run: runFinance },
 ];
 

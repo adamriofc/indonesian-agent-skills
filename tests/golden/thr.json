@@ -1,0 +1,38 @@
+[
+  {
+    "caseId": "THR-UNDER-1M",
+    "description": "Tenure below 1 month: not eligible (Permenaker 6/2016 Art. 2)",
+    "input": { "monthlyBaseSalary": 10000000, "fixedAllowance": 0, "tenureMonths": 0.8 },
+    "expected": { "isEligible": false, "statutoryThrPayout": 0 }
+  },
+  {
+    "caseId": "THR-EXACT-1M",
+    "description": "Exactly 1 month: (1/12) x monthly wage",
+    "input": { "monthlyBaseSalary": 12000000, "fixedAllowance": 0, "tenureMonths": 1 },
+    "expected": { "isEligible": true, "statutoryThrPayout": 1000000 }
+  },
+  {
+    "caseId": "THR-6M",
+    "description": "6 months continuous service: (6/12) x wage",
+    "input": { "monthlyBaseSalary": 12000000, "fixedAllowance": 0, "tenureMonths": 6 },
+    "expected": { "isEligible": true, "statutoryThrPayout": 6000000 }
+  },
+  {
+    "caseId": "THR-12M-FULL",
+    "description": "12 months: exactly 1 full monthly wage",
+    "input": { "monthlyBaseSalary": 12000000, "fixedAllowance": 0, "tenureMonths": 12 },
+    "expected": { "isEligible": true, "statutoryThrPayout": 12000000 }
+  },
+  {
+    "caseId": "THR-FIXED-ALLOWANCE",
+    "description": "Fixed allowance included in THR base: (6/12) x (salary + allowance)",
+    "input": { "monthlyBaseSalary": 12000000, "fixedAllowance": 3000000, "tenureMonths": 6 },
+    "expected": { "isEligible": true, "statutoryThrPayout": 7500000 }
+  },
+  {
+    "caseId": "THR-NEGATIVE-CLAMP",
+    "description": "Negative salary input clamps to zero base",
+    "input": { "monthlyBaseSalary": -10000000, "fixedAllowance": 0, "tenureMonths": 6 },
+    "expected": { "isEligible": true, "monthlyBaseSalary": 0, "statutoryThrPayout": 0 }
+  }
+]

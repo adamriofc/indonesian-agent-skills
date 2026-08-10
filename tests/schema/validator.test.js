@@ -52,6 +52,7 @@ function validate() {
   console.log("🔍 Running Dynamic Plugin & Skill Schema Validation...\n");
   let errors = 0;
   let totalSkills = 0;
+  const skillCountByPlugin = {};
 
   const rootDir = path.join(__dirname, '../..');
   const plugins = discoverPlugins(rootDir);
@@ -170,6 +171,7 @@ function validate() {
 
         totalSkills++;
       });
+      skillCountByPlugin[plugin] = skills.filter(s => fs.existsSync(path.join(skillsDir, s, 'SKILL.md'))).length;
     }
   });
 
@@ -187,9 +189,120 @@ function validate() {
       } else {
         console.log(`  Machine-readable skill registry verified (${registry.skills.length} registered skills).`);
       }
+
+      // Cross-field registry validation: every entry must resolve to a real skill file
+      const seenIds = new Set();
+      registry.skills.forEach(entry => {
+        const entryLabel = `registry entry "${entry.id || entry.name || '(unnamed)'}"`;
+
+        if (typeof entry.id !== 'string' || entry.id.trim() === '') {
+          console.error(`❌ Registry Violation: ${entryLabel} must have a non-empty string 'id'.`);
+          errors++;
+          return;
+        }
+        if (seenIds.has(entry.id)) {
+          console.error(`❌ Registry Violation: duplicate skill id "${entry.id}" in registry/index.json.`);
+          errors++;
+          return;
+        }
+        seenIds.add(entry.id);
+
+        if (entry.name !== entry.id) {
+          console.error(`❌ Registry Violation: ${entryLabel} has 'name' ("${entry.name}") that does not match its 'id' ("${entry.id}").`);
+          errors++;
+        }
+
+        if (typeof entry.plugin !== 'string' || !plugins.includes(entry.plugin)) {
+          console.error(`❌ Registry Violation: ${entryLabel} references unknown plugin "${entry.plugin}".`);
+          errors++;
+          return;
+        }
+
+        const skillFilePath = path.join(rootDir, entry.plugin, 'skills', entry.id, 'SKILL.md');
+        if (!fs.existsSync(skillFilePath)) {
+          console.error(`❌ Registry Violation: ${entryLabel} has no matching skill file at ${entry.plugin}/skills/${entry.id}/SKILL.md.`);
+          errors++;
+          return;
+        }
+
+        const content = fs.readFileSync(skillFilePath, 'utf8');
+        const parts = content.split('---');
+        if (parts.length < 3) {
+          console.error(`❌ Registry Violation: ${entryLabel} skill file has invalid frontmatter delimiters.`);
+          errors++;
+          return;
+        }
+        const frontmatter = parseYamlFrontmatter(parts[1]);
+
+        if (frontmatter.name !== entry.id) {
+          console.error(`❌ Registry Violation: ${entryLabel} frontmatter name ("${frontmatter.name}") does not match registry id.`);
+          errors++;
+        }
+        if (frontmatter.risk_level && frontmatter.risk_level !== entry.risk_level) {
+          console.error(`❌ Registry Violation: ${entryLabel} frontmatter risk_level ("${frontmatter.risk_level}") does not match registry entry ("${entry.risk_level}").`);
+          errors++;
+        }
+        if (frontmatter.rule_type && frontmatter.rule_type !== entry.rule_type) {
+          console.error(`❌ Registry Violation: ${entryLabel} frontmatter rule_type ("${frontmatter.rule_type}") does not match registry entry ("${entry.rule_type}").`);
+          errors++;
+        }
+        if (frontmatter.quality_tier && frontmatter.quality_tier !== entry.quality_tier) {
+          console.error(`❌ Registry Violation: ${entryLabel} frontmatter quality_tier ("${frontmatter.quality_tier}") does not match registry entry ("${entry.quality_tier}").`);
+          errors++;
+        }
+
+        if (entry.engine && typeof entry.engine === 'string') {
+          if (!fs.existsSync(path.join(rootDir, entry.engine))) {
+            console.error(`❌ Registry Violation: ${entryLabel} references missing engine file "${entry.engine}".`);
+            errors++;
+          }
+        } else if (entry.engine !== null && entry.engine !== undefined) {
+          console.error(`❌ Registry Violation: ${entryLabel} 'engine' must be a string path or null. Got: ${JSON.stringify(entry.engine)}`);
+          errors++;
+        }
+      });
     } catch (e) {
       console.error(`❌ Machine-Readable Registry JSON error in ${registryPath}: ${e.message}`);
       errors++;
+    }
+  }
+
+  // Validate README plugin inventory counts against discovered skills (prevents stale catalog)
+  const readmePath = path.join(rootDir, 'README.md');
+  if (fs.existsSync(readmePath)) {
+    const readme = fs.readFileSync(readmePath, 'utf8');
+    const countByPlugin = {};
+    plugins.forEach(p => { countByPlugin[p] = 0; });
+
+    // ### N. `plugin-name`: Title (X Skills)
+    const inventoryRegex = /^### \d+\. `([a-z0-9-]+)`:[^(]*\((\d+) Skills?\)$/gm;
+    let match;
+    while ((match = inventoryRegex.exec(readme)) !== null) {
+      const pluginName = match[1];
+      const claimedCount = parseInt(match[2], 10);
+      if (!countByPlugin.hasOwnProperty(pluginName)) {
+        console.error(`❌ README Inventory Violation: section lists unknown plugin "${pluginName}".`);
+        errors++;
+        continue;
+      }
+      countByPlugin[pluginName]++;
+      if (claimedCount !== skillCountByPlugin[pluginName]) {
+        console.error(`❌ README Inventory Violation: ${pluginName} claims ${claimedCount} skills but ${skillCountByPlugin[pluginName]} discovered on disk.`);
+        errors++;
+      }
+    }
+    const listed = Object.keys(countByPlugin).filter(p => !countByPlugin[p]);
+    if (listed.length > 0) {
+      console.error(`❌ README Inventory Violation: no inventory section found for plugin(s): ${listed.join(', ')}.`);
+      errors++;
+    }
+    const totalClaimMatch = readme.match(/\((\d+) Skills Across (\d+) Plugins\)/);
+    if (totalClaimMatch) {
+      const claimedTotal = parseInt(totalClaimMatch[1], 10);
+      if (claimedTotal !== totalSkills) {
+        console.error(`❌ README Inventory Violation: README claims ${claimedTotal} total skills, but ${totalSkills} discovered on disk.`);
+        errors++;
+      }
     }
   }
 

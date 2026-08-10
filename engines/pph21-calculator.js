@@ -35,6 +35,14 @@ function parseMaxLimit(val) {
   return val === 'Infinity' ? Infinity : Number(val);
 }
 
+// Deterministic non-negative Rupiah clamp: rejects NaN/Infinity/negative inputs
+// so hostile or malformed values can never propagate into tax math.
+function clampRupiah(val) {
+  const n = Number(val);
+  return Number.isFinite(n) ? Math.max(0, n) : 0;
+}
+
+
 function getTerCategory(ptkp, pphRules) {
   const ptkpUpper = (ptkp || 'TK/0').toUpperCase().trim();
   if (pphRules.ter_categories.A.includes(ptkpUpper)) return { category: 'A', table: pphRules.ter_tables.A };
@@ -45,7 +53,7 @@ function getTerCategory(ptkp, pphRules) {
 
 // Monthly TER Calculation (Jan-Nov)
 function calculatePPh21Monthly(grossSalary, ptkpStatus = 'TK/0', taxpayerIdentity = true, dateStr) {
-  const salary = Math.max(0, Number(grossSalary) || 0);
+  const salary = clampRupiah(grossSalary);
   const activeDateStr = dateStr || '2026-03-01';
   const pphRules = getRulesForDate(activeDateStr);
   const { category, table } = getTerCategory(ptkpStatus, pphRules);
@@ -123,12 +131,12 @@ function calculateArticle17AnnualTax(netTaxableIncome, dateStr) {
 function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'TK/0', janToNovTaxWithheld = 0, monthlyJhtEmployeeDeduction = 0, taxpayerIdentity = true, dateStr) {
   const activeDateStr = dateStr || '2026-03-01';
   const pphRules = getRulesForDate(activeDateStr);
-  const annualGross = Math.max(0, Number(annualGrossIncome) || 0);
+  const annualGross = clampRupiah(annualGrossIncome);
   const ptkpAmount = pphRules.ptkp_thresholds[ptkpStatus.toUpperCase()] || pphRules.ptkp_thresholds['TK/0'];
 
   const calculatedBiayaJabatan = Math.min(annualGross * pphRules.biaya_jabatan.rate, pphRules.biaya_jabatan.annual_max);
   
-  const annualJhtDeduction = Math.max(0, Number(monthlyJhtEmployeeDeduction) || 0) * 12;
+  const annualJhtDeduction = clampRupiah(monthlyJhtEmployeeDeduction) * 12;
   const totalDeductions = calculatedBiayaJabatan + annualJhtDeduction;
 
   const netAnnualIncome = Math.max(0, annualGross - totalDeductions);
@@ -146,7 +154,7 @@ function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'T
     totalAnnualTax = Math.round(totalAnnualTax * pphRules.non_npwp_penalty_rate);
   }
 
-  const decTaxToWithhold = Math.max(0, totalAnnualTax - Number(janToNovTaxWithheld));
+  const decTaxToWithhold = Math.max(0, totalAnnualTax - clampRupiah(janToNovTaxWithheld));
 
   return {
     annualGrossIncome: annualGross,
@@ -157,7 +165,7 @@ function calculatePPh21DecemberReconciliation(annualGrossIncome, ptkpStatus = 'T
     netAnnualIncome,
     pkp,
     totalAnnualTaxArt17: totalAnnualTax,
-    janToNovTaxWithheld: Number(janToNovTaxWithheld),
+    janToNovTaxWithheld: clampRupiah(janToNovTaxWithheld),
     decemberTaxWithheld: decTaxToWithhold,
     hasNpwp: isNPWPValid,
     calculationDate: activeDateStr,

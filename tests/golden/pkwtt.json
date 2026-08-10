@@ -1,0 +1,32 @@
+[
+  {
+    "caseId": "PKWTT-VALID-3M",
+    "description": "Valid PKWTT with 3-month probation: compliant, no conversion",
+    "input": { "monthlyWage": 10000000, "probationMonths": 3, "minimumWage": 5000000, "contractType": "pkwtt" },
+    "expected": { "isConvertedToPkwttByLaw": false, "probationAuditIsCompliant": true, "effectiveContractStatus": "PKWTT (Permanent Employment)" }
+  },
+  {
+    "caseId": "PKWT-PROBATION-CONVERSION",
+    "description": "PKWT with probation: auto-converts to PKWTT",
+    "input": { "monthlyWage": 10000000, "probationMonths": 2, "contractType": "pkwt" },
+    "expected": { "isConvertedToPkwttByLaw": true, "conversionTriggers": ["PROBATION_IN_PKWT", "PERMANENT_JOB_IN_PKWT"] }
+  },
+  {
+    "caseId": "PKWT-PERMANENT-JOB",
+    "description": "PKWT for permanent job nature: auto-converts to PKWTT",
+    "input": { "monthlyWage": 10000000, "jobType": "permanent", "contractType": "pkwt" },
+    "expected": { "isConvertedToPkwttByLaw": true, "conversionTriggers": ["PERMANENT_JOB_IN_PKWT"] }
+  },
+  {
+    "caseId": "PKWT-TENURE-61",
+    "description": "PKWT tenure above 60 months: auto-converts to PKWTT",
+    "input": { "monthlyWage": 10000000, "totalTenureMonths": 61, "contractType": "pkwt" },
+    "expected": { "isConvertedToPkwttByLaw": true, "conversionTriggers": ["PERMANENT_JOB_IN_PKWT", "TENURE_EXCEEDED_5_YEARS"] }
+  },
+  {
+    "caseId": "PKWTT-PROBATION-4M",
+    "description": "PKWTT probation above 3 months: violation flagged",
+    "input": { "monthlyWage": 10000000, "probationMonths": 4, "contractType": "pkwtt" },
+    "expected": { "isConvertedToPkwttByLaw": false, "probationValidMonths": 3, "hasViolations": true }
+  }
+]

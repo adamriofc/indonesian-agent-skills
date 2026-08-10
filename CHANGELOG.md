@@ -2,7 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
-## [2.2.0] - 2026-08-10
+## [2.2.1] - 2026-08-10
+
+### Fixed & Hardened
+- **Metadata & Catalog Sync**: Updated `tax-payroll-id/.claude-plugin/plugin.json` to rate-agnostic PPN/PPnBM description; corrected tax-payroll-id inventory count (18 skills) in `README.md`.
+- **Registry Cross-Validation**: Upgraded `tests/schema/validator.test.js` to cross-validate registry IDs, plugins, skill paths, frontmatter metadata (`risk_level`, `rule_type`, `quality_tier`), engine paths, and README inventory section counts (0 schema or cross-field errors across all 67 skills).
+- **Closed Security Boundaries**: Replaced dangling injection isolation blocks across ingestion skills (`contract-reviewer`, `pdp-compliance`, `phk-calculator`, `analisis-kompetitor-marketplace`, `somasi-draft-id`, `oss-kbli-navigator`, `haki-trademark-check`) with complete, closed `[SYSTEM INSTRUCTION] ... [UNTRUSTED DATA PAYLOAD] ... [END PAYLOAD]` runtime templates; added delimiter-break protection and adversarial fixtures (`fixtures/adversarial/`).
+- **23-Engine Golden Benchmark**: Expanded deterministic benchmark harness (`scripts/benchmark.js`) and static golden corpus (`tests/golden/`) to **78 cases across all 23 engine modules** (16 domains) at 100% accuracy and stable determinism.
+- **Engine Coercion Safety**: Hardened `engines/pph21-calculator.js` to clamp `NaN`/`Infinity`/hostile values to zero Rupiah balance without crashing or leaking numeric anomalies.
+- **CI Dependency Upgrades**: Merged Dependabot PRs for GitHub Actions workflows (`actions/checkout` v7, `actions/setup-node` v7; Node 20/22/24 matrix green).
 
 ### Added
 - **5 Ultra-Advanced Corporate & Enterprise Engines**:

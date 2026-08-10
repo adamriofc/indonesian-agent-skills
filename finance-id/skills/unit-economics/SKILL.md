@@ -3,7 +3,7 @@ name: unit-economics
 description: Model customer-level economics — LTV, CAC, contribution margin per unit, and the LTV:CAC heuristic — for Indonesian digital and D2C businesses.
 argument-hint: "<arppu> <churn> <cac>"
 risk_level: LOW
-rule_type: internal-policy
+rule_type: professional-standard
 ---
 
 # Unit Economics

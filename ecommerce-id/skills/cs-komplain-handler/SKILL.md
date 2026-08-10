@@ -3,7 +3,7 @@ name: cs-komplain-handler
 description: Draft empathetic, professional, and brand-aligned customer support responses for negative reviews and order issues.
 argument-hint: "<customer_review_or_complaint> <issue_type_damaged_delayed_missing>"
 risk_level: LOW
-rule_type: commercial
+rule_type: commercial-policy
 ---
 
 # Customer Service Complaint Handler

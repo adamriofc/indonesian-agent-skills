@@ -1,0 +1,50 @@
+[
+  {
+    "caseId": "PKWT-ZERO-TENURE",
+    "description": "Zero tenure: not eligible",
+    "input": { "monthlyWage": 10000000, "tenureMonths": 0 },
+    "expected": { "isEligible": false, "compensationPayout": 0 }
+  },
+  {
+    "caseId": "PKWT-FRACTIONAL-0.5",
+    "description": "Fractional tenure below 1 month: not eligible",
+    "input": { "monthlyWage": 10000000, "tenureMonths": 0.5 },
+    "expected": { "isEligible": false }
+  },
+  {
+    "caseId": "PKWT-EXACT-1",
+    "description": "Exactly 1 month: (1/12) x wage",
+    "input": { "monthlyWage": 12000000, "tenureMonths": 1 },
+    "expected": { "isEligible": true, "statutoryCompensationPayout": 1000000 }
+  },
+  {
+    "caseId": "PKWT-6M",
+    "description": "6 months: (6/12) x wage",
+    "input": { "monthlyWage": 12000000, "tenureMonths": 6 },
+    "expected": { "isEligible": true, "statutoryCompensationPayout": 6000000 }
+  },
+  {
+    "caseId": "PKWT-12M",
+    "description": "Exactly 12 months: 1 full monthly wage",
+    "input": { "monthlyWage": 12000000, "tenureMonths": 12 },
+    "expected": { "statutoryCompensationPayout": 12000000, "formulaApplied": "1 x Monthly Wage" }
+  },
+  {
+    "caseId": "PKWT-13M",
+    "description": "13 months stays proportional: 13/12 x wage",
+    "input": { "monthlyWage": 12000000, "tenureMonths": 13 },
+    "expected": { "statutoryCompensationPayout": 13000000 }
+  },
+  {
+    "caseId": "PKWT-5-YEARS",
+    "description": "60 months: 5x wage",
+    "input": { "monthlyWage": 12000000, "tenureMonths": 60 },
+    "expected": { "isEligible": true, "statutoryCompensationPayout": 60000000 }
+  },
+  {
+    "caseId": "PKWT-ROUNDING",
+    "description": "Non-divisible wage rounds to nearest whole Rupiah",
+    "input": { "monthlyWage": 9970000, "tenureMonths": 5 },
+    "expected": { "statutoryCompensationPayout": 4154167 }
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "caseId": "TS-SERIES-B-A",
+    "description": "Series B participating + Series A non-participating: 52B investors / 48B common",
+    "input": {
+      "exitValuation": 100000000000,
+      "commonOwnershipPercent": 0.65,
+      "investorTiers": [
+        { "tierName": "Series B", "investmentAmount": 20000000000, "preferenceMultiple": 1.0, "isParticipating": true, "capMultiple": null, "ownershipPercent": 0.15, "seniorityOrder": 1 },
+        { "tierName": "Series A", "investmentAmount": 10000000000, "preferenceMultiple": 1.0, "isParticipating": false, "capMultiple": null, "ownershipPercent": 0.20, "seniorityOrder": 2 }
+      ]
+    },
+    "expected": { "totalInvestorPayout": 52000000000, "commonShareholdersPayout": 48000000000, "remainingUnallocated": 0 }
+  },
+  {
+    "caseId": "TS-SINGLE-A",
+    "description": "Single Series A non-participating: preference only",
+    "input": {
+      "exitValuation": 100000000000,
+      "commonOwnershipPercent": 0.8,
+      "investorTiers": [
+        { "tierName": "Series A", "investmentAmount": 10000000000, "preferenceMultiple": 1.0, "isParticipating": false, "capMultiple": null, "ownershipPercent": 0.20, "seniorityOrder": 1 }
+      ]
+    },
+    "expected": { "totalInvestorPayout": 20000000000, "commonShareholdersPayout": 80000000000, "remainingUnallocated": 0 }
+  }
+]

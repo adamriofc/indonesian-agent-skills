@@ -3,7 +3,7 @@ name: tokopedia-seo-optimizer
 description: Optimize product titles and listing metadata to achieve high visibility in search rankings.
 argument-hint: "<brand_name> <product_type> <specifications> <target_keywords>"
 risk_level: LOW
-rule_type: commercial
+rule_type: commercial-policy
 ---
 
 # Tokopedia & Shopee Title Formula Optimizer

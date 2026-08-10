@@ -1,0 +1,26 @@
+[
+  {
+    "caseId": "BADAN-SMALL-FULL-50",
+    "description": "Turnover <= 4.8B: full 50% discount (11% effective)",
+    "input": { "grossTurnover": 2000000000, "commercialNetProfit": 500000000, "positiveFiscalAdjustments": 0 },
+    "expected": { "appliedFacilityType": "FULL_50_PERCENT_DISCOUNT", "totalCorporateTaxDue": 55000000 }
+  },
+  {
+    "caseId": "BADAN-BOUNDARY-4.8B",
+    "description": "Exact 4.8B turnover boundary: full facility retained",
+    "input": { "grossTurnover": 4800000000, "commercialNetProfit": 1000000000, "positiveFiscalAdjustments": 0 },
+    "expected": { "appliedFacilityType": "FULL_50_PERCENT_DISCOUNT", "totalCorporateTaxDue": 110000000 }
+  },
+  {
+    "caseId": "BADAN-MID-PROPORTIONAL",
+    "description": "12B turnover: proportional Pasal 31E facility split",
+    "input": { "grossTurnover": 12000000000, "commercialNetProfit": 2000000000, "positiveFiscalAdjustments": 400000000 },
+    "expected": { "appliedFacilityType": "PROPORTIONAL_PASAL_31E", "taxableIncome": 2400000000, "facilityTaxableIncome": 960000000, "nonFacilityTaxableIncome": 1440000000, "totalCorporateTaxDue": 422400000 }
+  },
+  {
+    "caseId": "BADAN-BIG-FULL-RATE",
+    "description": "Turnover above 50B: no facility, full 22% rate",
+    "input": { "grossTurnover": 60000000000, "commercialNetProfit": 10000000000, "positiveFiscalAdjustments": 0 },
+    "expected": { "appliedFacilityType": "NO_FACILITY_FULL_RATE", "taxableIncome": 10000000000, "totalCorporateTaxDue": 2200000000 }
+  }
+]

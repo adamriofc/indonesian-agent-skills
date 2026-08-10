@@ -1,0 +1,14 @@
+[
+  {
+    "caseId": "DIFF-UMKM-2022-2026",
+    "description": "UMKM PP 55/2022 to PP 20/2026 transition diff",
+    "input": { "domain": "umkm", "from": "UMKM-2022", "to": "UMKM-2026" },
+    "expected": { "domain": "umkm", "comparison": "UMKM-2022 ➔ UMKM-2026", "effectiveTransitionDate": "2026-04-22", "totalChanges": 4, "removedEntities": ["corporate", "pt", "cv", "firma"] }
+  },
+  {
+    "caseId": "DIFF-BPJS-2025-2026",
+    "description": "BPJS JP wage cap transition diff (SE B/726/022025)",
+    "input": { "domain": "bpjs", "from": "BPJS-2025", "to": "BPJS-2026" },
+    "expected": { "domain": "bpjs", "effectiveTransitionDate": "2026-03-01", "totalChangesGreaterThanZero": true }
+  }
+]

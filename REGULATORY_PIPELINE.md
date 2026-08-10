@@ -82,7 +82,7 @@ Never delete or recreate an existing release tag (`gh release delete`) in produc
 
 ## 5. Post-Release Verification (Checklist)
 
-- [ ] `npm test` passes on Node 18, 20, 22 (GitHub Actions matrix confirmed green)
+- [x] `npm test` passes on Node 20, 22, 24 (GitHub Actions matrix confirmed green)
 - [ ] `sha256sum` of each JSON equals `RULESET_CHECKSUMS` entry in `integrity.js`
 - [ ] `PROVENANCE.md` Rule Lineage Register updated with new Rule ID row
 - [ ] `REGULATORY_CHANGELOG.md` updated with new entry (date, regulation, scope, status)

@@ -1,0 +1,32 @@
+[
+  {
+    "caseId": "PPN-IMPORT-LUXURY-50",
+    "description": "Import luxury goods: 12% PPN on CIF+duty base, 50% PPnBM",
+    "input": { "transactionType": "import", "cifValueIdr": 1000000000, "customsDutyAmount": 200000000, "ppnbmRatePercent": 50 },
+    "expected": { "dppBase": 1200000000, "ppnAmount": 144000000, "ppnbmAmount": 600000000, "totalTaxes": 744000000 }
+  },
+  {
+    "caseId": "PPN-STANDARD-DOMESTIC",
+    "description": "Standard domestic sale: 12% PPN on selling price",
+    "input": { "transactionType": "standard", "sellingPriceOrDpp": 30000000, "ppnbmRatePercent": 0 },
+    "expected": { "dppBase": 30000000, "ppnAmount": 3600000, "ppnbmAmount": 0, "totalTaxes": 3600000, "effectivePpnBurdenPercent": "12.00%" }
+  },
+  {
+    "caseId": "PPN-DPP-NILAI-LAIN",
+    "description": "Other Basis DPP: 11/12 fraction gives effective 11% burden",
+    "input": { "transactionType": "dpp_nilai_lain", "sellingPriceOrDpp": 12000000, "ppnbmRatePercent": 0 },
+    "expected": { "dppBase": 11000000, "ppnAmount": 1320000, "effectivePpnBurdenPercent": "11.00%" }
+  },
+  {
+    "caseId": "PPN-DOMESTIC-LUXURY-20",
+    "description": "Domestic luxury 20% PPnBM: tax computed on DPP",
+    "input": { "transactionType": "standard", "sellingPriceOrDpp": 50000000, "ppnbmRatePercent": 20 },
+    "expected": { "dppBase": 50000000, "ppnAmount": 6000000, "ppnbmAmount": 10000000, "totalTaxes": 16000000 }
+  },
+  {
+    "caseId": "PPN-EXPORT-ZERO",
+    "description": "Export: 0% PPN rate, zero tax amounts",
+    "input": { "transactionType": "export_zero", "sellingPriceOrDpp": 100000000, "ppnbmRatePercent": 0 },
+    "expected": { "dppBase": 100000000, "ppnRatePercent": "0.00%", "ppnAmount": 0 }
+  }
+]

@@ -3,7 +3,7 @@ name: whatsapp-broadcast
 description: Generate high-conversion WhatsApp blast and broadcast message copy that avoids trigger-words which lead to account blocks.
 argument-hint: "<promo_angle> <product_features> <cta_link>"
 risk_level: LOW
-rule_type: commercial
+rule_type: commercial-policy
 ---
 
 # WhatsApp Broadcast Copywriter

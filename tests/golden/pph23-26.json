@@ -1,0 +1,50 @@
+[
+  {
+    "caseId": "P23-SERVICE-NPWP",
+    "description": "PPh 23 service 2% with NPWP",
+    "input": { "grossAmount": 10000000, "type": "service", "hasNpwp": true },
+    "expected": { "taxType": "PPh 23", "taxWithheld": 200000, "netAmountReceived": 9800000, "penaltyApplied": false }
+  },
+  {
+    "caseId": "P23-SERVICE-NO-NPWP",
+    "description": "PPh 23 service without NPWP: 100% penalty doubles rate to 4%",
+    "input": { "grossAmount": 10000000, "type": "service", "hasNpwp": false },
+    "expected": { "taxWithheld": 400000, "penaltyApplied": true, "effectiveRatePercent": "4.00%" }
+  },
+  {
+    "caseId": "P23-ROYALTY",
+    "description": "PPh 23 royalty 15% with NPWP",
+    "input": { "grossAmount": 10000000, "type": "royalty", "hasNpwp": true },
+    "expected": { "taxWithheld": 1500000, "effectiveRatePercent": "15.00%" }
+  },
+  {
+    "caseId": "P26-OFFSHORE-DEFAULT",
+    "description": "PPh 26 offshore service default 20%",
+    "input": { "grossAmount": 50000000, "type": "offshore_service", "hasNpwp": false, "isTreaty": false, "treatyRatePercent": null },
+    "expected": { "taxType": "PPh 26", "taxWithheld": 10000000, "penaltyApplied": false }
+  },
+  {
+    "caseId": "P26-TREATY-10",
+    "description": "PPh 26 treaty (DGT form) 10% rate",
+    "input": { "grossAmount": 50000000, "type": "offshore_service", "hasNpwp": false, "isTreaty": true, "treatyRatePercent": 10 },
+    "expected": { "taxWithheld": 5000000, "effectiveRatePercent": "10.00%" }
+  },
+  {
+    "caseId": "P23-ROUNDING",
+    "description": "Fractional Rupiah rounds at withholding level",
+    "input": { "grossAmount": 33333333, "type": "service", "hasNpwp": true },
+    "expected": { "taxWithheld": 666667 }
+  },
+  {
+    "caseId": "P23-ZERO-CLAMP",
+    "description": "Zero gross clamps to zero tax",
+    "input": { "grossAmount": 0, "type": "service", "hasNpwp": true },
+    "expected": { "taxWithheld": 0, "netAmountReceived": 0 }
+  },
+  {
+    "caseId": "P23-NEGATIVE-CLAMP",
+    "description": "Negative gross clamps to zero",
+    "input": { "grossAmount": -5000000, "type": "service", "hasNpwp": true },
+    "expected": { "grossAmount": 0, "taxWithheld": 0 }
+  }
+]
