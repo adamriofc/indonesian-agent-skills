@@ -91,7 +91,7 @@ All rules listed above carry status `VERIFIED` as of 2026-08-10. Active statutor
 2. **BPJS Ketenagakerjaan SEs are not published centrally as digital text**; third-party mirrors are used (`SECONDARY_MIRROR`) and their content is compared against official releases per branch office.
 3. **MA Registry (KUHPerdata) and DJKI (UU 20/2016) entries block automated clients** (HTTP 403 anti-bot). Entries were verified manually via a human browser; links still point to official authorities.
 4. **Perpres 59/2024** (limited amendments to health provisions) is in the review pipeline; current employer rates and wage caps still reference Perpres 64/2020. See `REGULATORY_PIPELINE.md`.
-5. **Not notarization**: the SHA-256 checksum binds repository file content, not the issuer's digital signature. Issuer integrity is maintained through `CONTRIBUTING.md` (review board) and the regulatory pipeline.
+5. **Not notarization**: the SHA-256 checksum binds repository file content, not the issuer's digital signature. Issuer integrity is maintained through internal review checklist (`verified_by: "Repository Maintainer — adamriofc (Internal Review Checklist)"`) and the regulatory pipeline.
 6. **Accounting standards are not positive law**: PSAK/SAK EMKM (register Section 6) are professional standards issued by IAI; the finance formulas in the engines are standard math not bound to standard amendments. PSAK amendments are tracked through the issue/review pipeline, not runtime rulesets. The `SAK-IAI` page returned 404 for automated clients at verification time (the parent domain was verified live); entries are marked `OFFICIAL_PAGE` + verified manually.
 
 ---

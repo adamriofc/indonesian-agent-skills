@@ -4,6 +4,31 @@ This log tracks statutory changes, gazette updates, and their impact on calculat
 
 ---
 
+## 2026-08-10 — Version 2.0.0 Release (Finance Core, PP 20/2026 & PPN 12% Updates)
+
+### PPh Final UMKM & PP 20/2026 Amendment (`tax-payroll-id`)
+* **Active Statutes**: PP No. 55/2022 (`UMKM-2022`) & PP No. 20/2026 (`UMKM-2026`, effective 2026-04-22).
+* **Engine Implementation**: `engines/umkm-tax-calculator.js`.
+* **Ruleset**: `engines/rules/umkm.json`.
+* **Features**:
+  * PPh Final 0.5% rate restricted to eligible entities under PP 20/2026: Orang Pribadi (OP), Perseroan Perorangan (PT Perorangan), and Koperasi.
+  * General Corporate PT / CV / Firma marked **NOT Eligible** under `UMKM-2026` (requires general corporate PPh).
+  * Rp 500M non-taxable threshold preserved exclusively for OP.
+  * Maximum Rp 4.8 Billion gross turnover ceiling enforced (over Rp 4.8B renders taxpayer ineligible for final tax).
+
+### PPN 12% & Coretax Invoice Audit (`tax-payroll-id`)
+* **Active Statutes**: UU No. 7/2021 (HPP), PMK No. 131/2024, PER-01/PJ/2025, PER-11/PJ/2025.
+* **Skill Implementation**: `tax-payroll-id/skills/efaktur-helper/SKILL.md`.
+* **Features**:
+  * PPN 12% statutory rate and 11/12 DPP Nilai Lain effective 11% burden calculation (`12% x 11/12 x DPP`).
+  * Updated DJP Coretax & e-Faktur transaction codes (01, 02, 03, 04, 07, 08).
+
+### Business Finance & Accounting Core (`finance-id`)
+* **8 Deterministic Math Engines**: `engines/break-even.js`, `depreciation.js`, `npv.js`, `irr.js`, `loan-amortization.js`, `financial-ratios.js`, `working-capital.js`, `eoq.js`.
+* **12 Agent Skills**: `accounting-basics`, `break-even-analysis`, `budgeting-forecasting`, `business-feasibility`, `capital-budgeting`, `cash-flow-analysis`, `cost-accounting`, `financial-modeling`, `financial-ratio-analysis`, `financial-statements`, `unit-economics`, `working-capital`.
+
+---
+
 ## 2026-08-10 — Version 1.0.0 Release (Expansion to 42 Skills & 8 Engines)
 
 ### PPh 23 / 26 Withholding & PPh Final UMKM (`tax-payroll-id`)

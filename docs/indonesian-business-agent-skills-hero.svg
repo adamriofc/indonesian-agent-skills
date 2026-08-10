@@ -38,7 +38,7 @@
     <!-- Stat 4 -->
     <g transform="translate(690, 0)">
       <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.5">RULESET INTEGRITY</text>
-      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#A78BFA">SHA-256 Signed</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#A78BFA">SHA-256 Integrity</text>
     </g>
 
     <!-- Stat 5 -->

@@ -2,7 +2,7 @@
 
 *Give AI agents a business brain for Indonesia.*
 
-**Legal, tax, finance, HR, e-commerce, and content — grounded in Indonesian rules, workflows, and deterministic engines.**
+**Open-source Indonesian business intelligence for AI agents — combining regulatory-grounded skills, temporal rulesets, deterministic engines, and auditable provenance.**
 
 <p align="center">
   <img src="docs/indonesian-business-agent-skills-hero.svg" alt="Indonesian Business Agent Skills Banner" width="100%">
@@ -141,39 +141,49 @@ Compatibility classes (audit-grade, no overclaim):
 
 ## 🛠️ Installation & Setup Guide
 
-### 1. OpenWork Desktop & Cloud
-OpenWork registers the plugins upon adding the repository:
+### 1. Universal Agent Skills CLI (Frictionless / Recommended)
+Install skills directly across any supported agent framework (Claude Code, OpenCode, Codex, Cursor, Antigravity) using `npx`:
+```bash
+# Install all skills across the repository
+npx skills add adamriofc/indonesian-business-agent-skills
+
+# Selective installation by agent platform or skill domain
+npx skills add adamriofc/indonesian-business-agent-skills --agent claude-code
+npx skills add adamriofc/indonesian-business-agent-skills --skill pph21-calculator
+```
+
+### 2. Claude Code Marketplace (Plugin Integration)
+Register the repository as a marketplace source and install individual plugins:
+```bash
+# Add the repository as a plugin marketplace source
+claude plugin marketplace add adamriofc/indonesian-business-agent-skills
+
+# Install individual plugins from the marketplace
+claude plugin install legal-id@indonesian-business-agent-skills
+claude plugin install tax-payroll-id@indonesian-business-agent-skills
+claude plugin install finance-id@indonesian-business-agent-skills
+```
+
+### 3. Portable Agent Skills Standard (.agents / .opencode / .cursor)
+For native skill discovery without plugins, link or copy skills to the canonical `.agents/skills/` directory:
+```bash
+# Canonical cross-agent skills directory
+mkdir -p .agents/skills
+cp -r legal-id/skills/* .agents/skills/
+cp -r tax-payroll-id/skills/* .agents/skills/
+cp -r finance-id/skills/* .agents/skills/
+
+# OpenCode & Cursor native paths
+mkdir -p .opencode/skills .cursor/skills
+cp -r .agents/skills/* .opencode/skills/
+cp -r .agents/skills/* .cursor/skills/
+```
+
+### 4. OpenWork Desktop & Cloud
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. The 6 plugins and 54 skills will activate automatically in your workspace.
-
-### 2. OpenCode CLI
-Install the plugins directly from your terminal:
-```bash
-opencode plugins add adamriofc/indonesian-business-agent-skills
-```
-
-### 3. Claude Code (CLI)
-Link the skills directory to Claude Code config context:
-```bash
-claude plugins add adamriofc/indonesian-business-agent-skills
-```
-
-### 4. Cursor IDE
-To instruct Cursor agent to use these rules, copy `.cursorrules` configurations to your project root:
-```bash
-mkdir -p .cursorrules.d
-cp -r $PWD/legal-id/skills/ .cursorrules.d/
-```
-
-### 5. VS Code Agent (Copilot / Cline / Roo Code)
-Configure VS Code system instructions by adding the path to your settings:
-```json
-{
-  "roo-code.systemPromptPath": "/absolute/path/to/indonesian-business-agent-skills/legal-id/skills/contract-reviewer/SKILL.md"
-}
-```
+4. The 6 plugins and 54 skills activate automatically.
 
 ---
 

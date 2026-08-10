@@ -1,31 +1,35 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "indonesian-business-agent-skills",
-  "owner": "adamriofc",
-  "description": "Production-oriented AI domain-intelligence infrastructure for Indonesian legal, tax, HR, finance, e-commerce, and content operations.",
+  "owner": {
+    "name": "adamriofc",
+    "url": "https://github.com/adamriofc"
+  },
+  "description": "Open-source Indonesian business intelligence, regulatory, tax, legal, HR, finance, and commerce skills for AI agents.",
   "plugins": [
     {
       "name": "legal-id",
-      "path": "./legal-id"
+      "source": "./legal-id"
     },
     {
       "name": "tax-payroll-id",
-      "path": "./tax-payroll-id"
+      "source": "./tax-payroll-id"
     },
     {
       "name": "hr-id",
-      "path": "./hr-id"
+      "source": "./hr-id"
     },
     {
       "name": "finance-id",
-      "path": "./finance-id"
+      "source": "./finance-id"
     },
     {
       "name": "ecommerce-id",
-      "path": "./ecommerce-id"
+      "source": "./ecommerce-id"
     },
     {
       "name": "content-lokal-id",
-      "path": "./content-lokal-id"
+      "source": "./content-lokal-id"
     }
   ]
 }
