@@ -220,19 +220,6 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
 
 ### 6. `finance-id`: Business Finance & Accounting (15 Skills)
-
-### 7. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
-* `porter-three-tests`: Evaluates diversification and M&A strategies using Porter's 3 Tests (Attractiveness, Cost of Entry, Better-Off).
-* `porter-five-forces`: Analyzes industry structural attractiveness across Supplier, Buyer, Substitutes, Entrants, and Rivalry.
-* `bcg-matrix`: Portfolio matrix evaluation (Star, Cash Cow, Question Mark, Dog) with deterministic engine scoring.
-* `ansoff-matrix`: Evaluates corporate growth vectors (Market Penetration/Development, Product Development, Diversification).
-* `vrio-analysis`: Evaluates internal corporate resources (Valuable, Rare, Inimitable, Organized) for sustained competitive advantage.
-* `value-chain-analysis`: Deconstructs Primary and Support activities to isolate cost drivers and differentiation sources.
-* `strategic-planning`: Structured strategic planning linking Vision/Mission to Objectives, KPIs, Initiatives, and Roadmaps.
-* `decision-making`: Executive decision-making framework powered by Multi-Criteria Decision Analysis (MCDA) weighted scoring.
-* `scenario-planning`: Evaluates macro/micro What-If scenarios using deterministic sensitivity simulation math.
-* `strategic-risk-analysis`: Computes corporate strategic risk scores (Likelihood x Impact x Velocity) to generate risk heatmaps.
-
 * `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.
 * `financial-statements`: 3-statement structure and PSAK 1 presentation principles.
 * `cash-flow-analysis`: OCF/ICF/FCF analysis and cash runway.
@@ -248,6 +235,18 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `vc-term-sheet-waterfall`: Venture capital startup exit liquidation preference waterfall (Seniority, Pari Passu, Participating with Caps).
 * `business-scenario`: Maps business profile across the 8 Stages of the Indonesian Business Lifecycle for an integrated compliance roadmap.
 * `decision-engine`: Evaluates financial & operational metrics to generate deterministic, prioritized business decision recommendations.
+
+### 7. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
+* `porter-three-tests`: Evaluates diversification and M&A strategies using Porter's 3 Tests (Attractiveness, Cost of Entry, Better-Off).
+* `porter-five-forces`: Analyzes industry structural attractiveness across Supplier, Buyer, Substitutes, Entrants, and Rivalry.
+* `bcg-matrix`: Portfolio matrix evaluation (Star, Cash Cow, Question Mark, Dog) with deterministic engine scoring.
+* `ansoff-matrix`: Evaluates corporate growth vectors (Market Penetration/Development, Product Development, Diversification).
+* `vrio-analysis`: Evaluates internal corporate resources (Valuable, Rare, Inimitable, Organized) for sustained competitive advantage.
+* `value-chain-analysis`: Deconstructs Primary and Support activities to isolate cost drivers and differentiation sources.
+* `strategic-planning`: Structured strategic planning linking Vision/Mission to Objectives, KPIs, Initiatives, and Roadmaps.
+* `decision-making`: Executive decision-making framework powered by Multi-Criteria Decision Analysis (MCDA) weighted scoring.
+* `scenario-planning`: Evaluates macro/micro What-If scenarios using deterministic sensitivity simulation math.
+* `strategic-risk-analysis`: Computes corporate strategic risk scores (Likelihood x Impact x Velocity) to generate risk heatmaps.
 
 ---
 

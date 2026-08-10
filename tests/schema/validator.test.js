@@ -320,14 +320,22 @@ function validate() {
       console.error(`❌ README Inventory Violation: no inventory section found for plugin(s): ${listed.join(', ')}.`);
       errors++;
     }
-    const totalClaimMatch = readme.match(/\((\d+) Skills Across (\d+) Plugins\)/);
-    if (totalClaimMatch) {
-      const claimedTotal = parseInt(totalClaimMatch[1], 10);
-      if (claimedTotal !== totalSkills) {
-        console.error(`❌ README Inventory Violation: README claims ${claimedTotal} total skills, but ${totalSkills} discovered on disk.`);
+    // Strict Plugin Section Non-Empty Content Enforcer
+    plugins.forEach(p => {
+      const pluginHeaderRegex = new RegExp(`### \\d+\\.\\s+\`?${p}\`?:[^\n]+\n([\\s\\S]*?)(?=\n### |\\n---|$)`);
+      const sectionMatch = readme.match(pluginHeaderRegex);
+      if (!sectionMatch) {
+        console.error(`❌ README Layout Violation: Missing section header for plugin "${p}".`);
         errors++;
+      } else {
+        const sectionContent = sectionMatch[1];
+        const bulletCount = (sectionContent.match(/^\*\s+`[a-z0-9-]+`/gm) || []).length;
+        if (bulletCount !== skillCountByPlugin[p]) {
+          console.error(`❌ README Layout Violation: Plugin "${p}" header has ${bulletCount} listed skills in README body, but ${skillCountByPlugin[p]} exist on disk.`);
+          errors++;
+        }
       }
-    }
+    });
 
     // Strict Overview Narrative Sync Enforcer
     const overviewSkillsMatch = readme.match(/integrates \*\*(\d+) Agent Skills\*\*/);

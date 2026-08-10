@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.5.1] - 2026-08-10
+
+### Fixed & Hardened
+- **README Layout Fix (P0 Fix)**: Corrected Markdown section hierarchy in `README.md` catalog so that the 15 bullet skills for `finance-id` are rendered directly under `### 6. finance-id` and before `### 7. strategic-id`.
+- **Automated Layout Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert that every plugin section in `README.md` contains its exact required number of skill bullets.
+
 ## [2.5.0] - 2026-08-10
 
 ### Added
