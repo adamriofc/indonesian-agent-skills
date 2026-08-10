@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.3.2] - 2026-08-10
+
+### Fixed & Hardened
+- **README Overview Narrative Sync (P0 Fix)**: Synchronized stale narrative text in `README.md` Overview (line 23), ASCII architecture diagram (line 77), and activation instructions (line 148) from historical `67 skills / 23 engines` to current canonical counts (**71 skills / 27 engines**).
+- **Audit Validator Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert strict Regex matches on Overview narrative skill & engine numbers against `registry.total_skills` and `registry.total_engines` (0 schema, lockfile, or narrative drift errors).
+
 ## [2.3.1] - 2026-08-10
 
 ### Fixed & Hardened

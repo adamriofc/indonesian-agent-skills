@@ -20,7 +20,7 @@
 
 ## 📌 Overview & Value Proposition
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **67 Agent Skills** with **23 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **71 Agent Skills** with **27 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
 Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
@@ -73,11 +73,11 @@ npm test
                        └──────────────────┬───────────────────┘
                                           │
                                           ▼
-              ┌──────────────────────────────────────────────────────┐
-              │      23 Deterministic Node.js Math & Diff Engines    │
-              │ 15 statutory (engines/*.js + SSOT temporal rulesets) │
-              │ 8 finance (engines/*.js — pure standard math)        │
-              └──────────────────┬───────────────────┬───────────────┘
+               ┌──────────────────────────────────────────────────────┐
+               │      27 Deterministic Node.js Math & Diff Engines    │
+               │ 19 statutory (engines/*.js + SSOT temporal rulesets) │
+               │ 8 finance (engines/*.js — pure standard math)        │
+               └──────────────────┬───────────────────┬───────────────┘
                                  │                   │
                                  ▼                   ▼
       ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
@@ -145,7 +145,7 @@ cp -r .agents/skills/* .cursor/skills/
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. The 6 plugins and 67 skills activate automatically.
+4. The 6 plugins and 71 skills activate automatically.
 
 ---
 

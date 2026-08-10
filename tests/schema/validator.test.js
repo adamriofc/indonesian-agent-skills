@@ -179,10 +179,12 @@ function validate() {
   const registryPath = path.join(rootDir, 'registry', 'index.json');
   const packagePath = path.join(rootDir, 'package.json');
   const packageLockPath = path.join(rootDir, 'package-lock.json');
+  let loadedRegistry = null;
 
   if (fs.existsSync(registryPath) && fs.existsSync(packagePath)) {
     try {
       const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      loadedRegistry = registry;
       const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
       const packageLockJson = fs.existsSync(packageLockPath) ? JSON.parse(fs.readFileSync(packageLockPath, 'utf8')) : null;
 
@@ -323,6 +325,26 @@ function validate() {
       const claimedTotal = parseInt(totalClaimMatch[1], 10);
       if (claimedTotal !== totalSkills) {
         console.error(`❌ README Inventory Violation: README claims ${claimedTotal} total skills, but ${totalSkills} discovered on disk.`);
+        errors++;
+      }
+    }
+
+    // Strict Overview Narrative Sync Enforcer
+    const overviewSkillsMatch = readme.match(/integrates \*\*(\d+) Agent Skills\*\*/);
+    if (overviewSkillsMatch) {
+      const overviewSkillsCount = parseInt(overviewSkillsMatch[1], 10);
+      if (overviewSkillsCount !== totalSkills) {
+        console.error(`❌ README Overview Violation: Overview claims ${overviewSkillsCount} Agent Skills, but discovered ${totalSkills} skill files.`);
+        errors++;
+      }
+    }
+
+    const overviewEnginesMatch = readme.match(/with \*\*(\d+) Deterministic Computational & Regulatory Diff Engines\*\*/);
+    if (overviewEnginesMatch) {
+      const overviewEnginesCount = parseInt(overviewEnginesMatch[1], 10);
+      const expectedEngines = loadedRegistry ? loadedRegistry.total_engines : 27;
+      if (overviewEnginesCount !== expectedEngines) {
+        console.error(`❌ README Overview Violation: Overview claims ${overviewEnginesCount} engines, but registry lists ${expectedEngines} total_engines.`);
         errors++;
       }
     }
