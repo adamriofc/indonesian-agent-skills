@@ -13,6 +13,7 @@ Every computational rule and legal prompt instruction in `indonesian-agent-skill
 | `DIRECT_DOCUMENT` | Lampiran/PDF resmi dari lembaga penerbit, dapat diunduh langsung |
 | `REGISTRY_ENTRY` | Entri dokumen pada registri hukum nasional resmi (BPK JDIH, Peraturan.go.id, JDIH kementerian) |
 | `OFFICIAL_PAGE` | Halaman resmi lembaga penerbit; dokumen unduh tidak dipublikasikan dalam teks terbuka |
+| `STANDARD_REFERENCE` | Standar profesi/akuntansi dari lembaga penerbit (bukan hukum positif); dirujuk sebagai prinsip penyusunan, bukan sumber tarif |
 | `SECONDARY_MIRROR` | Salinan dokumen resmi yang diterbitkan pihak ketiga terverifikasi (isi dibandingkan dengan portal resmi) |
 
 ### 1.2 Statutory Rules
@@ -90,6 +91,7 @@ All rules listed above carry status `VERIFIED` as of 2026-08-10. Active statutor
 3. **Entri MA Registry (KUHPerdata) dan DJKI (UU 20/2016) memblokir klien otomatis** (HTTP 403 anti-bot). Entri diverifikasi manual via browser manusia; tautan tetap merujuk otoritas resmi.
 4. **Perpres 59/2024** (perubahan terbatas ketentuan kesehatan) sedang dalam pipeline review; tarif pemberi kerja dan batas upah saat ini masih merujuk Perpres 64/2020. Lihat `REGULATORY_PIPELINE.md`.
 5. **Bukan notarisasi**: checksum SHA-256 mengikat konten file repo, bukan tanda tangan digital penerbit. Integritas penerbit dijaga lewat `CONTRIBUTING.md` (review board) dan pipeline regulasi.
+6. **Standar akuntansi bukan hukum positif**: PSAK/SAK EMKM (register bagian 6) adalah standar profesi dari IAI; formula finance di engine adalah matematika baku yang tidak terikat amendemen standar. Amendemen PSAK di-track lewat issue/pipeline review, bukan ruleset runtime. Halaman `SAK-IAI` mengembalikan 404 untuk klien otomatis pada saat verifikasi (domain induk terverifikasi hidup); entri ditandai `OFFICIAL_PAGE` + diverifikasi manual.
 
 ---
 
@@ -129,3 +131,18 @@ The following rules govern marketplace fee engines (`rulesetId: MKPL-FEE-2024`, 
 | `MKPL-FRESH-01` | All platforms | 4.0% | Rp 10.000 per item | Platform seller centers | 2026-08-10 |
 
 > **Policy Rules are versioned separately from statutory rules (`MKPL-FEE-2024`) and require 3-monthly verification; the active ruleset is resolved deterministically by effective date at engine runtime.**
+
+---
+
+## 6. Finance & Accounting Standard Register (Non-Statutory)
+
+The finance engines (`engines/break-even.js`, `depreciation.js`, `npv.js`, `irr.js`, `loan-amortization.js`, `financial-ratios.js`, `working-capital.js`, `eoq.js`) implement **standard mathematical formulas** from management and financial accounting. They contain no numeric rulesets and are not bound to any statute. The standards below are referenced as presentation/measurement principles for the `finance-id` skills; amendments are tracked via the regulatory issue pipeline, never as runtime rulesets.
+
+| Rule ID | Standard | Issuer | Access Path | Audit Status | Verified At | Verification Link |
+|---|---|---|---|---|---|---|
+| `FIN-BASIS-01` | PSAK 1 — Penyajian Laporan Keuangan (accrual, linkage 3 statements) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 bagi klien otomatis; domain induk hidup — diverifikasi manual) |
+| `FIN-DEP-01` | PSAK 16 — Aset Tetap: metode garis lurus, saldo menurun ganda (DDB), jumlah angka tahun (SYD) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 bagi klien otomatis; diverifikasi manual) |
+| `FIN-REV-01` | PSAK 23 — Pendapatan dari Kontrak dengan Pelanggan (pengakuan accrual) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 bagi klien otomatis; diverifikasi manual) |
+| `FIN-SAK-EMKM-01` | SAK EMKM — Laporan Keuangan Entitas Mikro Kecil Menengah | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 bagi klien otomatis; diverifikasi manual) |
+
+> **Non-claim**: standards above are professional references (IAI), not positive law. Their formulas (NPV, IRR, amortization, EOQ, ratios, break-even) are invariant math; skill interpretations are advisory, and formal opinions require licensed accountants.
