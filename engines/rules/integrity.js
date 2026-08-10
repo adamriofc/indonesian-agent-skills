@@ -1,46 +1,38 @@
 /**
- * Cryptographic Ruleset Runtime Integrity Verifier
- * Computes and asserts SHA-256 checksums of regulatory rulesets to prevent tampering.
+ * Cryptographic SHA-256 Ruleset Integrity & Tamper Protection Anchor
  */
+const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
 
-const crypto = require('crypto');
-const fs = require('fs');
-const path = require('path');
-
-// Expected SHA-256 Hashes for Version 1.1.0 Rulesets (audit-hardening release)
-const RULESET_CHECKSUMS = {
-  'bpjs.json': '96637d44ecdded7998a7b417ee931ed526d65ad26f04471874a4d96b235bedc2',
-  'pph21.json': 'faec8d0b221ab8f730b0d79d75ae66e76e21bbc781040d81662948c90a9562b0',
-  'marketplace.json': 'ae5167b48cc70b2148d6a860ab8ed515d61f77824799bb35c3f49939ec0e2615',
-  'umkm.json': 'abbaa87ec0e8f6715be6119abcb432cc984d371b6aad38fc1a1195b502283587'
+const EXPECTED_HASHES = {
+  "bpjs.json": "9203585d83863a44fec7ced194672d0c206dcb70b7b6d844626c90b93101d9b7",
+  "pph21.json": "ed1198d3b5c151a1dd8ff2653743bd04af03d73f7ea18dbbca6bac0e64e921ed",
+  "marketplace.json": "551fa957822cde264463b62c647f19d7759fb9c171f051c49406d325d89ebfa2",
+  "umkm.json": "1b06c261a9d06eb0359817dbe12bf1d4cf8ba9f8875cc025a6d49edef3cdd03a"
 };
 
-function verifyRulesetIntegrity(filename, filePathOverride) {
-  const expectedHash = RULESET_CHECKSUMS[filename];
-  if (!expectedHash) {
-    throw new Error(`[Cryptographic Integrity Violation] No registered hash manifest for: ${filename}`);
+function verifyRulesetIntegrity(fileBasename, overrideFilePath = null) {
+  const expected = EXPECTED_HASHES[fileBasename];
+  if (!expected) {
+    throw new Error("No registered hash manifest for: " + fileBasename);
   }
-
-  const targetPath = filePathOverride || path.join(__dirname, filename);
-  if (!fs.existsSync(targetPath)) {
-    throw new Error(`[Cryptographic Integrity Violation] Ruleset file not found: ${targetPath}`);
+  const filePath = overrideFilePath || path.join(__dirname, fileBasename);
+  if (!fs.existsSync(filePath)) {
+    throw new Error("Missing ruleset file: " + fileBasename);
   }
-
-  const fileContent = fs.readFileSync(targetPath, 'utf8');
-  const computedHash = crypto.createHash('sha256').update(fileContent, 'utf8').digest('hex');
-
-  if (computedHash !== expectedHash) {
-    throw new Error(`[Cryptographic Integrity Violation] Ruleset ${filename} has been tampered with! Computed SHA-256: ${computedHash}, Expected: ${expectedHash}`);
+  const content = fs.readFileSync(filePath);
+  const actual = crypto.createHash("sha256").update(content).digest("hex");
+  if (actual !== expected) {
+    throw new Error("Cryptographic Integrity Violation: Ruleset " + fileBasename + " has been tampered with! Expected " + expected + ", got " + actual);
   }
-
   return {
-    filename,
-    status: 'VERIFIED',
-    hash: computedHash
+    status: "VERIFIED",
+    file: fileBasename,
+    hash: actual
   };
 }
 
 module.exports = {
-  verifyRulesetIntegrity,
-  RULESET_CHECKSUMS
+  verifyRulesetIntegrity
 };

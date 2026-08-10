@@ -11,6 +11,7 @@ FILES=(
   "engines/rules/bpjs.json"
   "engines/rules/pph21.json"
   "engines/rules/marketplace.json"
+  "engines/rules/umkm.json"
 )
 
 cmd="${1:-verify}"

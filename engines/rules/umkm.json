@@ -27,7 +27,7 @@
       "lifecycle": {
         "status": "ARCHIVED",
         "verified_at": "2026-08-10T00:00:00Z",
-        "verified_by": "Indonesian Agent Skills Review Board",
+        "verified_by": "Repository Maintainer — adamriofc",
         "review_interval_months": 12,
         "superseded_by": "UMKM-2026"
       }
@@ -56,7 +56,7 @@
       "lifecycle": {
         "status": "RELEASED",
         "verified_at": "2026-08-10T00:00:00Z",
-        "verified_by": "Indonesian Agent Skills Review Board",
+        "verified_by": "Repository Maintainer — adamriofc",
         "review_interval_months": 12
       }
     }

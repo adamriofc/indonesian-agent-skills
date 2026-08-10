@@ -177,17 +177,39 @@ function validate() {
 
   // Validate registry/index.json machine-readable index
   const registryPath = path.join(rootDir, 'registry', 'index.json');
-  if (fs.existsSync(registryPath)) {
+  const packagePath = path.join(rootDir, 'package.json');
+  const packageLockPath = path.join(rootDir, 'package-lock.json');
+
+  if (fs.existsSync(registryPath) && fs.existsSync(packagePath)) {
     try {
       const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+      const packageLockJson = fs.existsSync(packageLockPath) ? JSON.parse(fs.readFileSync(packageLockPath, 'utf8')) : null;
+
+      // Automated Version & Header Consistency Enforcer
+      if (registry.version !== packageJson.version) {
+        console.error(`❌ Registry Version Mismatch: registry index version ("${registry.version}") does not match package.json version ("${packageJson.version}").`);
+        errors++;
+      }
+
+      if (packageLockJson && packageLockJson.version !== packageJson.version) {
+        console.error(`❌ Lockfile Version Mismatch: package-lock.json version ("${packageLockJson.version}") does not match package.json version ("${packageJson.version}").`);
+        errors++;
+      }
+
+      if (registry.total_skills !== totalSkills) {
+        console.error(`❌ Registry Skill Count Mismatch: registry header total_skills is ${registry.total_skills}, but discovered ${totalSkills} skill files.`);
+        errors++;
+      }
+
       if (!registry.skills || !Array.isArray(registry.skills)) {
         console.error(`❌ Machine-Readable Registry Violation in ${registryPath}: 'skills' array is required.`);
         errors++;
       } else if (registry.skills.length !== totalSkills) {
-        console.error(`❌ Machine-Readable Registry Mismatch: registry index has ${registry.skills.length} skills, but discovered ${totalSkills} skill files.`);
+        console.error(`❌ Machine-Readable Registry Mismatch: registry index array has ${registry.skills.length} skills, but discovered ${totalSkills} skill files.`);
         errors++;
       } else {
-        console.log(`  Machine-readable skill registry verified (${registry.skills.length} registered skills).`);
+        console.log(`  Machine-readable skill registry verified (${registry.skills.length} registered skills, version ${registry.version}).`);
       }
 
       // Cross-field registry validation: every entry must resolve to a real skill file

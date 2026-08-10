@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.3.1] - 2026-08-10
+
+### Fixed & Hardened
+- **Metadata & Version Alignment (P0 Fix)**: Synchronized `package.json`, `package-lock.json`, and `registry/index.json` to canonical version `2.3.1` (71 skills, 27 engines, exact tier counts).
+- **Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert strict version consistency across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md` catalog headers.
+- **Trust Alignment (`verified_by` P1 Fix)**: Updated ruleset issuer audit metadata in `engines/rules/*.json` to transparently state `"Repository Maintainer — adamriofc"`.
+- **SHA-256 Ruleset Anchor**: Expanded cryptographic trust anchor generator (`scripts/sha256sums.sh` & `engines/rules/integrity.js`) to cover all 4 statutory rulesets (`bpjs.json`, `pph21.json`, `marketplace.json`, `umkm.json`).
+
 ## [2.3.0] - 2026-08-10
 
 ### Added

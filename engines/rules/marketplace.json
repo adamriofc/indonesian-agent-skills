@@ -35,7 +35,7 @@
       "lifecycle": {
         "status": "RELEASED",
         "verified_at": "2026-08-10T00:00:00Z",
-        "verified_by": "Indonesian Agent Skills Review Board",
+        "verified_by": "Repository Maintainer — adamriofc",
         "review_interval_months": 3,
         "note": "Commercial platform policy, not statutory law; requires frequent review and is versioned separately from statutory rulesets"
       }
