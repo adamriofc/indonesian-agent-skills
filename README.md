@@ -35,68 +35,64 @@ This repository decouples AI **reasoning** from **calculation**:
 
 ---
 
-## ⚡ 30-Second Quickstart Demo
+## ⚡ 30-Second Killer Cross-Domain Demo
 
-```bash
-# 1. Clone the repository (5 seconds)
-git clone https://github.com/adamriofc/indonesian-business-agent-skills.git && cd indonesian-business-agent-skills
+```text
+User: "Perusahaan saya PT Management Consulting (KBLI 70209) dengan omzet Rp 5 Miliar dan 15 karyawan.
+       Kami ingin membuka cabang baru dan menambah 10 karyawan. Apakah ekspansi ini aman dari sisi Pajak, HR, Legal, dan Strategi?"
 
-# 2. Install (10 seconds, 0 external dependencies)
-npm ci
-
-# 3. Execute precise PPh 21 TER tax calculation (2 seconds)
-node -e "
-const { calculatePPh21Monthly } = require('./engines/pph21-calculator');
-console.log(calculatePPh21Monthly(10000000, 'TK/0', true, '2026-03-01'));
-"
-
-# 4. Verify cryptographic SHA-256 ruleset integrity (2 seconds)
-./scripts/sha256sums.sh verify
-
-# 5. Run full test suite: 900+ assertions (30 seconds)
-npm test
+Agent (Skill-Assisted Execution):
+1. [KBLI Router]: KBLI 70209 ➔ PROFESSIONAL_SERVICE Archetype (Capacity Unit: Service Practice Lines).
+2. [Tax Engine]: PP 20/2026 Ineligibility Flagged (PT Corporate must use General PPh 31E at 11%/22%, not 0.5% UMKM).
+3. [HR Engine]: 25 Total Employees ➔ Mandatory Wage Structure & Scale (Permenaker 1/2017) + BPJS JP Cap update.
+4. [Legal Engine]: Audit Article 1266 KUHPerdata waiver & PDP Data Processing Addendum (UU 27/2022).
+5. [Decision Engine]: MCDA Weighted Score = 8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH).
 ```
-
-> 🌐 **Interactive No-Code Demo**: Open `docs/playground.html` directly in your browser to test interactive calculators for PPh 21, PP 20/2026 UMKM tax, Break-Even Analysis, and Loan Amortization!
 
 ---
 
 ## 🏗️ System Architecture
 
 ```text
-                                 [ User / Agent Query ]
+                                  [ User / Agent Query ]
+                                            │
+                                            ▼
+                        ┌──────────────────────────────────────┐
+                        │      KBLI CONTEXT ROUTER ENGINE      │
+                        │ Maps KBLI 2020 ➔ Business Archetype  │
+                        └──────────────────┬───────────────────┘
                                            │
                                            ▼
-                       ┌──────────────────────────────────────┐
-                       │    Skill Instruction Layer (MD)      │
-                       │ Extracts parameters & structured JSON│
-                       └──────────────────┬───────────────────┘
-                                          │
-                                          ▼
+                        ┌──────────────────────────────────────┐
+                        │   STRATEGIC APPLICATION PROTOCOL     │
+                        │ 12-Step Context & Evidence Discipline│
+                        └──────────────────┬───────────────────┘
+                                           │
+                                           ▼
                ┌──────────────────────────────────────────────────────┐
                │      32 Deterministic Node.js Math & Diff Engines    │
                │ 24 statutory (engines/*.js + SSOT temporal rulesets) │
                │ 8 finance (engines/*.js — pure standard math)        │
                └──────────────────┬───────────────────┬───────────────┘
-                                 │                   │
-                                 ▼                   ▼
-      ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
-      │ Single Source of Truth Rules │   │ Cryptographic SHA-256 Checksums     │
-      │ (engines/rules/*.json)       │   │ (engines/rules/integrity.js +        │
-      │ — statutory & policy only    │   │  SHA256SUMS.txt)                     │
-      └──────────────┬───────────────┘   └──────────────────┬───────────────────┘
-                     │                                      │
-                     └──────────────────────────┬───────────┘
-                                                │
-                                                ▼
-                         ┌──────────────────────────────────────┐
-                         │  Validated Statutory Output + Math   │
-                         └──────────────────┬───────────────────┘
-                                            │
-                                            ▼
-                         ┌──────────────────────────────────────┐
-                         │ LLM Narrative Synthesis & Formatting │
-                         └──────────────────────────────────────┘
+                                  │                   │
+                                  ▼                   ▼
+       ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
+       │ Single Source of Truth Rules │   │ Cryptographic SHA-256 Checksums     │
+       │ (engines/rules/*.json)       │   │ (engines/rules/integrity.js +        │
+       │ — statutory & policy only    │   │  SHA256SUMS.txt)                     │
+       └──────────────┬───────────────┘   └──────────────────┬───────────────────┘
+                      │                                      │
+                      └──────────────────────────┬───────────┘
+                                                 │
+                                                 ▼
+                          ┌──────────────────────────────────────┐
+                          │  Validated Statutory Output + Math   │
+                          └──────────────────┬───────────────────┘
+                                             │
+                                             ▼
+                          ┌──────────────────────────────────────┐
+                          │ LLM Narrative Synthesis & Formatting │
+                          └──────────────────────────────────────┘
 ```
 
 ---

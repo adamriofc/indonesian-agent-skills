@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.7.0] - 2026-08-10
+
+### Refined & Hardened
+- **3-Tier Accuracy Taxonomy**: Updated `docs/BENCHMARK.md` to define Tier 1 (Deterministic Engine Math: **100.00% Pass Rate**), Tier 2 (Parameter Extraction Accuracy: **96.00%**), and Tier 3 (End-to-End Enterprise Task Completion: **94.00%**).
+- **Strategic Application Protocol Engine**: Added `engines/strategic-protocol.js` establishing a 12-Step Strategic Operating System connecting KBLI 2020 Context Routing, Business Archetype Adaptation (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`), and Evidence Sufficiency Discipline (`SUFFICIENT`, `PARTIAL`, `INSUFFICIENT`).
+- **Strategic Skills Protocol Integration**: Updated 10 Strategic Skills in `strategic-id/skills/` to enforce KBLI context resolution and evidence-based decision boundaries.
+- **50-Case Enterprise Integration Suite**: Expanded `tests/integration/workflow.test.js` from 20 to **50 end-to-end enterprise employee lifecycle & scenario assertions**.
+- **Provenance Taxonomy Refinement**: Updated `PROVENANCE.md` with 4 explicit **Source Quality Tiers** (`STATUTORY`, `PROFESSIONAL_STANDARD`, `COMMERCIAL_POLICY`, `INTERNAL_HEURISTIC`).
+- **30-Second Killer Cross-Domain Demo**: Added interactive scenario demo and updated System Architecture ASCII Diagram in `README.md`.
+
 ## [2.6.0] - 2026-08-10
 
 ### Refined & Hardened

@@ -6,7 +6,13 @@ Every computational rule and legal prompt instruction in `indonesian-business-ag
 
 ## 1. Rule Lineage Register
 
-### 1.1 Access Path Legend
+### 1.1 Access Path Legend & Source Quality Taxonomy
+
+Every rule and computational engine is traceably classified across **4 Source Quality Tiers**:
+- **`STATUTORY`**: Primary official gazettes issued by the Government of Indonesia (UU, PP, PMK, Perpres, Permenaker) published via official JDIH databases (`PRIMARY`).
+- **`PROFESSIONAL_STANDARD`**: Peer-reviewed academic and professional frameworks (HBR, Porter, BCG, Ansoff, SAK EMKM, PSAK) (`PRIMARY`).
+- **`COMMERCIAL_POLICY`**: Official commercial terms and fee structures published by platform seller centers (Shopee, Tokopedia, TikTok Shop) (`PRIMARY`).
+- **`INTERNAL_HEURISTIC`**: Repository maintainer-calibrated evaluation heuristics (e.g. Risk Velocity Multipliers, MCDA normalization weights) transparently documented as internal methodology (`SECONDARY_VERIFIED`).
 
 | Access Path | Definition |
 |---|---|
