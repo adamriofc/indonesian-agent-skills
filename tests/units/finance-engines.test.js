@@ -115,11 +115,41 @@ function testIrr() {
   console.log('  [4/8] irr engine: IRR-001 range + self-consistency passed');
 }
 
+function testLoan() {
+  const { monthlyPayment, amortizationSchedule } = require('../../engines/loan-amortization');
+
+  const pmt = monthlyPayment(100000000, 0.12, 24);
+  assert.strictEqual(pmt, 4707347);
+
+  const sched = amortizationSchedule(100000000, 0.12, 24);
+  assert.strictEqual(sched.payment, 4707347);
+  assert.strictEqual(sched.schedule.length, 24);
+  assert.strictEqual(sched.schedule[23].balance, 0);
+  assert.strictEqual(sched.totalInterest, 12976331);
+  assert.strictEqual(sched.schedule[0].month, 1);
+  assert.strictEqual(sched.schedule[0].interest, 1000000);
+  assert.strictEqual(sched.schedule[0].principal, 3707347);
+  assert.strictEqual(sched.schedule[0].balance, 96292653);
+
+  const zeroRate = amortizationSchedule(12000000, 0, 12);
+  assert.strictEqual(zeroRate.payment, 1000000);
+  assert.strictEqual(zeroRate.schedule[11].balance, 0);
+
+  assert.throws(() => monthlyPayment(10000000, 0.12, 0), /Invalid loan/);
+  assert.throws(() => monthlyPayment(10000000, -0.05, 12), /Invalid loan/);
+  assert.throws(() => monthlyPayment(0, 0.12, 12), /Invalid loan/);
+  assert.throws(() => amortizationSchedule(10000000, 0.12, 2.5), /Invalid loan/);
+
+  assertDeterministic(() => amortizationSchedule(100000000, 0.12, 24), 'loan determinism');
+  console.log('  [5/8] loan-amortization engine: LOAN-001 schedule + edge cases passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
   testNpv();
   testIrr();
+  testLoan();
 }
 
 runAll();
