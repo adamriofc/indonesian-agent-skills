@@ -17,16 +17,16 @@ Generates 15-30 second video scripts optimized for Shopee Video algorithms and v
 4. **Yellow Basket Tagging**: Directing users to click the Shopee Video product tag.
 
 ## Tagging & Algorithm Notes
-* Tag produk di **frame pertama & terakhir** (model WAJIB tag video untuk kelayakan komisi/reach).
-* Caption 1-2 kalimat dengan keyword utama di awal; sertakan 2-3 hashtag relevan.
-* Upload via Seller Center → Shopee Video → pilih kategori & voucher — video dengan voucher punya prioritas penempatan.
-* Durasi 15-30s; aspect ratio 9:16; teks overlay 2-3 kata per adegan.
+* Tag the product in the **first & last frame** (the video MUST be tagged for commission/reach eligibility).
+* Write a 1-2 sentence caption with the main keyword at the start; include 2-3 relevant hashtags.
+* Upload via Seller Center → Shopee Video → pick the category & voucher — videos with vouchers get placement priority.
+* Duration 15-30s; 9:16 aspect ratio; 2-3 words of overlay text per scene.
 
 ## Scope & Safety
-* **Use for**: product demo, restock, flash-sale teaser, tutorial singkat.
-* **Do not use for**: claim medis/khasiat tanpa izin, testimoni palsu, atau perbandingan harga kompetitor yang tidak dapat dibuktikan.
-* **Voucher truth**: hanya iklankan voucher yang benar-benar aktif di akun; sinkronkan stok produk sebelum video tayang.
+* **Use for**: product demos, restocks, flash-sale teasers, short tutorials.
+* **Do not use for**: medical/efficacy claims without authorization, fake testimonials, or competitor price comparisons that cannot be proven.
+* **Voucher truth**: only advertise vouchers that are actually active on the account; sync product stock before the video airs.
 
 ## Worked Example
 Input: `product: "vacuum cleaner cordless 600W" / promo_angle: "fur pet removal"`
-Script 15s: Hook (0-3s): halaman kotor penuh bulu → (3-10s): demo hisap bulu sekali lewat bersih → (10-15s): *"Ada voucher 20% di video ini — klik tag produk di bawah!"* + 2 kalimat caption: *"Vacuum cordless 600W yang kuat ngangkat bulu hewan. Cek voucher-nya!"* + tag produk + hashtag #vacuumcleaner #petowner.
+Script 15s: Hook (0-3s): dirty floor full of fur → (3-10s): demo sucking the fur in one clean pass → (10-15s): *"There's a 20% voucher on this video — click the product tag below!"* + 2-sentence caption: *"Powerful 600W cordless vacuum that lifts pet fur. Check out the voucher!"* + product tag + hashtags #vacuumcleaner #petowner.

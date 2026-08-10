@@ -16,16 +16,16 @@ Generates high-conversion WhatsApp direct marketing copy structured to avoid spa
 3. **CTA**: Single, clear call to action.
 
 ## Anti-Trigger Writing Rules
-* Gunakan nama/kebutuhan spesifik penerima, bukan sapaan massal (*"Halo semuanya"*).
-* Hindari kata-kata berisiko tinggi tersaring spam: *GRATIS!!!, 100% DISKON, KLIK SEKARANG, PINJAMAN TANPA JAMINAN* — ganti dengan konteks & nilai.
-* Tidak memakai link eksternal pendek (bit.ly) di pesan pertama — pakai link toko resmi/WhatsApp Catalog.
-* Sisipkan opsi berhenti: *"Balas STOP untuk berhenti menerima info promo."* (kepatuhan komunikasi fisik/elektronik & praktik CRM sehat).
+* Personalize with the recipient's name or specific need, not mass greetings (*"Hello everyone"*).
+* Avoid high-risk words commonly filtered as spam: *FREE!!!, 100% DISCOUNT, CLICK NOW, NO-COLLATERAL LOAN* — replace them with context & value.
+* Do not use short external links (bit.ly) in the first message — use official store links or the WhatsApp Catalog.
+* Include an opt-out: *"Reply STOP to stop receiving promo updates."* (electronic communications compliance & healthy CRM practices).
 
 ## Scope & Safety
-* **Use for**: promo, restock info, follow-up pesanan, event undangan.
-* **Do not use for**: phising, penawaran ilegal, atau pengiriman tanpa dasar kepentingan — UU PDP No. 27/2022 menuntut dasar pemrosesan data; broadcast masif tanpa izin berisiko blokir nomor & aduan.
-* **Data source**: daftar kontak wajib berasal dari data yang diperoleh sah (pelanggan yang pernah bertransaksi / opt-in).
+* **Use for**: promos, restock info, order follow-ups, event invitations.
+* **Do not use for**: phishing, illegal offers, or sending without a legitimate-interest basis — Law No. 27/2022 on Personal Data Protection (UU PDP) requires a legal basis for data processing; mass broadcasting without consent risks number blocks & complaints.
+* **Data source**: contact lists must come from lawfully obtained data (customers who have transacted / opted in).
 
 ## Worked Example
-Input: `promo_angle: "restock skincare favorit" / features: ["serum 10ml", "SPF 30"] / cta: "catalog"`
-Output: *"Halo Kak Rina 👋 Stok serum favorit Kakak udah balik lagi nih — ukuran 10ml dengan SPF 30. Kabar baiknya, minggu ini ada bundle hemat + free pouch.* [2 baris detail] *Mau lihat katalognya? Balas 'KATALOG' ya. Balas STOP kapan saja untuk berhenti update."*
+Input: `promo_angle: "restock of favorite skincare" / features: ["10ml serum", "SPF 30"] / cta: "catalog"`
+Output: *"Hi Rina 👋 Your favorite serum is back in stock — 10ml size with SPF 30. Good news: this week there's a value bundle + free pouch.* [2 lines of details] *Want to see the catalog? Reply 'CATALOG' anytime. Reply STOP to opt out of updates anytime."*

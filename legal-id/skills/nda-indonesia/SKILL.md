@@ -11,13 +11,13 @@ rule_type: statutory
 Drafts unilateral or mutual non-disclosure agreements (Perjanjian Kerahasiaan) under Indonesian commercial law.
 
 ## Legal Provenance & Governance
-* **Statutory Basis**: KUHPerdata Art. 1338 & UU No. 30/2000 (Rahasai Dagang).
+* **Statutory Basis**: KUHPerdata Art. 1338 & UU No. 30/2000 (Trade Secrets).
 
 ## Required Terms
-1. **Definisi Informasi Rahasia**: Proprietary code, financial models, customer lists, and strategic business plans marked confidential.
+1. **Confidential Information Definition**: Proprietary code, financial models, customer lists, and strategic business plans marked confidential.
 2. **Exclusions**: Publicly known data, data received from a third party without breach, or data required by law/court order.
 3. **Survival Period**: 2 to 5 years post-termination.
 4. **Liquidated Damages**: Enforceable contractual fine per breach incident.
 
 ## Clause Structure
-"Penerima Informasi sepakat menjaga kerahasiaan Informasi Rahasia dan tidak menggunakannya untuk tujuan selain dari Evaluasi Kerjasama. Setiap kebocoran Informasi Rahasia akibat kelalaian Penerima dikenakan ganti rugi sebesar Rp [Jumlah Liquidated Damages] tanpa mengurangi hak Pemilik untuk menuntut ganti rugi aktual."
+"The Receiving Party agrees to keep the Confidential Information confidential and not to use it for any purpose other than the Cooperation Evaluation. Any disclosure of the Confidential Information resulting from the Receiving Party's negligence shall be subject to liquidated damages of Rp [Liquidated Damages Amount] without prejudice to the Owner's right to claim actual damages."

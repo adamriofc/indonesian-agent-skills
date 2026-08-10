@@ -11,10 +11,10 @@ rule_type: standards
 Formats raw transaction data into standardized financial statements for Indonesian businesses.
 
 ## Framework & Standards
-* **SAK EMKM**: Micro, Small, and Medium Enterprises Accounting Standard (Neraca, Laporan Laba Rugi, Catatan atas Laporan Keuangan - CALK).
+* **SAK EMKM**: Micro, Small, and Medium Enterprises Accounting Standard (Balance Sheet (Neraca), Income Statement (Laporan Laba Rugi), Notes to the Financial Statements (CALK)).
 * **SAK EP**: Entities without Public Accountability.
 
 ## Output Structure
-1. **Laporan Laba Rugi (Income Statement)**: Revenue, HPP (COGS), Gross Profit, Operational Expenses, Net Operating Income, Tax Expense, Net Profit.
-2. **Laporan Posisi Keuangan / Neraca (Balance Sheet)**: Aset Lancar, Aset Tidak Lancar, Kewajiban Jangka Pendek, Kewajiban Jangka Panjang, Ekuitas.
-3. **Catatan atas Laporan Keuangan (CALK)**: Significant accounting policies and asset depreciation schedules.
+1. **Income Statement (Laporan Laba Rugi)**: Revenue, HPP (COGS), Gross Profit, Operational Expenses, Net Operating Income, Tax Expense, Net Profit.
+2. **Statement of Financial Position / Balance Sheet**: Current Assets, Non-Current Assets, Current Liabilities, Non-Current Liabilities, Equity.
+3. **Notes to the Financial Statements (CALK)**: Significant accounting policies and asset depreciation schedules.

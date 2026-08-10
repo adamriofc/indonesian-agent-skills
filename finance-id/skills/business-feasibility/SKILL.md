@@ -1,33 +1,33 @@
 ---
 name: business-feasibility
 description: Structure Indonesian SME feasibility assessments across market, technical, financial, legal, and risk aspects with consistent financial figures.
-argument-hint: "<ide_bisnis> <investasi> <proyeksi>"
+argument-hint: "<business_idea> <investment> <projections>"
 risk_level: MEDIUM
 rule_type: internal-policy
 ---
 
 # Business Feasibility Study
 
-Framework 5 aspek untuk menilai layak-tidaknya usaha/bisnis baru sebelum dana dikunci.
+A 5-aspect framework for assessing whether a new business is viable before funds are committed.
 
 ## Five Aspects
-1. **Pasar**: ukuran, segmen, kompetitor, willingness-to-pay — validasi primer (survey/pilot), bukan opini.
-2. **Teknis**: kapasitas produksi, supply chain, tenaga kerja, teknologi — apakah bisa dieksekusi.
-3. **Finansial**: investasi awal, proyeksi arus kas, payback, NPV/IRR (lihat capital-budgeting) — angka konsisten antar skenario.
-4. **Legal**: izin usaha (OSS), KBLI, sertifikasi, perpajakan (NIB, NPWP, PPh final UMKM) — cek plugin legal-id & tax-payroll-id.
-5. **Risiko**: top 5 risiko + mitigasi; test sensitivitas ±10% harga & volume.
+1. **Market**: size, segments, competitors, willingness-to-pay — primary validation (survey/pilot), not opinion.
+2. **Technical**: production capacity, supply chain, workforce, technology — whether it can be executed.
+3. **Financial**: initial investment, cash flow projections, payback, NPV/IRR (see capital-budgeting) — figures consistent across scenarios.
+4. **Legal**: business permits (OSS), KBLI, certifications, taxation (NIB, NPWP, PPh final UMKM) — check the legal-id & tax-payroll-id plugins.
+5. **Risk**: top 5 risks + mitigations; ±10% sensitivity test on price and volume.
 
 ## Rules
-* Semua angka finansial berasal dari satu model yang sama (no angka mengambang).
-* Payback & NPV dihitung dengan asumsi eksplisit (diskon rate = WACC sederhana).
-* Izin & kepatuhan bukan "belakangan" — masuk biaya & timeline awal.
+* All financial figures come from a single shared model (no floating numbers).
+* Payback & NPV are computed with explicit assumptions (discount rate = simple WACC).
+* Permits & compliance are not "later" items — they enter upfront costs & timeline.
 
 ## Scope & Safety
-* **Use for**: keputusan mulai/berhenti, presentasi ke investor/bank, prioritas antar ide bisnis.
-* **Do not use for**: jaminan hasil — feasibility adalah estimasi, bukan kontrak; sertakan disclaimer.
-* Data pasar wajib bersumber (survei, BPS, asosiasi); jangan mengarang angka.
-* Kelayakan legal membutuhkan pengecekan terkini ke OSS — verifikasi saat eksekusi nyata.
+* **Use for**: go/no-go decisions, investor/bank presentations, prioritizing between business ideas.
+* **Do not use for**: a guarantee of results — feasibility is an estimate, not a contract; include a disclaimer.
+* Market data must be sourced (surveys, BPS, associations); do not fabricate figures.
+* Legal feasibility requires an up-to-date check against OSS — verify at actual execution time.
 
 ## Worked Example
-Input: kedai kopi — investasi 250 jt (renovasi 120 jt, alat 80 jt, modal kerja 50 jt); proyeksi laba bersih tahunan ~72 jt.
-Output: Payback = 250 ÷ 72 ≈ **3,5 tahun**; dengan diskon 12% cek NPV (capital-budgeting); aspek pasar: catchment ±5.000 pekerja, kompetitor 3 — validasi 100 responden; legal: NIB + KBLI 56301; risiko #1 lokasi — mitigasi: sewa 3+2 tahun. Kesimpulan: layak dengan syarat volume rata-rata tercapai.
+Input: coffee shop — investment 250 million (renovation 120 million, equipment 80 million, working capital 50 million); projected annual net profit ~72 million.
+Output: Payback = 250 ÷ 72 ≈ **3.5 years**; at a 12% discount rate check NPV (capital-budgeting); market aspect: catchment ±5,000 workers, 3 competitors — validated with 100 respondents; legal: NIB + KBLI 56301; risk #1 location — mitigation: 3+2 year lease. Conclusion: feasible provided average volume is achieved.

@@ -16,17 +16,17 @@ Guides individual taxpayers in completing Form 1770, 1770S, or 1770SS via DJP On
 * **Form 1770**: Independent business owners, freelancers, or professionals.
 
 ## Filing Steps (DJP Online)
-1. Login djponline.pajak.go.id → menu **Lapor** → buat SPT.
-2. Pilih form sesuai matrix → input data 1721-A1 / pembukuan.
-3. Periksa PTKP status (TK/0, K/0, K/1, K/2, K/3) sesuai Perdirjen PER-2/2025 (tarif efektif & PTKP check).
-4. Submit → terima BPE (Bukti Penerimaan Elektronik) — simpan minimal 5 tahun (UU KUP periode simpan).
-5. Deadline: 31 Maret tahun berikutnya (individu), 30 April (WP usaha wajib lapor elektronik).
+1. Log in to djponline.pajak.go.id → **Lapor** menu → create the SPT.
+2. Select the form per the matrix → enter the 1721-A1 data / bookkeeping records.
+3. Verify PTKP status (TK/0, K/0, K/1, K/2, K/3) per Director General Regulation (Perdirjen) PER-2/2025 (effective rate & PTKP check).
+4. Submit → receive the BPE (Bukti Penerimaan Elektronik / Electronic Filing Receipt) — retain it for at least 5 years (UU KUP retention period).
+5. Deadline: 31 March of the following year (individuals), 30 April (business taxpayers (Wajib Pajak) required to file electronically).
 
 ## Scope & Safety
-* **Use for**: panduan pengisian & alur pelaporan; penghitungan silakan pakai engine `pph21-calculator`.
-* **Do not use as**: substitute konsultan pajak untuk kasus non-resident, penghasilan LN tanpa kredit pajak PPh 24, atau tunggakan/restrukturisasi.
-* **Penalty awareness**: telat lapor = sanksi Rp 100.000 (1770SS) / Rp 100.000–500.000 tergantung form; salah isi berpotensi pemeriksaan — verifikasi data dari 1721-A1/A2.
+* **Use for**: filling guidance & reporting workflow; for calculations, use the `pph21-calculator` engine.
+* **Do not use as**: a substitute for a tax consultant for non-resident cases, foreign-source income without PPh 24 tax credit, or arrears/restructuring cases.
+* **Penalty awareness**: late filing = sanction of Rp 100.000 (1770SS) / Rp 100.000–500.000 depending on the form; incorrect entries may trigger an audit — verify the data from 1721-A1/A2.
 
 ## Worked Example
-Input: `spt_form_type: "1770S" / has_1721_a1: true, gaji bruto 150 jt, PTKP TK/0, PPh 21 sudah dipotong 3,6 jt`
-Alur: Login → Lapor → 1770S → isi data 1721-A1 → cek kolom PPh terutang (pakai engine PPh21: TER + Art 17) → hasil: PPh terutang 150 jt × progesif → bandingkan dengan kredit potong 3,6 jt → lebih bayar/kurang bayar → submit → simpan BPE.
+Input: `spt_form_type: "1770S" / has_1721_a1: true, gross salary Rp 150 million, PTKP TK/0, PPh 21 already withheld Rp 3.6 million`
+Flow: Login → Lapor → 1770S → enter 1721-A1 data → check the tax payable column (use the PPh21 engine: TER + Art 17) → result: tax payable = Rp 150 million × progressive rate → compare against the Rp 3.6 million withholding credit → overpayment/underpayment → submit → save the BPE.

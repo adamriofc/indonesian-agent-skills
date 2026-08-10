@@ -39,29 +39,29 @@ This skill collection resolves these failure modes by executing mathematical ope
 
 ---
 
-## 🚀 Quickstart (< 60 detik)
+## 🚀 Quickstart (< 60 seconds)
 
 ```bash
-# 1. Clone (5 detik)
+# 1. Clone (5 seconds)
 git clone https://github.com/adamriofc/indonesian-business-agent-skills.git && cd indonesian-business-agent-skills
 
-# 2. Install (10 detik, tanpa dependensi pihak ketiga)
+# 2. Install (10 seconds, no third-party dependencies)
 npm ci
 
-# 3. Jalankan engine dan lihat output terverifikasi (2 detik)
+# 3. Run an engine and see verified output (2 seconds)
 node -e "
 const { calculatePPh21Monthly } = require('./engines/pph21-calculator');
 console.log(calculatePPh21Monthly(10000000, 'TK/0', true, '2026-03-01'));
 "
 
-# 4. Verifikasi integritas (2 detik)
+# 4. Verify integrity (2 seconds)
 ./scripts/sha256sums.sh verify
 
-# 5. Tes penuh: 900+ asersi (30-60 detik)
+# 5. Full test: 900+ assertions (30-60 seconds)
 npm test
 ```
 
-Setelah itu: salin folder skill yang dibutuhkan ke agent Anda (lihat tabel Compatibility & Integration Directory di bawah).
+Afterward: copy the skill folders you need into your agent (see the Compatibility & Integration Directory table below).
 
 ---
 
@@ -129,13 +129,13 @@ Compatibility classes (audit-grade, no overclaim):
 
 | Application / Platform | Integration Method | Compatibility Class | Verification Method | Last Verified |
 |---|---|---|---|---|
-| **OpenWork Desktop & Cloud** | Native `plugin.json` manifest; 6 plugins + 54 skills divalidasi schema validator di CI | 🟢 **Verified** | CI schema validation (`tests/schema/`) + `npm test` | 2026-08-10 |
-| **OpenCode CLI** | `opencode` mendukung plugin pihak ketiga; cara impor tercatat di dokumentasi; tidak ada E2E run dalam repo ini | 🟡 **Adapter** | Dokumentasi + format analysis (tidak di-E2E-kan di CI repo ini) | 2026-08-10 |
-| **Claude Code (CLI) & Cowork** | Native `.claude-plugin` manifest format; `claude plugins add` | 🟡 **Adapter** | Format-native (manifest tervalidasi CI); E2E register pending | 2026-08-10 |
-| **Cursor IDE** | Context loading via `.cursorrules` / `.mdc` copies | 🟡 **Adapter** | Dokumentasi; tidak diuji otomatis di repo ini | 2026-08-10 |
-| **VS Code Agent (Copilot / Cline / Roo Code)** | Workspace prompt rules under `.vscode/settings.json` / `systemPromptPath` | 🔵 **Manual** | Langkah manual pengguna; tanpa kontrak otomasi | 2026-08-10 |
-| **Gemini CLI & Codex** | Imported as external system prompts | 🔵 **Manual** | Langkah manual pengguna | 2026-08-10 |
-| **ChatGPT / Custom GPTs** | Upload skill files in GPT Builder knowledge database | 🔵 **Manual** | Langkah manual pengguna | 2026-08-10 |
+| **OpenWork Desktop & Cloud** | Native `plugin.json` manifest; 6 plugins + 54 skills validated by the schema validator in CI | 🟢 **Verified** | CI schema validation (`tests/schema/`) + `npm test` | 2026-08-10 |
+| **OpenCode CLI** | `opencode` supports third-party plugins; import instructions are documented; no E2E run in this repository | 🟡 **Adapter** | Documentation + format analysis (not E2E-tested in this repo's CI) | 2026-08-10 |
+| **Claude Code (CLI) & Cowork** | Native `.claude-plugin` manifest format; `claude plugins add` | 🟡 **Adapter** | Format-native (manifest CI-validated); E2E registration pending | 2026-08-10 |
+| **Cursor IDE** | Context loading via `.cursorrules` / `.mdc` copies | 🟡 **Adapter** | Documentation; not automated-tested in this repository | 2026-08-10 |
+| **VS Code Agent (Copilot / Cline / Roo Code)** | Workspace prompt rules under `.vscode/settings.json` / `systemPromptPath` | 🔵 **Manual** | Manual user steps; no automation contract | 2026-08-10 |
+| **Gemini CLI & Codex** | Imported as external system prompts | 🔵 **Manual** | Manual user steps | 2026-08-10 |
+| **ChatGPT / Custom GPTs** | Upload skill files in GPT Builder knowledge database | 🔵 **Manual** | Manual user steps | 2026-08-10 |
 
 ---
 
@@ -249,9 +249,9 @@ Configure VS Code system instructions by adding the path to your settings:
 
 ## 📊 Real-World Execution Examples
 
-Semua output di bawah adalah **output engine aktual** (dijalankan 2026-08-10, Node.js 18+, `npm test` hijau).
+All outputs below are **actual engine outputs** (run on 2026-08-10, Node.js 18+, `npm test` green).
 
-### 1. PPh 21 TER Monthly — Output Engine Aktual
+### 1. PPh 21 TER Monthly — Actual Engine Output
 
 ```javascript
 const { calculatePPh21Monthly } = require('./engines/pph21-calculator');
@@ -277,7 +277,7 @@ console.log(result);
 }
 ```
 
-### 2. BPJS Temporal Wage Cap Transition — Output Engine Aktual
+### 2. BPJS Temporal Wage Cap Transition — Actual Engine Output
 
 ```javascript
 const { calculateBpjs } = require('./engines/bpjs-calculator');
@@ -299,9 +299,9 @@ console.log(res2026.bpjsKetenagakerjaan.jp.employer);              // 221726
 }
 ```
 
-Perhatikan bahwa mesin memilih ruleset **secara temporal**: dengan tanggal `2026-03-01` engine otomatis beralih dari `BPJS-2025` (cap Rp 10.547.400) ke `BPJS-2026` (cap Rp 11.086.300) — diuji oleh 425 asersi PPh 21 dan 225 asersi PHK di CI.
+Note that the engine selects rulesets **temporally**: given the date `2026-03-01`, the engine automatically switches from `BPJS-2025` (cap Rp 10.547.400) to `BPJS-2026` (cap Rp 11.086.300) — covered by 425 PPh 21 assertions and 225 PHK assertions in CI.
 
-### 3. Break-Even Analysis — Output Engine Aktual
+### 3. Break-Even Analysis — Actual Engine Output
 
 ```javascript
 const { breakEvenUnits, breakEvenRevenue, contributionMargin, contributionMarginRatio, marginOfSafety } = require('./engines/break-even');
@@ -325,7 +325,7 @@ console.log({
 }
 ```
 
-### 4. Amortization & IRR — Output Engine Aktual
+### 4. Amortization & IRR — Actual Engine Output
 
 ```javascript
 const { monthlyPayment, amortizationSchedule } = require('./engines/loan-amortization');
@@ -362,7 +362,7 @@ npm test
 
 See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines, [`PROVENANCE.md`](PROVENANCE.md) for the granular statutory gazette register, [`REGULATORY_PIPELINE.md`](REGULATORY_PIPELINE.md) for the official update procedure, and [`REGULATORY_CHANGELOG.md`](REGULATORY_CHANGELOG.md) for regulatory amendments.
 
-**Release Trust Anchor**: `SHA256SUMS.txt` (di-root repo) memuat checksum SHA-256 seluruh ruleset; regenerasi/verifikasi via `./scripts/sha256sums.sh generate|verify` dan dijalankan otomatis di CI setiap push.
+**Release Trust Anchor**: `SHA256SUMS.txt` (at the repo root) holds SHA-256 checksums for every ruleset; regeneration/verification via `./scripts/sha256sums.sh generate|verify` and runs automatically in CI on every push.
 
 Governance and community files: [`CONTRIBUTING.md`](CONTRIBUTING.md), [`ROADMAP.md`](ROADMAP.md), [`CHANGELOG.md`](CHANGELOG.md).
 

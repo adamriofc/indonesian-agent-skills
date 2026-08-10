@@ -6,42 +6,42 @@ All notable changes to this project are documented here in reverse chronological
 
 ### Added
 - **Finance Core (`finance-id` plugin)**: 12 business finance & accounting skills — accounting-basics, financial-statements, cash-flow-analysis, budgeting-forecasting, financial-ratio-analysis, working-capital, cost-accounting, break-even-analysis, unit-economics, business-feasibility, financial-modeling, capital-budgeting.
-- **8 deterministic finance engines** (pure standard math, no ruleset): `engines/break-even.js`, `depreciation.js` (SL/DDB/SYD), `npv.js` (+ terminal value), `irr.js` (bisection, self-consistency), `loan-amortization.js`, `financial-ratios.js` (14 ratios), `working-capital.js`, `eoq.js` — each with golden corpus (`tests/golden/finance.json`, 11 kasus) + unit module (`tests/units/finance-engines.test.js`).
-- **Benchmark harness extended**: domain `finance` (8 engine, 11 golden cases) — semua domain 100% deterministik.
-- **PROVENANCE.md**: Access Path baru `STANDARD_REFERENCE` + section 6 Finance & Accounting Standard Register (PSAK 1/16/23, SAK EMKM; IAI — 404 klien otomatis, diverifikasi manual).
+- **8 deterministic finance engines** (pure standard math, no ruleset): `engines/break-even.js`, `depreciation.js` (SL/DDB/SYD), `npv.js` (+ terminal value), `irr.js` (bisection, self-consistency), `loan-amortization.js`, `financial-ratios.js` (14 ratios), `working-capital.js`, `eoq.js` — each with a golden corpus (`tests/golden/finance.json`, 11 cases) + unit module (`tests/units/finance-engines.test.js`).
+- **Benchmark harness extended**: domain `finance` (8 engines, 11 golden cases) — all domains 100% deterministic.
+- **PROVENANCE.md**: new `STANDARD_REFERENCE` Access Path + section 6 Finance & Accounting Standard Register (PSAK 1/16/23, SAK EMKM; IAI — 404 for automated clients, verified manually).
 
 ### Changed
-- **Repo direname**: `indonesian-agent-skills` → `indonesian-business-agent-skills` (redirect GitHub otomatis).
-- **Rebrand**: judul "Indonesian Business Agent Skills", tagline *"Give AI agents a business brain for Indonesia."*; arsitektur CORE (legal/tax/finance/HR) · BUSINESS (commerce) · CREATIVE (content); scope "6 business domains · 54 agent skills · 16 deterministic engines".
-- `package.json`: name `indonesian-business-agent-skills`, version `2.0.0`; rantai `npm test` + `test:units` menyertakan `finance-engines.test.js` (9 modul).
-- README: contoh output engine aktual finance (break-even, amortization, IRR) ditambahkan; path absolut `/tmp/...` diganti `$PWD`.
+- **Repo renamed**: `indonesian-agent-skills` → `indonesian-business-agent-skills` (automatic GitHub redirect).
+- **Rebrand**: title "Indonesian Business Agent Skills", tagline *"Give AI agents a business brain for Indonesia."*; CORE (legal/tax/finance/HR) · BUSINESS (commerce) · CREATIVE (content) architecture; scope "6 business domains · 54 agent skills · 16 deterministic engines".
+- `package.json`: name `indonesian-business-agent-skills`, version `2.0.0`; the `npm test` + `test:units` chain now includes `finance-engines.test.js` (9 modules).
+- README: actual finance engine output examples (break-even, amortization, IRR) added; absolute `/tmp/...` paths replaced with `$PWD`.
 
 ### Fixed
-- `scripts/benchmark.js`: parser argumen `--json-report`/`--llm-sample` kini menerima sintaks space (`--json-report path`) dan `=`; perbandingan kasus array (mis. `annual` depresiasi) memakai deep-match, bukan `===` referensi.
+- `scripts/benchmark.js`: the `--json-report`/`--llm-sample` argument parser now accepts both space (`--json-report path`) and `=` syntax; array case comparisons (e.g. `annual` depreciation) use deep-match instead of `===` reference equality.
 
-### Benchmark (run aktual 2026-08-10, Node v26.5.1, `scripts/benchmark.js`)
-- PPh 21 100% (6 kasus, 14.649 ops/dtk) · BPJS 100% (3, 14.329) · PHK 100% (3, 27.028) · Finance 100% (11, 4.099) — determinisme 3× OK, 0 pelanggaran.
+### Benchmark (actual run 2026-08-10, Node v26.5.1, `scripts/benchmark.js`)
+- PPh 21 100% (6 cases, 14.649 ops/s) · BPJS 100% (3, 14.329) · PHK 100% (3, 27.028) · Finance 100% (11, 4.099) — determinism 3× OK, 0 violations.
 
 ## [1.1.0] - 2026-08-10
 
 ### Added
-- **Release Trust Anchor**: `SHA256SUMS.txt` + `scripts/sha256sums.sh generate|verify`, diverifikasi otomatis di CI setiap push.
-- **Benchmark harness**: `scripts/benchmark.js` (deterministic accuracy vs golden corpus, determinism 3×, ops/detik, opsi LLM baseline via OpenAI-compatible endpoint) + `docs/BENCHMARK.md` (no-fiction policy: hanya angka hasil run aktual).
-- **PROVENANCE.md diperluas**: kolom Access Path (`DIRECT_DOCUMENT` / `REGISTRY_ENTRY` / `OFFICIAL_PAGE` / `SECONDARY_MIRROR`), section Audit Scope Statement & Non-Claims, dan Provenance Change Log.
-- **15 skill terpendek diperkaya** dengan Scope & Safety + Worked Example (script-reels-tiktok, press-release-id, lokalisasi-slang-indonesia, tokopedia-seo-optimizer, linkedin-x-thread-id, spt-tahunan-guide, shopee-live-script, whatsapp-broadcast, buyer-negotiator, shopee-video-creator, bpjs-tenagakerja-admin, klaim-logistik-retur, tiktok-shop-affiliate, interview-id, gmb-local-seo).
-- Community files: `CODE_OF_CONDUCT.md`, `.github/ISSUE_TEMPLATE/regulatory-update.md`; GitHub topics (regtech, taxtech, legaltech, dsb.).
+- **Release Trust Anchor**: `SHA256SUMS.txt` + `scripts/sha256sums.sh generate|verify`, automatically verified in CI on every push.
+- **Benchmark harness**: `scripts/benchmark.js` (deterministic accuracy vs golden corpus, 3× determinism, ops/second, LLM baseline option via OpenAI-compatible endpoint) + `docs/BENCHMARK.md` (no-fiction policy: only numbers from actual runs).
+- **PROVENANCE.md expanded**: Access Path column (`DIRECT_DOCUMENT` / `REGISTRY_ENTRY` / `OFFICIAL_PAGE` / `SECONDARY_MIRROR`), Audit Scope Statement & Non-Claims section, and Provenance Change Log.
+- **15 shortest skills enriched** with Scope & Safety + Worked Example (script-reels-tiktok, press-release-id, lokalisasi-slang-indonesia, tokopedia-seo-optimizer, linkedin-x-thread-id, spt-tahunan-guide, shopee-live-script, whatsapp-broadcast, buyer-negotiator, shopee-video-creator, bpjs-tenagakerja-admin, klaim-logistik-retur, tiktok-shop-affiliate, interview-id, gmb-local-seo).
+- Community files: `CODE_OF_CONDUCT.md`, `.github/ISSUE_TEMPLATE/regulatory-update.md`; GitHub topics (regtech, taxtech, legaltech, etc.).
 
 ### Fixed
-- **Link sumber rusak (404)** diganti dengan tautan resmi terverifikasi: UU 7/2021 (JDIH Kemenkeu download → BPK JDIH `Details/185162`), PP 55/2022 (JDIH Kemenkeu download → `jdih.kemenkeu.go.id/dok/pp-55-tahun-2022`).
-- **Presisi provenance**: BPJS-KES (portal arsip root → Peraturan.go.id Perpres 64/2020), BPJS-JP-2015 (FAQ root → BPK JDIH PP 45/2015), BPJS-JP-2026 (FAQ root → mirror PDF SE terverifikasi), OSS-PP5 (oss.go.id root → Peraturan.go.id PP 5/2021), PDP (Kominfo timeout → Peraturan.go.id UU 27/2022).
-- **README**: quickstart <60 detik, output engine aktual (bukan dugaan), tabel compatibility + kolom Verification Method & Last Verified, klaim "synced via Cloud API" dihapus (jujur: schema-validated, bukan E2E cloud).
+- **Broken source links (404)** replaced with verified official links: UU 7/2021 (JDIH Kemenkeu download → BPK JDIH `Details/185162`), PP 55/2022 (JDIH Kemenkeu download → `jdih.kemenkeu.go.id/dok/pp-55-tahun-2022`).
+- **Provenance precision**: BPJS-KES (archive portal root → Peraturan.go.id Perpres 64/2020), BPJS-JP-2015 (FAQ root → BPK JDIH PP 45/2015), BPJS-JP-2026 (FAQ root → verified SE PDF mirror), OSS-PP5 (oss.go.id root → Peraturan.go.id PP 5/2021), PDP (Kominfo timeout → Peraturan.go.id UU 27/2022).
+- **README**: quickstart <60 seconds, actual engine outputs (not guesses), compatibility table with Verification Method & Last Verified columns, "synced via Cloud API" claim removed (honest: schema-validated, not cloud E2E).
 
 ### Changed
-- `engines/rules/bpjs.json`: source URL eksak per ruleset (BPJS-2015, BPJS-2025, BPJS-2026); checksum `integrity.js` diperbarui.
-- CI: langkah `sha256sums.sh verify` sebelum `npm test`.
+- `engines/rules/bpjs.json`: exact source URL per ruleset (BPJS-2015, BPJS-2025, BPJS-2026); `integrity.js` checksums updated.
+- CI: `sha256sums.sh verify` step before `npm test`.
 
-### Benchmark (run aktual 2026-08-10)
-- Akurasi golden corpus: PPh 21 100%, BPJS 100%, PHK 100% — determinisme 3× OK; throughput 17.373 / 1.921 / 16.450 ops/detik (Node v26.5.1).
+### Benchmark (actual run 2026-08-10)
+- Golden corpus accuracy: PPh 21 100%, BPJS 100%, PHK 100% — determinism 3× OK; throughput 17.373 / 1.921 / 16.450 ops/second (Node v26.5.1).
 
 ## [1.0.0] - 2026-08-10
 

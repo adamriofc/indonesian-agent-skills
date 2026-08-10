@@ -11,21 +11,21 @@ rule_type: commercial
 Designs affiliate commission plans and outreach templates for TikTok Shop creators.
 
 ## Commission Strategy
-* **Target Commission (Komisi Target)**: Higher commission (15-25%) offered to select high-performing creators with free sample sending (*sampel gratis*).
-* **Open Commission (Komisi Terbuka)**: Standard baseline commission (5-10%) open to all affiliate creators.
+* **Target Commission**: Higher commission (15-25%) offered to select high-performing creators, with free-sample sending.
+* **Open Commission**: Standard baseline commission (5-10%) open to all affiliate creators.
 * **Sample Policy Rules**: Mandate video posting within 7-14 days of receiving samples, with cart link attached.
 
 ## Campaign Setup
 1. **Budget split**: 60% target creators (volume) + 40% open pool (crawl for UGC).
-2. **Creator tiers**: nano (<10k), micro (10-100k), macro (100k-1M), mega (>1M) — sesuaikan komisi & syarat sampel.
-3. **Brief wajib memuat**: produk demo point, USPs, syarat video (durasi, CTA, link cart), tagar wajib, dan tenggat.
-4. **Tracking**: monitor per-creator conversion (GPM), cut creators tanpa hasil di minggu 2-3.
+2. **Creator tiers**: nano (<10k), micro (10-100k), macro (100k-1M), mega (>1M) — adjust commission & sample requirements accordingly.
+3. **The brief must include**: product demo points, USPs, video requirements (duration, CTA, cart link), mandatory hashtags, and deadlines.
+4. **Tracking**: monitor per-creator conversion (GPM); cut creators with no results in weeks 2-3.
 
 ## Scope & Safety
-* **Use for**: campaign launch, season flash sale, brand awareness via UGC.
-* **Do not use for**: komisi imbalan ulasan positif saja (astroturfing) — TikTok Shop melarang; klaim khasiat produk wajib mengikuti regulasi iklan (BPOM/KKB bila relevan).
-* **Perpajakan**: komisi yang dibayarkan kepada kreator = objek PPh (cek `pph23-26-calculator` — PPh 23/26 atas jasa afiliasi bila memenuhi syarat pemotong).
+* **Use for**: campaign launches, seasonal flash sales, brand awareness via UGC.
+* **Do not use for**: commission as payment for positive reviews only (astroturfing) — prohibited by TikTok Shop; product efficacy claims must follow advertising regulations (BPOM/KKB where relevant).
+* **Taxation**: commissions paid to creators are subject to PPh (income tax) (check `pph23-26-calculator` — PPh 23/26 on affiliate services where the withholding requirements are met).
 
 ## Worked Example
-Input: `category: "skincare serum" / target: "1.000 pcs/bulan" / margin_allowance: "25%"`
-Plan: 20 target creators (nano-micro) komisi 20% + sampel 50 pcs syarat post ≤ 10 hari; open commission 8%; brief: demo 3 poin (tekstur, hasil 2 minggu, foto sebelum-sesudah sesuai klaim) + CTA "cek link cart"; monitoring mingguan GPM, cut <1.0 di minggu 2.
+Input: `category: "skincare serum" / target: "1.000 pcs/month" / margin_allowance: "25%"`
+Plan: 20 target creators (nano-micro) at 20% commission + 50 pcs samples, posting within ≤ 10 days; open commission at 8%; brief: 3 demo points (texture, 2-week results, before-after photos per claim) + CTA "check the cart link"; weekly GPM monitoring; cut creators with GPM < 1.0 in week 2.

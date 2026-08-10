@@ -1,7 +1,7 @@
 ---
 name: working-capital
 description: Calculate net working capital, working capital ratio, cash conversion cycle, and funding requirements with the deterministic working-capital engine.
-argument-hint: "<current_assets> <current_liabilities> <siklus_hari> <cogs_harian>"
+argument-hint: "<current_assets> <current_liabilities> <cycle_days> <daily_cogs>"
 risk_level: MEDIUM
 rule_type: professional-standard
 ---
@@ -12,20 +12,20 @@ Measures how much cash is trapped in the operating cycle and how much funding is
 
 ## Metrics
 * **Net Working Capital** = Current Assets − Current Liabilities.
-* **Working Capital Ratio** = Current Assets ÷ Current Liabilities (≥ 1.5 konservatif untuk UMKM).
-* **Cash Conversion Cycle (CCC)** = DIO + DSO − DPO — hari kas terikat dari beli stok sampai kas kembali.
-* **Working Capital Requirement** = CCC (hari) × COGS per hari — kebutuhan dana operasional.
+* **Working Capital Ratio** = Current Assets ÷ Current Liabilities (≥ 1.5 conservative for SMEs).
+* **Cash Conversion Cycle (CCC)** = DIO + DSO − DPO — days cash is tied up from buying stock until cash returns.
+* **Working Capital Requirement** = CCC (days) × COGS per day — operational funding needs.
 
 ## Scope & Safety
-* **Use for**: merencanakan kebutuhan pinjaman modal kerja, negosiasi syarat pembayaran pemasok, menilai likuiditas operasional.
-* **Do not use for**: keputusan pinjaman investasi jangka panjang (pakai capital-budgeting), atau penilaian solvabilitas total.
-* CCC panjang = kas tersedot ke piutang/persediaan — prioritas: percepat penagihan, perpanjang utang pemasok secara wajar, kurangi stok mati.
-* Angka WCR adalah estimasi kebutuhan; tambahkan buffer 10–20% untuk musiman.
+* **Use for**: planning working-capital loan needs, negotiating supplier payment terms, assessing operational liquidity.
+* **Do not use for**: long-term investment loan decisions (use capital-budgeting), or total solvency assessment.
+* A long CCC means cash is absorbed into receivables/inventory — priorities: speed up collections, reasonably extend supplier payables, reduce dead stock.
+* WCR figures are need estimates; add a 10–20% buffer for seasonality.
 
 ## Hybrid Execution Model
-Pass input ke `engines/working-capital.js`: `netWorkingCapital`, `workingCapitalRatio`, `cashConversionCycle`, `workingCapitalRequirement`. Wrap dalam Trust Envelope (risk MEDIUM; as_of; review manusia untuk pengajuan kredit).
+Pass inputs to `engines/working-capital.js`: `netWorkingCapital`, `workingCapitalRatio`, `cashConversionCycle`, `workingCapitalRequirement`. Wrap in a Trust Envelope (risk MEDIUM; as_of; human review for credit applications).
 
 ## Worked Example
-Input: CA 500 jt, CL 250 jt; DIO 60 hari, DSO 45 hari, DPO 30 hari; COGS/hari 2 jt.
-Output: NWC = **250 jt**; Ratio = **2.0**; CCC = 60 + 45 − 30 = **75 hari**; Kebutuhan = 75 × 2 jt = **150 jt**.
-Interpretasi: usaha secara likuid, tetapi butuh ±150 jt dana untuk membiayai siklus modal kerja 75 hari.
+Input: CA 500 million, CL 250 million; DIO 60 days, DSO 45 days, DPO 30 days; COGS/day 2 million.
+Output: NWC = **250 million**; Ratio = **2.0**; CCC = 60 + 45 − 30 = **75 days**; Requirement = 75 × 2 million = **150 million**.
+Interpretation: the business is liquid, but needs ~150 million to fund the 75-day working capital cycle.

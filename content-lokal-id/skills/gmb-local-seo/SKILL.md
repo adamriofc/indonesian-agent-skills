@@ -12,21 +12,21 @@ Optimizes Google Maps listings and local search rankings for offline businesses 
 
 ## Local SEO Checklist
 1. **NAP Consistency (Name, Address, Phone)**: Ensure identical address styling across Google Maps, website footer, and social bios.
-2. **Geo-Targeted Keywords**: Insert location terms into category descriptions (e.g. *"Cafe Kopi Kekinian Jakarta Selatan"*).
+2. **Geo-Targeted Keywords**: Insert location terms into category descriptions (e.g. *"South Jakarta Trendy Coffee Cafe"*).
 3. **Customer Review Response Protocol**: Reply to positive reviews within 24 hours and handle negative reviews with escalation contacts.
 
 ## Optimization Steps
-* **Kategori & atribut**: pilih kategori utama yang paling spesifik (bukan umum); isi atribut (bukti kepemilikan, jam operasional, fasilitas).
-* **Foto**: min 10 foto berkualitas (fasad, interior, menu/produk, kegiatan); update 1-2x/bulan; foto dengan geotag lokal.
-* **Posts**: 1-2 post/minggu (promo, event, behind-scene) — aktivitas listing memengaruhi snapshot ranking.
-* **Q&A**: jawab pertanyaan publik sendiri untuk menghindari info keliru dari pengguna lain.
-* **Ulasan**: balas semua ulasan; ulasan negatif → balas profesional + tawarkan solusi offline (telepon/WA), jangan debat publik.
+* **Category & attributes**: select the most specific primary category (not a generic one); fill in attributes (ownership verification, business hours, facilities).
+* **Photos**: at least 10 quality photos (facade, interior, menu/products, activities); update 1-2x/month; use locally geotagged photos.
+* **Posts**: 1-2 posts/week (promos, events, behind-the-scenes) — listing activity affects ranking snapshots.
+* **Q&A**: answer public questions yourself to prevent inaccurate info from other users.
+* **Reviews**: reply to all reviews; for negative reviews → respond professionally + offer an offline resolution (phone/WhatsApp), never argue in public.
 
 ## Scope & Safety
-* **Use for**: usaha offline/toko fisik, multi-branch, layanan lokal.
-* **Do not use for**: pengisian data palsu (alamat fiktif, PO box sebagai lokasi), ulasan palsu/bayaran, atau spam keyword — penalti Google (listing suspended) & berisiko UU 8/1999.
-* **Konsistensi**: perubahan jam buka (hari raya) → update listing + website same time.
+* **Use for**: offline businesses/brick-and-mortar stores, multi-branch operations, local services.
+* **Do not use for**: submitting false data (fictitious addresses, PO boxes as locations), fake/paid reviews, or keyword spam — Google penalties (suspended listing) & risk under Law No. 8/1999.
+* **Consistency**: when business hours change (public holidays) → update the listing + website at the same time.
 
 ## Worked Example
 Input: `business: "Kopi Senja" / city: "Bandung" / category: "cafe"`
-Tindakan: kategori utama "Kedai Kopi"; deskripsi: *"Kedai kopi specialty di Bandung — roasted lokal, free wifi, cocok kerja remote"*; NAP seragam (Jl. Dago No. 12, 022-123456); upload 15 foto; post mingguan; baja ulasan 4-5⭐ dengan *"Terima kasih kak! Senang kopinya cocok 😊"*; ulasan 1⭐ → *"Mohon maaf atas pengalaman Anda — mohon hubungi +62 812-xxxx via WA agar kami bisa tindak lanjut langsung."*
+Actions: primary category "Coffee Shop"; description: *"Specialty coffee shop in Bandung — locally roasted beans, free Wi-Fi, great for remote work"*; uniform NAP (Jl. Dago No. 12, 022-123456); upload 15 photos; weekly posts; reply to 4-5⭐ reviews with *"Thank you! Glad the coffee hit the spot 😊"*; 1⭐ review → *"We apologize for your experience — please contact +62 812-xxxx via WhatsApp so we can follow up directly."*

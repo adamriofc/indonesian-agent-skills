@@ -12,13 +12,13 @@ Validates transaction codes, DPP values, and PPN 11% tax invoices for e-Faktur D
 
 ## Statutory Basis & Code Classification
 * **Statute**: UU No. 7/2021 (HPP) & PER-03/PJ/2022 (Faktur Pajak).
-* **Kode Transaksi NSFP**:
-  * **01**: Penyerahan BKP/JKP kepada selain Pemungut PPN.
-  * **02**: Penyerahan kepada Bendahara Pemerintah.
-  * **03**: Penyerahan kepada Pemungut PPN Lain (BUMN/Kontraktor Migas).
-  * **04**: Penyerahan menggunakan DPP Nilai Lain.
-  * **07**: Penyerahan PPN Tidak Dipungut (Kawasan Bebas / Bonded Zone).
-  * **08**: Penyerahan PPN Dibebaskan.
+* **NSFP Transaction Codes**:
+  * **01**: Supply of taxable goods/services (BKP/JKP) to parties other than PPN Collectors.
+  * **02**: Supply to Government Budget Treasurers (Bendahara Pemerintah).
+  * **03**: Supply to other PPN Collectors (SOEs / Oil & Gas Contractors).
+  * **04**: Supply using the Other Basis DPP (DPP Nilai Lain).
+  * **07**: Supply where PPN is not collected (Free Zone / Bonded Zone).
+  * **08**: Supply exempted from PPN.
 
 ## Auditing Workflow
 1. Verify 16-digit NSFP format.

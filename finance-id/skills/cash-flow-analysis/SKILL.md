@@ -1,7 +1,7 @@
 ---
 name: cash-flow-analysis
 description: Analyze operating, investing, and financing cash flows, free cash flow, and cash runway for Indonesian businesses.
-argument-hint: "<laporan_arus_kas> <capex> <burn_bulanan>"
+argument-hint: "<cash_flow_statement> <capex> <monthly_burn>"
 risk_level: MEDIUM
 rule_type: professional-standard
 ---
@@ -11,18 +11,18 @@ rule_type: professional-standard
 Determines whether a business generates enough cash to sustain operations, growth, and obligations.
 
 ## Methods & Core Metrics
-* **Metode langsung**: kas dari pelanggan − kas keluar operasi.
-* **Metode tidak langsung**: laba bersih + non-kas (depresiasi) ± perubahan modal kerja.
-* **Free Cash Flow (FCF)** = OCF − Capex — uang yang benar-benar bebas untuk dividen/utang/investasi.
-* **Cash Runway** = Kas saat ini ÷ Burn rate bulanan — bulan sebelum kas habis (tanpa tambahan dana).
+* **Direct method**: cash from customers − cash paid for operations.
+* **Indirect method**: net income + non-cash items (depreciation) ± changes in working capital.
+* **Free Cash Flow (FCF)** = OCF − Capex — the cash truly free for dividends/debt/investment.
+* **Cash Runway** = Current cash ÷ monthly burn rate — months before cash runs out (without additional funding).
 
 ## Scope & Safety
-* **Use for**: menilai kelayakan membayar utang, merencanakan pendanaan, mendeteksi "laba tapi tak ada kas" (earning without cash).
-* **Do not use for**: penilaian profitabilitas saja (arus kas bukan laba) — gabungkan dengan Laba Rugi.
-* FCF positif sekali periode bukan jaminan; gunakan tren multi-periode (min. 3 bulan) + musiman.
-* Angka proyeksi harus diberi label asumsi, bukan fakta.
+* **Use for**: assessing debt repayment capacity, planning financing, detecting "earning without cash" situations.
+* **Do not use for**: profitability assessment alone (cash flow ≠ profit) — combine with the Profit & Loss statement.
+* A single positive FCF period is not a guarantee; use multi-period trends (min. 3 months) plus seasonality.
+* Projected figures must be labeled as assumptions, not facts.
 
 ## Worked Example
-Input: OCF 150 jt/bulan, Capex 40 jt/bulan, kas 300 jt, burn 25 jt/bulan (jika pendapatan berhenti).
-Output: FCF = 150 − 40 = **110 jt/bulan**; Runway = 300 ÷ 25 = **12 bulan**.
-Interpretasi: bisnis menghasilkan kas positif; tetap butuh buffer 3–6 bulan runway untuk kondisi darurat.
+Input: OCF 150 million/month, Capex 40 million/month, cash 300 million, burn 25 million/month (if revenue stops).
+Output: FCF = 150 − 40 = **110 million/month**; Runway = 300 ÷ 25 = **12 months**.
+Interpretation: the business generates positive cash; still needs a 3–6 month runway buffer for emergencies.

@@ -11,21 +11,21 @@ rule_type: platform-policy
 Drafts formal insurance claim reports to couriers and marketplace resolution centers.
 
 ## Required Claim Package
-1. **Bukti Resi (Airwaybill)** & Order ID.
-2. **Video Unboxing Tanpa Jeda**: Unbroken unboxing video demonstrating outer package label + damage.
-3. **Foto Kerusakan / Barang Hilang**: Photos of damaged item + packaging box.
-4. **Surat Pertanggungjawaban**: Formal claim letter requesting 100% item value reimbursement under courier insurance policy.
+1. **Receipt Proof (Airwaybill)** & Order ID.
+2. **Uninterrupted Unboxing Video**: Unbroken unboxing video demonstrating outer package label + damage.
+3. **Damage / Lost Item Photos**: Photos of damaged item + packaging box.
+4. **Formal Claim Letter**: Formal claim letter requesting 100% item value reimbursement under courier insurance policy.
 
-## Claim Timeline (umum)
-* **Paket hilang**: klaim diajukan 7-30 hari sejak status resi berhenti; masing-masing kurir beda SOP (J&T ≤ 30 hari, JNE ≤ 30 hari, SiCepat ≤ 21 hari, Shopee Xpress via pusat resolusi 7-14 hari).
-* **Paket rusak**: foto+video wajib dikirim ≤ 24-48 jam setelah diterima — lewat dari itu umumnya ditolak.
-* **Proses**: ajukan via marketplace (CS/komplain pesanan) terlebih dahulu bila transaksi marketplace — kurir biasanya memproses setelah marketplace approve.
+## Claim Timeline (general)
+* **Lost package**: claims filed 7-30 days from the date the tracking status stops updating; each courier has different SOPs (J&T ≤ 30 days, JNE ≤ 30 days, SiCepat ≤ 21 days, Shopee Xpress via the resolution center 7-14 days).
+* **Damaged package**: photos + video must be submitted ≤ 24-48 hours after receipt — beyond that, generally rejected.
+* **Process**: file first via the marketplace (CS/order complaint) for marketplace transactions — couriers typically process only after the marketplace approves.
 
 ## Scope & Safety
-* **Use for**: klaim asuransi kiriman standar (nilai barang ≤ limit pertanggungan default).
-* **Do not use for**: barang tanpa asuransi (nilai > limit tanpa extra cover), kiriman ilegal, atau klaim rugi immaterial — tidak dipertanggungkan.
-* **Anti-scam**: jangan pernah "mempercantik" bukti (foto diedit) — bisa berujung penolakan permanen & blacklist.
+* **Use for**: standard shipping insurance claims (item value ≤ default coverage limit).
+* **Do not use for**: uninsured items (value above the limit without extra cover), illegal shipments, or immaterial loss claims — not covered.
+* **Anti-scam**: never "beautify" evidence (edited photos) — can lead to permanent rejection & blacklisting.
 
 ## Worked Example
-Input: `waybill: "JT123456789" / courier: "J&T" / "paket hilang setelah 20 hari"`
-Draft: Surat klaim → lampirkan resi JT123456789, bukti pembayaran, chat konfirmasi pengiriman, screenshot status resi berhenti di tanggal X → ajukan via CS J&T (hotline/portal) → follow up hari ke-7 → bila buntu, eskalasi via marketplace resolution center + laporan ke WhatsApp Business resmi J&T. Nilai klaim = harga produk (≥ limit default? cek skema asuransi).
+Input: `waybill: "JT123456789" / courier: "J&T" / "package lost after 20 days"`
+Draft: claim letter → attach the JT123456789 airwaybill, payment proof, delivery confirmation chat, and screenshot of the tracking status frozen on date X → submit via J&T CS (hotline/portal) → follow up on day 7 → if stalled, escalate via the marketplace resolution center + report to J&T's official WhatsApp Business. Claim value = product price (above the default limit? check the insurance scheme).

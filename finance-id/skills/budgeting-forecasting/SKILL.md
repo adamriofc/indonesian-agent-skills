@@ -1,7 +1,7 @@
 ---
 name: budgeting-forecasting
 description: Build top-down or bottom-up budgets, variance analysis, and rolling forecasts for Indonesian SME planning cycles.
-argument-hint: "<target> <history> <asumsi>"
+argument-hint: "<target> <history> <assumptions>"
 risk_level: MEDIUM
 rule_type: internal-policy
 ---
@@ -11,21 +11,21 @@ rule_type: internal-policy
 Turns targets into executable budgets with honest variance tracking and rolling recalibration.
 
 ## Methods
-* **Top-down**: target manajemen diturunkan ke unit — cepat, tapi bisa tidak realistis di lapangan.
-* **Bottom-up**: estimasi dari unit/pelanggan dinaikkan — lebih akurat, lebih lambat; pilih sesuai skala.
-* **Rolling forecast**: revisit kuartalan, bukan setahun sekali — cocok untuk UMKM yang berubah cepat.
+* **Top-down**: management targets are cascaded down to units — fast, but may be unrealistic on the ground.
+* **Bottom-up**: estimates from units/customers are rolled up — more accurate, slower; choose based on scale.
+* **Rolling forecast**: quarterly revisit instead of once a year — suited to fast-changing SMEs.
 
 ## Variance Rules
 * **Variance = Actual − Budget**: label favorable (+) / unfavorable (−).
-* Threshold review: variance ≥ 5% per pos signifikan → wajib analisis sebab (volume? harga? timing?) sebelum revisi.
-* Jangan revisi budget di tengah periode hanya karena underperform — revisi forecast terpisah.
+* Review threshold: variance ≥ 5% on any significant line item → require root-cause analysis (volume? price? timing?) before revising.
+* Do not revise the budget mid-period just because of underperformance — revise the forecast separately.
 
 ## Scope & Safety
-* **Use for**: perencanaan tahunan, kontrol biaya, komunikasi target dengan investor/bank.
-* **Do not use for**: dasar pengakuan laba (budget ≠ hasil aktual), atau klaim pendapatan kepada pihak ketiga.
-* Asumsi (harga, volume, inflasi) harus ditulis eksplisit dan diuji sensitivitasnya.
-* Angka historis vs proyeksi harus diberi label berbeda di semua dokumen.
+* **Use for**: annual planning, cost control, communicating targets to investors/banks.
+* **Do not use for**: a basis for profit recognition (budget ≠ actual results), or revenue claims to third parties.
+* Assumptions (price, volume, inflation) must be stated explicitly and sensitivity-tested.
+* Historical vs projected figures must be labeled differently in all documents.
 
 ## Worked Example
-Input: budget penjualan 500 jt/bulan, actual 460 jt → variance −40 jt (−8%, unfavorable).
-Analisis: volume turun 60 jt tetapi harga naik 3% (+20 jt) → penyebab utama volume; cek kompetisi & musiman sebelum revisi forecast kuartal baru: 470 jt/bulan.
+Input: sales budget 500 million/month, actual 460 million → variance −40 million (−8%, unfavorable).
+Analysis: volume dropped by 60 million but price rose 3% (+20 million) → volume is the main driver; check competition & seasonality before revising the new quarterly forecast: 470 million/month.

@@ -1,31 +1,31 @@
 ---
 name: financial-statements
 description: Structure Indonesian financial statements (income statement, balance sheet, cash flow) per PSAK 1 presentation principles with accrual linkage.
-argument-hint: "<trial_balance> <periode>"
+argument-hint: "<trial_balance> <period>"
 risk_level: MEDIUM
 rule_type: professional-standard
 ---
 
 # Financial Statements
 
-Builds and links the three core statements: Laba Rugi, Neraca, and Arus Kas — presentation aligned with PSAK 1.
+Builds and links the three core statements: Income Statement, Balance Sheet, and Cash Flow — presentation aligned with PSAK 1.
 
 ## Statement Structure & Linkage
-1. **Laporan Laba Rugi**: Pendapatan − Beban = Laba/Rugi Periode (accrual basis).
-2. **Laporan Posisi Keuangan (Neraca)**: Aset = Liabilitas + Ekuitas; laba periode ditutup ke ekuitas.
-3. **Laporan Arus Kas**: operasi, investasi, pendanaan — kas akhir harus cocok dengan kas di neraca.
-* Linkage: Laba Rugi → Neraca (laba ditahan) → Arus Kas (depresiasi non-kas di-reverse, perubahan modal kerja).
+1. **Income Statement**: Revenue − Expenses = Period Profit/Loss (accrual basis).
+2. **Statement of Financial Position (Balance Sheet)**: Assets = Liabilities + Equity; period profit is closed to equity.
+3. **Statement of Cash Flows**: operating, investing, financing — ending cash must match cash on the balance sheet.
+* Linkage: Income Statement → Balance Sheet (retained earnings) → Cash Flow (non-cash depreciation reversed, working capital changes).
 
 ## Disclosure Essentials (PSAK 1)
-* Pos disajikan material; klasifikasi lancar/tidak lancar; komparatif periode sebelumnya; basis pengukuran dinyatakan.
-* Catatan atas LK menjelaskan kebijakan akuntansi signifikan.
+* Items presented when material; current/non-current classification; comparative prior period; measurement basis stated.
+* Notes to the financial statements explain significant accounting policies.
 
 ## Scope & Safety
-* **Use for**: penyusunan struktur LK UMKM, analisis internal, persiapan data untuk kredit bank.
-* **Do not use for**: opini audit atau laporan yang wajib diaudit — harus akuntan publik terdaftar (regulasi OJK/PMK).
-* **Relation to `laporan-keuangan-psak` (tax-payroll-id)**: skill itu menyusun LK SAK EMKM untuk pengajuan kredit bank; skill ini fokus penyajian & analisis umum.
-* Standar akuntansi (PSAK/SAK EMKM) bukan hukum positif — amendemen PSAK di-track di PROVENANCE register, bukan ruleset runtime.
+* **Use for**: structuring SME financial statements, internal analysis, preparing data for bank credit.
+* **Do not use for**: audit opinions or statements that must be audited — requires a registered public accountant (OJK/PMK regulations).
+* **Relation to `laporan-keuangan-psak` (tax-payroll-id)**: that skill prepares SAK EMKM financial statements for bank credit applications; this skill focuses on general presentation & analysis.
+* Accounting standards (PSAK/SAK EMKM) are not positive law — PSAK amendments are tracked in the PROVENANCE register, not the runtime ruleset.
 
 ## Worked Example
-Input: trial balance periode (pendapatan 1,2 M; COGS 800 jt; beban op 200 jt; kas 100 jt; piutang 150 jt; persediaan 200 jt; aset tetap 550 jt; utang 250 jt; modal 350 jt).
-Output: Laba bersih 200 jt → Ekuitas akhir 550 jt; Neraca: Aset 1 M = Liabilitas 450 jt + Ekuitas 550 jt; Arus kas: OCF 150 jt (net income + depresiasi 50 jt − kenaikan piutang 40 jt − kenaikan persediaan 60 jt) → kas akhir konsisten.
+Input: trial balance for the period (revenue 1.2 billion; COGS 800 million; operating expenses 200 million; cash 100 million; receivables 150 million; inventory 200 million; fixed assets 550 million; payables 250 million; capital 350 million).
+Output: net income 200 million → ending equity 550 million; Balance Sheet: Assets 1 billion = Liabilities 450 million + Equity 550 million; Cash flow: OCF 150 million (net income + depreciation 50 million − increase in receivables 40 million − increase in inventory 60 million) → ending cash is consistent.

@@ -22,9 +22,9 @@ Drafts structured video scripts with 3-second visual hooks, audio track suggesti
 
 ## Scope & Safety
 * **Use for**: TikTok, Instagram Reels, YouTube Shorts scripts; hook testing.
-* **Do not use for**: scripted claims of medical/cure, investment guarantees, or unverifiable income claims — these violate platform advertising policies and UU 8/1999 (konsumen). Never fabricate testimonials.
-* **Compliance**: include visible #Iklan / #Ad disclosure for paid partnerships (BPHN/FTC-aligned disclosure norms).
+* **Do not use for**: scripted claims of medical/cure, investment guarantees, or unverifiable income claims — these violate platform advertising policies and Law No. 8/1999 (consumer protection). Never fabricate testimonials.
+* **Compliance**: include a visible #Iklan (ad) disclosure for paid partnerships (BPHN/FTC-aligned disclosure norms).
 
 ## Worked Example
-Input: `product_hook: "baju kemeja anti-kusut" / outline: "orang sibuk, 5 menit siap rapi"`
-Output (30s): Hook: *"Kemeja yang nggak butuh setrika."* → Bridge: tunjukkan bahan anti-kusut + 1 benefit (hemat waktu pagi) → Proof: demo lipat-kantong-keluarkan-masih rapi → CTA: *"Komen 'RAPI' buat link-nya!"* (captions: [LAGU: upbeat, duck 20%]).
+Input: `product_hook: "wrinkle-free shirt" / outline: "busy person, presentable in 5 minutes"`
+Output (30s): Hook: *"A shirt that needs no ironing."* → Bridge: showcase the wrinkle-free fabric + 1 benefit (saves your morning) → Proof: fold → bag → unpack → still crisp demo → CTA: *"Comment 'NEAT' for the link!"* (captions: [MUSIC: upbeat, duck 20%]).

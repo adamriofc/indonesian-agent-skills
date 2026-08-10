@@ -1,7 +1,7 @@
 ---
 name: accounting-basics
 description: Apply double-entry bookkeeping fundamentals, journal entries, and accrual vs cash basis rules for Indonesian SME bookkeeping.
-argument-hint: "<transaksi>"
+argument-hint: "<transaction>"
 risk_level: LOW
 rule_type: internal-policy
 ---
@@ -11,24 +11,24 @@ rule_type: internal-policy
 Ground rules for recording business transactions correctly before any financial statement is produced.
 
 ## Double-Entry Rules
-* **Debit kiri, kredit kanan**; setiap transaksi tercatat berpasangan (jurnal berimbang).
-* Aset & beban: bertambah di debit, berkurang di kredit. Liabilitas, ekuitas & pendapatan: bertambah di kredit, berkurang di debit.
-* Persamaan dasar: **Aset = Liabilitas + Ekuitas** — selalu terjaga setelah setiap jurnal.
-* Bukti transaksi (kuitansi, invoice, nota) wajib ada sebelum jurnal dibuat — no document, no journal.
+* **Debit left, credit right**; every transaction is recorded in pairs (balanced journal entries).
+* Assets & expenses: increase on the debit side, decrease on the credit side. Liabilities, equity & revenue: increase on the credit side, decrease on the debit side.
+* Fundamental equation: **Assets = Liabilities + Equity** — always maintained after every journal entry.
+* Source documents (receipts, invoices, notes) must exist before a journal entry is made — no document, no journal.
 
 ## Accrual vs Cash Basis
-* **Accrual**: pendapatan diakui saat hak timbul, beban saat kewajiban timbul — bukan saat kas bergerak (SAK EMKM berbasis accrual).
-* **Cash basis**: diakui saat kas diterima/dibayar — hanya untuk catatan internal sederhana, bukan untuk laporan resmi.
+* **Accrual**: revenue is recognized when the right arises, expenses when the obligation arises — not when cash moves (SAK EMKM is accrual-based).
+* **Cash basis**: recognized when cash is received/paid — only for simple internal records, not for official reports.
 
 ## Scope & Safety
-* **Use for**: pencatatan transaksi harian UMKM, persiapan data sebelum disusun jadi laporan keuangan.
-* **Do not use for**: pengganti jasa akuntan/akuntan publik; penyusunan SPT tanpa validasi (lihat plugin tax-payroll-id).
-* UMKM dengan omzet di bawah batas SAK EMKM dapat menyusun LK berbasis EMKM — SAK EMKM bukan hukum positif, wajib dibantu akuntan untuk opini.
-* Kebijakan akuntansi (metode persediaan, depresiasi) harus konsisten antar periode.
+* **Use for**: recording SME daily transactions, preparing data before it is compiled into financial statements.
+* **Do not use for**: a substitute for accountant/public accountant services; preparing SPT returns without validation (see tax-payroll-id plugin).
+* SMEs with turnover below the SAK EMKM threshold may prepare EMKM-based financial statements — SAK EMKM is not positive law; an accountant is required for audit opinions.
+* Accounting policies (inventory method, depreciation) must be consistent across periods.
 
 ## Worked Example
-Input: "Pembelian perlengkapan kantor Rp 5.000.000 secara kredit".
-Jurnal:
-* Perlengkapan (Aset) — Debit Rp 5.000.000
-* Utang Usaha (Liabilitas) — Kredit Rp 5.000.000
-Hasil: neraca tetap seimbang (aset +5jt, liabilitas +5jt). Saat dibayar tunai: Utang Usaha (D) 5jt / Kas (K) 5jt.
+Input: "Purchased office supplies for Rp 5.000.000 on credit".
+Journal:
+* Supplies (Asset) — Debit Rp 5.000.000
+* Accounts Payable (Liability) — Credit Rp 5.000.000
+Result: the balance sheet stays balanced (assets +5 million, liabilities +5 million). When paid in cash: Accounts Payable (D) 5 million / Cash (C) 5 million.

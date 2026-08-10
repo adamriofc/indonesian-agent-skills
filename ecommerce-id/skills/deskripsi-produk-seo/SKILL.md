@@ -13,5 +13,5 @@ Writes conversion-focused product copy optimized for search algorithms on Tokope
 ## Required Structure
 1. **Hook Sentence**: Immediate benefit statement addressing customer pain points.
 2. **USP (Unique Selling Proposition)**: 3-4 bullet points highlighting product superiority.
-3. **Spesifikasi Detail**: Materials, dimensions, weight, color options, package contents.
-4. **Mandatory Disclaimer (Klaim Garansi)**: Append: *"WAJIB merekam video unboxing tanpa jeda saat paket diterima untuk klaim garansi kerusakkan/kekurangan barang."*
+3. **Detailed Specifications**: Materials, dimensions, weight, color options, package contents.
+4. **Mandatory Disclaimer (Warranty Claims)**: Append: *"You MUST record an uninterrupted unboxing video when the package is received to claim the warranty for damaged/missing items."*

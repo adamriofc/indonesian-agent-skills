@@ -1,7 +1,7 @@
 ---
 name: cost-accounting
 description: Compute cost of goods sold, absorption vs variable costing, and simple product costing for Indonesian SME operations.
-argument-hint: "<persediaan_awal> <pembelian> <persediaan_akhir>"
+argument-hint: "<beginning_inventory> <purchases> <ending_inventory>"
 risk_level: MEDIUM
 rule_type: professional-standard
 ---
@@ -11,17 +11,17 @@ rule_type: professional-standard
 Tracks product and service costs so pricing and margin decisions are grounded in real numbers.
 
 ## Core Methods
-* **COGS** (HPP) = Persediaan Awal + Pembelian − Persediaan Akhir; stok akhir dihitung via metode konsisten (FIFO/rata-rata).
-* **Absorption costing**: semua biaya produksi (variabel + tetap) masuk HPP — sesuai SAK EMKM untuk LK.
-* **Variable costing**: hanya biaya variabel masuk HPP; tetap dibebankan saat terjadi — alat analisis internal untuk keputusan harga jangka pendek.
-* **Unit cost** = Total biaya produksi ÷ unit diproduksi; jangan samakan dengan harga jual.
+* **COGS (Cost of Goods Sold)** = Beginning Inventory + Purchases − Ending Inventory; ending stock is computed via a consistent method (FIFO/average).
+* **Absorption costing**: all production costs (variable + fixed) enter COGS — per SAK EMKM for financial statements.
+* **Variable costing**: only variable costs enter COGS; fixed costs are expensed as incurred — an internal analysis tool for short-term pricing decisions.
+* **Unit cost** = Total production cost ÷ units produced; do not confuse it with the selling price.
 
 ## Scope & Safety
-* **Use for**: penetapan harga jual minimal, evaluasi margin produk per SKU, keputusan make-vs-buy.
-* **Do not use for**: pengakuan nilai persediaan di LK dengan metode yang berbeda dari kebijakan yang dipilih (harus konsisten antar periode).
-* Alokasi biaya overhead (listrik, sewa gudang) bersifat estimasi — dokumentasikan basis alokasinya.
-* Data stok harus dipertanggungjawabkan fisik (stock opname) setidaknya tahunan.
+* **Use for**: setting the minimum selling price, evaluating per-SKU product margins, make-vs-buy decisions.
+* **Do not use for**: recognizing inventory value in financial statements with a method different from the chosen policy (must be consistent across periods).
+* Overhead allocation (electricity, warehouse rent) is an estimate — document the allocation basis.
+* Stock data must be physically accounted for (stock-taking) at least annually.
 
 ## Worked Example
-Input: persediaan awal 50 jt; pembelian 300 jt; persediaan akhir 40 jt; unit terjual 2.000.
-Output: COGS = 50 + 300 − 40 = **310 jt**; HPP per unit = 310 jt ÷ 2.000 = **155.000**. Jika harga jual 200.000 → margin kotor per unit 45.000 (22,5%) sebelum biaya operasional.
+Input: beginning inventory 50 million; purchases 300 million; ending inventory 40 million; 2,000 units sold.
+Output: COGS = 50 + 300 − 40 = **310 million**; COGS per unit = 310 million ÷ 2,000 = **155.000**. If the selling price is 200.000 → gross margin per unit 45.000 (22.5%) before operating expenses.

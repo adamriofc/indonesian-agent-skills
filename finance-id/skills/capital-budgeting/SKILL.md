@@ -1,30 +1,30 @@
 ---
 name: capital-budgeting
 description: Evaluate Indonesian SME investment projects with NPV, IRR, and payback using the deterministic npv and irr engines against a simple WACC.
-argument-hint: "<investasi> <cashflow_tahunan> <wacc>"
+argument-hint: "<investment> <annual_cashflow> <wacc>"
 risk_level: MEDIUM
 rule_type: professional-standard
 ---
 
 # Capital Budgeting
 
-Decides whether a capital expenditure creates value: **terima jika NPV > 0 dan IRR > WACC**.
+Decides whether a capital expenditure creates value: **accept if NPV > 0 and IRR > WACC**.
 
 ## Decision Rules
-* **NPV > 0** → nilai tercipta; NPV < 0 → nilai hancur (pakai `engines/npv.js`).
-* **IRR > WACC** → proyek menutup biaya modal (pakai `engines/irr.js`); bandingkan, jangan dipakai tunggal bila arus kas tidak konvensional.
-* **Payback period** = investasi ÷ arus kas tahunan rata-rata — alat bantu likuiditas, bukan pengganti NPV.
-* **WACC sederhana** = (E÷V × ke) + (D÷V × kd × (1 − tarif pajak)) — untuk SME: ke = ekspektasi return pemilik, kd = bunga pinjaman efektif.
+* **NPV > 0** → value is created; NPV < 0 → value is destroyed (use `engines/npv.js`).
+* **IRR > WACC** → the project covers its cost of capital (use `engines/irr.js`); compare them — do not use IRR alone when cash flows are unconventional.
+* **Payback period** = investment ÷ average annual cash flow — a liquidity aid, not a substitute for NPV.
+* **Simple WACC** = (E÷V × ke) + (D÷V × kd × (1 − tax rate)) — for SMEs: ke = owner's expected return, kd = effective loan interest rate.
 
 ## Hybrid Execution Model
-Pass `cashflows: [−investasi, cf1..cfn]` ke `engines/npv.js` (`npv(rate, cashflows)`) dan `engines/irr.js` (`irr(cashflows, {tolerance: 1e-9})`). Trust Envelope: risk MEDIUM, standard basis (bukan statutory), `requires_human_review: true` untuk komitmen dana.
+Pass `cashflows: [−investment, cf1..cfn]` to `engines/npv.js` (`npv(rate, cashflows)`) and `engines/irr.js` (`irr(cashflows, {tolerance: 1e-9})`). Trust Envelope: risk MEDIUM, standard basis (not statutory), `requires_human_review: true` for fund commitments.
 
 ## Scope & Safety
-* **Use for**: beli mesin, ekspansi cabang, investasi proyek — arus kas inkremental setelah pajak.
-* **Do not use for**: keputusan portofolio/saham (bukan finance core), proyek dengan arus kas multi-tanda tanpa analisis lanjutan.
-* IRR engine throw "No IRR found in range" bila arus kas tidak konvensional — gunakan NPV sebagai keputusan utama.
-* Pastikan tarif pajak & bunga aktual (cek tax-payroll-id) — jangan asumsi.
+* **Use for**: machine purchases, branch expansion, project investments — incremental after-tax cash flows.
+* **Do not use for**: portfolio/stock decisions (not finance core), projects with multi-sign cash flows without further analysis.
+* The IRR engine throws "No IRR found in range" when cash flows are unconventional — use NPV as the primary decision.
+* Make sure tax rates & interest are actual (check tax-payroll-id) — do not assume.
 
 ## Worked Example
-Input: mesin 2 M; arus kas bersih 600 jt/tahun × 5 tahun; WACC 12% (ke 15% × 60% + kd 10% × 40% × (1 − 22%)).
-Output: NPV @12% = 600 jt × annuity 3,6048 − 2 M = **+162,9 jt** (> 0 → terima); IRR ≈ **15,2%** (> 12% ✓); payback = 2.000 ÷ 600 ≈ **3,3 tahun**. Rekomendasi: layak dengan asumsi arus kas inkremental tercapai.
+Input: machine 2 billion; net cash flow 600 million/year × 5 years; WACC 12% (ke 15% × 60% + kd 10% × 40% × (1 − 22%)).
+Output: NPV @12% = 600 million × annuity factor 3.6048 − 2 billion = **+162.9 million** (> 0 → accept); IRR ≈ **15.2%** (> 12% ✓); payback = 2 billion ÷ 600 million ≈ **3.3 years**. Recommendation: feasible provided the incremental cash flows materialize.

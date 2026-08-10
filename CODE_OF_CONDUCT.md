@@ -1,38 +1,38 @@
 # Code of Conduct
 
-## Komitmen Kami
+## Our Commitment
 
-Kami berkomitmen menyediakan lingkungan yang terbuka, ramah, dan menghormati semua kontributor — tanpa memandang usia, jenis kelamin, orientasi seksual, disabilitas, etnis, agama, atau pengalaman teknis.
+We are committed to providing an open, welcoming, and respectful environment for all contributors — regardless of age, gender, sexual orientation, disability, ethnicity, religion, or technical experience.
 
-## Standar Perilaku
+## Standards of Behavior
 
-Perilaku yang mendukung lingkungan positif:
+Behaviors that support a positive environment:
 
-- Menggunakan bahasa yang inklusif dan tidak merendahkan.
-- Menghormati sudut pandang dan pengalaman yang berbeda.
-- Menerima kritik konstruktif dengan lapang dada.
-- Fokus pada kualitas teknis dan kebenaran regulasi — bukan pada ego atau kepentingan pribadi.
-- **Kebenaran di atas segalanya**: dilarang mengarang angka, tautan, atau klaim regulasi yang belum diverifikasi (no-fiction policy repo ini).
+- Using inclusive and non-demeaning language.
+- Respecting different viewpoints and experiences.
+- Accepting constructive criticism graciously.
+- Focusing on technical quality and regulatory correctness — not on ego or personal interests.
+- **Truth above all else**: fabricating unverified figures, links, or regulatory claims is prohibited (this repository's no-fiction policy).
 
-Perilaku yang tidak dapat diterima:
+Unacceptable behaviors:
 
-- Pelecehan seksual, komentar ofensif, atau serangan pribadi.
-- Doxing (publikasi data pribadi tanpa izin).
-- Berbagi informasi palsu/menyesatkan tentang hukum, pajak, atau regulasi.
-- Spam, promosi diri berlebihan, atau konten tidak relevan.
+- Sexual harassment, offensive comments, or personal attacks.
+- Doxing (publishing personal data without permission).
+- Sharing false/misleading information about law, tax, or regulation.
+- Spam, excessive self-promotion, or irrelevant content.
 
-## Area Verifikasi Regulasi
+## Regulatory Verification Scope
 
-Kontribusi yang menyentuh angka/tarif/aturan wajib menyertakan tautan sumber (lihat `PROVENANCE.md` dan `CONTRIBUTING.md`). Kontributor yang berulang kali mengajukan klaim tanpa sumber dapat diminta menahan diri dari perubahan ruleset hingga menuntaskan pelatihan kontribusi.
+Contributions touching figures/rates/rules must include source links (see `PROVENANCE.md` and `CONTRIBUTING.md`). Contributors who repeatedly submit claims without sources may be asked to refrain from ruleset changes until completing contribution training.
 
-## Pelaporan
+## Reporting
 
-Insiden dilaporkan melalui email pengelola repo (lihat `CONTRIBUTING.md`). Semua laporan ditangani secara rahasia dan segera. Balasan terhadap pelapor tidak akan dibalas dengan pembalasan.
+Incidents are reported via the repository maintainer's email (see `CONTRIBUTING.md`). All reports are handled confidentially and promptly. Reporters will not receive retaliation in response.
 
-## Penegakan
+## Enforcement
 
-Pelanggaran ringan: peringatan. Pelanggaran berat atau berulang: penghapusan kontribusi dan/atau larangan berkontribusi.
+Minor violations: warning. Severe or repeated violations: removal of contributions and/or a contribution ban.
 
 ---
 
-Diadaptasi dari Contributor Covenant versi 2.1, dengan klausul khusus verifikasi regulasi untuk repositori kepatuhan Indonesia.
+Adapted from the Contributor Covenant version 2.1, with a specific regulatory verification clause for Indonesian compliance repositories.
