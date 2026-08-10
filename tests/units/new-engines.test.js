@@ -5,9 +5,13 @@ const { calculateMarketplaceFee, MARKETPLACE_FEE_RATES, FREE_SHIPPING_POLICY, re
 const { calculatePkwtCompensation } = require('../../engines/pkwt-compensation-calculator');
 const { auditPkwttStatus } = require('../../engines/pkwtt-calculator');
 const { compareRulesets } = require('../../engines/regulatory-diff');
+const { calculatePPh21GrossUp } = require('../../engines/pph21-grossup-calculator');
+const { calculateCorporateTax } = require('../../engines/pph-badan-calculator');
+const { auditTransferPricingThinCap } = require('../../engines/transfer-pricing-engine');
+const { calculatePpnAndPpnbm } = require('../../engines/ppn-ppnbm-calculator');
 
 function runNewEnginesTests() {
-  console.log("⚡ Running Deepened Math Unit Tests for 6 Deterministic Engines (incl. PKWTT & Regulatory Diff)...\n");
+  console.log("⚡ Running Deepened Math Unit Tests for 10 Deterministic & Tax Engineering Engines...\n");
 
   // ------------------------------------------------------
   // 1. PPh 23 & 26 Engine: statutory rates, penalty, treaty
@@ -347,7 +351,68 @@ function runNewEnginesTests() {
   assert.strictEqual(bpjsDiff.domain, 'bpjs');
   assert.strictEqual(bpjsDiff.effectiveTransitionDate, '2026-03-01');
 
-  console.log("\n✅ All 5 Deterministic Calculation & Regulatory Diff Engines Passed 100% of Assertions!");
+  // ------------------------------------------------------
+  // 6. PPh 21 Gross-Up Iterative Engine (PMK 66/2023 & TER)
+  // ------------------------------------------------------
+  console.log("  [6/10] PPh 21 Gross-Up Iterative Convergence Engine...");
+  const grossUpRes = calculatePPh21GrossUp({ baseSalary: 15000000, ptkpStatus: 'TK/0', naturaAmount: 3000000 });
+  assert.ok(grossUpRes.grossUpTaxAllowance > 0);
+  assert.strictEqual(grossUpRes.grossTakeHomePay, 15000000);
+  assert.strictEqual(grossUpRes.taxableNatura, 1000000);
+  assert.strictEqual(grossUpRes.netTaxWithheld, grossUpRes.grossUpTaxAllowance);
+
+  // ------------------------------------------------------
+  // 7. Corporate Income Tax (PPh Badan) & Pasal 31E Engine
+  // ------------------------------------------------------
+  console.log("  [7/10] PPh Badan 22% & Article 31E Sliding Scale Facility Engine...");
+  // Small business <= 4.8B -> Full 50% discount (11% effective rate)
+  const corpSmall = calculateCorporateTax({ grossTurnover: 2000000000, commercialNetProfit: 500000000 });
+  assert.strictEqual(corpSmall.appliedFacilityType, 'FULL_50_PERCENT_DISCOUNT');
+  assert.strictEqual(corpSmall.totalCorporateTaxDue, 55000000);
+
+  // Mid-market 12B -> Proportional facility split
+  const corpMid = calculateCorporateTax({ grossTurnover: 12000000000, commercialNetProfit: 2000000000, positiveFiscalAdjustments: 400000000 });
+  assert.strictEqual(corpMid.taxableIncome, 2400000000);
+  assert.strictEqual(corpMid.appliedFacilityType, 'PROPORTIONAL_PASAL_31E');
+  assert.strictEqual(corpMid.facilityTaxableIncome, 960000000);
+  assert.strictEqual(corpMid.nonFacilityTaxableIncome, 1440000000);
+  assert.strictEqual(corpMid.totalCorporateTaxDue, 422400000);
+
+  // ------------------------------------------------------
+  // 8. Thin Capitalization & Transfer Pricing Secondary Adjustment Engine
+  // ------------------------------------------------------
+  console.log("  [8/10] Thin Capitalization DER 4:1 & Secondary Dividend Adjustment Engine...");
+  const thinCapRes = auditTransferPricingThinCap({
+    totalInterestBearingDebt: 50000000000,
+    totalEquity: 10000000000,
+    annualInterestExpense: 5000000000,
+    isAffiliateLender: true,
+    isDomesticAffiliate: false,
+    hasValidDgtForm: true,
+    treatyRatePercent: 10
+  });
+  assert.strictEqual(thinCapRes.actualDerRatio, 5);
+  assert.strictEqual(thinCapRes.isDerExceeded, true);
+  assert.strictEqual(thinCapRes.maxAllowableDebt, 40000000000);
+  assert.strictEqual(thinCapRes.nonDeductibleInterestExpense, 1000000000);
+  assert.strictEqual(thinCapRes.secondaryAdjustmentTaxAmount, 100000000);
+
+  // ------------------------------------------------------
+  // 9. PPN 12% & PPnBM Luxury Tax Engine
+  // ------------------------------------------------------
+  console.log("  [9/10] PPN 12% & PPnBM Luxury Tax Engine...");
+  const ppnImport = calculatePpnAndPpnbm({
+    transactionType: 'import',
+    cifValueIdr: 1000000000,
+    customsDutyAmount: 200000000,
+    ppnbmRatePercent: 50
+  });
+  assert.strictEqual(ppnImport.dppBase, 1200000000);
+  assert.strictEqual(ppnImport.ppnAmount, 144000000);
+  assert.strictEqual(ppnImport.ppnbmAmount, 600000000);
+  assert.strictEqual(ppnImport.totalTaxes, 744000000);
+
+  console.log("\n✅ All 10 Deterministic Calculation & Regulatory Diff Engines Passed 100% of Assertions!");
 }
 
 runNewEnginesTests();

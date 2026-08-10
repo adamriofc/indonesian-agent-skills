@@ -20,7 +20,7 @@
 
 ## 📌 Overview & Value Proposition (Apa Ini & Untuk Siapa?)
 
-**Indonesian Business Agent Skills** adalah infrastruktur *domain intelligence* sumber terbuka (*open-source*) yang memberikan "otak bisnis dan regulasi Indonesia" kepada agen AI. Dirancang untuk **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, dan *framework* agen kustom, repositori ini mengintegrasikan **61 Agent Skills** dengan **18 Mesin Kalkulasi Deterministik & Regulatory Diff Engine** (`engines/`) serta *ruleset* JSON berbasis waktu (*temporal SSOT* di `engines/rules/`).
+**Indonesian Business Agent Skills** adalah infrastruktur *domain intelligence* sumber terbuka (*open-source*) yang memberikan "otak bisnis dan regulasi Indonesia" kepada agen AI. Dirancang untuk **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, dan *framework* agen kustom, repositori ini mengintegrasikan **67 Agent Skills** dengan **23 Mesin Kalkulasi Deterministik & Regulatory Diff Engine** (`engines/`) serta *ruleset* JSON berbasis waktu (*temporal SSOT* di `engines/rules/`).
 
 ### 💡 Mengapa AI Biasa (Tanpa Engine) Sering Salah Hitung?
 Model AI generik (seperti ChatGPT atau Claude tanpa *tooling*) memprediksi kata berdasarkan probabilitas (*token prediction*). Ketika diminta menghitung pajak PPh 21 TER, kompensasi PHK, atau bunga pinjaman, AI biasa mengalami 3 kegagalan utama:
@@ -149,7 +149,7 @@ cp -r .agents/skills/* .cursor/skills/
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (61 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (67 Skills Across 6 Plugins)
 
 Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/index.json`)** dengan *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 

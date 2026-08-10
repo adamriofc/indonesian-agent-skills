@@ -220,6 +220,22 @@ function testEoq() {
   console.log('  [8/8] eoq engine: EOQ-001 + edge cases passed');
 }
 
+function testTermSheetWaterfall() {
+  const waterfallEng = require('../../engines/term-sheet-waterfall');
+
+  const tiers = [
+    { tierName: 'Series B', investmentAmount: 20000000000, preferenceMultiple: 1.0, isParticipating: true, capMultiple: null, ownershipPercent: 0.15, seniorityOrder: 1 },
+    { tierName: 'Series A', investmentAmount: 10000000000, preferenceMultiple: 1.0, isParticipating: false, capMultiple: null, ownershipPercent: 0.20, seniorityOrder: 2 }
+  ];
+
+  const res = waterfallEng.calculateExitWaterfall({ exitValuation: 100000000000, investorTiers: tiers, commonOwnershipPercent: 0.65 });
+  assert.strictEqual(res.exitValuation, 100000000000);
+  assert.strictEqual(res.totalInvestorPayout, 52000000000);
+  assert.strictEqual(res.commonShareholdersPayout, 48000000000);
+
+  console.log('  [9/9] VC term-sheet waterfall engine: exit distribution passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
@@ -229,7 +245,8 @@ function runAll() {
   testRatios();
   testWorkingCapital();
   testEoq();
+  testTermSheetWaterfall();
 }
 
 runAll();
-console.log('\n✅ Finance engines passed all unit assertions.');
+console.log('\n✅ Finance & VC Waterfall engines passed all unit assertions.');

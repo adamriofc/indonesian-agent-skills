@@ -1,0 +1,31 @@
+---
+name: ppn-ppnbm-advanced
+description: Calculate statutory 12% PPN, PPnBM Luxury Tax (10% to 200%), Other Basis DPP (11/12), import CIF tax bases, and DJP Coretax equalisation.
+argument-hint: "<transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>"
+metadata:
+  risk_level: HIGH
+  rule_type: statutory
+  quality_tier: expert-reviewed
+---
+
+# PPN 12% & PPnBM Luxury Tax Advanced Calculator
+
+Calculates statutory 12% PPN, Luxury Goods Sales Tax (**PPnBM**), Other Basis DPP ($11/12 \times \text{DPP}$), and import CIF tax bases per UU No. 7/2021 (HPP), PP No. 61/2020, & PMK No. 131/2024.
+
+## Tax Base & Rate Classification
+1. **Standard Domestic Sales**: `PPN = 12% x Selling Price`.
+2. **Other Basis DPP (DPP Nilai Lain)**: `DPP = 11/12 x Selling Price`. `PPN = 12% x (11/12 x Selling Price)` = **11.00% effective burden**.
+3. **Import Transactions**: `DPP = CIF Value + Customs Duty (Bea Masuk)`. PPN 12% and PPnBM are levied on full Import Value.
+4. **PPnBM Luxury Tax Tiers**: Statutory rates ranging from **10% to 200%** (levied once at manufacturer/import level). PPnBM is non-creditable input tax.
+5. **Export 0% Rate**: Export BKP/JKP is taxed at 0%, while Input Tax Credits (*Pajak Masukan*) remain 100% creditable/refundable.
+
+## Hybrid Execution Model
+Pass parameters to `engines/ppn-ppnbm-calculator.js`:
+* `calculatePpnAndPpnbm({ transactionType, cifValueIdr, customsDutyAmount, sellingPriceOrDpp, ppnbmRatePercent, inputTaxCreditsAlreadyPaid })`
+
+## Worked Example
+Input: Import of luxury motor vehicle with CIF Rp 1.000.000.000, Customs Duty Rp 200.000.000, PPnBM rate 50%.
+- Import Value (DPP Base) = `Rp 1B + Rp 200M` = **Rp 1.200.000.000**.
+- Statutory PPN 12% = `12% x Rp 1.2B` = **Rp 144.000.000**.
+- PPnBM 50% = `50% x Rp 1.2B` = **Rp 600.000.000**.
+- Total Taxes at Import = **Rp 744.000.000**.

@@ -1,13 +1,13 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "generated_at": "2026-08-10T00:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
-  "total_skills": 61,
-  "total_engines": 18,
+  "total_skills": 67,
+  "total_engines": 23,
   "quality_tiers": {
-    "expert-reviewed": 9,
-    "tested": 25,
+    "expert-reviewed": 15,
+    "tested": 26,
     "source-verified": 26
   },
   "skills": [
@@ -21,8 +21,12 @@
     { "id": "somasi-draft-id", "name": "somasi-draft-id", "plugin": "legal-id", "domain": "legal", "type": "drafting", "quality_tier": "source-verified", "risk_level": "HIGH", "rule_type": "statutory", "engine": null },
 
     { "id": "pph21-calculator", "name": "pph21-calculator", "plugin": "tax-payroll-id", "domain": "tax", "type": "calculation", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pph21-calculator.js" },
+    { "id": "pph21-grossup", "name": "pph21-grossup", "plugin": "tax-payroll-id", "domain": "tax", "type": "calculation", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pph21-grossup-calculator.js" },
     { "id": "pph23-26-calculator", "name": "pph23-26-calculator", "plugin": "tax-payroll-id", "domain": "tax", "type": "calculation", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pph23-26-calculator.js" },
     { "id": "pph-final-umkm", "name": "pph-final-umkm", "plugin": "tax-payroll-id", "domain": "tax", "type": "calculation", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/umkm-tax-calculator.js" },
+    { "id": "pph-badan-calculator", "name": "pph-badan-calculator", "plugin": "tax-payroll-id", "domain": "tax", "type": "calculation", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pph-badan-calculator.js" },
+    { "id": "transfer-pricing-audit", "name": "transfer-pricing-audit", "plugin": "tax-payroll-id", "domain": "tax", "type": "audit", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/transfer-pricing-engine.js" },
+    { "id": "ppn-ppnbm-advanced", "name": "ppn-ppnbm-advanced", "plugin": "tax-payroll-id", "domain": "tax", "type": "calculation", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/ppn-ppnbm-calculator.js" },
     { "id": "tax-planning", "name": "tax-planning", "plugin": "tax-payroll-id", "domain": "tax", "type": "planning", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/umkm-tax-calculator.js" },
     { "id": "tax-optimization", "name": "tax-optimization", "plugin": "tax-payroll-id", "domain": "tax", "type": "optimization", "quality_tier": "expert-reviewed", "risk_level": "MEDIUM", "rule_type": "statutory", "engine": null },
     { "id": "tax-risk-analysis", "name": "tax-risk-analysis", "plugin": "tax-payroll-id", "domain": "tax", "type": "risk", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "statutory", "engine": null },
@@ -40,6 +44,7 @@
     { "id": "interview-id", "name": "interview-id", "plugin": "hr-id", "domain": "hr", "type": "assessment", "quality_tier": "source-verified", "risk_level": "LOW", "rule_type": "internal-policy", "engine": null },
     { "id": "bpjs-tenagakerja-admin", "name": "bpjs-tenagakerja-admin", "plugin": "hr-id", "domain": "hr", "type": "guidance", "quality_tier": "source-verified", "risk_level": "MEDIUM", "rule_type": "statutory", "engine": null },
     { "id": "phk-calculator", "name": "phk-calculator", "plugin": "hr-id", "domain": "hr", "type": "calculation", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/phk-calculator.js" },
+    { "id": "phk-advanced-matrix", "name": "phk-advanced-matrix", "plugin": "hr-id", "domain": "hr", "type": "calculation", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/phk-calculator.js" },
     { "id": "pkwt-pkwtt-checker", "name": "pkwt-pkwtt-checker", "plugin": "hr-id", "domain": "hr", "type": "audit", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pkwt-compensation-calculator.js" },
     { "id": "pkwtt-checker", "name": "pkwtt-checker", "plugin": "hr-id", "domain": "hr", "type": "audit", "quality_tier": "tested", "risk_level": "HIGH", "rule_type": "statutory", "engine": "engines/pkwtt-calculator.js" },
     { "id": "struktur-skala-upah", "name": "struktur-skala-upah", "plugin": "hr-id", "domain": "hr", "type": "calculation", "quality_tier": "source-verified", "risk_level": "MEDIUM", "rule_type": "statutory", "engine": null },
@@ -76,6 +81,7 @@
     { "id": "unit-economics", "name": "unit-economics", "plugin": "finance-id", "domain": "finance", "type": "analysis", "quality_tier": "expert-reviewed", "risk_level": "LOW", "rule_type": "professional-standard", "engine": null },
     { "id": "business-feasibility", "name": "business-feasibility", "plugin": "finance-id", "domain": "finance", "type": "feasibility", "quality_tier": "expert-reviewed", "risk_level": "MEDIUM", "rule_type": "professional-standard", "engine": null },
     { "id": "financial-modeling", "name": "financial-modeling", "plugin": "finance-id", "domain": "finance", "type": "modeling", "quality_tier": "expert-reviewed", "risk_level": "MEDIUM", "rule_type": "professional-standard", "engine": null },
-    { "id": "capital-budgeting", "name": "capital-budgeting", "plugin": "finance-id", "domain": "finance", "type": "modeling", "quality_tier": "tested", "risk_level": "MEDIUM", "rule_type": "professional-standard", "engine": "engines/npv.js" }
+    { "id": "capital-budgeting", "name": "capital-budgeting", "plugin": "finance-id", "domain": "finance", "type": "modeling", "quality_tier": "tested", "risk_level": "MEDIUM", "rule_type": "professional-standard", "engine": "engines/npv.js" },
+    { "id": "vc-term-sheet-waterfall", "name": "vc-term-sheet-waterfall", "plugin": "finance-id", "domain": "finance", "type": "modeling", "quality_tier": "expert-reviewed", "risk_level": "HIGH", "rule_type": "professional-standard", "engine": "engines/term-sheet-waterfall.js" }
   ]
 }

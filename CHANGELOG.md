@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.2.0] - 2026-08-10
+
+### Added
+- **5 Ultra-Advanced Corporate & Enterprise Engines**:
+  - `engines/pph21-grossup-calculator.js`: Circular PPh 21 tax allowance bisection loop & PMK 66/2023 Natura exemption thresholds.
+  - `engines/pph-badan-calculator.js`: Corporate Income Tax (22%) with Pasal 31E UU PPh sliding scale facility (&le; 4.8B, 4.8B–50B, > 50B).
+  - `engines/transfer-pricing-engine.js`: Thin Capitalization (DER 4:1 max ceiling), interest deduction barriers, & secondary dividend adjustments (PMK 172/2023).
+  - `engines/ppn-ppnbm-calculator.js`: Statutory 12% PPN, PPnBM Luxury Goods Tax (10% to 200%), Other Basis DPP (11/12), & CIF import bases.
+  - `engines/term-sheet-waterfall.js`: Indonesian startup VC liquidation preference exit waterfall (Seniority, Pari Passu, Participating with Caps).
+- **6 Flagship Enterprise Agent Skills**: `pph21-grossup`, `pph-badan-calculator`, `transfer-pricing-audit`, `ppn-ppnbm-advanced`, `vc-term-sheet-waterfall`, `phk-advanced-matrix` (expanding total skills to **67 Skills across 6 Plugins** & **23 Deterministic Engines**).
+- **Registry Update**: `registry/index.json` updated with 67 registered skills and quality tiers.
+
 ## [2.1.0] - 2026-08-10
 
 ### Added
