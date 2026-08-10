@@ -187,6 +187,21 @@ function testRatios() {
   console.log('  [6/8] financial-ratios engine: RAT-001 14 ratios passed');
 }
 
+function testWorkingCapital() {
+  const wc = require('../../engines/working-capital');
+
+  assert.strictEqual(wc.netWorkingCapital(500000000, 250000000), 250000000);
+  assert.strictEqual(wc.workingCapitalRatio(500000000, 250000000), 2);
+  assert.strictEqual(wc.cashConversionCycle(60, 45, 30), 75);
+  assert.strictEqual(wc.workingCapitalRequirement(75, 2000000), 150000000);
+
+  assert.throws(() => wc.workingCapitalRatio(500000000, 0), /greater than zero/);
+  assert.throws(() => wc.workingCapitalRatio(500000000, -1000000), /greater than zero/);
+
+  assertDeterministic(() => wc.netWorkingCapital(500000000, 250000000), 'working capital determinism');
+  console.log('  [7/8] working-capital engine: WC-001 passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
@@ -194,6 +209,7 @@ function runAll() {
   testIrr();
   testLoan();
   testRatios();
+  testWorkingCapital();
 }
 
 runAll();
