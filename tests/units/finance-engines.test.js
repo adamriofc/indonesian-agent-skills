@@ -202,6 +202,24 @@ function testWorkingCapital() {
   console.log('  [7/8] working-capital engine: WC-001 passed');
 }
 
+function testEoq() {
+  const eoqEng = require('../../engines/eoq');
+
+  assert.strictEqual(eoqEng.eoq(12000, 100000, 6000), 633);
+  assert.strictEqual(eoqEng.reorderPoint(12000, 7, 0), 230);
+  assert.strictEqual(eoqEng.reorderPoint(12000, 7, 50), 280);
+  assert.strictEqual(eoqEng.annualHoldingCost(633, 6000), 1899000);
+  assert.strictEqual(eoqEng.annualOrderCost(12000, 633, 100000), 1895735);
+
+  assert.throws(() => eoqEng.eoq(0, 100000, 6000), /greater than zero/);
+  assert.throws(() => eoqEng.eoq(12000, 0, 6000), /greater than zero/);
+  assert.throws(() => eoqEng.eoq(12000, 100000, 0), /greater than zero/);
+  assert.throws(() => eoqEng.reorderPoint(12000, -1), />= 0/);
+
+  assertDeterministic(() => eoqEng.eoq(12000, 100000, 6000), 'eoq determinism');
+  console.log('  [8/8] eoq engine: EOQ-001 + edge cases passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
@@ -210,6 +228,7 @@ function runAll() {
   testLoan();
   testRatios();
   testWorkingCapital();
+  testEoq();
 }
 
 runAll();
