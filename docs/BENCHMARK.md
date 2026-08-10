@@ -4,15 +4,15 @@ Official methodology and measurement results. **Rule: no number is ever written 
 
 ---
 
-## 1. Measurement Scope & 3-Tier Accuracy Taxonomy
+## 1. Measurement Scope & 3-Tier Evaluation Taxonomy
 
-To ensure scientific rigor and eliminate unsubstantiated claims, repository performance is evaluated across a **3-Tier Accuracy Taxonomy**:
+To ensure scientific rigor and eliminate unsubstantiated claims, repository performance is evaluated across a **3-Tier Evaluation Taxonomy**:
 
-| Tier | Evaluation Focus | Question Answered | Measurement Tool | Target / Status |
+| Tier | Evaluation Focus | Question Answered | Measurement Tool | Status / Pass Rate |
 |---|---|---|---|---|
 | **Tier 1: Deterministic Engine Math** | Calculation & invariant precision | Does the Node.js engine compute equations with 0% arithmetic error per official rulesets? | `scripts/benchmark.js` | **100.00% Pass Rate** (92 Golden Cases) |
-| **Tier 2: Agent Parameter Extraction** | Intent & slot extraction | Does the agent extract correct numeric values, PTKP statuses, and dates from natural language text? | System Integration Tests | **96.00% Accuracy** (50 Enterprise Cases) |
-| **Tier 3: End-to-End Business Decision** | Integrated multi-domain output | Does the agent synthesize accurate, auditable, and contextually grounded business advice? | `tests/integration/workflow.test.js` | **94.00% Task Completion Rate** |
+| **Tier 2: Multi-Engine Integration Assertions** | Cross-domain data flow | Do payroll, BPJS, THR, PHK, and THP calculations integrate accurately across employee lifecycles? | `tests/integration/workflow.test.js` | **100.00% Pass Rate** (50 Enterprise Assertions) |
+| **Tier 3: Agent LLM End-to-End Decision** | Synthesis & context adaptation | Does an LLM agent equipped with skills generate contextually grounded business advice? | Experimental Evaluation Harness | **EXPERIMENTAL** (Baseline benchmarked below) |
 
 ### Golden Corpus Scope:
 - **Static Golden Corpus (`tests/golden/`)**: **92 golden cases across all 32 engine modules** (25 benchmark domains) — fast batch, deterministic, zero-dependency.
@@ -24,7 +24,7 @@ Run command: `node scripts/benchmark.js [--llm] [--json-report path]`
 
 ## 2. Latest Deterministic Execution Results (Tier 1)
 
-**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.7.0 (32-engine coverage)**
+**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.7.1 (32-engine coverage)**
 
 | Benchmark Domain | Cases | Golden Accuracy Pass Rate | Determinism (3×) | Throughput |
 |---|---|---|---|---|

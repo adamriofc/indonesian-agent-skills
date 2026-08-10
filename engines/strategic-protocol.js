@@ -1,6 +1,6 @@
 /**
  * Strategic Application Protocol (Strategic Operating System)
- * Connects KBLI Context Router, Business Archetype Adaptation, Framework Applicability,
+ * Connects KBLI Context Router, Business Archetype Adaptation, 4-State Framework Applicability,
  * and Evidence Sufficiency Verification into a unified protocol for all strategic skills.
  */
 
@@ -25,14 +25,32 @@ function applyStrategicProtocol({
   const archetype = archetypeRes.businessArchetype;
   const characteristics = archetypeRes.archetypeCharacteristics;
 
-  // 2. Framework Applicability Check
-  let isApplicable = true;
-  let applicabilityNote = 'Framework is applicable to this business archetype.';
+  // 2. 4-State Framework Applicability Check: NATIVE, ADAPTABLE, CONDITIONAL, NOT_RECOMMENDED
+  let applicabilityStatus = 'NATIVE';
+  let applicabilityNote = 'Framework applies natively to this business archetype.';
 
-  if (frameworkName === 'bcg-matrix' && archetype === 'PROFESSIONAL_SERVICE') {
-    applicabilityNote = 'BCG Matrix adapted to Professional Service Lines / Practice Areas (using Practice Revenue Share as proxy).';
-  } else if (frameworkName === 'value-chain-analysis' && (archetype === 'PROFESSIONAL_SERVICE' || archetype === 'CAPACITY_SERVICE')) {
-    applicabilityNote = 'Value Chain adapted from manufacturing logistics to Service Co-Production and Capacity Slot Delivery.';
+  if (frameworkName === 'bcg-matrix') {
+    if (archetype === 'PRODUCT_MANUFACTURING') {
+      applicabilityStatus = 'NATIVE';
+      applicabilityNote = 'BCG Matrix applies natively using Physical SKU / Product Volume share.';
+    } else if (archetype === 'PROFESSIONAL_SERVICE') {
+      applicabilityStatus = 'ADAPTABLE';
+      applicabilityNote = 'BCG Matrix adapted to Professional Service Lines / Practice Areas (using Practice Revenue Share as proxy).';
+    } else if (archetype === 'CAPACITY_SERVICE') {
+      applicabilityStatus = 'ADAPTABLE';
+      applicabilityNote = 'BCG Matrix adapted to Capacity Slots / Properties (using Occupancy / Utilization Share as proxy).';
+    } else {
+      applicabilityStatus = 'CONDITIONAL';
+      applicabilityNote = 'BCG Matrix requires explicit definition of Strategic Business Units (SBUs).';
+    }
+  } else if (frameworkName === 'value-chain-analysis') {
+    if (archetype === 'PRODUCT_MANUFACTURING') {
+      applicabilityStatus = 'NATIVE';
+      applicabilityNote = 'Value Chain applies natively across physical inbound, ops, and outbound logistics.';
+    } else if (archetype === 'PROFESSIONAL_SERVICE' || archetype === 'CAPACITY_SERVICE') {
+      applicabilityStatus = 'ADAPTABLE';
+      applicabilityNote = 'Value Chain adapted from physical manufacturing logistics to Service Co-Production and Slot Delivery.';
+    }
   }
 
   // 3. Evidence Sufficiency Verification
@@ -46,17 +64,17 @@ function applyStrategicProtocol({
     missingEvidence.push('No market/financial evidence provided.');
   } else if (!availableEvidence.competitorData) {
     evidenceSufficiency = 'PARTIAL';
-    missingEvidence.push('Competitor market share & relative margin data unavailable; using internal proxies.');
+    missingEvidence.push('Competitor market share & relative margin data unavailable; using internal practice proxies.');
   }
 
   // 4. Required Assumptions
   const mandatoryAssumptions = [...customAssumptions];
   if (evidenceSufficiency === 'PARTIAL') {
-    mandatoryAssumptions.push('Relative market share estimated via practice revenue contribution due to missing external competitor data.');
+    mandatoryAssumptions.push('Relative market position estimated via internal revenue contribution due to missing external competitor data.');
   }
 
   return {
-    protocolVersion: '1.0.0',
+    protocolVersion: '1.1.0',
     frameworkName,
     businessContext: {
       kbliCode: archetypeRes.kbliCode,
@@ -66,7 +84,8 @@ function applyStrategicProtocol({
       valueChainFocus: characteristics.valueChainFocus
     },
     applicability: {
-      isApplicable,
+      status: applicabilityStatus, // NATIVE, ADAPTABLE, CONDITIONAL, NOT_RECOMMENDED
+      isApplicable: applicabilityStatus !== 'NOT_RECOMMENDED',
       applicabilityNote
     },
     evidenceVerification: {
@@ -80,7 +99,7 @@ function applyStrategicProtocol({
       '2. Resolve KBLI 2020 Context',
       '3. Determine Business Archetype',
       '4. Determine Unit of Analysis',
-      '5. Framework Applicability Check',
+      '5. 4-State Framework Applicability Check (NATIVE/ADAPTABLE/CONDITIONAL/NOT_RECOMMENDED)',
       '6. Verify Evidence Sufficiency',
       '7. Identify Missing Evidence',
       '8. State Explicit Assumptions',

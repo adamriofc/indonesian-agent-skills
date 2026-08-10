@@ -57,8 +57,14 @@ function runStrategicManagementEnginesTests() {
   });
   assert.strictEqual(riskRes.overallRiskTier, 'CRITICAL');
 
-  // 5. KBLI Context Router & Business Archetype Classifier Engine
-  console.log("  [5/5] KBLI Context Router & Archetype Classifier Engine...");
+  // 5. KBLI Context Router & Strategic Protocol Engine
+  console.log("  [5/5] KBLI Context Router & Strategic Protocol Engine...");
+  const { applyStrategicProtocol } = require('../../engines/strategic-protocol');
+  const protoRes = applyStrategicProtocol({ frameworkName: 'bcg-matrix', kbliCode: '70209', activityName: 'Konsultasi Manajemen' });
+  assert.strictEqual(protoRes.businessContext.businessArchetype, 'PROFESSIONAL_SERVICE');
+  assert.strictEqual(protoRes.applicability.status, 'ADAPTABLE');
+  assert.strictEqual(protoRes.applicability.isApplicable, true);
+
   const profService = resolveBusinessArchetype({ kbliCode: '70209', activityName: 'Konsultasi Manajemen' });
   assert.strictEqual(profService.businessArchetype, 'PROFESSIONAL_SERVICE');
   assert.strictEqual(profService.archetypeCharacteristics.hasPhysicalInventory, false);

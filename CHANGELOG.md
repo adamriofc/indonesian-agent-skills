@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.7.1] - 2026-08-10
+
+### Fixed & Hardened
+- **Benchmark Taxonomy Correction (P0 Fix)**: Refactored `docs/BENCHMARK.md` to eliminate claims overstatement, formally classifying Tier 1 (Deterministic Engine Math: **100.00% Pass Rate** on 92 Golden Cases), Tier 2 (Multi-Engine Integration Assertions: **100.00% Pass Rate** on 50 Enterprise Lifecycle Assertions), and Tier 3 (Agent LLM End-to-End Decision: **EXPERIMENTAL**).
+- **4-State Strategic Applicability Enum (P1 Fix)**: Refactored `engines/strategic-protocol.js` to replace boolean `isApplicable` with a 4-state enum (`'NATIVE'`, `'ADAPTABLE'`, `'CONDITIONAL'`, `'NOT_RECOMMENDED'`) for strict framework applicability bounds.
+- **Audit Validator Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `2.7.1` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [2.7.0] - 2026-08-10
 
 ### Refined & Hardened
