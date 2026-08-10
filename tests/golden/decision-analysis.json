@@ -1,0 +1,15 @@
+[
+  {
+    "caseId": "MCDA-DECISION-001",
+    "description": "Multi-criteria evaluation selecting Target B based on weighted score (9.0 vs 7.0)",
+    "input": {
+      "decisionTitle": "Acquisition Target Evaluation",
+      "criteriaWeights": { "fit": 0.5, "roi": 0.5 },
+      "alternatives": [
+        { "optionName": "Target A", "scores": { "fit": 8, "roi": 6 } },
+        { "optionName": "Target B", "scores": { "fit": 9, "roi": 9 } }
+      ]
+    },
+    "expected": { "topRecommendedOption": "Target B", "topScore": 9.0 }
+  }
+]

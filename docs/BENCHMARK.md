@@ -14,8 +14,8 @@ Official methodology and measurement results. **Rule: no number is ever written 
 | 4. LLM Baseline (optional) | How do general LLM models compare against the engine? | `scripts/benchmark.js --llm` |
 
 Corpus used:
-- Static golden corpus (`tests/golden/`): **85 cases across all 27 engine modules** (20 benchmark domains) — fast batch, deterministic, key-free.
-- Deepened matrix in CI: 425 PPh 21 cases, 225 PHK cases, 20 integration assertions, 27 engine modules, security suite (see `npm test`).
+- Static golden corpus (`tests/golden/`): **90 cases across all 31 engine modules** (24 benchmark domains) — fast batch, deterministic, key-free.
+- Deepened matrix in CI: 425 PPh 21 cases, 225 PHK cases, 20 integration assertions, 31 engine modules, security suite (see `npm test`).
 
 Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
@@ -23,7 +23,7 @@ Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
 ## 2. Latest Results — Deterministic Run
 
-**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.3.0 (27-engine coverage: added regulatory-impact, compliance-risk, business-scenario, decision-engine domains)**
+**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.5.0 (31-engine coverage: added strategic-framework, decision-analysis, scenario-analysis, strategic-risk domains)**
 
 | Engine | Cases | Accuracy | Determinism (3×) | Throughput |
 |---|---|---|---|---|

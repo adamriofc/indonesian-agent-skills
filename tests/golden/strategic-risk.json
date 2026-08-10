@@ -1,0 +1,13 @@
+[
+  {
+    "caseId": "STRATEGIC-RISK-HEATMAP-001",
+    "description": "Critical supply spike (5x5x5) evaluation yielding Critical Overall Risk Tier",
+    "input": {
+      "risks": [
+        { "riskTitle": "Critical Supply Spike", "likelihoodScore": 5, "impactScore": 5, "velocityScore": 5 },
+        { "riskTitle": "Minor Tech Delay", "likelihoodScore": 2, "impactScore": 2, "velocityScore": 2 }
+      ]
+    },
+    "expected": { "overallRiskTier": "CRITICAL", "criticalRisksCount": 1, "topRiskTitle": "Critical Supply Spike" }
+  }
+]

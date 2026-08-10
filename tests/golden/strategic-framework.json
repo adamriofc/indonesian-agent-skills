@@ -1,0 +1,14 @@
+[
+  {
+    "caseId": "BCG-STAR-001",
+    "description": "High growth (15%) & high relative share (1.5x): Star quadrant",
+    "input": { "unitName": "Fintech Unit", "marketGrowthRatePercent": 15, "relativeMarketShare": 1.5 },
+    "expected": { "category": "STAR", "capitalAllocationPriority": "HIGH_INVESTMENT" }
+  },
+  {
+    "caseId": "BCG-CASH-COW-001",
+    "description": "Low growth (5%) & high relative share (1.2x): Cash Cow quadrant",
+    "input": { "unitName": "Legacy Unit", "marketGrowthRatePercent": 5, "relativeMarketShare": 1.2 },
+    "expected": { "category": "CASH_COW", "capitalAllocationPriority": "MODERATE_MAINTENANCE" }
+  }
+]

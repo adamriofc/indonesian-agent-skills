@@ -30,6 +30,11 @@
     {
       "name": "content-lokal-id",
       "source": "./content-lokal-id"
+    },
+    {
+      "name": "strategic-id",
+      "source": "./strategic-id",
+      "description": "Production-grade Strategic Management, Corporate Strategy, MCDA Decision Analysis, and Portfolio Optimization for Indonesian enterprises."
     }
   ]
 }

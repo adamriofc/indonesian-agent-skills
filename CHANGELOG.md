@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.5.0] - 2026-08-10
+
+### Added
+- **Plugin Ke-7: `strategic-id` (Strategic Management & Corporate Strategy)**:
+  - 10 Flagship Strategic Management Skills: `porter-three-tests`, `porter-five-forces`, `bcg-matrix`, `ansoff-matrix`, `vrio-analysis`, `value-chain-analysis`, `strategic-planning`, `decision-making`, `scenario-planning`, `strategic-risk-analysis`.
+- **4 Deterministic Strategic & MCDA Engines**:
+  - `engines/strategic-framework-engine.js`: Deterministic portfolio matrix evaluation (BCG Growth-Share Matrix & GE-McKinsey 9-Box Matrix).
+  - `engines/decision-analysis-engine.js`: Multi-Criteria Decision Analysis (MCDA) weighted scoring & trade-off ranking engine.
+  - `engines/scenario-analysis-engine.js`: What-If macro/micro scenario simulation & profit sensitivity engine.
+  - `engines/strategic-risk-engine.js`: Strategic Risk Index (Likelihood x Impact x Velocity) scoring & heatmap classification engine.
+- **Catalog & Benchmark Expansion**: Expanded catalog to **81 Skills Across 7 Plugins** and **31 Deterministic Engines** (24 benchmark domains / 90 golden cases at 100.00% accuracy).
+
 ## [2.4.0] - 2026-08-10
 
 ### Refined & Hardened

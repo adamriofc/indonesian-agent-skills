@@ -20,7 +20,7 @@
 
 ## 📌 Overview & Value Proposition
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **71 Agent Skills** with **27 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **81 Agent Skills** with **31 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
 Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
@@ -74,7 +74,7 @@ npm test
                                           │
                                           ▼
                ┌──────────────────────────────────────────────────────┐
-               │      27 Deterministic Node.js Math & Diff Engines    │
+               │      31 Deterministic Node.js Math & Diff Engines    │
                │ 19 statutory (engines/*.js + SSOT temporal rulesets) │
                │ 8 finance (engines/*.js — pure standard math)        │
                └──────────────────┬───────────────────┬───────────────┘
@@ -145,11 +145,11 @@ cp -r .agents/skills/* .cursor/skills/
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. The 6 plugins and 71 skills activate automatically.
+4. The 7 plugins and 81 skills activate automatically.
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (71 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (81 Skills Across 7 Plugins)
 
 All skills and computational engines are mapped in the **Machine-Readable Registry (`registry/index.json`)** with defined *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
@@ -220,6 +220,19 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
 
 ### 6. `finance-id`: Business Finance & Accounting (15 Skills)
+
+### 7. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
+* `porter-three-tests`: Evaluates diversification and M&A strategies using Porter's 3 Tests (Attractiveness, Cost of Entry, Better-Off).
+* `porter-five-forces`: Analyzes industry structural attractiveness across Supplier, Buyer, Substitutes, Entrants, and Rivalry.
+* `bcg-matrix`: Portfolio matrix evaluation (Star, Cash Cow, Question Mark, Dog) with deterministic engine scoring.
+* `ansoff-matrix`: Evaluates corporate growth vectors (Market Penetration/Development, Product Development, Diversification).
+* `vrio-analysis`: Evaluates internal corporate resources (Valuable, Rare, Inimitable, Organized) for sustained competitive advantage.
+* `value-chain-analysis`: Deconstructs Primary and Support activities to isolate cost drivers and differentiation sources.
+* `strategic-planning`: Structured strategic planning linking Vision/Mission to Objectives, KPIs, Initiatives, and Roadmaps.
+* `decision-making`: Executive decision-making framework powered by Multi-Criteria Decision Analysis (MCDA) weighted scoring.
+* `scenario-planning`: Evaluates macro/micro What-If scenarios using deterministic sensitivity simulation math.
+* `strategic-risk-analysis`: Computes corporate strategic risk scores (Likelihood x Impact x Velocity) to generate risk heatmaps.
+
 * `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.
 * `financial-statements`: 3-statement structure and PSAK 1 presentation principles.
 * `cash-flow-analysis`: OCF/ICF/FCF analysis and cash runway.

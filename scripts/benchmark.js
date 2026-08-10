@@ -51,6 +51,10 @@ const { analyzeRegulatoryImpact } = require(path.join(ROOT, 'engines/regulatory-
 const { auditComplianceRisk } = require(path.join(ROOT, 'engines/compliance-risk-engine'));
 const { evaluateBusinessScenario } = require(path.join(ROOT, 'engines/business-scenario-engine'));
 const { evaluateBusinessDecision } = require(path.join(ROOT, 'engines/decision-engine'));
+const { evaluateBcgMatrix } = require(path.join(ROOT, 'engines/strategic-framework-engine'));
+const { evaluateStrategicDecisionAlternatives } = require(path.join(ROOT, 'engines/decision-analysis-engine'));
+const { simulateScenarioImpact } = require(path.join(ROOT, 'engines/scenario-analysis-engine'));
+const { evaluateStrategicRisks } = require(path.join(ROOT, 'engines/strategic-risk-engine'));
 
 function loadGolden(name) {
   const raw = fs.readFileSync(path.join(ROOT, 'tests/golden', `${name}.json`), 'utf8');
@@ -346,6 +350,27 @@ function runDecisionEngine(c) {
   return { priorityLevel: r.priorityLevel, totalDriversCount: r.keyDecisionDrivers.length, cashRunwayMonths: r.financialAssessment.cashRunwayMonths, derRatio: r.financialAssessment.derRatio };
 }
 
+
+function runStrategicFramework(c) {
+  const r = evaluateBcgMatrix(c.input);
+  return { category: r.category, capitalAllocationPriority: r.capitalAllocationPriority };
+}
+
+function runDecisionAnalysis(c) {
+  const r = evaluateStrategicDecisionAlternatives(c.input);
+  return { topRecommendedOption: r.topRecommendedOption, topScore: r.rankedOptions[0].compositeWeightedScore };
+}
+
+function runScenarioAnalysis(c) {
+  const r = simulateScenarioImpact(c.input);
+  return { baseNetProfit: r.baseCaseMetrics.netProfit, simulatedNetProfit: r.simulatedScenarioMetrics.netProfit, resilienceAssessment: r.resilienceAssessment };
+}
+
+function runStrategicRisk(c) {
+  const r = evaluateStrategicRisks(c.input);
+  return { overallRiskTier: r.overallRiskTier, criticalRisksCount: r.criticalRisksCount, topRiskTitle: r.evaluatedRisks[0].riskTitle };
+}
+
 const DOMAINS = [
   { name: 'pph21', label: 'PPh 21 (TER PP 58/2023)', golden: 'pph21', run: runPph21 },
   { name: 'bpjs', label: 'BPJS (Perpres 64/2020 + PP 45/2015)', golden: 'bpjs', run: runBpjs },
@@ -366,6 +391,10 @@ const DOMAINS = [
   { name: 'compliance-risk', label: 'Compliance Risk Engine', golden: 'compliance-risk', run: runComplianceRisk },
   { name: 'business-scenario', label: 'Business Scenario & Lifecycle Engine', golden: 'business-scenario', run: runBusinessScenario },
   { name: 'decision-engine', label: 'Business Decision Engine', golden: 'decision-engine', run: runDecisionEngine },
+  { name: 'strategic-framework', label: 'Strategic Framework Engine (BCG & GE)', golden: 'strategic-framework', run: runStrategicFramework },
+  { name: 'decision-analysis', label: 'Decision Analysis Engine (MCDA)', golden: 'decision-analysis', run: runDecisionAnalysis },
+  { name: 'scenario-analysis', label: 'Scenario & Sensitivity Analysis Engine', golden: 'scenario-analysis', run: runScenarioAnalysis },
+  { name: 'strategic-risk', label: 'Strategic Risk Scoring & Heatmap Engine', golden: 'strategic-risk', run: runStrategicRisk },
   { name: 'finance', label: 'Finance (8 deterministic engines)', golden: 'finance', run: runFinance },
 ];
 

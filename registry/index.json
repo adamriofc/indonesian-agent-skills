@@ -1,14 +1,14 @@
 {
-  "version": "2.4.0",
+  "version": "2.5.0",
   "generated_at": "2026-08-10T00:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
-  "total_plugins": 6,
-  "total_skills": 71,
-  "total_engines": 27,
+  "total_plugins": 7,
+  "total_skills": 81,
+  "total_engines": 31,
   "quality_tiers": {
     "tested": 18,
     "source-verified": 31,
-    "expert-reviewed": 22
+    "expert-reviewed": 32
   },
   "skills": [
     {
@@ -791,6 +791,116 @@
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
       "engine": "engines/decision-engine.js"
+    },
+    {
+      "id": "porter-three-tests",
+      "name": "porter-three-tests",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "evaluation",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": "engines/strategic-framework-engine.js"
+    },
+    {
+      "id": "porter-five-forces",
+      "name": "porter-five-forces",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "analysis",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "bcg-matrix",
+      "name": "bcg-matrix",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "portfolio",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": "engines/strategic-framework-engine.js"
+    },
+    {
+      "id": "ansoff-matrix",
+      "name": "ansoff-matrix",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "growth",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "vrio-analysis",
+      "name": "vrio-analysis",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "capability",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "value-chain-analysis",
+      "name": "value-chain-analysis",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "analysis",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "strategic-planning",
+      "name": "strategic-planning",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "planning",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "decision-making",
+      "name": "decision-making",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "decision",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": "engines/decision-analysis-engine.js"
+    },
+    {
+      "id": "scenario-planning",
+      "name": "scenario-planning",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "scenario",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": "engines/scenario-analysis-engine.js"
+    },
+    {
+      "id": "strategic-risk-analysis",
+      "name": "strategic-risk-analysis",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "type": "risk",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": "engines/strategic-risk-engine.js"
     }
   ]
 }

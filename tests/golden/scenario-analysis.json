@@ -1,0 +1,11 @@
+[
+  {
+    "caseId": "SCENARIO-STRESS-TEST-001",
+    "description": "Revenue -20% & COGS +10% stress test converting 200M profit into 60M loss",
+    "input": {
+      "baseCase": { "monthlyRevenue": 1000000000, "cogs": 600000000, "operatingExpenses": 200000000 },
+      "scenarioDeltas": { "revenueChangePercent": -20, "cogsChangePercent": 10, "opexChangePercent": 0 }
+    },
+    "expected": { "baseNetProfit": 200000000, "simulatedNetProfit": -60000000, "resilienceAssessment": "VULNERABLE_LOSS_MAKING" }
+  }
+]
