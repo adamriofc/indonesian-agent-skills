@@ -94,10 +94,32 @@ function testNpv() {
   console.log('  [3/8] npv engine: NPV-001 + NPV-TV-001 golden cases passed');
 }
 
+function testIrr() {
+  const { irr, irrFromNpv } = require('../../engines/irr');
+  const { npv } = require('../../engines/npv');
+
+  const r = irr([-100000, 30000, 40000, 50000]);
+  assert.ok(r.irr >= 0.088 && r.irr <= 0.09, `IRR-001: ${r.irr} outside [0.088, 0.090]`);
+  assert.ok(r.iterations >= 1 && r.iterations <= 200, 'IRR-001: iterations out of bounds');
+
+  const tight = irr([-100000, 30000, 40000, 50000], { tolerance: 1e-9 });
+  assertNear(npv(tight.irr, [-100000, 30000, 40000, 50000]), 0, 0.02, 'IRR self-consistency');
+
+  const viaFn = irrFromNpv(npv, [-100000, 30000, 40000, 50000]);
+  assertNear(viaFn.irr, r.irr, 1e-4, 'irrFromNpv equals irr');
+
+  assert.throws(() => irr([100, 200, 300]), /No IRR found/);
+  assert.throws(() => irr([-100, -200]), /No IRR found/);
+
+  assertDeterministic(() => irr([-100000, 30000, 40000, 50000]), 'irr determinism');
+  console.log('  [4/8] irr engine: IRR-001 range + self-consistency passed');
+}
+
 function runAll() {
   testBreakEven();
   testDepreciation();
   testNpv();
+  testIrr();
 }
 
 runAll();
