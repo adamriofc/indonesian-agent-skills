@@ -1,0 +1,26 @@
+[
+  {
+    "caseId": "COMP-RISK-HIGH-VIOLATIONS",
+    "description": "Multi-domain audit with 5 critical/high statutory violations",
+    "input": {
+      "companyProfile": { "entityType": "pt", "hasNib": true, "hasNpwp": true, "employeeCount": 20 },
+      "taxPractices": { "isCorpUsingUmkmPost2026": true, "hasLateMonthlyPph21": false },
+      "hrPractices": { "hasPkwtProbation": true, "overtimeExceedsLimit": false, "hasWageScaleStructure": false },
+      "legalPractices": { "article1266WaivedInContracts": false },
+      "pdpPractices": { "collectsCustomerPii": true, "hasDpaAddendum": false }
+    },
+    "expected": { "complianceHealthScore": 15, "overallAssessment": "HIGH_RISK", "totalViolationsDetected": 5 }
+  },
+  {
+    "caseId": "COMP-RISK-HEALTHY",
+    "description": "Clean compliant company audit (100 Health Score)",
+    "input": {
+      "companyProfile": { "entityType": "pt", "hasNib": true, "hasNpwp": true, "employeeCount": 5 },
+      "taxPractices": { "isCorpUsingUmkmPost2026": false },
+      "hrPractices": { "hasPkwtProbation": false, "overtimeExceedsLimit": false, "hasWageScaleStructure": true },
+      "legalPractices": { "article1266WaivedInContracts": true },
+      "pdpPractices": { "collectsCustomerPii": false }
+    },
+    "expected": { "complianceHealthScore": 100, "overallAssessment": "HEALTHY", "totalViolationsDetected": 0 }
+  }
+]

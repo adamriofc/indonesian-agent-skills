@@ -1,0 +1,24 @@
+[
+  {
+    "caseId": "REG-IMP-UMKM-CORP",
+    "description": "PP 20/2026 transition for Corporate PT with 5B turnover (High Impact)",
+    "input": {
+      "domain": "umkm",
+      "fromRuleset": "UMKM-2022",
+      "toRuleset": "UMKM-2026",
+      "companyProfile": { "entityType": "corporate", "annualRevenue": 5000000000, "employeeCount": 15 }
+    },
+    "expected": { "impactLevel": "HIGH", "totalChecklistItems": 3 }
+  },
+  {
+    "caseId": "REG-IMP-UMKM-INDIV",
+    "description": "PP 20/2026 transition for Individual taxpayer with 200M turnover (Medium Impact)",
+    "input": {
+      "domain": "umkm",
+      "fromRuleset": "UMKM-2022",
+      "toRuleset": "UMKM-2026",
+      "companyProfile": { "entityType": "individual", "annualRevenue": 200000000, "employeeCount": 2 }
+    },
+    "expected": { "impactLevel": "MEDIUM", "totalChecklistItems": 1 }
+  }
+]

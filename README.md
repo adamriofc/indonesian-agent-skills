@@ -149,12 +149,13 @@ cp -r .agents/skills/* .cursor/skills/
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (67 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (71 Skills Across 6 Plugins)
 
 All skills and computational engines are mapped in the **Machine-Readable Registry (`registry/index.json`)** with defined *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
-### 1. `legal-id`: Commercial Law & Compliance (8 Skills)
+### 1. `legal-id`: Commercial Law & Compliance (9 Skills)
 * `contract-reviewer`: Audits agreements and outputs a **Contract Risk Score (0-100)** with redlines.
+* `compliance-risk`: Multi-Domain Compliance Health Audit (Tax, HR, Legal, PDP, Commerce) outputting a Compliance Score (0-100) & remediation roadmap.
 * `spk-generator`: Drafts bilateral service contracts compliant with KUHPerdata Arts. 1320 & 1338.
 * `nda-indonesia`: Non-disclosure agreements with DJKI & UU Trade Secret protections.
 * `pdp-compliance`: Corporate personal data protection audit under UU No. 27/2022.
@@ -163,7 +164,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `oss-kbli-navigator`: Maps activities to 5-digit KBLI 2020 and OSS-RBA risk levels.
 * `somasi-draft-id`: Drafts formal advocate-standard legal warning letters (Somasi 1, 2, 3).
 
-### 2. `tax-payroll-id`: Tax Engineering & Payroll (18 Skills)
+### 2. `tax-payroll-id`: Tax Engineering & Payroll (19 Skills)
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `pph21-grossup`: Solves circular PPh 21 tax allowance equations (Gross-Up) and PMK 66/2023 Natura thresholds.
 * `pph23-26-calculator`: Calculates PPh 23 (2% service) and PPh 26 (20% offshore / Tax Treaty DGT).
@@ -171,6 +172,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `pph-badan-calculator`: Corporate Income Tax (22%) with Article 31E UU PPh sliding scale facility (&le; 4.8B, 4.8B–50B, > 50B).
 * `transfer-pricing-audit`: Thin Capitalization (DER 4:1 max ceiling), interest barriers, & secondary dividend adjustments (PMK 172/2023).
 * `ppn-ppnbm-advanced`: Statutory 12% PPN, PPnBM luxury tax tiers (10%-200%), import CIF bases, & DJP Coretax equalisation.
+* `regulatory-impact`: Evaluates statutory transitions (PP 20/2026, BPJS caps) to compute business impact, checklists, and deadlines.
 * `tax-planning`: Evaluates entity tax regime efficiency (PP 20/2026 vs General PPh, Gross vs Gross-Up, Dividend vs Salary).
 * `tax-optimization`: Deductible expense optimization (Pasal 6 vs Pasal 9 UU PPh), PPh 21 Dec reconciliation, and PPh 23/26 invoice splits.
 * `tax-risk-analysis`: Detects DJP equalisation discrepancies, transfer pricing indicators (PMK 172/2023), and SP2DK audit triggers.
@@ -217,7 +219,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `kol-brief-contract`: KOL/Influencer campaign briefs, SOWs, and content usage rights contracts.
 * `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
 
-### 6. `finance-id`: Business Finance & Accounting (13 Skills)
+### 6. `finance-id`: Business Finance & Accounting (15 Skills)
 * `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.
 * `financial-statements`: 3-statement structure and PSAK 1 presentation principles.
 * `cash-flow-analysis`: OCF/ICF/FCF analysis and cash runway.
@@ -231,6 +233,8 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `financial-modeling`: 3-statement linkage and deterministic sensitivity tables.
 * `capital-budgeting`: NPV/IRR/payback via `engines/npv.js` & `engines/irr.js` vs simple WACC.
 * `vc-term-sheet-waterfall`: Venture capital startup exit liquidation preference waterfall (Seniority, Pari Passu, Participating with Caps).
+* `business-scenario`: Maps business profile across the 8 Stages of the Indonesian Business Lifecycle for an integrated compliance roadmap.
+* `decision-engine`: Evaluates financial & operational metrics to generate deterministic, prioritized business decision recommendations.
 
 ---
 

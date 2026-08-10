@@ -1,0 +1,17 @@
+[
+  {
+    "caseId": "DECISION-CRITICAL-RUNWAY-DER",
+    "description": "Critical burn rate (4m runway), margin squeeze (20%), and DER 5:1 violation",
+    "input": {
+      "financialMetrics": {
+        "monthlyRevenue": 500000000,
+        "monthlyOperatingExpense": 800000000,
+        "cashBalance": 1200000000,
+        "cogs": 400000000,
+        "totalDebt": 50000000000,
+        "totalEquity": 10000000000
+      }
+    },
+    "expected": { "priorityLevel": "HIGH", "totalDriversCount": 3, "cashRunwayMonths": 4, "derRatio": "5:1" }
+  }
+]

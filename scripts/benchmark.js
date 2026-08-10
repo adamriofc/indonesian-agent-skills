@@ -47,6 +47,10 @@ const { auditTransferPricingThinCap } = require(path.join(ROOT, 'engines/transfe
 const { calculatePpnAndPpnbm } = require(path.join(ROOT, 'engines/ppn-ppnbm-calculator'));
 const { calculateMarketplaceFee } = require(path.join(ROOT, 'engines/marketplace-fee-calculator'));
 const { calculateExitWaterfall } = require(path.join(ROOT, 'engines/term-sheet-waterfall'));
+const { analyzeRegulatoryImpact } = require(path.join(ROOT, 'engines/regulatory-impact-engine'));
+const { auditComplianceRisk } = require(path.join(ROOT, 'engines/compliance-risk-engine'));
+const { evaluateBusinessScenario } = require(path.join(ROOT, 'engines/business-scenario-engine'));
+const { evaluateBusinessDecision } = require(path.join(ROOT, 'engines/decision-engine'));
 
 function loadGolden(name) {
   const raw = fs.readFileSync(path.join(ROOT, 'tests/golden', `${name}.json`), 'utf8');
@@ -321,6 +325,27 @@ function runTermSheet(c) {
   return { totalInvestorPayout: r.totalInvestorPayout, commonShareholdersPayout: r.commonShareholdersPayout, remainingUnallocated: r.remainingUnallocated };
 }
 
+
+function runRegulatoryImpact(c) {
+  const r = analyzeRegulatoryImpact(c.input);
+  return { impactLevel: r.impactLevel, totalChecklistItems: r.actionChecklist.length };
+}
+
+function runComplianceRisk(c) {
+  const r = auditComplianceRisk(c.input);
+  return { complianceHealthScore: r.complianceHealthScore, overallAssessment: r.overallAssessment, totalViolationsDetected: r.totalViolationsDetected };
+}
+
+function runBusinessScenario(c) {
+  const r = evaluateBusinessScenario(c.input);
+  return { totalLifecycleStages: r.totalLifecycleStages, recommendedRegime: r.recommendedRegime };
+}
+
+function runDecisionEngine(c) {
+  const r = evaluateBusinessDecision(c.input);
+  return { priorityLevel: r.priorityLevel, totalDriversCount: r.keyDecisionDrivers.length, cashRunwayMonths: r.financialAssessment.cashRunwayMonths, derRatio: r.financialAssessment.derRatio };
+}
+
 const DOMAINS = [
   { name: 'pph21', label: 'PPh 21 (TER PP 58/2023)', golden: 'pph21', run: runPph21 },
   { name: 'bpjs', label: 'BPJS (Perpres 64/2020 + PP 45/2015)', golden: 'bpjs', run: runBpjs },
@@ -337,6 +362,10 @@ const DOMAINS = [
   { name: 'ppn-ppnbm', label: 'PPN 12% & PPnBM (UU HPP & PMK 131/2024)', golden: 'ppn-ppnbm', run: runPpnPpnbm },
   { name: 'marketplace-fee', label: 'Marketplace Fee & Margin', golden: 'marketplace-fee', run: runMarketplaceFee },
   { name: 'term-sheet', label: 'VC Term-Sheet Waterfall', golden: 'term-sheet', run: runTermSheet },
+  { name: 'regulatory-impact', label: 'Regulatory Impact Intelligence', golden: 'regulatory-impact', run: runRegulatoryImpact },
+  { name: 'compliance-risk', label: 'Compliance Risk Engine', golden: 'compliance-risk', run: runComplianceRisk },
+  { name: 'business-scenario', label: 'Business Scenario & Lifecycle Engine', golden: 'business-scenario', run: runBusinessScenario },
+  { name: 'decision-engine', label: 'Business Decision Engine', golden: 'decision-engine', run: runDecisionEngine },
   { name: 'finance', label: 'Finance (8 deterministic engines)', golden: 'finance', run: runFinance },
 ];
 

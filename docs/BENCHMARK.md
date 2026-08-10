@@ -14,8 +14,8 @@ Official methodology and measurement results. **Rule: no number is ever written 
 | 4. LLM Baseline (optional) | How do general LLM models compare against the engine? | `scripts/benchmark.js --llm` |
 
 Corpus used:
-- Static golden corpus (`tests/golden/`): **78 cases across all 23 engine modules** (16 benchmark domains) — fast batch, deterministic, key-free.
-- Deepened matrix in CI: 425 PPh 21 cases, 225 PHK cases, 20 integration assertions, 23 engine modules, security suite (see `npm test`).
+- Static golden corpus (`tests/golden/`): **85 cases across all 27 engine modules** (20 benchmark domains) — fast batch, deterministic, key-free.
+- Deepened matrix in CI: 425 PPh 21 cases, 225 PHK cases, 20 integration assertions, 27 engine modules, security suite (see `npm test`).
 
 Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
@@ -23,7 +23,7 @@ Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 
 ## 2. Latest Results — Deterministic Run
 
-**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.2.1 (23-engine coverage: added umkm, thr, pph23-26, pkwt, pkwtt, regulatory-diff, pph21-grossup, pph-badan, transfer-pricing, ppn-ppnbm, marketplace-fee, term-sheet domains)**
+**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.3.0 (27-engine coverage: added regulatory-impact, compliance-risk, business-scenario, decision-engine domains)**
 
 | Engine | Cases | Accuracy | Determinism (3×) | Throughput |
 |---|---|---|---|---|
@@ -42,6 +42,10 @@ Run: `node scripts/benchmark.js [--llm] [--json-report path]`
 | PPN 12% & PPnBM (UU HPP & PMK 131/2024) | 5 | **100.00%** | OK, identical | 58,678 ops/second |
 | Marketplace Fee & Margin | 7 | **100.00%** | OK, identical | 62,827 ops/second |
 | VC Term-Sheet Waterfall | 2 | **100.00%** | OK, identical | 14,326 ops/second |
+| Regulatory Impact Intelligence | 2 | **100.00%** | OK, identical | 10,917 ops/second |
+| Compliance Risk Engine | 2 | **100.00%** | OK, identical | 20,830 ops/second |
+| Business Scenario & Lifecycle Engine | 2 | **100.00%** | OK, identical | 27,450 ops/second |
+| Business Decision Engine | 1 | **100.00%** | OK, identical | 15,727 ops/second |
 | Finance (8 engines: BE, DEP, NPV, IRR, LOAN, RAT, WC, EOQ) | 11 | **100.00%** | OK, identical | 10,413 ops/second |
 
 Methodology notes:

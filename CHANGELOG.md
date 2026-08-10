@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.3.0] - 2026-08-10
+
+### Added
+- **4 Strategic Cross-Domain Intelligence Engines**:
+  - `engines/regulatory-impact-engine.js`: Evaluates versioned statutory transitions (PP 20/2026, BPJS caps) against company operational profiles to compute business impact level, affected domains, action checklists, and statutory deadlines.
+  - `engines/compliance-risk-engine.js`: Multi-Domain Compliance Health Audit (Tax, HR, Legal, Data/PDP, Commerce) computing a Compliance Health Score (0-100), domain health flags, detected violations, and a prioritized remediation roadmap.
+  - `engines/business-scenario-engine.js`: Maps business profiles across the 8 Stages of the Indonesian Business Lifecycle (Incorporation ➔ HR Onboarding ➔ Payroll/THR ➔ Contracts ➔ Tax ➔ E-Commerce ➔ Financial Reporting ➔ Exit/Restructuring).
+  - `engines/decision-engine.js`: Evaluates corporate financial & operational metrics (cash runway, gross margin, Thin Cap DER 4:1 ratio under PMK 172/2023, PPh 21 gross-up tax burden) to generate deterministic, prioritized business decision recommendations and driver classifications.
+- **4 Flagship Cross-Domain Agent Skills**: `regulatory-impact` (under `tax-payroll-id`), `compliance-risk` (under `legal-id`), `business-scenario` (under `finance-id`), `decision-engine` (under `finance-id`), bringing total catalog to **71 Skills across 6 Plugins** & **27 Deterministic Engines**.
+- **20-Domain Golden Benchmark**: Expanded static golden corpus (`tests/golden/`) to **85 golden cases across 27 engines** (20 benchmark domains) at **100.00% accuracy** and stable determinism.
+
 ## [2.2.1] - 2026-08-10
 
 ### Fixed & Hardened
