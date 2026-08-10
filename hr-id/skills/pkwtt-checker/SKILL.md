@@ -13,9 +13,9 @@ metadata:
 Audits PKWTT (Perjanjian Kerja Waktu Tidak Tertentu / Permanent Employment) contracts, probation period limits, and automatic conversion triggers from PKWT to PKWTT under Government Regulation PP No. 35/2021 and UU No. 6/2023 (Cipta Kerja).
 
 ## Statutory Rules & Conversion Triggers (PP 35/2021)
-1. **Probation Period (Masa Percobaan)**:
+1. **Probation Period (Masa Percobaan / Probation)**:
    - Allowed **only in PKWTT** for a maximum duration of **3 months** (Pasal 13).
-   - Any probation clause inside a PKWT contract is null and void (*batal demi hukum*), causing the contract to automatically convert to PKWTT from day 1.
+   - Any probation clause inside a PKWT contract is null and void (*batal demi hukum* / void by operation of law), causing the contract to automatically convert to PKWTT from day 1.
 2. **Job Nature Boundary (Pasal 4)**:
    - PKWT cannot be used for core production or permanent work. If executed for permanent work, it converts to PKWTT by law.
 3. **Tenure Limit (Pasal 8)**:

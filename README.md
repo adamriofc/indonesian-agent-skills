@@ -18,46 +18,46 @@
 
 ---
 
-## 📌 Overview & Value Proposition (Apa Ini & Untuk Siapa?)
+## 📌 Overview & Value Proposition
 
-**Indonesian Business Agent Skills** adalah infrastruktur *domain intelligence* sumber terbuka (*open-source*) yang memberikan "otak bisnis dan regulasi Indonesia" kepada agen AI. Dirancang untuk **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, dan *framework* agen kustom, repositori ini mengintegrasikan **67 Agent Skills** dengan **23 Mesin Kalkulasi Deterministik & Regulatory Diff Engine** (`engines/`) serta *ruleset* JSON berbasis waktu (*temporal SSOT* di `engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **67 Agent Skills** with **23 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
-### 💡 Mengapa AI Biasa (Tanpa Engine) Sering Salah Hitung?
-Model AI generik (seperti ChatGPT atau Claude tanpa *tooling*) memprediksi kata berdasarkan probabilitas (*token prediction*). Ketika diminta menghitung pajak PPh 21 TER, kompensasi PHK, atau bunga pinjaman, AI biasa mengalami 3 kegagalan utama:
-1. **Halusinasi Aritmatika**: AI menebak angka alih-alih menghitung rumus secara presisi.
-2. **Ambigu Temporal**: AI tidak tahu perubahan batas tarif/upah BPJS antara tahun 2024, 2025, dan 2026.
-3. **Tanpa Dasar Hukum Terlacak**: Hasil AI biasa tidak melampirkan rujukan resmi lembaran negara (*gazette*) yang dapat diaudit.
+### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
+Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
+1. **Arithmetic Hallucination**: AI models guess numbers rather than computing equations, leading to incorrect tax bracket assignments and faulty severance math.
+2. **Temporal Ambiguity**: AI models fail to track statutory wage caps and rate adjustments across transition windows (such as BPJS JP wage cap adjustments in March 2025 vs March 2026).
+3. **Unverifiable Lineage**: Standard AI responses lack traceable references to official gazettes (*lembaran negara*), rendering them unsuited for corporate audits.
 
-### 🛡️ Solusi Hibrida Repositori Ini
-Repositori ini memisahkan **penalaran (*reasoning*)** AI dari **perhitungan (*calculation*)**:
-- **AI (Agent Skill)**: Memahami bahasa alami manusia, mengekstrak parameter, dan menyusun penjelasan.
-- **Engine (Node.js)**: Menghitung matematika murni secara presisi (0% halusinasi) sesuai *ruleset* resmi pemerintah.
+### 🛡️ The Hybrid Architecture Solution
+This repository decouples AI **reasoning** from **calculation**:
+- **AI (Agent Skill)**: Understands natural language, extracts parameters, and synthesizes explanations.
+- **Engine (Node.js)**: Computes exact invariant mathematics (0% hallucination) per official government rulesets.
 
 ---
 
 ## ⚡ 30-Second Quickstart Demo
 
 ```bash
-# 1. Clone repositori (5 detik)
+# 1. Clone the repository (5 seconds)
 git clone https://github.com/adamriofc/indonesian-business-agent-skills.git && cd indonesian-business-agent-skills
 
-# 2. Install (10 detik, 0 dependensi eksternal)
+# 2. Install (10 seconds, 0 external dependencies)
 npm ci
 
-# 3. Jalankan kalkulasi PPh 21 TER presisi (2 detik)
+# 3. Execute precise PPh 21 TER tax calculation (2 seconds)
 node -e "
 const { calculatePPh21Monthly } = require('./engines/pph21-calculator');
 console.log(calculatePPh21Monthly(10000000, 'TK/0', true, '2026-03-01'));
 "
 
-# 4. Verifikasi integritas kriptografi SHA-256 (2 detik)
+# 4. Verify cryptographic SHA-256 ruleset integrity (2 seconds)
 ./scripts/sha256sums.sh verify
 
-# 5. Jalankan full test suite: 900+ asersi (30 detik)
+# 5. Run full test suite: 900+ assertions (30 seconds)
 npm test
 ```
 
-> 🌐 **Coba Tanpa Koding**: Buka `docs/playground.html` langsung di browser Anda untuk menguji kalkulator PPh 21, UMKM PP 20/2026, Break-Even, dan Amortisasi Pinjaman secara interaktif!
+> 🌐 **Interactive No-Code Demo**: Open `docs/playground.html` directly in your browser to test interactive calculators for PPh 21, PP 20/2026 UMKM tax, Break-Even Analysis, and Loan Amortization!
 
 ---
 
@@ -74,8 +74,8 @@ npm test
                                           │
                                           ▼
               ┌──────────────────────────────────────────────────────┐
-              │      17 Deterministic Node.js Math & Diff Engines    │
-              │ 9 statutory (engines/*.js + SSOT temporal rulesets)  │
+              │      23 Deterministic Node.js Math & Diff Engines    │
+              │ 15 statutory (engines/*.js + SSOT temporal rulesets) │
               │ 8 finance (engines/*.js — pure standard math)        │
               └──────────────────┬───────────────────┬───────────────┘
                                  │                   │
@@ -101,57 +101,57 @@ npm test
 
 ---
 
-## 🛠️ Installation & Integration Guide (Panduan Instalasi)
+## 🛠️ Installation & Integration Guide
 
-### 1. Universal Agent Skills CLI (Paling Mudah / Direkomendasikan)
-Install skill secara langsung ke berbagai agen (Claude Code, OpenCode, Codex, Cursor, Antigravity) menggunakan `npx`:
+### 1. Universal Agent Skills CLI (Recommended / Universal)
+Install skills directly across any supported agent framework (Claude Code, OpenCode, Codex, Cursor, Antigravity) using `npx`:
 ```bash
-# Install seluruh skill ke agen Anda
+# Install all skills across the repository
 npx skills add adamriofc/indonesian-business-agent-skills
 
-# Selektif berdasarkan platform atau domain skill tertentu
+# Selective installation by agent platform or skill domain
 npx skills add adamriofc/indonesian-business-agent-skills --agent claude-code
 npx skills add adamriofc/indonesian-business-agent-skills --skill pph21-calculator
 ```
 
-### 2. Claude Code Marketplace (Integrasi Plugin Resmi)
-Daftarkan repositori sebagai *marketplace source* resmi dan install plugin per domain:
+### 2. Claude Code Marketplace (Official Plugin Integration)
+Register the repository as a marketplace source and install individual plugins:
 ```bash
-# Tambahkan repositori sebagai sumber marketplace plugin
+# Add the repository as a plugin marketplace source
 claude plugin marketplace add adamriofc/indonesian-business-agent-skills
 
-# Install plugin domain sesuai kebutuhan
+# Install individual plugins from the marketplace
 claude plugin install legal-id@indonesian-business-agent-skills
 claude plugin install tax-payroll-id@indonesian-business-agent-skills
 claude plugin install finance-id@indonesian-business-agent-skills
 ```
 
-### 3. Portabilitas Agent Skills Standard (.agents / .opencode / .cursor)
-Untuk *discovery* skill secara native tanpa plugin, salin skill ke folder `.agents/skills/`:
+### 3. Portable Agent Skills Standard (.agents / .opencode / .cursor)
+For native skill discovery without plugins, copy skills to the `.agents/skills/` directory:
 ```bash
-# Direktori standar lintaskan agen
+# Canonical cross-agent skills directory
 mkdir -p .agents/skills
 cp -r legal-id/skills/* .agents/skills/
 cp -r tax-payroll-id/skills/* .agents/skills/
 cp -r finance-id/skills/* .agents/skills/
 
-# Path native OpenCode & Cursor
+# OpenCode & Cursor native paths
 mkdir -p .opencode/skills .cursor/skills
 cp -r .agents/skills/* .opencode/skills/
 cp -r .agents/skills/* .cursor/skills/
 ```
 
 ### 4. OpenWork Desktop & Cloud
-1. Buka **Settings > Plugins**.
-2. Klik **Add Plugin from Repository**.
-3. Masukkan URL GitHub: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. Ke-6 plugin dan 60 skill akan aktif secara otomatis.
+1. Open **Settings > Plugins**.
+2. Click **Add Plugin from Repository**.
+3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
+4. The 6 plugins and 67 skills activate automatically.
 
 ---
 
 ## 📦 Plugin Inventory & Skill Catalog (67 Skills Across 6 Plugins)
 
-Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/index.json`)** dengan *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
+All skills and computational engines are mapped in the **Machine-Readable Registry (`registry/index.json`)** with defined *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
 ### 1. `legal-id`: Commercial Law & Compliance (8 Skills)
 * `contract-reviewer`: Audits agreements and outputs a **Contract Risk Score (0-100)** with redlines.
@@ -163,10 +163,14 @@ Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/
 * `oss-kbli-navigator`: Maps activities to 5-digit KBLI 2020 and OSS-RBA risk levels.
 * `somasi-draft-id`: Drafts formal advocate-standard legal warning letters (Somasi 1, 2, 3).
 
-### 2. `tax-payroll-id`: Tax Engineering & Payroll (14 Skills)
+### 2. `tax-payroll-id`: Tax Engineering & Payroll (19 Skills)
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
+* `pph21-grossup`: Solves circular PPh 21 tax allowance equations (Gross-Up) and PMK 66/2023 Natura thresholds.
 * `pph23-26-calculator`: Calculates PPh 23 (2% service) and PPh 26 (20% offshore / Tax Treaty DGT).
 * `pph-final-umkm`: Calculates 0.5% UMKM final tax with Rp 500M OP threshold exemption (PP 55/2022 & PP 20/2026).
+* `pph-badan-calculator`: Corporate Income Tax (22%) with Article 31E UU PPh sliding scale facility (&le; 4.8B, 4.8B–50B, > 50B).
+* `transfer-pricing-audit`: Thin Capitalization (DER 4:1 max ceiling), interest barriers, & secondary dividend adjustments (PMK 172/2023).
+* `ppn-ppnbm-advanced`: Statutory 12% PPN, PPnBM luxury tax tiers (10%-200%), import CIF bases, & DJP Coretax equalisation.
 * `tax-planning`: Evaluates entity tax regime efficiency (PP 20/2026 vs General PPh, Gross vs Gross-Up, Dividend vs Salary).
 * `tax-optimization`: Deductible expense optimization (Pasal 6 vs Pasal 9 UU PPh), PPh 21 Dec reconciliation, and PPh 23/26 invoice splits.
 * `tax-risk-analysis`: Detects DJP equalisation discrepancies, transfer pricing indicators (PMK 172/2023), and SP2DK audit triggers.
@@ -179,12 +183,13 @@ Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/
 * `bpjs-calculator`: Calculations for health and social security contribution splits.
 * `spt-tahunan-guide`: Filing workflow for individual tax returns via DJP Online.
 
-### 3. `hr-id`: Labor & Employment Compliance (8 Skills)
+### 3. `hr-id`: Labor & Employment Compliance (9 Skills)
 * `surat-peringatan`: Drafts SP1, SP2, and SP3 warning letters following 6-month statutory windows.
 * `sop-perusahaan`: Generates SOPs enforcing overtime limits (Perpu 2/2022 max 4h/day, 18h/week).
 * `interview-id`: Candidate scorecards evaluating technical skills and local cultural fit.
 * `bpjs-tenagakerja-admin`: SIPP BPJS portal administration workflow guide.
 * `phk-calculator`: Statutory severance payout engine under PP 35/2021.
+* `phk-advanced-matrix`: Complex termination scenarios (retirement crossover, efficiency due to loss vs prevention of loss, merger employee/employer refusal).
 * `pkwt-pkwtt-checker`: Audits contract worker duration (max 5 yrs) and computes statutory PKWT compensation.
 * `pkwtt-checker`: Audits permanent employment (PKWTT) contracts, probation rules (max 3 months), and automatic conversion triggers.
 * `struktur-skala-upah`: Builds statutory Wage Structure and Scale frameworks per Permenaker 1/2017.
@@ -212,7 +217,7 @@ Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/
 * `kol-brief-contract`: KOL/Influencer campaign briefs, SOWs, and content usage rights contracts.
 * `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
 
-### 6. `finance-id`: Business Finance & Accounting (12 Skills)
+### 6. `finance-id`: Business Finance & Accounting (13 Skills)
 * `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.
 * `financial-statements`: 3-statement structure and PSAK 1 presentation principles.
 * `cash-flow-analysis`: OCF/ICF/FCF analysis and cash runway.
@@ -225,12 +230,13 @@ Mesin dan skill repositori dipetakan ke dalam **Registri Terstruktur (`registry/
 * `business-feasibility`: 5-aspect feasibility framework with consistent financial figures.
 * `financial-modeling`: 3-statement linkage and deterministic sensitivity tables.
 * `capital-budgeting`: NPV/IRR/payback via `engines/npv.js` & `engines/irr.js` vs simple WACC.
+* `vc-term-sheet-waterfall`: Venture capital startup exit liquidation preference waterfall (Seniority, Pari Passu, Participating with Caps).
 
 ---
 
 ## 📊 Real-World Execution Examples
 
-All outputs below are **actual engine outputs** (run on 2026-08-10, Node.js 20+, `npm test` green).
+All outputs below are **actual engine outputs** (run on Node.js 20+, `npm test` green).
 
 ### 1. PPh 21 TER Monthly — Actual Engine Output
 
@@ -289,46 +295,46 @@ console.log(diff);
 
 ## ❓ Frequently Asked Questions (FAQ)
 
-### Q1: Saya pemilik bisnis / orang awam (non-programmer), bagaimana cara menggunakan repositori ini?
-> **Jawab**: Anda tidak perlu menjadi programmer! Ada 2 cara paling mudah:
-> 1. **Tanpa Koding**: Buka file `docs/playground.html` langsung di browser Anda untuk menggunakan kalkulator pajak PPh 21, UMKM, dan Keuangan secara interaktif.
-> 2. **Via Agen AI**: Jika Anda menggunakan aplikasi AI seperti Claude Code, OpenWork, atau Cursor, cukup jalankan perintah `npx skills add adamriofc/indonesian-business-agent-skills`. Setelah itu, Anda bisa bertanya langsung dalam bahasa Indonesia sehari-hari kepada AI Anda (misal: *"Berapa pajak PPh 21 untuk gaji Rp 10 juta?"*).
+### Q1: I am a business owner / non-technical user. How do I use this repository?
+> **Answer**: You do not need to be a developer! You can use this in 2 easy ways:
+> 1. **No-Code Interactive**: Open `docs/playground.html` directly in your browser to run interactive calculators for PPh 21, UMKM PP 20/2026, Break-Even, and Loan Amortization.
+> 2. **Via AI Agents**: If you use an AI app like Claude Code, OpenWork, or Cursor, simply run `npx skills add adamriofc/indonesian-business-agent-skills`. Afterward, you can ask questions naturally in plain language (e.g. *"What is the PPh 21 tax for a Rp 10M monthly salary?"*).
 
-### Q2: Mengapa saya tidak boleh mempercayai perhitungan pajak atau pesangon langsung dari ChatGPT / AI biasa?
-> **Jawab**: AI biasa menghitung dengan menebak kata berdasarkan pola teks (*probabilistic token prediction*), bukan dengan mesin matematika. AI biasa sering mengalami:
-> - **Salah Hitung**: Menghasilkan angka yang tampak meyakinkan padahal rumus matematikanya salah.
-> - **Ketinggalan Aturan**: Tidak tahu bahwa tarif BPJS atau aturan PPh UMKM telah berubah di tahun 2025/2026.
-> Repositori ini memaksa AI untuk menggunakan **Node.js Engine** (kalkulator matematika murni) yang terhubung ke aturan pemerintah (*ruleset JSON*), sehingga hasilnya **100% presisi dan 0% halusinasi**.
+### Q2: Why should I not rely on unassisted ChatGPT / standard AI for Indonesian tax or severance calculations?
+> **Answer**: Standard AI predicts words probabilistically (*token prediction*) rather than executing math. Unassisted AI encounters:
+> - **Arithmetic Hallucination**: Producing plausible-looking numbers based on invalid formulas.
+> - **Outdated Regulations**: Missing recent statutory changes such as BPJS wage cap adjustments or PP 20/2026 UMKM eligibility rules.
+> This repository forces the AI to call a **Node.js Engine** (pure math calculator) connected to official government rulesets (`ruleset JSON`), ensuring **100% precision and 0% hallucination**.
 
-### Q3: Apakah aturan PPh Final UMKM di repo ini sudah mendukung PP No. 20 Tahun 2026 terbaru?
-> **Jawab**: **Ya, 100% didukung!** Repositori ini memiliki dua *ruleset*:
-> - `UMKM-2022` (PP 55/2022): Berlaku hingga 21 April 2026 (PT/CV dan Orang Pribadi berhak atas tarif 0,5%).
-> - `UMKM-2026` (PP 20/2026): Berlaku mulai 22 April 2026. Dalam aturan terbaru ini:
->   - **Orang Pribadi (OP)**: Tetap berhak 0,5% dengan fasilitas omzet bebas pajak Rp 500 Juta/tahun.
->   - **PT Perorangan & Koperasi**: Berhak 0,5% tanpa fasilitas omzet bebas Rp 500M.
->   - **PT / CV / Firma Biasa**: **Tidak lagi berhak** atas tarif final 0,5% (wajib PPh Umum Badan).
->   - **Batas Omzet**: Batas maksimal omzet kumulatif adalah Rp 4,8 Miliar/tahun.
+### Q3: Does this repository support the latest PP No. 20 Year 2026 UMKM tax regulations?
+> **Answer**: **Yes, 100%!** The repository maintains versioned temporal rulesets:
+> - `UMKM-2022` (PP 55/2022): Effective until April 21, 2026.
+> - `UMKM-2026` (PP 20/2026): Effective April 22, 2026 onwards. Under the updated statute:
+>   - **Individual Taxpayers (OP)**: Eligible for 0.5% final tax with a Rp 500M annual non-taxable threshold.
+>   - **Single-Person PT (PT Perorangan) & Cooperatives**: Eligible for 0.5% final tax without the Rp 500M exemption.
+>   - **General Corporate PT / CV / Firma**: **Not eligible** for 0.5% final tax (must calculate under general Corporate PPh).
+>   - **Turnover Limit**: Maximum Rp 4.8 Billion gross annual turnover ceiling.
 
-### Q4: Bagaimana repositori ini menangani aturan PPN 12% dan Coretax DJP?
-> **Jawab**: Skill `efaktur-helper` telah diperbarui sesuai **UU HPP No. 7/2021**, **PMK No. 131/2024**, dan **PER-01/PJ/2025**:
-> - Tarif statutory PPN adalah **12%**.
-> - Untuk barang/jasa non-mewah (Kode Transaksi 04), digunakan mekanisme **DPP Nilai Lain (11/12 × DPP)** sehingga beban PPN efektif tetap **11%** ($\text{PPN} = 12\% \times \frac{11}{12} \times \text{DPP}$).
-> - Mendukung integrasi skema Faktur Pajak Coretax DJP & e-Faktur Desktop.
+### Q4: How does this repository handle 12% PPN and DJP Coretax tax invoices?
+> **Answer**: The `efaktur-helper` and `ppn-ppnbm-advanced` skills reflect **UU HPP No. 7/2021**, **PMK No. 131/2024**, and **PER-01/PJ/2025**:
+> - Statutory PPN rate is **12%**.
+> - Non-luxury goods (Transaction Code 04) utilize **Other Basis DPP ($11/12 \times \text{DPP}$)** for an effective tax burden of **11%** ($\text{PPN} = 12\% \times \frac{11}{12} \times \text{DPP}$).
+> - Supports DJP Coretax and e-Faktur Desktop invoice auditing formats.
 
-### Q5: Apa bedanya 'Skill', 'Engine', dan 'Ruleset' di dalam repositori ini?
-> **Jawab**:
-> - **Skill (`SKILL.md`)**: Petunjuk dan panduan cara berpikir AI (otak/manual).
-> - **Engine (`engines/*.js`)**: Kode program matematika murni yang melakukan perhitungan (kalkulator).
-> - **Ruleset (`engines/rules/*.json`)**: Database angka dan tarif resmi pemerintah berdasarkan tanggal efektif (buku aturan resmi).
+### Q5: What is the difference between a 'Skill', an 'Engine', and a 'Ruleset'?
+> **Answer**:
+> - **Skill (`SKILL.md`)**: The prompt instructions that guide the AI on how to interpret user queries.
+> - **Engine (`engines/*.js`)**: Pure JavaScript math functions that perform calculations.
+> - **Ruleset (`engines/rules/*.json`)**: Single-source-of-truth JSON database containing official government rates and effective date windows.
 
-### Q6: Apakah data keuangan atau bisnis saya aman dan tidak terkirim ke server luar?
-> **Jawab**: **Sangat Aman.** Seluruh mesin kalkulasi (`engines/`) berjalan **100% secara lokal** di komputer Anda tanpa dependensi npm pihak ketiga dan tanpa melakukan koneksi jaringan (*zero network calls*).
+### Q6: Is my business and financial data secure?
+> **Answer**: **100% Secure.** All computational engines (`engines/`) execute locally on your machine with zero third-party dependencies and zero external network calls.
 
-### Q7: Apakah hasil perhitungan dari repo ini bisa dijadikan bukti sah legal atau perpajakan?
-> **Jawab**: Hasil repositori ini berfungsi sebagai *decision-support intelligence* (alat bantu analisis keputusan). Meskipun perhitungannya 100% presisi sesuai lembaran negara, keputusan hukum atau pelaporan pajak resmi berisiko tinggi (*high-risk*) tetap direkomendasikan untuk diverifikasi oleh Konsultan Pajak (BKP) atau Advokat terlisensi.
+### Q7: Can calculations from this repository be used as formal legal or tax opinions?
+> **Answer**: Outputs serve as decision-support intelligence. While calculation math is 100% verified against statutory gazettes, high-risk decisions (such as formal PHK severance execution or tax audit filings) require review by a licensed Indonesian advocate or tax consultant.
 
-### Q8: Bagaimana cara mengintegrasikan repo ini dengan ERP, sistem HRIS, atau API perusahaan kami?
-> **Jawab**: Repositori ini memiliki panduan arsitektur integrasi di `integrations/README.md`. Karena mesin kalkulasi bersifat modular (fungsi JavaScript murni), Anda dapat langsung memanggil fungsi engine (`calculatePPh21Monthly`, `calculateBpjs`, `calculatePhk`) dari aplikasi backend Node.js, REST API, atau sistem ERP Anda.
+### Q8: How do we integrate these engines into our corporate ERP, HRIS, or custom API?
+> **Answer**: Refer to `integrations/README.md`. Since engines are pure modular JavaScript functions, you can import functions (`calculatePPh21Monthly`, `calculateCorporateTax`, `auditTransferPricingThinCap`, `calculatePhk`) directly into your backend Node.js, REST API, or ERP system.
 
 ---
 
@@ -345,7 +351,7 @@ npm test
 
 ## 🛡️ Security & Disclaimers
 
-See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines, [`PROVENANCE.md`](PROVENANCE.md) for the granular statutory gazette register & Section 7 Expert Review Register, [`REGULATORY_PIPELINE.md`](REGULATORY_PIPELINE.md) for the official update procedure, and [`REGULATORY_CHANGELOG.md`](REGULATORY_CHANGELOG.md) for regulatory amendments.
+See [`SECURITY.md`](SECURITY.md) for prompt injection defense guidelines, [`PROVENANCE.md`](PROVENANCE.md) for the statutory gazette register & Section 7 Expert Review Register, [`REGULATORY_PIPELINE.md`](REGULATORY_PIPELINE.md) for the official update procedure, and [`REGULATORY_CHANGELOG.md`](REGULATORY_CHANGELOG.md) for regulatory amendments.
 
 **Release Trust Anchor**: `SHA256SUMS.txt` holds SHA-256 checksums for every ruleset; verified via `./scripts/sha256sums.sh verify` and in CI.
 

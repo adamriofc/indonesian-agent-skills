@@ -29,4 +29,4 @@ Adapts formal or translated copy into natural, professional Indonesian casual to
 * **Culture check**: avoid stereotypes of regions/ethnicities; keep tone consistent with brand persona — do not "Jaksel-ize" premium B2B brands.
 
 ## Worked Example
-Input: `"Our premium quality coffee is finally available nationwide."` → Casual output: *"Kopi kualitas premium kita akhirnya bisa dinikmati di seluruh Indonesia, guys."* → B2B formal output: *"Kopi kualitas premium kini tersedia di seluruh Indonesia."* — both natural, zero dictionary-ism.
+Input: `"Our premium quality coffee is finally available nationwide."` → Casual output (Indonesian slang specimen): *"Kopi kualitas premium kita akhirnya bisa dinikmati di seluruh Indonesia, guys."* → B2B formal output (Indonesian formal specimen): *"Kopi kualitas premium kini tersedia di seluruh Indonesia."* — both outputs are localized specimens in Indonesian (this skill's purpose is to produce Indonesian-language copy), while all surrounding instructions and commentary remain in English.

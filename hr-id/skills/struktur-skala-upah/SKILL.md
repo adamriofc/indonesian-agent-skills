@@ -11,7 +11,7 @@ rule_type: statutory
 Constructs mandatory corporate Wage Structure and Scale frameworks based on job evaluation metrics.
 
 ## Statutory Provenance & Rules
-* **Statute**: Permenaker No. 1 Tahun 2017 & PP No. 36/2021 tentang Pengupahan.
+* **Statute**: Permenaker No. 1 Year 2017 & PP No. 36/2021 regarding Remuneration (Pengupahan).
 * **Mandatory Filing**: Every company must compile and inform employees of their wage structure and attach it during manpower reporting.
 * **Minimum Wage Boundary**: The lowest grade in the scale cannot be lower than the active regional minimum wage (UMR / UMP).
 
