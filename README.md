@@ -1,4 +1,4 @@
-# Indonesian Business Agent Skills 🇮🇩
+# Indonesian Business Agent Skills
 
 *Give AI agents a business brain for Indonesia.*
 

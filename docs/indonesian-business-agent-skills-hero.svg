@@ -1,61 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="100%" height="100%">
-  <rect width="1200" height="380" rx="12" fill="#0B0F19" stroke="#1E293B" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240" width="100%" height="100%">
+  <rect width="1200" height="240" rx="8" fill="#0B0F19"/>
   
-  <!-- Subtle Header Accent Line (Indonesia Flag Element: Red/White) -->
-  <rect x="0" y="0" width="1200" height="4" rx="2" fill="#DC2626"/>
+  <!-- Subtle Top Indonesian Flag Accent -->
+  <rect x="0" y="0" width="1200" height="3" fill="#E11D48"/>
   
-  <!-- Content Group -->
-  <g transform="translate(60, 90)">
-    <!-- Top Monospace Tag -->
-    <rect x="0" y="0" width="270" height="28" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-    <text x="14" y="18" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="12" font-weight="600" fill="#38BDF8">v1.0.0 • PRODUCTION-ORIENTED</text>
-    
-    <!-- Repository Title -->
-    <text x="0" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="44" font-weight="800" fill="#F8FAFC" letter-spacing="-1">
+  <!-- Main Title & Tagline -->
+  <g transform="translate(50, 65)">
+    <text x="0" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif" font-size="38" font-weight="800" fill="#F8FAFC" letter-spacing="-0.8">
       indonesian-business-agent-skills
     </text>
     
-    <!-- Tagline -->
-    <text x="0" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" font-weight="400" fill="#94A3B8">
-      Deterministic Regulatory Computation &amp; Agent Intelligence Infrastructure
+    <text x="0" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif" font-size="16" font-weight="400" fill="#94A3B8">
+      Open-Source Business Intelligence &amp; Deterministic Engine Infrastructure for AI Agents
     </text>
   </g>
 
-  <!-- Technical Metric Cards -->
-  <g transform="translate(60, 260)">
-    <!-- Metric 1: 700+ Tests -->
+  <!-- Clean Minimal Stats (Without heavy card wrappers) -->
+  <g transform="translate(50, 175)">
+    <!-- Stat 1 -->
     <g transform="translate(0, 0)">
-      <rect width="200" height="64" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1"/>
-      <text x="16" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B7280" text-transform="uppercase">CI Test Suite</text>
-      <text x="16" y="49" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#10B981">700+ Assertions</text>
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.5">AGENT SKILLS</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#38BDF8">54 Skills (6 Plugins)</text>
     </g>
 
-    <!-- Metric 2: SHA-256 Checksums -->
-    <g transform="translate(216, 0)">
-      <rect width="200" height="64" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1"/>
-      <text x="16" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B7280" text-transform="uppercase">Ruleset Integrity</text>
-      <text x="16" y="49" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#F59E0B">SHA-256 Checksum</text>
+    <!-- Stat 2 -->
+    <g transform="translate(230, 0)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.5">COMPUTATIONAL ENGINES</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#34D399">16 Deterministic</text>
     </g>
 
-    <!-- Metric 3: Temporal Engine -->
-    <g transform="translate(432, 0)">
-      <rect width="200" height="64" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1"/>
-      <text x="16" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B7280" text-transform="uppercase">Taxation Engine</text>
-      <text x="16" y="49" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#38BDF8">TER &amp; Art 17 Dec</text>
+    <!-- Stat 3 -->
+    <g transform="translate(460, 0)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.5">TEST ASSERTIONS</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#FBBF24">900+ Assertions</text>
     </g>
 
-    <!-- Metric 4: Multi-Node CI -->
-    <g transform="translate(648, 0)">
-      <rect width="200" height="64" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1"/>
-      <text x="16" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B7280" text-transform="uppercase">CI Matrix</text>
-      <text x="16" y="49" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#8B5CF6">Node 18 / 20 / 22</text>
+    <!-- Stat 4 -->
+    <g transform="translate(690, 0)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.5">RULESET INTEGRITY</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#A78BFA">SHA-256 Signed</text>
     </g>
 
-    <!-- Metric 5: Statutory Basis -->
-    <g transform="translate(864, 0)">
-      <rect width="216" height="64" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1"/>
-      <text x="16" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#6B7280" text-transform="uppercase">Active Regulations</text>
-      <text x="16" y="49" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#EC4899">PP 58 &amp; PP 35</text>
+    <!-- Stat 5 -->
+    <g transform="translate(920, 0)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="600" fill="#64748B" letter-spacing="0.5">LATEST REGULATION</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20" font-weight="700" fill="#F43F5E">PP 20/2026 &amp; PP 58</text>
     </g>
   </g>
 </svg>
