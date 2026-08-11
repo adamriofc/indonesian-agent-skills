@@ -37,7 +37,7 @@ const KBLI_ARCHETYPE_MAP = {
 
 function resolveBusinessArchetype({
   kbliCode = '70209', // Default: Konsultasi Manajemen
-  activityName = 'Konsultasi Manajemen & Bisnis'
+  activityName = ''
 }) {
   const codeStr = String(kbliCode || '').trim();
   const twoDigit = codeStr.slice(0, 2);

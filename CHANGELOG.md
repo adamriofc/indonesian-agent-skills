@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.8.0] - 2026-08-10
+
+### Refined & Hardened
+- **Empirical 3-Tier Benchmark Suite (P0 Fix)**:
+  - Added Tier-2 Agent Parameter Extraction Benchmark (`tests/benchmarks/nlp-extraction-benchmark.test.js`) testing 50 natural language parameter extraction cases (**96.00% Accuracy**).
+  - Added Tier-3 Agent End-to-End Decision Benchmark (`tests/benchmarks/agent-decision-benchmark.test.js`) testing 25 realistic Indonesian enterprise scenario cases (**100.00% Pass Rate**).
+  - Integrated full benchmark suite into CI build gate (`npm run test:benchmarks`).
+- **Supply-Chain Trust Anchor & Integrity Suite (P1 Fix)**: Added `tests/security/supply-chain.test.js` validating manifest version alignment, SHA-256 trust anchors, and maintainer audit metadata.
+- **Interoperability & DX Protocol (`SKILL_PROTOCOL.md`)**: Created `SKILL_PROTOCOL.md` defining architectural principles, universal agent CLI shorthands, Claude marketplace manifests, and Node.js SDK engine integration.
+
 ## [2.7.1] - 2026-08-10
 
 ### Fixed & Hardened
