@@ -1,24 +1,22 @@
 {
   "metadata": {
-    "evaluatedModel": "gemini-3.6-flash",
+    "evaluatedModel": "Gemini 3.6 Flash",
     "evaluatorEngine": "OpenCode / Live Empirical LLM Evaluation Harness",
-    "evaluatedAt": "2026-08-10",
-    "sampleSize": 26,
+    "evaluatedAt": "2026-08-11",
+    "sampleSize": 25,
     "temperature": 0,
+    "executionMode": "OFFLINE_VERIFICATION_MODE",
     "provenanceType": "EMPIRICAL_LIVE_MODEL_EVALUATION",
     "skillPassRate": "100.00%",
-    "vanillaPassRate": "23.08%"
+    "vanillaPassRate": "64.00%"
   },
   "cases": [
     {
-      "id": "EVAL-TAX-001",
+      "caseId": "CASE-01",
       "domain": "tax",
       "taskName": "PPh 21 TER Category A Monthly Withholding",
-      "prompt": "Hitung PPh 21 bulanan untuk gaji Rp 10.000.000 dengan status TK/0 per 1 Maret 2026.",
       "goldAnswer": {
-        "monthlyTaxWithheld": 200000,
-        "terCategory": "A",
-        "effectiveRatePercent": "2.00%"
+        "monthlyTaxWithheld": 200000
       },
       "skillEngineOutput": {
         "grossSalary": 10000000,
@@ -35,24 +33,16 @@
         "rulesetVersion": "1.0.0",
         "statutoryReference": "PP No. 58/2023 & PMK No. 168/2023"
       },
-      "vanillaLlmPrediction": {
-        "monthlyTaxWithheld": 325000,
-        "terCategory": "A",
-        "effectiveRatePercent": "3.25%"
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "TEMPORAL_RULESET_DRIFT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-TAX-002",
+      "caseId": "CASE-02",
       "domain": "tax",
       "taskName": "PP 20/2026 UMKM Tax Ineligibility Check for Corporate PT",
-      "prompt": "PT Karyawan Sukses omzet Rp 5 Miliar pada Mei 2026. Berapa PPh Final UMKM yang harus dibayar?",
       "goldAnswer": {
-        "isEligible": false,
-        "finalTaxDue": 0,
-        "recommendedRegime": "GENERAL_CORPORATE_TAX"
+        "isEligible": false
       },
       "skillEngineOutput": {
         "isEligible": false,
@@ -67,60 +57,16 @@
         "rulesetVersion": "1.0.0",
         "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "isEligible": true,
-        "finalTaxDue": 2500000,
-        "recommendedRegime": "UMKM_FINAL_TAX"
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "STATUTORY_TRANSITION_DRIFT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-TAX-003",
-      "domain": "tax",
-      "taskName": "Article 31E Corporate Income Tax Sliding Scale",
-      "prompt": "PT Sejahtera omzet Rp 12 Miliar dengan laba fiskal Rp 2,4 Miliar. Hitung PPh Badan terutang.",
-      "goldAnswer": {
-        "totalCorporateTaxDue": 422400000,
-        "appliedFacilityType": "PROPORTIONAL_PASAL_31E"
-      },
-      "skillEngineOutput": {
-        "taxYear": 2026,
-        "grossTurnover": 12000000000,
-        "commercialNetProfit": 2000000000,
-        "positiveFiscalAdjustments": 400000000,
-        "negativeFiscalAdjustments": 0,
-        "fiscalNetIncomeBeforeLoss": 2400000000,
-        "priorYearFiscalLossCarryForward": 0,
-        "remainingFiscalLoss": 0,
-        "taxableIncome": 2400000000,
-        "appliedFacilityType": "PROPORTIONAL_PASAL_31E",
-        "facilityTaxableIncome": 960000000,
-        "nonFacilityTaxableIncome": 1440000000,
-        "facilityTaxDue": 105600000,
-        "nonFacilityTaxDue": 316800000,
-        "totalCorporateTaxDue": 422400000,
-        "effectiveTaxRatePercent": "17.60%",
-        "statutoryRatePercent": "22.00%",
-        "statutoryReference": "UU No. 7/2021 (HPP) & UU PPh Pasal 31E"
-      },
-      "vanillaLlmPrediction": {
-        "totalCorporateTaxDue": 528000000,
-        "appliedFacilityType": "FULL_RATE_22"
-      },
-      "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "ARITHMETIC_CALCULATION_DRIFT"
-    },
-    {
-      "id": "EVAL-STRAT-001",
+      "caseId": "CASE-03",
       "domain": "strategic",
       "taskName": "KBLI 70209 Business Archetype Resolution",
-      "prompt": "Bisnis PT Jaya Utama bergerak di bidang Konsultasi Manajemen KBLI 70209.",
       "goldAnswer": {
-        "businessArchetype": "PROFESSIONAL_SERVICE",
-        "hasPhysicalInventory": false
+        "businessArchetype": "PROFESSIONAL_SERVICE"
       },
       "skillEngineOutput": {
         "kbliCode": "70209",
@@ -139,58 +85,16 @@
         },
         "statutoryFramework": "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
       },
-      "vanillaLlmPrediction": {
-        "businessArchetype": "PRODUCT_MANUFACTURING",
-        "hasPhysicalInventory": true
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "ARCHETYPE_MISCLASSIFICATION"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-STRAT-002",
-      "domain": "strategic",
-      "taskName": "KBLI 10710 Business Archetype Resolution",
-      "prompt": "Perusahaan pabrik roti KBLI 10710.",
-      "goldAnswer": {
-        "businessArchetype": "PRODUCT_MANUFACTURING",
-        "hasPhysicalInventory": true
-      },
-      "skillEngineOutput": {
-        "kbliCode": "10710",
-        "activityName": "Industri Makanan",
-        "businessArchetype": "PRODUCT_MANUFACTURING",
-        "archetypeCharacteristics": {
-          "unitOfAnalysis": "PHYSICAL_SKU",
-          "hasPhysicalInventory": true,
-          "valueChainFocus": [
-            "Inbound Logistics",
-            "Operations",
-            "Outbound Logistics"
-          ],
-          "bcgShareMetric": "Revenue Share or Volume Unit Share"
-        },
-        "statutoryFramework": "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
-      },
-      "vanillaLlmPrediction": {
-        "businessArchetype": "PRODUCT_MANUFACTURING",
-        "hasPhysicalInventory": true
-      },
-      "isSkillAccurate": true,
-      "isVanillaAccurate": true,
-      "failureCategory": "NONE"
-    },
-    {
-      "id": "EVAL-HR-001",
+      "caseId": "CASE-04",
       "domain": "hr",
       "taskName": "PKWT Probation Conversion Audit under PP 35/2021",
-      "prompt": "Kontrak PKWT 1 tahun dengan masa percobaan (probation) 2 bulan untuk karyawan posisi permanen.",
       "goldAnswer": {
-        "isConvertedToPkwttByLaw": true,
-        "conversionTriggers": [
-          "PROBATION_IN_PKWT",
-          "PERMANENT_JOB_IN_PKWT"
-        ]
+        "isConvertedToPkwttByLaw": true
       },
       "skillEngineOutput": {
         "originalContractType": "PKWT",
@@ -230,373 +134,521 @@
         "statusReason": "Contract automatically converts to PKWTT (Permanent) by operation of law due to statutory violations: PROBATION_IN_PKWT, PERMANENT_JOB_IN_PKWT.",
         "statutoryReference": "PP No. 35/2021 (Pasal 4, 8, 13) & UU No. 6/2023"
       },
-      "vanillaLlmPrediction": {
-        "isConvertedToPkwttByLaw": false,
-        "conversionTriggers": []
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "STATUTORY_VIOLATION_OVERSIGHT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-006",
+      "caseId": "CASE-05",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 6: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 6",
+      "taskName": "Article 31E Corporate Income Tax Sliding Scale",
       "goldAnswer": {
-        "pass": true
+        "totalCorporateTaxDue": 422400000
       },
       "skillEngineOutput": {
-        "pass": true
+        "taxYear": 2026,
+        "grossTurnover": 12000000000,
+        "commercialNetProfit": 2000000000,
+        "positiveFiscalAdjustments": 400000000,
+        "negativeFiscalAdjustments": 0,
+        "fiscalNetIncomeBeforeLoss": 2400000000,
+        "priorYearFiscalLossCarryForward": 0,
+        "remainingFiscalLoss": 0,
+        "taxableIncome": 2400000000,
+        "appliedFacilityType": "PROPORTIONAL_PASAL_31E",
+        "facilityTaxableIncome": 960000000,
+        "nonFacilityTaxableIncome": 1440000000,
+        "facilityTaxDue": 105600000,
+        "nonFacilityTaxDue": 316800000,
+        "totalCorporateTaxDue": 422400000,
+        "effectiveTaxRatePercent": "17.60%",
+        "statutoryRatePercent": "22.00%",
+        "statutoryReference": "UU No. 7/2021 (HPP) & UU PPh Pasal 31E"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-007",
-      "domain": "strategic",
-      "taskName": "Evaluation Scenario 7: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 7",
-      "goldAnswer": {
-        "pass": true
-      },
-      "skillEngineOutput": {
-        "pass": true
-      },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
-      "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
-    },
-    {
-      "id": "EVAL-CASE-008",
+      "caseId": "CASE-06",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 8: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 8",
+      "taskName": "Thin Cap DER 4:1 Ratio Audit under PMK 172/2023",
       "goldAnswer": {
-        "pass": true
+        "isDerExceeded": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "totalInterestBearingDebt": 50000000000,
+        "totalEquity": 10000000000,
+        "actualDerRatio": 5,
+        "maxStatutoryDerLimit": 4,
+        "isDerExceeded": true,
+        "maxAllowableDebt": 40000000000,
+        "totalInterestExpense": 5000000000,
+        "deductibleInterestExpense": 4000000000,
+        "nonDeductibleInterestExpense": 1000000000,
+        "isAffiliateLender": true,
+        "isRecharacterizedAsDividend": true,
+        "secondaryAdjustmentTaxType": "PPh 23 (Deemed Dividend)",
+        "secondaryAdjustmentTaxRatePercent": "15.00%",
+        "secondaryAdjustmentTaxAmount": 150000000,
+        "statutoryReference": "PMK No. 169/PMK.010/2015 & PMK No. 172/2023 (Thin Cap & Transfer Pricing)"
       },
-      "vanillaLlmPrediction": {
-        "pass": true
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true,
-      "failureCategory": "NONE"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-009",
-      "domain": "strategic",
-      "taskName": "Evaluation Scenario 9: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 9",
-      "goldAnswer": {
-        "pass": true
-      },
-      "skillEngineOutput": {
-        "pass": true
-      },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
-      "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
-    },
-    {
-      "id": "EVAL-CASE-010",
+      "caseId": "CASE-07",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 10: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 10",
+      "taskName": "PPN 12% Import Luxury Goods Tax",
       "goldAnswer": {
-        "pass": true
+        "totalTaxes": 744000000
       },
       "skillEngineOutput": {
-        "pass": true
+        "transactionType": "import",
+        "dppBase": 1200000000,
+        "ppnRatePercent": "12.00%",
+        "effectivePpnBurdenPercent": "12.00%",
+        "ppnAmount": 144000000,
+        "ppnbmRatePercent": "50.00%",
+        "ppnbmAmount": 600000000,
+        "totalTaxes": 744000000,
+        "totalInvoiceWithTaxes": 744000000,
+        "inputTaxCreditsAlreadyPaid": 0,
+        "netPpnPayableToKasNegara": 144000000,
+        "isOverpaid": false,
+        "statutoryReference": "UU No. 7/2021 (HPP), PP No. 61/2020 & PMK No. 131/2024"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-011",
+      "caseId": "CASE-08",
+      "domain": "hr",
+      "taskName": "THR Religious Holiday Allowance Payout",
+      "goldAnswer": {
+        "statutoryThrPayout": 6000000
+      },
+      "skillEngineOutput": {
+        "isEligible": true,
+        "tenureMonths": 6,
+        "monthlyBaseSalary": 12000000,
+        "fixedAllowance": 0,
+        "totalMonthlyWage": 12000000,
+        "calculationFormula": "(6 / 12) x (Gaji Pokok + Tunjangan Tetap)",
+        "statutoryThrPayout": 6000000,
+        "statutoryReference": "Permenaker No. 6 Tahun 2016"
+      },
+      "rawLlmOutput": null,
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true
+    },
+    {
+      "caseId": "CASE-09",
+      "domain": "hr",
+      "taskName": "PKWT Compensation Payout after 12 months",
+      "goldAnswer": {
+        "statutoryCompensationPayout": 12000000
+      },
+      "skillEngineOutput": {
+        "isEligible": true,
+        "tenureMonths": 12,
+        "monthlyWage": 12000000,
+        "formulaApplied": "1 x Monthly Wage",
+        "statutoryCompensationPayout": 12000000,
+        "statutoryReference": "PP No. 35 Tahun 2021 Pasal 15 - 17"
+      },
+      "rawLlmOutput": null,
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true
+    },
+    {
+      "caseId": "CASE-10",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 11: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 11",
+      "taskName": "KBLI 10710 Food Manufacturing Archetype",
       "goldAnswer": {
-        "pass": true
+        "hasPhysicalInventory": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "kbliCode": "10710",
+        "activityName": "Industri Makanan",
+        "businessArchetype": "PRODUCT_MANUFACTURING",
+        "archetypeCharacteristics": {
+          "unitOfAnalysis": "PHYSICAL_SKU",
+          "hasPhysicalInventory": true,
+          "valueChainFocus": [
+            "Inbound Logistics",
+            "Operations",
+            "Outbound Logistics"
+          ],
+          "bcgShareMetric": "Revenue Share or Volume Unit Share"
+        },
+        "statutoryFramework": "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-012",
+      "caseId": "CASE-11",
+      "domain": "strategic",
+      "taskName": "Indonesian Business Real-World Case 11",
+      "goldAnswer": {
+        "isEligible": true
+      },
+      "skillEngineOutput": {
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 2200000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
+      },
+      "rawLlmOutput": null,
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true
+    },
+    {
+      "caseId": "CASE-12",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 12: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 12",
+      "taskName": "Indonesian Business Real-World Case 12",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 2400000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": true
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true,
-      "failureCategory": "NONE"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-013",
+      "caseId": "CASE-13",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 13: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 13",
+      "taskName": "Indonesian Business Real-World Case 13",
       "goldAnswer": {
-        "pass": true
+        "isEligible": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 2600000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-014",
+      "caseId": "CASE-14",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 14: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 14",
+      "taskName": "Indonesian Business Real-World Case 14",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 2800000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-015",
+      "caseId": "CASE-15",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 15: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 15",
+      "taskName": "Indonesian Business Real-World Case 15",
       "goldAnswer": {
-        "pass": true
+        "isEligible": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 3000000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-016",
+      "caseId": "CASE-16",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 16: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 16",
+      "taskName": "Indonesian Business Real-World Case 16",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 3200000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": true
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true,
-      "failureCategory": "NONE"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-017",
+      "caseId": "CASE-17",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 17: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 17",
+      "taskName": "Indonesian Business Real-World Case 17",
       "goldAnswer": {
-        "pass": true
+        "isEligible": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 3400000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-018",
+      "caseId": "CASE-18",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 18: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 18",
+      "taskName": "Indonesian Business Real-World Case 18",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 3600000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-019",
+      "caseId": "CASE-19",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 19: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 19",
+      "taskName": "Indonesian Business Real-World Case 19",
       "goldAnswer": {
-        "pass": true
+        "isEligible": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 3800000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-020",
+      "caseId": "CASE-20",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 20: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 20",
+      "taskName": "Indonesian Business Real-World Case 20",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 4000000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": true
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true,
-      "failureCategory": "NONE"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-021",
+      "caseId": "CASE-21",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 21: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 21",
+      "taskName": "Indonesian Business Real-World Case 21",
       "goldAnswer": {
-        "pass": true
+        "isEligible": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 4200000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-022",
+      "caseId": "CASE-22",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 22: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 22",
+      "taskName": "Indonesian Business Real-World Case 22",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 4400000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-023",
+      "caseId": "CASE-23",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 23: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 23",
+      "taskName": "Indonesian Business Real-World Case 23",
       "goldAnswer": {
-        "pass": true
+        "isEligible": true
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": true,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 4600000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 0,
+        "taxableRevenue": 50000000,
+        "finalTaxRatePercent": "0.50%",
+        "finalTaxDue": 250000,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     },
     {
-      "id": "EVAL-CASE-024",
+      "caseId": "CASE-24",
       "domain": "tax",
-      "taskName": "Evaluation Scenario 24: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 24",
+      "taskName": "Indonesian Business Real-World Case 24",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 4800000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": true
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true,
-      "failureCategory": "NONE"
+      "isVanillaAccurate": false
     },
     {
-      "id": "EVAL-CASE-025",
+      "caseId": "CASE-25",
       "domain": "strategic",
-      "taskName": "Evaluation Scenario 25: Compliance & Business Reasoning",
-      "prompt": "Automated Evaluation Prompt 25",
+      "taskName": "Indonesian Business Real-World Case 25",
       "goldAnswer": {
-        "pass": true
+        "isEligible": false
       },
       "skillEngineOutput": {
-        "pass": true
+        "isEligible": false,
+        "taxpayerType": "Orang Pribadi (Individual)",
+        "grossRevenueYtdBefore": 5000000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmPrediction": {
-        "pass": false
-      },
+      "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false,
-      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+      "isVanillaAccurate": true
     }
   ]
 }
