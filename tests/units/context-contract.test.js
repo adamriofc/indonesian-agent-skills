@@ -11,19 +11,20 @@ function runContextContractTests() {
     entity: { type: 'PT', kbli: '70209' },
     scale: { annualRevenue: 5000000000, employeeCount: 15 }
   });
-  assert.strictEqual(ctx.schemaVersion, '1.0.0');
+  assert.strictEqual(ctx.schemaVersion, '2.0.0');
   assert.strictEqual(ctx.businessArchetype, 'PROFESSIONAL_SERVICE');
   assert.strictEqual(ctx.scale.annualRevenue, 5000000000);
 
   // 2. Missing Parameter Detection & Assumption Registry
-  console.log("  [2/3] Testing Missing Information Protocol & Assumption Registry...");
-  const validationRes = validateBusinessContext({
-    scale: { annualRevenue: 1000000000 }
-  });
-  assert.strictEqual(validationRes.isComplete, false);
-  assert.strictEqual(validationRes.contextStatus, 'INSUFFICIENT_CONTEXT');
-  assert.ok(validationRes.missingParameters.includes('entity.type'));
-  assert.ok(validationRes.assumptionRegistry.length > 0);
+  console.log("  [2/3] Testing Missing Information Protocol & Assumption Registry (Strict vs Demo)...");
+  const strictRes = validateBusinessContext({ scale: { annualRevenue: 1000000000 } }, 'STRICT_PRODUCTION_MODE');
+  assert.strictEqual(strictRes.isComplete, false);
+  assert.strictEqual(strictRes.contextStatus, 'INSUFFICIENT_CONTEXT');
+  assert.ok(strictRes.missingParameters.includes('entity.type'));
+
+  const demoRes = validateBusinessContext({ scale: { annualRevenue: 1000000000 } }, 'DEMO_MODE');
+  assert.strictEqual(demoRes.contextStatus, 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
+  assert.ok(demoRes.assumptionRegistry.length > 0);
 
   // 3. Framework Applicability & Unit of Analysis Matrix
   console.log("  [3/3] Testing Framework Applicability & Unit of Analysis Matrix...");

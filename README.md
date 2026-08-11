@@ -20,7 +20,7 @@
 
 ## 📌 Overview & Value Proposition
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **81 Agent Skills** with **34 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **81 Agent Skills** with **35 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
 Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
@@ -53,13 +53,13 @@ Agent (Skill-Assisted Execution):
 
 | Agent Runtime / Environment | Integration Level | Status | Verification Mechanism |
 |---|---|---|---|
-| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 720+ assertions & 92 golden cases) |
+| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 750+ assertions & 92 golden cases) |
 | **OpenCode CLI** | Native Skill Integration (`.opencode/skills/`) | ✅ **Verified** | Automated Schema & Skill Protocol Tests |
 | **OpenWork Desktop & Cloud** | Native Plugin Manifest (`.claude-plugin/`) | ✅ **Verified** | Marketplace Schema Store & SHA-256 Ruleset Integrity |
 | **Claude Code (CLI)** | Native Plugin Installer (`npx skills`) | ✅ **Verified** | Universal Skill Protocol (`SKILL_PROTOCOL.md`) |
 | **Cursor IDE** | Skill Shorthand (`.cursor/skills/`) | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) |
 | **Codex** | Skill Shorthand (`.agents/skills/`) | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) |
-| **Custom Agent Frameworks** | Node.js SDK / Protocol Adapter | 🔵 **Expected** | Pure Math Engines & Decoupled JSON Rulesets |
+| **Custom SDK / REST Adapters** | Protocol-Level Adapter | ⚪ **Planned** | Pure Math Engines & Decoupled JSON Rulesets |
 
 ---
 
@@ -82,8 +82,8 @@ Agent (Skill-Assisted Execution):
                                            │
                                            ▼
                ┌──────────────────────────────────────────────────────┐
-               │      34 Deterministic Node.js Math & Diff Engines    │
-               │ 26 statutory (engines/*.js + SSOT temporal rulesets) │
+               │      35 Deterministic Node.js Math & Diff Engines    │
+               │ 27 statutory (engines/*.js + SSOT temporal rulesets) │
                │ 8 finance (engines/*.js — pure standard math)        │
                └──────────────────┬───────────────────┬───────────────┘
                                   │                   │

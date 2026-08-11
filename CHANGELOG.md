@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [4.0.0] - 2026-08-10
+
+### Major System Maturity Release
+- **Strict Production Mode & DEMO Mode (`engines/context-contract.js`)**: Separated `DEMO_MODE` (transparent demo defaults) from `STRICT_PRODUCTION_MODE` (returns `INSUFFICIENT_CONTEXT` with `missingParameters` and explicit `assumptionRegistry`).
+- **Indonesian Legal Hierarchy & Statutory Conflict Resolution Engine (`engines/conflict-resolution.js`)**: Implemented statutory hierarchy under UU No. 12/2011 jo. UU No. 13/2022 (*Lex Superior Derogat Legi Inferiori* & *Lex Posteriori Derogat Legi Priori*).
+- **Standard Failure Taxonomy Engine (`engines/failure-taxonomy.js`)**: Classified error modes into standard audit categories (`INVALID_INPUT`, `MISSING_PARAMETER`, `AMBIGUOUS_CONTEXT`, `OUTDATED_RULESET`, `CONFLICTING_RULE`, `UNSUPPORTED_CASE`, `ENGINE_ERROR`).
+- **Benchmark Corpus Partitioning & 120-Case Multi-Category Suite**: Reorganized benchmark folder into `tests/benchmarks/live/`, `tests/benchmarks/fixture/`, and `tests/benchmarks/synthetic/` (50 fixture cases + 70 synthetic/authored cases at **100.00% pass rate**).
+- **README Compatibility Matrix Refinement**: Clarified compatibility states: `✅ Verified` (CI-tested Node 20/22/24), `🟡 Compatible` (IDE agent skill paths), and `⚪ Planned` (Custom SDK adapters).
+
 ## [3.1.0] - 2026-08-10
 
 ### Refined & Hardened

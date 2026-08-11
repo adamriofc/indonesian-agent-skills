@@ -1,10 +1,10 @@
 {
-  "version": "3.1.0",
+  "version": "4.0.0",
   "generated_at": "2026-08-10T00:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 7,
   "total_skills": 81,
-  "total_engines": 34,
+  "total_engines": 35,
   "quality_tiers": {
     "tested": 18,
     "source-verified": 31,
