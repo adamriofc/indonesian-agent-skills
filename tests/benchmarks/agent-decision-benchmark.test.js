@@ -4,9 +4,10 @@ const { calculateUmkmFinalTax } = require('../../engines/umkm-tax-calculator');
 const { auditPkwttStatus } = require('../../engines/pkwtt-calculator');
 const { auditTransferPricingThinCap } = require('../../engines/transfer-pricing-engine');
 const { evaluateStrategicDecisionAlternatives } = require('../../engines/decision-analysis-engine');
+const { evaluateBusinessScenario } = require('../../engines/business-scenario-engine');
 
 function runAgentDecisionBenchmark() {
-  console.log("📊 Running Tier-3 Empirical Agent End-to-End Decision Benchmark (25 Scenario Cases)...\n");
+  console.log("📊 Running Tier-3 Cross-Domain Decision & Integration Benchmark (25 Scenario Cases)...\n");
 
   const scenarioCases = [
     {
@@ -56,26 +57,39 @@ function runAgentDecisionBenchmark() {
   let passed = 0;
   scenarioCases.forEach((sc) => {
     let ok = true;
+
+    // 1. KBLI Archetype Assertion
     if (sc.input.kbliCode) {
       const arch = resolveBusinessArchetype({ kbliCode: sc.input.kbliCode });
       if (sc.expected.archetype && arch.businessArchetype !== sc.expected.archetype) ok = false;
     }
 
+    // 2. UMKM Tax Eligibility Assertion
     if (sc.input.annualRevenue) {
       const umkm = calculateUmkmFinalTax(sc.input.annualRevenue, 50000000, sc.input.entityType, "2026-05-01");
       if (sc.expected.isUmkmEligible !== undefined && umkm.isEligible !== sc.expected.isUmkmEligible) ok = false;
     }
 
+    // 3. Recommended Tax Regime Assertion (Fix P0: previously defined but unasserted!)
+    if (sc.expected.recommendedTaxRegime !== undefined) {
+      const scenario = evaluateBusinessScenario({ companyProfile: { entityType: sc.input.entityType, annualRevenue: sc.input.annualRevenue } });
+      if (scenario.recommendedRegime !== sc.expected.recommendedTaxRegime) ok = false;
+    }
+
+    // 4. PKWTT Conversion Assertion
     if (sc.input.probationMonths !== undefined) {
       const pkwtt = auditPkwttStatus(sc.input);
       if (sc.expected.isConvertedToPkwttByLaw !== undefined && pkwtt.isConvertedToPkwttByLaw !== sc.expected.isConvertedToPkwttByLaw) ok = false;
     }
 
+    // 5. Thin Cap DER & Max Allowable Debt Assertion (Fix P0: maxAllowableDebt previously defined but unasserted!)
     if (sc.input.totalInterestBearingDebt !== undefined) {
       const tp = auditTransferPricingThinCap(sc.input);
       if (sc.expected.isDerExceeded !== undefined && tp.isDerExceeded !== sc.expected.isDerExceeded) ok = false;
+      if (sc.expected.maxAllowableDebt !== undefined && tp.maxAllowableDebt !== sc.expected.maxAllowableDebt) ok = false;
     }
 
+    // 6. MCDA Decision Assertion
     if (sc.input.criteria !== undefined) {
       const mcda = evaluateStrategicDecisionAlternatives({ criteriaConfig: sc.input.criteria, alternatives: sc.input.alternatives });
       if (sc.expected.topOption && mcda.topRecommendedOption !== sc.expected.topOption) ok = false;
@@ -86,9 +100,9 @@ function runAgentDecisionBenchmark() {
 
   const passRate = ((passed / scenarioCases.length) * 100).toFixed(2);
   console.log(`  Cases Tested: ${scenarioCases.length} | Passed: ${passed} | Decision Pass Rate: ${passRate}%`);
-  assert.strictEqual(passed, 25, "Tier-3 Agent Decision Benchmark should pass 100%");
+  assert.strictEqual(passed, 25, "Tier-3 Cross-Domain Decision Benchmark should pass 100% of all expected assertions");
 
-  console.log("\n✅ Tier-3 Agent End-to-End Decision Benchmark Passed!");
+  console.log("\n✅ Tier-3 Cross-Domain Decision & Integration Benchmark Passed 100%!");
 }
 
 runAgentDecisionBenchmark();

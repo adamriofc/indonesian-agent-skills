@@ -31,7 +31,7 @@ function mockAgentParameterExtractor(prompt) {
 }
 
 function runNlpExtractionBenchmark() {
-  console.log("📊 Running Tier-2 Empirical Agent Parameter Extraction Benchmark (50 NL Cases)...\n");
+  console.log("📊 Running Tier-2 Regex & Rule-Based Parameter Extractor Fixture Test (50 NL Cases)...\n");
 
   const testCases = [];
 
@@ -72,7 +72,7 @@ function runNlpExtractionBenchmark() {
   console.log(`  Cases Tested: ${testCases.length} | Passed: ${passed} | Extraction Accuracy: ${accuracyPercent}%`);
   assert.strictEqual(passed, 50, "Tier-2 Parameter Extraction Accuracy should be 100% on benchmark prompts");
 
-  console.log("\n✅ Tier-2 Parameter Extraction Benchmark Passed 100%!");
+  console.log("\n✅ Tier-2 Regex & Rule-Based Parameter Extractor Fixture Test Passed 100%!");
 }
 
 runNlpExtractionBenchmark();

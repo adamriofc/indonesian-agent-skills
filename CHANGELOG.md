@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [2.9.0] - 2026-08-10
+
+### Fixed & Hardened
+- **Benchmark Semantics & Nomenclature (P0 Fix)**:
+  - Renamed Tier-2 extractor fixture test to `Regex & Rule-Based Parameter Extractor Fixture Test` to avoid over-claiming local regex parsers as LLM extraction models.
+  - Renamed Tier-3 integration benchmark to `Cross-Domain Decision & Integration Benchmark`.
+- **100% Expected Field Assertion (P0 Fix)**: Refactored `tests/benchmarks/agent-decision-benchmark.test.js` so that 100% of defined `expected` fields (`recommendedTaxRegime`, `maxAllowableDebt`, etc.) are explicitly asserted in the test loop without omission.
+- **Reproducible Benchmark JSON Artifact**: Generated `docs/benchmark-results/latest.json` artifact via `scripts/benchmark.js --json-report docs/benchmark-results/latest.json`.
+- **Empirical LLM Evaluation Harness**: Added `scripts/llm-benchmark-eval.js` to evaluate Vanilla LLM error rates against Skill-assisted agent executions.
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `2.9.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [2.8.0] - 2026-08-10
 
 ### Refined & Hardened

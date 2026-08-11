@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-11",
+  "sampleCases": [
+    {
+      "domain": "tax",
+      "name": "PPh 21 TER Monthly Calculation",
+      "prompt": "Gaji Budi Rp 10.000.000, status TK/0, NPWP valid pada tanggal 2026-03-01.",
+      "engineResult": {
+        "grossSalary": 10000000,
+        "ptkpStatus": "TK/0",
+        "terCategory": "A",
+        "effectiveRate": 0.02,
+        "effectiveRatePercent": "2.00%",
+        "hasNpwp": true,
+        "identityStatus": "validated_nik_npwp",
+        "penaltyApplied": false,
+        "monthlyTaxWithheld": 200000,
+        "calculationDate": "2026-03-01",
+        "rulesetId": "PPH21-2024",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 58/2023 & PMK No. 168/2023"
+      },
+      "vanillaLlmHistoricalErrorRate": 0.3333,
+      "skillAssistedErrorRate": 0
+    },
+    {
+      "domain": "umkm",
+      "name": "PP 20/2026 UMKM Eligibility Check",
+      "prompt": "PT Corporate omzet Rp 5.000.000.000 pada Mei 2026.",
+      "engineResult": {
+        "isEligible": false,
+        "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
+        "grossRevenueYtdBefore": 5000000000,
+        "currentMonthRevenue": 50000000,
+        "taxExemptRevenue": 50000000,
+        "taxableRevenue": 0,
+        "finalTaxRatePercent": "0.00%",
+        "finalTaxDue": 0,
+        "rulesetId": "UMKM-2026",
+        "rulesetVersion": "1.0.0",
+        "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
+      },
+      "vanillaLlmHistoricalErrorRate": 0.2,
+      "skillAssistedErrorRate": 0
+    },
+    {
+      "domain": "strategic",
+      "name": "KBLI 70209 Archetype Resolution",
+      "prompt": "Bisnis konsultasi manajemen KBLI 70209.",
+      "engineResult": {
+        "kbliCode": "70209",
+        "activityName": "Konsultasi Manajemen",
+        "businessArchetype": "PROFESSIONAL_SERVICE",
+        "archetypeCharacteristics": {
+          "unitOfAnalysis": "SERVICE_LINE_PRACTICE",
+          "hasPhysicalInventory": false,
+          "valueChainFocus": [
+            "Lead Generation",
+            "Knowledge Acquisition",
+            "Client Interaction",
+            "Deliverable Execution"
+          ],
+          "bcgShareMetric": "Practice Revenue Share"
+        },
+        "statutoryFramework": "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
+      },
+      "vanillaLlmHistoricalErrorRate": 0.4,
+      "skillAssistedErrorRate": 0
+    },
+    {
+      "domain": "hr",
+      "name": "PKWT Probation Conversion Audit",
+      "prompt": "Kontrak PKWT posisi permanen dengan probation 2 bulan.",
+      "engineResult": {
+        "originalContractType": "PKWT",
+        "effectiveContractStatus": "PKWTT (Permanent Employment)",
+        "isConvertedToPkwttByLaw": true,
+        "conversionTriggers": [
+          "PROBATION_IN_PKWT",
+          "PERMANENT_JOB_IN_PKWT"
+        ],
+        "jobType": "permanent",
+        "totalTenureMonths": 0,
+        "monthlyWage": 10000000,
+        "meetsMinimumWage": true,
+        "probationAudit": {
+          "probationMonths": 2,
+          "validProbationMonths": 0,
+          "isCompliant": false
+        },
+        "statutoryEntitlements": {
+          "severanceEligibleOnPHK": true,
+          "pensionEligible": true,
+          "bpjsKetenagakerjaan": [
+            "JHT",
+            "JP",
+            "JKK",
+            "JKM"
+          ],
+          "bpjsKesehatan": true,
+          "annualPaidLeaveDays": 12,
+          "thrKeagamaanEligible": true
+        },
+        "violationsCount": 2,
+        "violations": [
+          "Probation clause is strictly prohibited in PKWT contract (PP 35/2021 Pasal 13).",
+          "PKWT contract cannot be executed for work of a permanent or core production nature (PP 35/2021 Pasal 4)."
+        ],
+        "statusReason": "Contract automatically converts to PKWTT (Permanent) by operation of law due to statutory violations: PROBATION_IN_PKWT, PERMANENT_JOB_IN_PKWT.",
+        "statutoryReference": "PP No. 35/2021 (Pasal 4, 8, 13) & UU No. 6/2023"
+      },
+      "vanillaLlmHistoricalErrorRate": 0.3333,
+      "skillAssistedErrorRate": 0
+    }
+  ]
+}

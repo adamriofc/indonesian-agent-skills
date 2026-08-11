@@ -1,30 +1,31 @@
 # Benchmark Report — `indonesian-business-agent-skills`
 
-Official methodology and measurement results. **Rule: no number is ever written without having been measured.** This document contains figures from actual, reproducible runs; any new execution must update the tables below.
+Official methodology and measurement results. **Rule: no number is ever written without having been measured.** This document contains figures from actual, reproducible runs; any new execution updates the benchmark artifact stored at [`docs/benchmark-results/latest.json`](./benchmark-results/latest.json).
 
 ---
 
 ## 1. Measurement Scope & 3-Tier Evaluation Taxonomy
 
-To ensure scientific rigor and eliminate unsubstantiated claims, repository performance is evaluated across a **3-Tier Evaluation Taxonomy**:
+To ensure scientific rigor, clear nomenclature, and eliminate unsubstantiated claims, repository performance is evaluated across a **3-Tier Evaluation Taxonomy**:
 
-| Tier | Evaluation Focus | Question Answered | Measurement Tool | Status / Pass Rate |
+| Tier | Evaluation Focus | Question Answered | Test Tool / Suite | Status / Pass Rate |
 |---|---|---|---|---|
 | **Tier 1: Deterministic Engine Math** | Calculation & invariant precision | Does the Node.js engine compute equations with 0% arithmetic error per official rulesets? | `scripts/benchmark.js` | **100.00% Pass Rate** (92 Golden Cases) |
-| **Tier 2: Multi-Engine Integration Assertions** | Cross-domain data flow | Do payroll, BPJS, THR, PHK, and THP calculations integrate accurately across employee lifecycles? | `tests/integration/workflow.test.js` | **100.00% Pass Rate** (50 Enterprise Assertions) |
-| **Tier 3: Agent LLM End-to-End Decision** | Synthesis & context adaptation | Does an LLM agent equipped with skills generate contextually grounded business advice? | Experimental Evaluation Harness | **EXPERIMENTAL** (Baseline benchmarked below) |
+| **Tier 2: Rule-Based Parameter Extraction** | Pattern & slot extraction fixture | Does the extraction parser parse numeric values, PTKP statuses, and dates from natural language text? | `tests/benchmarks/nlp-extraction-benchmark.test.js` | **100.00% Pass Rate** (50 Fixture Cases) |
+| **Tier 3: Cross-Domain Integration & Decision** | Multi-domain workflow integration | Do payroll, BPJS, THR, PHK, THP, and tax regime decisions integrate accurately across enterprise lifecycles? | `tests/benchmarks/agent-decision-benchmark.test.js` | **100.00% Pass Rate** (25 Decision Cases) |
 
-### Golden Corpus Scope:
+### Golden Corpus & Benchmark Artifact Scope:
 - **Static Golden Corpus (`tests/golden/`)**: **92 golden cases across all 32 engine modules** (25 benchmark domains) — fast batch, deterministic, zero-dependency.
 - **Deepened Matrix in CI**: 425 PPh 21 cases, 225 PHK cases, 50 enterprise integration scenario assertions, 32 engine modules, security suite (see `npm test`).
+- **Benchmark Artifact**: Automatically generated at `docs/benchmark-results/latest.json`.
 
-Run command: `node scripts/benchmark.js [--llm] [--json-report path]`
+Run command: `node scripts/benchmark.js [--llm] [--json-report docs/benchmark-results/latest.json]`
 
 ---
 
 ## 2. Latest Deterministic Execution Results (Tier 1)
 
-**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.7.1 (32-engine coverage)**
+**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.9.0 (32-engine coverage)**
 
 | Benchmark Domain | Cases | Golden Accuracy Pass Rate | Determinism (3×) | Throughput |
 |---|---|---|---|---|

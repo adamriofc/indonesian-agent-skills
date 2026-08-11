@@ -1,0 +1,181 @@
+{
+  "date": "2026-08-11",
+  "node": "v26.5.1",
+  "domains": {
+    "pph21": {
+      "cases": 6,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 20916,
+      "mismatches": []
+    },
+    "bpjs": {
+      "cases": 3,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 15805,
+      "mismatches": []
+    },
+    "phk": {
+      "cases": 3,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 28015,
+      "mismatches": []
+    },
+    "umkm": {
+      "cases": 5,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 35573,
+      "mismatches": []
+    },
+    "thr": {
+      "cases": 6,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 93754,
+      "mismatches": []
+    },
+    "pph23-26": {
+      "cases": 8,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 84282,
+      "mismatches": []
+    },
+    "pkwt": {
+      "cases": 8,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 111531,
+      "mismatches": []
+    },
+    "pkwtt": {
+      "cases": 5,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 39970,
+      "mismatches": []
+    },
+    "regulatory-diff": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 8242,
+      "mismatches": []
+    },
+    "pph21-grossup": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 9281,
+      "mismatches": []
+    },
+    "pph-badan": {
+      "cases": 4,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 34415,
+      "mismatches": []
+    },
+    "transfer-pricing": {
+      "cases": 1,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 13708,
+      "mismatches": []
+    },
+    "ppn-ppnbm": {
+      "cases": 5,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 56211,
+      "mismatches": []
+    },
+    "marketplace-fee": {
+      "cases": 7,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 61154,
+      "mismatches": []
+    },
+    "term-sheet": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 13548,
+      "mismatches": []
+    },
+    "regulatory-impact": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 8993,
+      "mismatches": []
+    },
+    "compliance-risk": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 17385,
+      "mismatches": []
+    },
+    "business-scenario": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 23258,
+      "mismatches": []
+    },
+    "decision-engine": {
+      "cases": 1,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 12394,
+      "mismatches": []
+    },
+    "strategic-framework": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 39834,
+      "mismatches": []
+    },
+    "decision-analysis": {
+      "cases": 1,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 7390,
+      "mismatches": []
+    },
+    "scenario-analysis": {
+      "cases": 1,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 14949,
+      "mismatches": []
+    },
+    "strategic-risk": {
+      "cases": 1,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 12939,
+      "mismatches": []
+    },
+    "kbli-context": {
+      "cases": 2,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 32636,
+      "mismatches": []
+    },
+    "finance": {
+      "cases": 11,
+      "accuracy": "100.00%",
+      "determinismViolations": 0,
+      "opsPerSec": 9586,
+      "mismatches": []
+    }
+  }
+}
