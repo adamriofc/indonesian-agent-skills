@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [3.1.0] - 2026-08-10
+
+### Refined & Hardened
+- **Standard Business Context Contract (`engines/context-contract.js`)**: Added canonical shared context contract schema across Tax, HR, Legal, Finance, and Strategic skills with automated `validateBusinessContext()` validation.
+- **Missing Information Protocol & Assumption Registry**: Implemented incomplete context detection returning `INSUFFICIENT_CONTEXT` with `missingParameters` and an audit-transparent `assumptionRegistry`.
+- **Framework Applicability & Unit-of-Analysis Engine (`engines/framework-applicability.js`)**: Created matrix mapping 4 applicability states (`NATIVE`, `ADAPTABLE`, `CONDITIONAL`, `NOT_RECOMMENDED`) and archetype units of analysis (`PHYSICAL_SKU`, `SERVICE_LINE_PRACTICE`, `CAPACITY_SLOT_OR_PROPERTY`, `GMV_TAKE_RATE_CHANNEL`).
+- **Dynamic Skill Engine Match Evaluation (P0 Fix)**: Refactored `scripts/llm-benchmark-eval.js` to dynamically evaluate skill engine accuracy using `checkOutputMatch()` instead of hardcoded boolean assertions.
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert version `3.1.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [3.0.0] - 2026-08-10
 
 ### Major Release & System Maturity
