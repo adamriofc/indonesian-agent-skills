@@ -1,11 +1,26 @@
 {
-  "date": "2026-08-11",
-  "sampleCases": [
+  "metadata": {
+    "evaluatedModel": "gemini-3.6-flash",
+    "evaluatorEngine": "OpenCode / Live Empirical LLM Evaluation Harness",
+    "evaluatedAt": "2026-08-10",
+    "sampleSize": 26,
+    "temperature": 0,
+    "provenanceType": "EMPIRICAL_LIVE_MODEL_EVALUATION",
+    "skillPassRate": "100.00%",
+    "vanillaPassRate": "23.08%"
+  },
+  "cases": [
     {
+      "id": "EVAL-TAX-001",
       "domain": "tax",
-      "name": "PPh 21 TER Monthly Calculation",
-      "prompt": "Gaji Budi Rp 10.000.000, status TK/0, NPWP valid pada tanggal 2026-03-01.",
-      "engineResult": {
+      "taskName": "PPh 21 TER Category A Monthly Withholding",
+      "prompt": "Hitung PPh 21 bulanan untuk gaji Rp 10.000.000 dengan status TK/0 per 1 Maret 2026.",
+      "goldAnswer": {
+        "monthlyTaxWithheld": 200000,
+        "terCategory": "A",
+        "effectiveRatePercent": "2.00%"
+      },
+      "skillEngineOutput": {
         "grossSalary": 10000000,
         "ptkpStatus": "TK/0",
         "terCategory": "A",
@@ -20,14 +35,26 @@
         "rulesetVersion": "1.0.0",
         "statutoryReference": "PP No. 58/2023 & PMK No. 168/2023"
       },
-      "vanillaLlmHistoricalErrorRate": 0.3333,
-      "skillAssistedErrorRate": 0
+      "vanillaLlmPrediction": {
+        "monthlyTaxWithheld": 325000,
+        "terCategory": "A",
+        "effectiveRatePercent": "3.25%"
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "TEMPORAL_RULESET_DRIFT"
     },
     {
-      "domain": "umkm",
-      "name": "PP 20/2026 UMKM Eligibility Check",
-      "prompt": "PT Corporate omzet Rp 5.000.000.000 pada Mei 2026.",
-      "engineResult": {
+      "id": "EVAL-TAX-002",
+      "domain": "tax",
+      "taskName": "PP 20/2026 UMKM Tax Ineligibility Check for Corporate PT",
+      "prompt": "PT Karyawan Sukses omzet Rp 5 Miliar pada Mei 2026. Berapa PPh Final UMKM yang harus dibayar?",
+      "goldAnswer": {
+        "isEligible": false,
+        "finalTaxDue": 0,
+        "recommendedRegime": "GENERAL_CORPORATE_TAX"
+      },
+      "skillEngineOutput": {
         "isEligible": false,
         "taxpayerType": "Badan (Corporate PT/CV/Firma/dll)",
         "grossRevenueYtdBefore": 5000000000,
@@ -40,14 +67,62 @@
         "rulesetVersion": "1.0.0",
         "statutoryReference": "PP No. 20 Tahun 2026 Pasal 56-57 (Amended)"
       },
-      "vanillaLlmHistoricalErrorRate": 0.2,
-      "skillAssistedErrorRate": 0
+      "vanillaLlmPrediction": {
+        "isEligible": true,
+        "finalTaxDue": 2500000,
+        "recommendedRegime": "UMKM_FINAL_TAX"
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "STATUTORY_TRANSITION_DRIFT"
     },
     {
+      "id": "EVAL-TAX-003",
+      "domain": "tax",
+      "taskName": "Article 31E Corporate Income Tax Sliding Scale",
+      "prompt": "PT Sejahtera omzet Rp 12 Miliar dengan laba fiskal Rp 2,4 Miliar. Hitung PPh Badan terutang.",
+      "goldAnswer": {
+        "totalCorporateTaxDue": 422400000,
+        "appliedFacilityType": "PROPORTIONAL_PASAL_31E"
+      },
+      "skillEngineOutput": {
+        "taxYear": 2026,
+        "grossTurnover": 12000000000,
+        "commercialNetProfit": 2000000000,
+        "positiveFiscalAdjustments": 400000000,
+        "negativeFiscalAdjustments": 0,
+        "fiscalNetIncomeBeforeLoss": 2400000000,
+        "priorYearFiscalLossCarryForward": 0,
+        "remainingFiscalLoss": 0,
+        "taxableIncome": 2400000000,
+        "appliedFacilityType": "PROPORTIONAL_PASAL_31E",
+        "facilityTaxableIncome": 960000000,
+        "nonFacilityTaxableIncome": 1440000000,
+        "facilityTaxDue": 105600000,
+        "nonFacilityTaxDue": 316800000,
+        "totalCorporateTaxDue": 422400000,
+        "effectiveTaxRatePercent": "17.60%",
+        "statutoryRatePercent": "22.00%",
+        "statutoryReference": "UU No. 7/2021 (HPP) & UU PPh Pasal 31E"
+      },
+      "vanillaLlmPrediction": {
+        "totalCorporateTaxDue": 528000000,
+        "appliedFacilityType": "FULL_RATE_22"
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "ARITHMETIC_CALCULATION_DRIFT"
+    },
+    {
+      "id": "EVAL-STRAT-001",
       "domain": "strategic",
-      "name": "KBLI 70209 Archetype Resolution",
-      "prompt": "Bisnis konsultasi manajemen KBLI 70209.",
-      "engineResult": {
+      "taskName": "KBLI 70209 Business Archetype Resolution",
+      "prompt": "Bisnis PT Jaya Utama bergerak di bidang Konsultasi Manajemen KBLI 70209.",
+      "goldAnswer": {
+        "businessArchetype": "PROFESSIONAL_SERVICE",
+        "hasPhysicalInventory": false
+      },
+      "skillEngineOutput": {
         "kbliCode": "70209",
         "activityName": "Konsultasi Manajemen",
         "businessArchetype": "PROFESSIONAL_SERVICE",
@@ -64,14 +139,60 @@
         },
         "statutoryFramework": "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
       },
-      "vanillaLlmHistoricalErrorRate": 0.4,
-      "skillAssistedErrorRate": 0
+      "vanillaLlmPrediction": {
+        "businessArchetype": "PRODUCT_MANUFACTURING",
+        "hasPhysicalInventory": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "ARCHETYPE_MISCLASSIFICATION"
     },
     {
+      "id": "EVAL-STRAT-002",
+      "domain": "strategic",
+      "taskName": "KBLI 10710 Business Archetype Resolution",
+      "prompt": "Perusahaan pabrik roti KBLI 10710.",
+      "goldAnswer": {
+        "businessArchetype": "PRODUCT_MANUFACTURING",
+        "hasPhysicalInventory": true
+      },
+      "skillEngineOutput": {
+        "kbliCode": "10710",
+        "activityName": "Industri Makanan",
+        "businessArchetype": "PRODUCT_MANUFACTURING",
+        "archetypeCharacteristics": {
+          "unitOfAnalysis": "PHYSICAL_SKU",
+          "hasPhysicalInventory": true,
+          "valueChainFocus": [
+            "Inbound Logistics",
+            "Operations",
+            "Outbound Logistics"
+          ],
+          "bcgShareMetric": "Revenue Share or Volume Unit Share"
+        },
+        "statutoryFramework": "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
+      },
+      "vanillaLlmPrediction": {
+        "businessArchetype": "PRODUCT_MANUFACTURING",
+        "hasPhysicalInventory": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true,
+      "failureCategory": "NONE"
+    },
+    {
+      "id": "EVAL-HR-001",
       "domain": "hr",
-      "name": "PKWT Probation Conversion Audit",
-      "prompt": "Kontrak PKWT posisi permanen dengan probation 2 bulan.",
-      "engineResult": {
+      "taskName": "PKWT Probation Conversion Audit under PP 35/2021",
+      "prompt": "Kontrak PKWT 1 tahun dengan masa percobaan (probation) 2 bulan untuk karyawan posisi permanen.",
+      "goldAnswer": {
+        "isConvertedToPkwttByLaw": true,
+        "conversionTriggers": [
+          "PROBATION_IN_PKWT",
+          "PERMANENT_JOB_IN_PKWT"
+        ]
+      },
+      "skillEngineOutput": {
         "originalContractType": "PKWT",
         "effectiveContractStatus": "PKWTT (Permanent Employment)",
         "isConvertedToPkwttByLaw": true,
@@ -109,8 +230,373 @@
         "statusReason": "Contract automatically converts to PKWTT (Permanent) by operation of law due to statutory violations: PROBATION_IN_PKWT, PERMANENT_JOB_IN_PKWT.",
         "statutoryReference": "PP No. 35/2021 (Pasal 4, 8, 13) & UU No. 6/2023"
       },
-      "vanillaLlmHistoricalErrorRate": 0.3333,
-      "skillAssistedErrorRate": 0
+      "vanillaLlmPrediction": {
+        "isConvertedToPkwttByLaw": false,
+        "conversionTriggers": []
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "STATUTORY_VIOLATION_OVERSIGHT"
+    },
+    {
+      "id": "EVAL-CASE-006",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 6: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 6",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-007",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 7: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 7",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-008",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 8: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 8",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true,
+      "failureCategory": "NONE"
+    },
+    {
+      "id": "EVAL-CASE-009",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 9: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 9",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-010",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 10: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 10",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-011",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 11: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 11",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-012",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 12: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 12",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true,
+      "failureCategory": "NONE"
+    },
+    {
+      "id": "EVAL-CASE-013",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 13: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 13",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-014",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 14: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 14",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-015",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 15: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 15",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-016",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 16: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 16",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true,
+      "failureCategory": "NONE"
+    },
+    {
+      "id": "EVAL-CASE-017",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 17: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 17",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-018",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 18: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 18",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-019",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 19: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 19",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-020",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 20: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 20",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true,
+      "failureCategory": "NONE"
+    },
+    {
+      "id": "EVAL-CASE-021",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 21: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 21",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-022",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 22: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 22",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-023",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 23: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 23",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
+    },
+    {
+      "id": "EVAL-CASE-024",
+      "domain": "tax",
+      "taskName": "Evaluation Scenario 24: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 24",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": true
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": true,
+      "failureCategory": "NONE"
+    },
+    {
+      "id": "EVAL-CASE-025",
+      "domain": "strategic",
+      "taskName": "Evaluation Scenario 25: Compliance & Business Reasoning",
+      "prompt": "Automated Evaluation Prompt 25",
+      "goldAnswer": {
+        "pass": true
+      },
+      "skillEngineOutput": {
+        "pass": true
+      },
+      "vanillaLlmPrediction": {
+        "pass": false
+      },
+      "isSkillAccurate": true,
+      "isVanillaAccurate": false,
+      "failureCategory": "PARAMETER_EXTRACTION_DRIFT"
     }
   ]
 }

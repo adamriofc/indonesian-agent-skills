@@ -25,7 +25,7 @@ Run command: `node scripts/benchmark.js [--llm] [--json-report docs/benchmark-re
 
 ## 2. Latest Deterministic Execution Results (Tier 1)
 
-**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v2.9.0 (32-engine coverage)**
+**Date: 2026-08-10 — Node.js v26.5.1 — `scripts/benchmark.js` v3.0.0 (32-engine coverage)**
 
 | Benchmark Domain | Cases | Golden Accuracy Pass Rate | Determinism (3×) | Throughput |
 |---|---|---|---|---|

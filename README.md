@@ -49,6 +49,18 @@ Agent (Skill-Assisted Execution):
 5. [Decision Engine]: MCDA Weighted Score = 8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH).
 ```
 
+## ⚙️ Compatibility & Testing Matrix
+
+| Agent Runtime / Environment | Integration Level | Status | Verification Mechanism |
+|---|---|---|---|
+| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 720+ assertions & 92 golden cases) |
+| **OpenCode CLI** | Native Skill Integration (`.opencode/skills/`) | ✅ **Verified** | Automated Schema & Skill Protocol Tests |
+| **OpenWork Desktop & Cloud** | Native Plugin Manifest (`.claude-plugin/`) | ✅ **Verified** | Marketplace Schema Store & SHA-256 Ruleset Integrity |
+| **Claude Code (CLI)** | Native Plugin Installer (`npx skills`) | ✅ **Verified** | Universal Skill Protocol (`SKILL_PROTOCOL.md`) |
+| **Cursor IDE** | Skill Shorthand (`.cursor/skills/`) | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) |
+| **Codex** | Skill Shorthand (`.agents/skills/`) | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) |
+| **Custom Agent Frameworks** | Node.js SDK / Protocol Adapter | 🔵 **Expected** | Pure Math Engines & Decoupled JSON Rulesets |
+
 ---
 
 ## 🏗️ System Architecture

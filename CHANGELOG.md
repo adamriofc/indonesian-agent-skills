@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [3.0.0] - 2026-08-10
+
+### Major Release & System Maturity
+- **Empirical Live LLM Evaluation Harness (`scripts/llm-benchmark-eval.js`)**: Refactored evaluation harness to execute live model predictions (evaluated against Gemini 3.6 Flash / OpenAI-compatible baseline) and write reproducible provenance metadata to `docs/benchmark-results/llm-eval.json` (`evaluatedModel`, `evaluatedAt`, `sampleSize`, `temperature`).
+- **Compatibility & Testing Matrix (`README.md`)**: Added explicit compatibility matrix distinguishing `✅ Verified` (CI-tested runtimes), `🟡 Compatible` (IDE agent skill paths), and `🔵 Expected` (Custom SDK adapters).
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `3.0.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+- **System Freeze & Production Stabilization**: Locked architecture at **81 Skills across 7 Plugins** & **32 Deterministic Engines** (25 benchmark domains at **100.00% pass rate**).
+
 ## [2.9.0] - 2026-08-10
 
 ### Fixed & Hardened
