@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.1.0] - 2026-08-12
+
+### Refined & Hardened
+- **Strict Production Mode Enforcement (`engines/context-contract.js`)**: Enforced explicit context validation separating `DEMO_MODE` from `STRICT_PRODUCTION_MODE` (returning `INSUFFICIENT_CONTEXT` with `missingParameters[]` and an explicit `assumptionRegistry` when context fields are missing).
+- **Multi-Factor Statutory Conflict Resolution System (`engines/conflict-resolution.js`)**: Implemented the 4 Principles of Indonesian Jurisprudence under UU No. 12/2011 jo. UU No. 13/2022 (*Lex Superior*, *Lex Specialis*, *Lex Posterior*, and Delegated Authority).
+- **Failure Taxonomy Expansion (`engines/failure-taxonomy.js`)**: Expanded failure taxonomy codes with `CONTEXT_CONFLICT` and `EVIDENCE_INSUFFICIENT`.
+- **Shared Business Archetype Contract Engine (`engines/business-archetype-contract.js`)**: Canonical archetype contracts mapping units of analysis, inventory characteristics, and value chain focus (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`).
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert version `6.1.0`, **87 skills**, **38 engines**, **6 plugins**, and Overview narrative consistency.
+
 ## [6.0.0] - 2026-08-12
 
 ### Major Business Capability Taxonomy Refactoring
