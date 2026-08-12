@@ -51,8 +51,8 @@ This repository decouples AI **reasoning** from **calculation**:
 ## ⚡ 30-Second Killer Cross-Domain Demo
 
 ```text
-User: "Perusahaan saya PT Management Consulting (KBLI 70209) dengan omzet Rp 5 Miliar dan 15 karyawan.
-       Kami ingin membuka cabang baru dan menambah 10 karyawan. Apakah ekspansi ini aman dari sisi Pajak, HR, Legal, dan Strategi?"
+User: "My company is a PT Management Consulting firm (KBLI 70209) with IDR 5 Billion turnover and 15 employees.
+       We want to open a second branch and add 10 employees. Is this expansion compliant across Tax, HR, Legal, and Strategy?"
 
 Agent (Skill-Assisted Execution):
 1. [KBLI Router]: KBLI 70209 ➔ PROFESSIONAL_SERVICE Archetype (Capacity Unit: Service Practice Lines).
@@ -66,7 +66,7 @@ Agent (Skill-Assisted Execution):
 
 | Agent Runtime / Environment | Integration Level | Status | Verification Mechanism |
 |---|---|---|---|
-| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 750+ assertions & 92 golden cases) |
+| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 438+ matrix assertions & 94 golden cases) |
 | **OpenCode CLI** | Native Skill Integration (`.opencode/skills/`) | ✅ **Verified** | Automated Schema & Skill Protocol Tests |
 | **OpenWork Desktop & Cloud** | Native Plugin Manifest (`.claude-plugin/`) | ✅ **Verified** | Marketplace Schema Store & SHA-256 Ruleset Integrity |
 | **Claude Code (CLI)** | Native Plugin Installer (`npx skills`) | ✅ **Verified** | Universal Skill Protocol (`SKILL_PROTOCOL.md`) |
@@ -115,9 +115,25 @@ Agent (Skill-Assisted Execution):
                           └──────────────────┬───────────────────┘
                                              │
                                              ▼
-                          ┌──────────────────────────────────────┐
-                          │ LLM Narrative Synthesis & Formatting │
-                          └──────────────────────────────────────┘
+                           ┌──────────────────────────────────────┐
+                           │ LLM Narrative Synthesis & Formatting │
+                           └──────────────────────────────────────┘
+```
+
+---
+
+## 📚 Documentation Architecture
+
+```text
+README.md (What / Why / Overview & Demo)
+  ├── ARCHITECTURE.md (How it works & engine isolation)
+  ├── DESIGN_PRINCIPLES.md (Why design choices were made)
+  ├── BENCHMARK.md (How measurement works & 3-Tier evaluation taxonomy)
+  ├── PROVENANCE.md (Where statutory rules come from & JDIH sources)
+  ├── PRODUCTION_READINESS.md (Readiness levels L0–L4 & human review matrix)
+  ├── RELEASE.md (How releases are verified & 13-check release gate)
+  ├── METRICS.md (Single source of truth metrics & definitions)
+  └── OPERATIONAL_RUNBOOK.md (Incident handling & emergency procedures)
 ```
 
 ---
@@ -382,7 +398,7 @@ console.log(diff);
 
 ## 🧪 Comprehensive Test & Verification Suite
 
-Our test harness executes over **900+ individual test assertions** across 9 automated test modules:
+Our test harness executes over **424+ benchmark assertions (and 438+ deepened test matrix assertions)** across 9 automated test modules:
 
 ```bash
 # Run full test pipeline

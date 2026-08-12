@@ -4,11 +4,10 @@ Thank you for contributing to this project. Our purpose is **accurate, traceable
 
 ## Ground Rules
 
-1. **No AI slop.** Conversational essays, filler prose and marketing language are rejected in review. Write like a senior Indonesian practitioner.
-2. **No unverifiable claims.** Every statutory figure must cite an official JDIH/gazette URL or a symmetric official source (see `REGULATORY_PIPELINE.md`).
-3. **SSOT discipline.** Computation values live only in `engines/rules/*.json`. Skill markdown references ruleset Ids (`PPH21-2024`, `BPJS-2026`, ...) — it never hardcodes numbers that drift.
-4. **Never mutate a released ruleset in place.** Append a new ruleset entry with a fresh `rulesetId`, `effective_from` and bumped `rulesetVersion`.
-5. **Hash discipline.** Any edit to `engines/rules/*.json` requires recomputing `RULESET_CHECKSUMS` in `engines/rules/integrity.js` **in the same commit** (`sha256sum engines/rules/<file>.json`).
+1. **No unverifiable claims.** Every statutory figure must cite an official JDIH/gazette URL or a symmetric official source (see `REGULATORY_PIPELINE.md`).
+2. **SSOT discipline.** Computation values live only in `engines/rules/*.json`. Skill markdown references ruleset Ids (`PPH21-2024`, `BPJS-2026`, ...) — it never hardcodes numbers that drift.
+3. **Never mutate a released ruleset in place.** Append a new ruleset entry with a fresh `rulesetId`, `effective_from` and bumped `rulesetVersion`.
+4. **Hash discipline.** Any edit to `engines/rules/*.json` requires recomputing `RULESET_CHECKSUMS` in `engines/rules/integrity.js` **in the same commit** (`sha256sum engines/rules/<file>.json`).
 
 ## Ways To Contribute
 
