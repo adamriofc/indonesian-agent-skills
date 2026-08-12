@@ -130,7 +130,7 @@ claude plugin marketplace add adamriofc/indonesian-business-agent-skills
 
 # Install individual plugins from the marketplace
 claude plugin install legal-id@indonesian-business-agent-skills
-claude plugin install tax-payroll-id@indonesian-business-agent-skills
+claude plugin install tax-id@indonesian-business-agent-skills
 claude plugin install finance-id@indonesian-business-agent-skills
 ```
 
@@ -140,7 +140,7 @@ For native skill discovery without plugins, copy skills to the `.agents/skills/`
 # Canonical cross-agent skills directory
 mkdir -p .agents/skills
 cp -r legal-id/skills/* .agents/skills/
-cp -r tax-payroll-id/skills/* .agents/skills/
+cp -r tax-id/skills/* .agents/skills/
 cp -r finance-id/skills/* .agents/skills/
 
 # OpenCode & Cursor native paths

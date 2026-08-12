@@ -337,6 +337,15 @@ function validate() {
       }
     });
 
+    // Strict Stale Taxonomy Enforcer: Reject old plugin names across docs & manifests
+    const STALE_PLUGINS = ['tax-payroll-id', 'ecommerce-id', 'content-lokal-id'];
+    STALE_PLUGINS.forEach(stale => {
+      if (readme.includes(stale)) {
+        console.error(`❌ Stale Taxonomy Violation: README.md still contains reference to deleted plugin "${stale}".`);
+        errors++;
+      }
+    });
+
     // Strict Overview Narrative Sync Enforcer
     const overviewSkillsMatch = readme.match(/integrates \*\*(\d+) Agent Skills\*\*/);
     if (overviewSkillsMatch) {

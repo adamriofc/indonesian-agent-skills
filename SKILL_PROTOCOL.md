@@ -38,7 +38,7 @@ Allows native one-click plugin discovery and installation within Claude Code:
     "name": "adamriofc"
   },
   "plugins": [
-    { "name": "tax-payroll-id", "source": "./tax-payroll-id" },
+    { "name": "tax-id", "source": "./tax-id" },
     { "name": "legal-id", "source": "./legal-id" },
     { "name": "hr-id", "source": "./hr-id" },
     { "name": "ecommerce-id", "source": "./ecommerce-id" },

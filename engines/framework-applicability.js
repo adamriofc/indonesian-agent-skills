@@ -52,7 +52,6 @@ function checkFrameworkApplicability({
     businessArchetype: archetype,
     applicabilityStatus: evalResult.status, // NATIVE, ADAPTABLE, CONDITIONAL, NOT_RECOMMENDED
     recommendationLevel: evalResult.recommendationLevel, // RECOMMENDED, ADAPTABLE, CONDITIONAL, NOT_RECOMMENDED
-    isRecommended: evalResult.status !== 'NOT_RECOMMENDED',
     unitOfAnalysis: evalResult.unitOfAnalysis,
     recommendedMetric: evalResult.metric,
     applicabilityReason: `Framework '${frameworkName}' has applicability level '${evalResult.recommendationLevel}' for business archetype '${archetype}'.`

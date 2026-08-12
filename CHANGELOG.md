@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.3.0] - 2026-08-12
+
+### Refined & Hardened
+- **Multi-Factor Statutory Conflict Resolution Refinement (`engines/conflict-resolution.js`)**: Enhanced statutory conflict engine with temporal applicability verification (`effectiveFromDate` vs `asOfDate`), explicit repeal evidence check (`explicitRepeal`), and `NOT_YET_EFFECTIVE` status handling under UU No. 12/2011 jo. UU No. 13/2022.
+- **Clean Framework Recommendation Levels (`engines/framework-applicability.js`)**: Removed redundant boolean flag in favor of explicit 4-state `recommendationLevel` (`RECOMMENDED`, `ADAPTABLE`, `CONDITIONAL`, `NOT_RECOMMENDED`) with detailed `applicabilityReason`.
+- **Stale Taxonomy Enforcer Upgrade (`tests/schema/validator.test.js`)**: Enhanced schema validator to automatically assert canonical version `6.3.0` and reject stale plugin references (`tax-payroll-id`, `ecommerce-id`, `content-lokal-id`) across docs and manifests.
+- **Documentation & Install Command Sync**: Cleaned up 100% of remaining legacy installation commands across `README.md`, `SKILL_PROTOCOL.md`, and `package.json`.
+
 ## [6.2.0] - 2026-08-12
 
 ### Refined & Hardened
