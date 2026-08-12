@@ -43,19 +43,27 @@ function resolveBusinessArchetype({
   const twoDigit = codeStr.slice(0, 2);
   const fourDigit = codeStr.slice(0, 4);
 
-  let archetype = KBLI_ARCHETYPE_MAP[fourDigit] || KBLI_ARCHETYPE_MAP[twoDigit] || 'HYBRID';
+  const rawArchetype = KBLI_ARCHETYPE_MAP[fourDigit] || KBLI_ARCHETYPE_MAP[twoDigit] || null;
+  let archetype = rawArchetype || 'HYBRID';
   
-  // Name-based fallback heuristic
+  // Name-based fallback heuristic used when KBLI map is unmapped or for conflict detection
+  let nameArchetype = null;
   const nameLower = (activityName || '').toLowerCase();
   if (nameLower.includes('laundry') || nameLower.includes('hotel') || nameLower.includes('klinik') || nameLower.includes('restoran')) {
-    archetype = 'CAPACITY_SERVICE';
+    nameArchetype = 'CAPACITY_SERVICE';
   } else if (nameLower.includes('konsultasi') || nameLower.includes('hukum') || nameLower.includes('akuntansi') || nameLower.includes('software')) {
-    archetype = 'PROFESSIONAL_SERVICE';
+    nameArchetype = 'PROFESSIONAL_SERVICE';
   } else if (nameLower.includes('pabrik') || nameLower.includes('manufaktur') || nameLower.includes('produksi')) {
-    archetype = 'PRODUCT_MANUFACTURING';
+    nameArchetype = 'PRODUCT_MANUFACTURING';
   } else if (nameLower.includes('marketplace') || nameLower.includes('ecommerce') || nameLower.includes('tokopedia') || nameLower.includes('shopee')) {
-    archetype = 'MARKETPLACE_PLATFORM';
+    nameArchetype = 'MARKETPLACE_PLATFORM';
   }
+
+  if (!rawArchetype && nameArchetype) {
+    archetype = nameArchetype;
+  }
+
+  const hasNameConflict = Boolean(rawArchetype && nameArchetype && rawArchetype !== nameArchetype);
 
   const characteristics = {
     PRODUCT_MANUFACTURING: {
@@ -94,6 +102,7 @@ function resolveBusinessArchetype({
     kbliCode: codeStr,
     activityName,
     businessArchetype: archetype,
+    hasNameConflict,
     archetypeCharacteristics: characteristics[archetype],
     statutoryFramework: "BPS Regulation No. 2 Year 2020 (KBLI 2020)"
   };

@@ -44,6 +44,34 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
   };
 }
 
+function detectContextConflicts(context = {}) {
+  const conflicts = [];
+  const entity = context.entity || {};
+  const archetypeRes = resolveBusinessArchetype({ kbliCode: entity.kbli, activityName: entity.activityName });
+
+  if (archetypeRes.hasNameConflict) {
+    conflicts.push({
+      conflictType: 'KBLI_ARCHETYPE_MISMATCH',
+      issue: `KBLI code '${entity.kbli}' (${archetypeRes.businessArchetype}) conflicts with activity description '${entity.activityName}'.`,
+      recommendedClarification: 'Verify whether entity operates physical manufacturing facilities or professional consulting services.'
+    });
+  }
+
+  // Conflict 2: Individual taxpayer claiming Corporate PT entity structure
+  if (entity.type === 'individual' && activityName.includes('perseroan terbatas')) {
+    conflicts.push({
+      conflictType: 'ENTITY_STRUCTURE_MISMATCH',
+      issue: "Individual taxpayer type specified alongside 'Perseroan Terbatas' (PT) corporate title.",
+      recommendedClarification: 'Specify whether taxpayer is an Individual (Orang Pribadi) or a Corporate PT entity.'
+    });
+  }
+
+  return {
+    hasConflicts: conflicts.length > 0,
+    conflicts
+  };
+}
+
 function validateBusinessContext(rawContext = {}, mode = 'STRICT_PRODUCTION_MODE') {
   const missingParameters = [];
   const assumptionRegistry = [];
@@ -82,13 +110,21 @@ function validateBusinessContext(rawContext = {}, mode = 'STRICT_PRODUCTION_MODE
 
   const isComplete = missingParameters.length === 0;
   const canonicalContext = createDefaultBusinessContext(rawContext, mode);
+  const conflictCheck = detectContextConflicts(canonicalContext);
+
+  let contextStatus = isComplete ? 'COMPLETE' : (mode === 'STRICT_PRODUCTION_MODE' ? 'INSUFFICIENT_CONTEXT' : 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
+  if (conflictCheck.hasConflicts) {
+    contextStatus = 'CONTEXT_CONFLICT';
+  }
 
   return {
-    contextStatus: isComplete ? 'COMPLETE' : (mode === 'STRICT_PRODUCTION_MODE' ? 'INSUFFICIENT_CONTEXT' : 'DEMO_CONTEXT_WITH_ASSUMPTIONS'),
-    isComplete,
+    contextStatus, // COMPLETE | INSUFFICIENT_CONTEXT | DEMO_CONTEXT_WITH_ASSUMPTIONS | CONTEXT_CONFLICT
+    isComplete: isComplete && !conflictCheck.hasConflicts,
     executionMode: mode,
     missingParameters,
     assumptionRegistry,
+    hasConflicts: conflictCheck.hasConflicts,
+    conflicts: conflictCheck.conflicts,
     canonicalContext
   };
 }
@@ -96,5 +132,6 @@ function validateBusinessContext(rawContext = {}, mode = 'STRICT_PRODUCTION_MODE
 module.exports = {
   STANDARD_CONTEXT_SCHEMA_VERSION,
   createDefaultBusinessContext,
-  validateBusinessContext
+  validateBusinessContext,
+  detectContextConflicts
 };

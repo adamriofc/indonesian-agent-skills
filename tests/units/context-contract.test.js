@@ -19,7 +19,7 @@ function runContextContractTests() {
   assert.strictEqual(ctx.scale.annualRevenue, 5000000000);
 
   // 2. Missing Parameter Detection & Strict Mode Enforcement
-  console.log("  [2/6] Testing Missing Information Protocol & Strict Mode Enforcement...");
+  console.log("  [2/6] Testing Missing Information Protocol & Context Conflict Detection...");
   const strictRes = validateBusinessContext({ scale: { annualRevenue: 1000000000 } }, 'STRICT_PRODUCTION_MODE');
   assert.strictEqual(strictRes.isComplete, false);
   assert.strictEqual(strictRes.contextStatus, 'INSUFFICIENT_CONTEXT');
@@ -27,6 +27,10 @@ function runContextContractTests() {
 
   const demoRes = validateBusinessContext({ scale: { annualRevenue: 1000000000 } }, 'DEMO_MODE');
   assert.strictEqual(demoRes.contextStatus, 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
+
+  const conflictContextRes = validateBusinessContext({ entity: { type: 'pt', kbli: '70209', activityName: 'Pabrik Manufaktur Makanan' }, scale: { annualRevenue: 1000000000, employeeCount: 10 } });
+  assert.strictEqual(conflictContextRes.contextStatus, 'CONTEXT_CONFLICT');
+  assert.strictEqual(conflictContextRes.hasConflicts, true);
 
   // 3. Framework Applicability & Recommendation Level Matrix
   console.log("  [3/6] Testing Framework Applicability & Recommendation Level Matrix...");

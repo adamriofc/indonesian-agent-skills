@@ -72,6 +72,7 @@
         "kbliCode": "70209",
         "activityName": "Konsultasi Manajemen",
         "businessArchetype": "PROFESSIONAL_SERVICE",
+        "hasNameConflict": false,
         "archetypeCharacteristics": {
           "unitOfAnalysis": "SERVICE_LINE_PRACTICE",
           "hasPhysicalInventory": false,
@@ -274,6 +275,7 @@
         "kbliCode": "10710",
         "activityName": "Industri Makanan",
         "businessArchetype": "PRODUCT_MANUFACTURING",
+        "hasNameConflict": false,
         "archetypeCharacteristics": {
           "unitOfAnalysis": "PHYSICAL_SKU",
           "hasPhysicalInventory": true,
