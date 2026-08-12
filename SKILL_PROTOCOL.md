@@ -24,7 +24,7 @@ Supported across OpenWork Desktop, OpenCode CLI, Claude Code, Cursor IDE, Codex,
 npx skills add adamriofc/indonesian-business-agent-skills
 
 # Install specific domain plugins
-npx skills add adamriofc/indonesian-business-agent-skills --plugin tax-payroll-id
+npx skills add adamriofc/indonesian-business-agent-skills --plugin tax-id
 npx skills add adamriofc/indonesian-business-agent-skills --plugin strategic-id
 ```
 

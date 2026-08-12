@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.0.0] - 2026-08-12
+
+### Major Business Capability Taxonomy Refactoring
+- **Standalone `tax-id` & Payroll Integration into `hr-id`**: Refactored domain architecture by separating tax engineering from payroll operations into two dedicated business capability plugins:
+  - **`tax-id`**: *Indonesian Tax Intelligence, Engineering & Compliance* (16 Skills — PPh 21 TER, PPh 23/26, PPh Badan, PPN 12%, PPnBM, Transfer Pricing, Tax Planning, Tax Risk, Tax Audit, Cross-Border Tax).
+  - **`hr-id`**: *Indonesian Human Resources, Employment & Payroll Compliance* (12 Skills — Warning letters, SOPs, Interview, BPJS SIPP Admin, PHK Severance, PKWT/PKWTT, Wage Structure, and Statutory Payroll Execution: `bpjs-calculator`, `thr-calculator`, `spt-tahunan-guide`).
+- **6 Canonical Business Operating Intelligence Stack**:
+  1. `legal-id`: Commercial Law & Compliance (9 Skills)
+  2. `tax-id`: Tax Intelligence, Engineering & Compliance (16 Skills)
+  3. `hr-id`: Labor, Employment & Payroll Compliance (12 Skills)
+  4. `finance-id`: Business Finance & Accounting (15 Skills)
+  5. `marketing-id`: Marketing, Growth & Commerce (25 Skills)
+  6. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
+- **Automated Schema & Catalog Sync**: Upgraded `tests/schema/validator.test.js` to automatically assert canonical version `6.0.0`, **87 skills**, **38 engines**, **6 plugins**, and Overview narrative consistency.
+
 ## [5.1.0] - 2026-08-12
 
 ### Added

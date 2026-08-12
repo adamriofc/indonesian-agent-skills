@@ -172,7 +172,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `oss-kbli-navigator`: Maps activities to 5-digit KBLI 2020 and OSS-RBA risk levels.
 * `somasi-draft-id`: Drafts formal advocate-standard legal warning letters (Somasi 1, 2, 3).
 
-### 2. `tax-payroll-id`: Tax Engineering & Payroll (19 Skills)
+### 2. `tax-id`: Tax Intelligence, Engineering & Compliance (16 Skills)
 * `pph21-calculator`: TER monthly calculation engine (PP 58/2023) & Dec Annual Reconciliation.
 * `pph21-grossup`: Solves circular PPh 21 tax allowance equations (Gross-Up) and PMK 66/2023 Natura thresholds.
 * `pph23-26-calculator`: Calculates PPh 23 (2% service) and PPh 26 (20% offshore / Tax Treaty DGT).
@@ -189,11 +189,8 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `laporan-keuangan-psak`: Formats trial balances into SAK EMKM / SAK EP compliant financial statements.
 * `efaktur-helper`: Validates e-Faktur & DJP Coretax tax invoices for statutory PPN 12% & 11/12 DPP Nilai Lain (effective 11% burden).
 * `regulatory-diff`: Compares versioned SSOT ruleset transitions across effective date windows (e.g. PP 55/2022 ➔ PP 20/2026).
-* `thr-calculator`: Payout engine for religious holiday allowances.
-* `bpjs-calculator`: Calculations for health and social security contribution splits.
-* `spt-tahunan-guide`: Filing workflow for individual tax returns via DJP Online.
 
-### 3. `hr-id`: Labor & Employment Compliance (9 Skills)
+### 3. `hr-id`: Labor, Employment & Payroll Compliance (12 Skills)
 * `surat-peringatan`: Drafts SP1, SP2, and SP3 warning letters following 6-month statutory windows.
 * `sop-perusahaan`: Generates SOPs enforcing overtime limits (Perpu 2/2022 max 4h/day, 18h/week).
 * `interview-id`: Candidate scorecards evaluating technical skills and local cultural fit.
@@ -203,6 +200,9 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `pkwt-pkwtt-checker`: Audits contract worker duration (max 5 yrs) and computes statutory PKWT compensation.
 * `pkwtt-checker`: Audits permanent employment (PKWTT) contracts, probation rules (max 3 months), and automatic conversion triggers.
 * `struktur-skala-upah`: Builds statutory Wage Structure and Scale frameworks per Permenaker 1/2017.
+* `thr-calculator`: Payout engine for religious holiday allowances.
+* `bpjs-calculator`: Calculations for health and social security contribution splits.
+* `spt-tahunan-guide`: Filing workflow for individual tax returns via DJP Online.
 
 ### 4. `finance-id`: Business Finance & Accounting (15 Skills)
 * `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.

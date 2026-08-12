@@ -7,9 +7,9 @@
   },
   "plugins": [
     {
-      "name": "tax-payroll-id",
-      "source": "./tax-payroll-id",
-      "description": "Production-grade Indonesian tax & payroll engine: TER PPh 21 (PP 58/2023), BPJS splits, e-Faktur PPN/PPnBM validation, and statutory THR."
+      "name": "tax-id",
+      "source": "./tax-id",
+      "description": "Production-grade Indonesian Tax Intelligence, Engineering & Compliance: TER PPh 21, PPh 23/26, PPh Badan, PPN 12%, PPnBM, and Transfer Pricing."
     },
     {
       "name": "legal-id",
@@ -19,7 +19,7 @@
     {
       "name": "hr-id",
       "source": "./hr-id",
-      "description": "Production-grade Indonesian HR administration, compliant SP warning letters, SOP generation, BPJS SIPP portal setup, and severance calculations per PP 35/2021."
+      "description": "Production-grade Indonesian Human Resources, Employment & Payroll Administration: SP warning letters, SOP generation, BPJS SIPP portal setup, THR, and severance calculations per PP 35/2021."
     },
     {
       "name": "marketing-id",

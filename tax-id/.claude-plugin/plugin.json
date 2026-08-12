@@ -1,0 +1,8 @@
+{
+  "name": "tax-id",
+  "version": "6.0.0",
+  "description": "Production-grade Indonesian Tax Intelligence, Engineering & Compliance: TER PPh 21, PPh 23/26, PPh Badan, PPN 12%, PPnBM, and Transfer Pricing.",
+  "author": {
+    "name": "adamriofc"
+  }
+}

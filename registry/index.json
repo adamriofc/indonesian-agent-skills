@@ -1,5 +1,5 @@
 {
-  "version": "5.1.0",
+  "version": "6.0.0",
   "generated_at": "2026-08-10T00:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
@@ -102,7 +102,7 @@
     {
       "id": "pph21-calculator",
       "name": "pph21-calculator",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "calculation",
       "quality_tier": "tested",
@@ -113,7 +113,7 @@
     {
       "id": "pph21-grossup",
       "name": "pph21-grossup",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "calculation",
       "quality_tier": "expert-reviewed",
@@ -124,7 +124,7 @@
     {
       "id": "pph23-26-calculator",
       "name": "pph23-26-calculator",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "calculation",
       "quality_tier": "tested",
@@ -135,7 +135,7 @@
     {
       "id": "pph-final-umkm",
       "name": "pph-final-umkm",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "calculation",
       "quality_tier": "tested",
@@ -146,7 +146,7 @@
     {
       "id": "pph-badan-calculator",
       "name": "pph-badan-calculator",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "calculation",
       "quality_tier": "expert-reviewed",
@@ -157,7 +157,7 @@
     {
       "id": "transfer-pricing-audit",
       "name": "transfer-pricing-audit",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "audit",
       "quality_tier": "expert-reviewed",
@@ -168,7 +168,7 @@
     {
       "id": "ppn-ppnbm-advanced",
       "name": "ppn-ppnbm-advanced",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "calculation",
       "quality_tier": "expert-reviewed",
@@ -179,7 +179,7 @@
     {
       "id": "tax-planning",
       "name": "tax-planning",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "planning",
       "quality_tier": "expert-reviewed",
@@ -190,7 +190,7 @@
     {
       "id": "tax-optimization",
       "name": "tax-optimization",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "optimization",
       "quality_tier": "expert-reviewed",
@@ -201,7 +201,7 @@
     {
       "id": "tax-risk-analysis",
       "name": "tax-risk-analysis",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "risk",
       "quality_tier": "expert-reviewed",
@@ -212,7 +212,7 @@
     {
       "id": "tax-audit-preparation",
       "name": "tax-audit-preparation",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "audit",
       "quality_tier": "expert-reviewed",
@@ -223,7 +223,7 @@
     {
       "id": "tax-cross-border",
       "name": "tax-cross-border",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "cross-border",
       "quality_tier": "expert-reviewed",
@@ -234,7 +234,7 @@
     {
       "id": "regulatory-diff",
       "name": "regulatory-diff",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "diff",
       "quality_tier": "tested",
@@ -245,7 +245,7 @@
     {
       "id": "laporan-keuangan-psak",
       "name": "laporan-keuangan-psak",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "reporting",
       "quality_tier": "source-verified",
@@ -256,7 +256,7 @@
     {
       "id": "efaktur-helper",
       "name": "efaktur-helper",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "audit",
       "quality_tier": "source-verified",
@@ -267,8 +267,8 @@
     {
       "id": "thr-calculator",
       "name": "thr-calculator",
-      "plugin": "tax-payroll-id",
-      "domain": "tax",
+      "plugin": "hr-id",
+      "domain": "hr",
       "type": "calculation",
       "quality_tier": "tested",
       "risk_level": "HIGH",
@@ -278,8 +278,8 @@
     {
       "id": "bpjs-calculator",
       "name": "bpjs-calculator",
-      "plugin": "tax-payroll-id",
-      "domain": "tax",
+      "plugin": "hr-id",
+      "domain": "hr",
       "type": "calculation",
       "quality_tier": "tested",
       "risk_level": "HIGH",
@@ -289,8 +289,8 @@
     {
       "id": "spt-tahunan-guide",
       "name": "spt-tahunan-guide",
-      "plugin": "tax-payroll-id",
-      "domain": "tax",
+      "plugin": "hr-id",
+      "domain": "hr",
       "type": "guidance",
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
@@ -751,7 +751,7 @@
     {
       "id": "regulatory-impact",
       "name": "regulatory-impact",
-      "plugin": "tax-payroll-id",
+      "plugin": "tax-id",
       "domain": "tax",
       "type": "impact",
       "quality_tier": "expert-reviewed",
