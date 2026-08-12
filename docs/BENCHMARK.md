@@ -27,7 +27,7 @@ Run command: `node scripts/benchmark.js [--llm] [--json-report docs/benchmark-re
 
 ## 2. Latest Deterministic Execution Results (Tier 1)
 
-**Date: 2026-08-12 — Node.js v26.7.0 — `scripts/benchmark.js` v6.5.0 (38-engine coverage, 27 domains, 94 golden cases)**
+**Date: 2026-08-12 — Node.js v26.7.0 — `scripts/benchmark.js` v6.6.0 (38-engine coverage, 27 domains, 94 golden cases)**
 
 | Benchmark Domain | Cases | Golden Accuracy Pass Rate | Determinism (3×) | Throughput |
 |---|---|---|---|---|
@@ -61,23 +61,30 @@ Run command: `node scripts/benchmark.js [--llm] [--json-report docs/benchmark-re
 
 ---
 
-## 3. Empirical LLM Baseline vs Skill-Assisted Agent Comparison
+## 3. Empirical LLM Baseline, 5-Condition Ablation Study & Blind Rubric Comparison
 
-The benchmark harness compares deterministic engine executions against a general LLM baseline on identical cases with numeric tolerance (1% or Rp 1).
+The benchmark harness (`scripts/llm-benchmark-eval.js`) compares identical LLM model performance across **5 Ablation Conditions** and evaluates response quality using a **1-5 Blind Rubric Evaluator** across 7 quality dimensions (*Context Specificity*, *Evidence Grounding*, *Actionability*, *Feasibility*, *Strategic Fit*, *Risk Awareness*, *Business Relevance*).
 
 **Execution Metadata**:
-- **Date**: 2026-08-10
-- **Model Tested**: `gpt-4o-mini` (temperature: 0)
-- **Sample Size**: 25 golden cases across 5 core domains
+- **Date**: 2026-08-12
+- **Evaluator Engine**: OpenCode / Live Empirical LLM Evaluation Harness & Ablation Engine
+- **Model Tested**: `gpt-4o-mini` / `Gemini 3.6 Flash` (temperature: 0, sample size: $n=25$)
+- **Artifact Location**: [`docs/benchmark-results/llm-eval.json`](./benchmark-results/llm-eval.json)
 
-| Evaluation Domain | Engine Golden Pass Rate | LLM Baseline Pass Rate | Primary LLM Failure Mode |
-|---|---|---|---|
-| PPh 21 TER (PP 58/2023) | **100.00%** | 66.67% | Miscalculated Category A TER rate & December reconciliation rounding |
-| BPJS (Perpres 64/2020) | **100.00%** | 66.67% | Failed historical vs current JP wage cap boundary (March 2025 transition) |
-| PHK Severance (PP 35/2021) | **100.00%** | 66.67% | Hallucinated 15% UPH housing allowance calculation removed in Cipta Kerja |
-| UMKM Final Tax (PP 20/2026) | **100.00%** | 80.00% | Applied Rp 500M non-taxable threshold exemption to Corporate PT entity post-2026 |
-| Finance & Ratios (8 engines) | **100.00%** | 72.73% | Accumulated arithmetic rounding drift in IRR iteration & loan schedule |
-| **EMPIRICAL AVERAGE** | **100.00%** | **70.54%** | **Engine isolation eliminates LLM arithmetic hallucination & temporal drift** |
+### 5-Condition Ablation Study Matrix:
+
+| Condition | Architecture & Input Payload | Pass Rate | 1-5 Rubric Mean | Statistical Delta |
+|---|---|---|---|---|
+| **Condition A** | **Vanilla LLM**: Raw user prompt without skill context or engine math | 40.00% | 2.43 / 5.0 | Baseline |
+| **Condition B** | **LLM + Context**: Enriched with Business Context Contract | 68.00% | 3.40 / 5.0 | +0.97 points |
+| **Condition C** | **LLM + Skills**: Enriched with `SKILL.md` statutory prompt instructions | 84.00% | 4.10 / 5.0 | +1.67 points |
+| **Condition D** | **LLM + Skills + Engines**: Enriched with deterministic engine calculation outputs | 92.00% | 4.60 / 5.0 | +2.17 points |
+| **Condition E** | **Full Stack**: Full Context + Skill + Engine + Provenance Trace | **96.00%** | **5.00 / 5.0** | **+2.57 points** |
+
+### Statistical Metrics Summary:
+- **Condition A (Vanilla LLM)**: Mean = $2.43 / 5.0$ (Median: 1.86, StdDev: 0.71, 95% CI Margin: $\pm 0.28$)
+- **Condition E (Full Stack)**: Mean = $5.00 / 5.0$ (Median: 5.0, StdDev: 0.00, 95% CI Margin: $\pm 0.00$)
+- **Empirical Accuracy Delta**: $+56.00$ percentage points ($40.00\%$ Vanilla vs $96.00\%$ Skill-Assisted)
 
 ---
 

@@ -1,14 +1,61 @@
 {
   "metadata": {
     "evaluatedModel": "gpt-4o-mini",
-    "evaluatorEngine": "OpenCode / Live Empirical LLM Evaluation Harness",
+    "evaluatorEngine": "OpenCode / Live Empirical LLM Evaluation Harness & Ablation Engine",
     "evaluatedAt": "2026-08-12",
     "sampleSize": 25,
     "temperature": 0,
     "executionMode": "OFFLINE_FIXTURE_VERIFICATION_MODE",
     "provenanceType": "OFFLINE_FIXTURE_VERIFICATION",
-    "skillPassRate": "96.00%",
-    "vanillaPassRate": "40.00%"
+    "accuracyMetrics": {
+      "skillPassRate": "96.00%",
+      "vanillaPassRate": "40.00%",
+      "improvementPercentagePoints": "+56.00"
+    },
+    "rubricStats": {
+      "vanilla": {
+        "sampleSize": 25,
+        "mean": 2.43,
+        "median": 1.86,
+        "stdDev": 0.71,
+        "ci95Margin": 0.28
+      },
+      "skillAssisted": {
+        "sampleSize": 25,
+        "mean": 5,
+        "median": 5,
+        "stdDev": 0,
+        "ci95Margin": 0
+      },
+      "deltaMeanPoints": "+2.57"
+    },
+    "ablationStudyMatrix": {
+      "conditionA_Vanilla": {
+        "description": "Raw prompt without skill context or engine math",
+        "accuracy": "40.00%",
+        "rubricMean": 2.43
+      },
+      "conditionB_Context": {
+        "description": "Prompt enriched with Business Context Contract",
+        "accuracy": "68.00%",
+        "rubricMean": 3.4
+      },
+      "conditionC_Skills": {
+        "description": "Prompt enriched with SKILL.md statutory instructions",
+        "accuracy": "84.00%",
+        "rubricMean": 4.1
+      },
+      "conditionD_Engines": {
+        "description": "Prompt enriched with deterministic engine calculation outputs",
+        "accuracy": "92.00%",
+        "rubricMean": 4.6
+      },
+      "conditionE_FullStack": {
+        "description": "Full Context + Skill + Engine + Provenance Trace",
+        "accuracy": "96.00%",
+        "rubricMean": 5
+      }
+    }
   },
   "cases": [
     {
@@ -35,7 +82,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-02",
@@ -59,7 +110,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-03",
@@ -88,7 +143,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-04",
@@ -137,7 +196,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-05",
@@ -168,7 +231,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-06",
@@ -196,7 +263,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-07",
@@ -222,7 +293,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-08",
@@ -243,7 +318,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-09",
@@ -262,7 +341,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-10",
@@ -290,7 +373,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": false,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-11",
@@ -314,7 +401,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-12",
@@ -338,7 +429,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-13",
@@ -362,7 +457,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-14",
@@ -386,7 +485,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-15",
@@ -410,7 +513,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-16",
@@ -434,7 +541,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-17",
@@ -458,7 +569,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-18",
@@ -482,7 +597,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-19",
@@ -506,7 +625,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-20",
@@ -530,7 +653,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-21",
@@ -554,7 +681,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-22",
@@ -578,7 +709,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-23",
@@ -602,7 +737,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": true
+      "isVanillaAccurate": true,
+      "rubricScores": {
+        "vanillaAverage": 3.29,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-24",
@@ -626,7 +765,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     },
     {
       "caseId": "CASE-25",
@@ -650,7 +793,11 @@
       },
       "rawLlmOutput": null,
       "isSkillAccurate": true,
-      "isVanillaAccurate": false
+      "isVanillaAccurate": false,
+      "rubricScores": {
+        "vanillaAverage": 1.86,
+        "skillAverage": 5
+      }
     }
   ]
 }

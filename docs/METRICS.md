@@ -3,7 +3,7 @@
 Official measurement definitions and exact metrics for `indonesian-business-agent-skills`.
 
 > **Single Source of Truth File**: [`canonical-metadata.json`](../canonical-metadata.json)  
-> **Last Generated**: 2026-08-12T10:05:10.325Z  
+> **Last Generated**: 2026-08-12T10:13:31.585Z  
 > **Generator Command**: `npm run generate:metadata`
 
 ---
@@ -12,7 +12,7 @@ Official measurement definitions and exact metrics for `indonesian-business-agen
 
 | Metric Name | Value | Exact Definition & Measurement Source |
 |---|---|---|
-| **Repository Version** | `v6.5.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
+| **Repository Version** | `v6.6.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
 | **Canonical Plugins** | `6` | Plugin directories containing `.claude-plugin/plugin.json` (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `87` | Total `SKILL.md` files registered across the 6 canonical plugins |
 | **Deterministic Engines** | `38` | Pure Node.js calculation & regulatory diff engine modules in `engines/*.js` |

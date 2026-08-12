@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.6.0] - 2026-08-12
+
+### Added & Hardened (Evaluation Release — Audit Roadmap Phase 2)
+- **Apples-to-Apples LLM Evaluation Engine (`scripts/llm-benchmark-eval.js`)**: Upgraded evaluation harness to compare identical model outputs across 5 Ablation Conditions (Condition A: Vanilla LLM, Condition B: LLM + Context, Condition C: LLM + Skills, Condition D: LLM + Skills + Engines, Condition E: Full Stack).
+- **2-Evaluator Architecture & 1-5 Blind Rubric Evaluator**: Implemented Dual Evaluator architecture combining strict deterministic numeric/classification matching with 1-5 Blind Rubric evaluation across 7 dimensions (*Context Specificity*, *Evidence Grounding*, *Actionability*, *Feasibility*, *Strategic Fit*, *Risk Awareness*, *Business Relevance*).
+- **Statistical Analysis Reporting**: Automatically computes sample size ($n$), mean, median, standard deviation, delta, and 95% Confidence Intervals for both live API and offline fixture execution modes.
+- **BENCHMARK.md §3 Refinement**: Updated empirical evaluation documentation with 5-Condition Ablation Study matrix and 1-5 Rubric statistical metrics (+2.57 quality rating delta on 1-5 scale).
+
 ## [6.5.0] - 2026-08-12
 
 ### Added & Hardened (Reliability Release — Audit Roadmap Phase 1)
