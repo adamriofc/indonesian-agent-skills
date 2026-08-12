@@ -20,7 +20,7 @@
 
 ## 📌 Overview & Value Proposition
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **81 Agent Skills** with **36 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **87 Agent Skills** with **38 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
 Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
@@ -82,7 +82,7 @@ Agent (Skill-Assisted Execution):
                                            │
                                            ▼
                ┌──────────────────────────────────────────────────────┐
-               │      36 Deterministic Node.js Math & Diff Engines    │
+               │      38 Deterministic Node.js Math & Diff Engines    │
                │ 28 statutory (engines/*.js + SSOT temporal rulesets) │
                │ 8 finance (engines/*.js — pure standard math)        │
                └──────────────────┬───────────────────┬───────────────┘
@@ -153,11 +153,11 @@ cp -r .agents/skills/* .cursor/skills/
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. The 6 plugins and 81 skills activate automatically.
+4. The 6 plugins and 87 skills activate automatically.
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (81 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (87 Skills Across 6 Plugins)
 
 All skills and computational engines are mapped in the **Machine-Readable Registry (`registry/index.json`)** with defined *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
@@ -221,7 +221,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `business-scenario`: Maps business profile across the 8 Stages of the Indonesian Business Lifecycle for an integrated compliance roadmap.
 * `decision-engine`: Evaluates financial & operational metrics to generate deterministic, prioritized business decision recommendations.
 
-### 5. `marketing-id`: Marketing, Growth & Commerce (19 Skills)
+### 5. `marketing-id`: Marketing, Growth & Commerce (25 Skills)
 * `deskripsi-produk-seo`: Structural product copy optimized for Shopee & Tokopedia search.
 * `cs-komplain-handler`: Customer service protocols for negative reviews and damaged packages.
 * `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.
@@ -241,6 +241,13 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `youtube-shorts-script`: Retention scripts for 0-60s Shorts and long-form video outlines.
 * `kol-brief-contract`: KOL/Influencer campaign briefs, SOWs, and content usage rights contracts.
 * `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
+* `market-sizing`: Evaluates TAM/SAM/SOM market opportunity using top-down adoption models and deterministic calculations.
+* `customer-segmentation`: Segments customer markets using firmographic, behavioral, and willingness-to-pay criteria.
+* `jobs-to-be-done`: Evaluates customer functional, emotional, and social Jobs-To-Be-Done (JTBD) drivers.
+* `voice-of-customer`: Synthesizes customer reviews, survey responses, and complaint logs to extract pain points.
+* `positioning-analysis`: Establishes strategic brand positioning frameworks (Target, Frame of Reference, Point of Difference).
+* `go-to-market`: Formulates structured Go-To-Market (GTM) launch roadmaps, channels, pricing, and acquisition KPIs.
+
 
 ### 6. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
 * `porter-three-tests`: Evaluates diversification and M&A strategies using Porter's 3 Tests (Attractiveness, Cost of Entry, Better-Off).

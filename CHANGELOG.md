@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [5.1.0] - 2026-08-12
+
+### Added
+- **Market Research & Positioning Intelligence (`marketing-id`)**:
+  - 6 New Flagship Skills: `market-sizing`, `customer-segmentation`, `jobs-to-be-done`, `voice-of-customer`, `positioning-analysis`, `go-to-market` (expanding `marketing-id` to 25 Skills & total catalog to **87 Skills Across 6 Plugins**).
+- **2 Deterministic Marketing & Unit Economics Engines**:
+  - `engines/market-sizing-engine.js`: Top-down TAM / SAM / SOM market opportunity calculation engine.
+  - `engines/marketing-unit-economics.js`: LTV, CAC, LTV:CAC ratio (target >= 3.0x), CAC payback period (months), and ROAS calculation engine.
+- **Automated Schema & Catalog Sync**: Upgraded `tests/schema/validator.test.js` to automatically assert canonical version `5.1.0`, **87 skills**, **38 engines**, **6 plugins**, and Overview narrative consistency.
+
 ## [5.0.0] - 2026-08-12
 
 ### Major Architectural Consolidation

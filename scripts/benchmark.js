@@ -56,6 +56,8 @@ const { evaluateStrategicDecisionAlternatives } = require(path.join(ROOT, 'engin
 const { simulateScenarioImpact } = require(path.join(ROOT, 'engines/scenario-analysis-engine'));
 const { evaluateStrategicRisks } = require(path.join(ROOT, 'engines/strategic-risk-engine'));
 const { resolveBusinessArchetype } = require(path.join(ROOT, 'engines/kbli-context-router'));
+const { calculateMarketSizing } = require(path.join(ROOT, 'engines/market-sizing-engine'));
+const { calculateMarketingUnitEconomics } = require(path.join(ROOT, 'engines/marketing-unit-economics'));
 
 function loadGolden(name) {
   const raw = fs.readFileSync(path.join(ROOT, 'tests/golden', `${name}.json`), 'utf8');
@@ -378,6 +380,17 @@ function runKbliContext(c) {
   return { businessArchetype: r.businessArchetype, hasPhysicalInventory: r.archetypeCharacteristics.hasPhysicalInventory };
 }
 
+
+function runMarketSizing(c) {
+  const r = calculateMarketSizing(c.input);
+  return { totalAddressableCustomers: r.results.totalAddressableCustomers, tamAmount: r.results.tamAmount, samAmount: r.results.samAmount, somAmount: r.results.somAmount };
+}
+
+function runMarketingUnitEconomics(c) {
+  const r = calculateMarketingUnitEconomics(c.input);
+  return { cac: r.cac, ltv: r.ltv, ltvCacRatio: r.ltvCacRatio, roas: r.roas, healthStatus: r.healthStatus };
+}
+
 const DOMAINS = [
   { name: 'pph21', label: 'PPh 21 (TER PP 58/2023)', golden: 'pph21', run: runPph21 },
   { name: 'bpjs', label: 'BPJS (Perpres 64/2020 + PP 45/2015)', golden: 'bpjs', run: runBpjs },
@@ -403,6 +416,8 @@ const DOMAINS = [
   { name: 'scenario-analysis', label: 'Scenario & Sensitivity Analysis Engine', golden: 'scenario-analysis', run: runScenarioAnalysis },
   { name: 'strategic-risk', label: 'Strategic Risk Scoring & Heatmap Engine', golden: 'strategic-risk', run: runStrategicRisk },
   { name: 'kbli-context', label: 'KBLI Context Router & Business Archetype Classifier Engine', golden: 'kbli-context', run: runKbliContext },
+  { name: 'market-sizing', label: 'Market Sizing Engine (TAM/SAM/SOM)', golden: 'market-sizing', run: runMarketSizing },
+  { name: 'marketing-unit-economics', label: 'Marketing Unit Economics & LTV:CAC Engine', golden: 'marketing-unit-economics', run: runMarketingUnitEconomics },
   { name: 'finance', label: 'Finance (8 deterministic engines)', golden: 'finance', run: runFinance },
 ];
 

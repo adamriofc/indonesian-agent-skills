@@ -1,0 +1,17 @@
+[
+  {
+    "caseId": "MKTG-UNIT-ECON-001",
+    "description": "Healthy D2C unit economics with 200k CAC, 2.4M LTV, and 4x ROAS",
+    "input": {
+      "totalMarketingAndSalesCost": 50000000,
+      "newCustomersAcquired": 250,
+      "averageOrderValue": 500000,
+      "annualPurchaseFrequency": 4,
+      "grossMarginPercent": 40,
+      "customerLifespanYears": 3,
+      "adSpendBudget": 30000000,
+      "campaignRevenueGenerated": 120000000
+    },
+    "expected": { "cac": 200000, "ltv": 2400000, "ltvCacRatio": "12x", "roas": "4x", "healthStatus": "HEALTHY" }
+  }
+]

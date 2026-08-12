@@ -1,0 +1,14 @@
+[
+  {
+    "caseId": "MARKET-SIZING-ID-001",
+    "description": "Indonesian top-down market sizing for 270M population with 10% adoption & 1M spend",
+    "input": {
+      "totalPopulationOrEntities": 270000000,
+      "targetCategoryAdoptionPercent": 10,
+      "averageAnnualSpendingPerCustomer": 1000000,
+      "serviceableGeographicFraction": 0.50,
+      "targetObtainableSharePercent": 10
+    },
+    "expected": { "totalAddressableCustomers": 27000000, "tamAmount": 27000000000000, "samAmount": 13500000000000, "somAmount": 1350000000000 }
+  }
+]

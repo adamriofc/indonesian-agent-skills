@@ -1,14 +1,14 @@
 {
-  "version": "5.0.0",
+  "version": "5.1.0",
   "generated_at": "2026-08-10T00:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
-  "total_skills": 81,
-  "total_engines": 36,
+  "total_skills": 87,
+  "total_engines": 38,
   "quality_tiers": {
     "tested": 18,
     "source-verified": 31,
-    "expert-reviewed": 32
+    "expert-reviewed": 38
   },
   "skills": [
     {
@@ -901,6 +901,72 @@
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
       "engine": "engines/strategic-risk-engine.js"
+    },
+    {
+      "id": "market-sizing",
+      "name": "market-sizing",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "opportunity",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": "engines/market-sizing-engine.js"
+    },
+    {
+      "id": "customer-segmentation",
+      "name": "customer-segmentation",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "segmentation",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "jobs-to-be-done",
+      "name": "jobs-to-be-done",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "jtbd",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "voice-of-customer",
+      "name": "voice-of-customer",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "voc",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "positioning-analysis",
+      "name": "positioning-analysis",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "positioning",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": null
+    },
+    {
+      "id": "go-to-market",
+      "name": "go-to-market",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "gtm",
+      "quality_tier": "expert-reviewed",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "engine": null
     }
   ]
 }
