@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.4.1] - 2026-08-12
+
+### Corrected & Hardened (Final Audit Feedback)
+- **Benchmark Semantics Correction (P0)**: Renamed `tests/benchmarks/recommendation-quality.test.js` → `tests/benchmarks/business-scenario-regression.test.js`. The suite is now explicitly a *deterministic business scenario regression benchmark*, not an LLM recommendation-quality measurement; claims are scoped accordingly in `docs/BENCHMARK.md` §1/§4.
+- **Independent 8-Dimension Evaluation (P0)**: Each of the 8 dimensions (Context Correctness, Evidence Grounding, Recommendation Specificity, Actionability, Financial Feasibility, Constraint Awareness, Cross-Domain Consistency, Hallucination Absence) now has its own evaluator and its own 100% assertion. Dimension scores are no longer derived from a single case-level boolean.
+- **Case Provenance & Citation Metadata (P0)**: All 25 scenarios carry `sourceType` (`AUTHORED_SOURCE_CASE` | `PARAMETRIC_CASE`); the 5 authored cases include verifiable statutory citations (PP 20/2026, PP 55/2022, PMK 172/2023, Permenaker 1/2017, UU 13/2003 jo. UU 6/2023, UU 27/2022). Fabricated journal titles removed; no case is presented as a published journal study.
+- **Dead Expectation Repaired (P0)**: `totalViolationsCount` was previously asserted against a nonexistent engine field; the evaluator now compares the real `totalViolationsDetected` output, closing a silent coverage gap.
+- **Invalid Numeric Input Protocol (P1)**: `engines/context-contract.js` no longer silently coerces malformed numerics to `0` (`Number(x) || 0` removed). Non-numeric or negative scale values now surface `INVALID_INPUT` (`INVALID_NUMERIC_VALUE` / `NEGATIVE_VALUE_OUT_OF_RANGE`) via the new `inputIssues` array; schema version bumped to 2.1.0.
+- **Soft Context Warning (P1)**: KBLI vs activity-name ambiguity (`KBLI_ARCHETYPE_MISMATCH`) is now a soft `CONTEXT_WARNING` (needs clarification) rather than a hard `CONTEXT_CONFLICT`; hard conflicts remain only for structural contradictions (e.g., individual + Perseroan Terbatas).
+- **Documentation Consistency (P1)**: `docs/BENCHMARK.md` corrected to measured figures — 94 golden cases / 27 domains / 38 engines (was 92/25/32), Tier 2/3 suite paths, and 424 assertion statements; §2 table now includes Market Sizing and Marketing Unit Economics domains with measured throughput.
+- **Version Metadata Sync**: `package.json`, `package-lock.json`, and `registry/index.json` aligned at 6.4.1.
+
 ## [6.4.0] - 2026-08-12
 
 ### Refined & Hardened

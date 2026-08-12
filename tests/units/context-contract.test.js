@@ -14,7 +14,7 @@ function runContextContractTests() {
     entity: { type: 'PT', kbli: '70209' },
     scale: { annualRevenue: 5000000000, employeeCount: 15 }
   });
-  assert.strictEqual(ctx.schemaVersion, '2.0.0');
+  assert.strictEqual(ctx.schemaVersion, '2.1.0');
   assert.strictEqual(ctx.businessArchetype, 'PROFESSIONAL_SERVICE');
   assert.strictEqual(ctx.scale.annualRevenue, 5000000000);
 
@@ -29,8 +29,30 @@ function runContextContractTests() {
   assert.strictEqual(demoRes.contextStatus, 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
 
   const conflictContextRes = validateBusinessContext({ entity: { type: 'pt', kbli: '70209', activityName: 'Pabrik Manufaktur Makanan' }, scale: { annualRevenue: 1000000000, employeeCount: 10 } });
-  assert.strictEqual(conflictContextRes.contextStatus, 'CONTEXT_CONFLICT');
-  assert.strictEqual(conflictContextRes.hasConflicts, true);
+  assert.strictEqual(conflictContextRes.contextStatus, 'CONTEXT_WARNING');
+  assert.strictEqual(conflictContextRes.hasConflicts, false);
+  assert.strictEqual(conflictContextRes.hasWarnings, true);
+  assert.strictEqual(conflictContextRes.isComplete, true);
+  assert.strictEqual(conflictContextRes.warnings[0].warningType, 'KBLI_ARCHETYPE_MISMATCH');
+
+  const hardConflictRes = validateBusinessContext({ entity: { type: 'individual', kbli: '47911', activityName: 'Perseroan Terbatas Ritel Digital' }, scale: { annualRevenue: 300000000, employeeCount: 2 } });
+  assert.strictEqual(hardConflictRes.contextStatus, 'CONTEXT_CONFLICT');
+  assert.strictEqual(hardConflictRes.hasConflicts, true);
+  assert.strictEqual(hardConflictRes.conflicts[0].conflictType, 'ENTITY_STRUCTURE_MISMATCH');
+
+  // 2b. Invalid Numeric Input Protocol (never silently coerced to 0)
+  console.log("  [2b/6] Testing Invalid Numeric Input → INVALID_INPUT (no silent zero-coercion)...");
+  const invalidNumericRes = validateBusinessContext({ entity: { type: 'pt', kbli: '70209' }, scale: { annualRevenue: 'abc', employeeCount: 10 } });
+  assert.strictEqual(invalidNumericRes.contextStatus, 'INVALID_INPUT');
+  assert.strictEqual(invalidNumericRes.isComplete, false);
+  assert.strictEqual(invalidNumericRes.inputIssues.length, 1);
+  assert.strictEqual(invalidNumericRes.inputIssues[0].field, 'scale.annualRevenue');
+  assert.strictEqual(invalidNumericRes.inputIssues[0].issue, 'INVALID_NUMERIC_VALUE');
+  assert.strictEqual(invalidNumericRes.canonicalContext.scale.annualRevenue, null);
+
+  const negativeNumericRes = validateBusinessContext({ entity: { type: 'pt', kbli: '70209' }, scale: { annualRevenue: -500000000, employeeCount: 10 } });
+  assert.strictEqual(negativeNumericRes.contextStatus, 'INVALID_INPUT');
+  assert.strictEqual(negativeNumericRes.inputIssues[0].issue, 'NEGATIVE_VALUE_OUT_OF_RANGE');
 
   // 3. Framework Applicability & Recommendation Level Matrix
   console.log("  [3/6] Testing Framework Applicability & Recommendation Level Matrix...");

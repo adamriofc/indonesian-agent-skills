@@ -6,11 +6,26 @@
 
 const { resolveBusinessArchetype } = require('./kbli-context-router');
 
-const STANDARD_CONTEXT_SCHEMA_VERSION = "2.0.0";
+const STANDARD_CONTEXT_SCHEMA_VERSION = "2.1.0";
+
+function normalizeNonNegativeNumber(value, fieldName, issues) {
+  if (value === undefined || value === null) return null;
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) {
+    issues.push({ field: fieldName, issue: 'INVALID_NUMERIC_VALUE', received: value });
+    return null;
+  }
+  if (numericValue < 0) {
+    issues.push({ field: fieldName, issue: 'NEGATIVE_VALUE_OUT_OF_RANGE', received: value });
+    return null;
+  }
+  return numericValue;
+}
 
 function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
   const entity = overrides.entity || {};
   const scale = overrides.scale || {};
+  const scaleInputIssues = [];
 
   const isStrict = mode === 'STRICT_PRODUCTION_MODE';
 
@@ -40,28 +55,30 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
     businessArchetype: archetypeRes.businessArchetype,
     archetypeCharacteristics: archetypeRes.archetypeCharacteristics,
     scale: {
-      annualRevenue: scale.annualRevenue !== undefined ? Math.max(0, Number(scale.annualRevenue) || 0) : null,
-      monthlyOpEx: scale.monthlyOpEx !== undefined ? Math.max(0, Number(scale.monthlyOpEx) || 0) : null,
-      employeeCount: scale.employeeCount !== undefined ? Math.max(0, Number(scale.employeeCount) || 0) : null
-    }
+      annualRevenue: scale.annualRevenue !== undefined ? normalizeNonNegativeNumber(scale.annualRevenue, 'scale.annualRevenue', scaleInputIssues) : null,
+      monthlyOpEx: scale.monthlyOpEx !== undefined ? normalizeNonNegativeNumber(scale.monthlyOpEx, 'scale.monthlyOpEx', scaleInputIssues) : null,
+      employeeCount: scale.employeeCount !== undefined ? normalizeNonNegativeNumber(scale.employeeCount, 'scale.employeeCount', scaleInputIssues) : null
+    },
+    inputIssues: scaleInputIssues
   };
 }
 
 function detectContextConflicts(context = {}) {
   const conflicts = [];
+  const warnings = [];
   const entity = context.entity || {};
   const activityName = (entity.activityName || '').toLowerCase();
   const archetypeRes = resolveBusinessArchetype({ kbliCode: entity.kbli, activityName: entity.activityName });
 
   if (archetypeRes.hasNameConflict) {
-    conflicts.push({
-      conflictType: 'KBLI_ARCHETYPE_MISMATCH',
+    warnings.push({
+      warningType: 'KBLI_ARCHETYPE_MISMATCH',
       issue: `KBLI code '${entity.kbli}' (${archetypeRes.businessArchetype}) conflicts with activity description '${entity.activityName}'.`,
       recommendedClarification: 'Verify whether entity operates physical manufacturing facilities or professional consulting services.'
     });
   }
 
-  // Conflict 2: Individual taxpayer claiming Corporate PT entity structure
+  // Conflict: Individual taxpayer claiming Corporate PT entity structure
   if (entity.type === 'individual' && activityName.includes('perseroan terbatas')) {
     conflicts.push({
       conflictType: 'ENTITY_STRUCTURE_MISMATCH',
@@ -72,7 +89,9 @@ function detectContextConflicts(context = {}) {
 
   return {
     hasConflicts: conflicts.length > 0,
-    conflicts
+    conflicts,
+    hasWarnings: warnings.length > 0,
+    warnings
   };
 }
 
@@ -81,6 +100,18 @@ function validateBusinessContext(rawContext = {}, mode = 'STRICT_PRODUCTION_MODE
   const assumptionRegistry = [];
   const entity = rawContext.entity || {};
   const scale = rawContext.scale || {};
+
+  const inputIssues = [];
+  ['annualRevenue', 'monthlyOpEx', 'employeeCount'].forEach((field) => {
+    const fieldValue = scale[field];
+    if (fieldValue === undefined || fieldValue === null) return;
+    const numericValue = Number(fieldValue);
+    if (!Number.isFinite(numericValue)) {
+      inputIssues.push({ field: `scale.${field}`, issue: 'INVALID_NUMERIC_VALUE', received: fieldValue });
+    } else if (numericValue < 0) {
+      inputIssues.push({ field: `scale.${field}`, issue: 'NEGATIVE_VALUE_OUT_OF_RANGE', received: fieldValue });
+    }
+  });
 
   if (!entity.type) {
     missingParameters.push('entity.type');
@@ -116,19 +147,30 @@ function validateBusinessContext(rawContext = {}, mode = 'STRICT_PRODUCTION_MODE
   const canonicalContext = createDefaultBusinessContext(rawContext, mode);
   const conflictCheck = detectContextConflicts(canonicalContext);
 
-  let contextStatus = isComplete ? 'COMPLETE' : (mode === 'STRICT_PRODUCTION_MODE' ? 'INSUFFICIENT_CONTEXT' : 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
-  if (conflictCheck.hasConflicts) {
+  let contextStatus;
+  if (inputIssues.length > 0) {
+    contextStatus = 'INVALID_INPUT';
+  } else if (conflictCheck.hasConflicts) {
     contextStatus = 'CONTEXT_CONFLICT';
+  } else if (isComplete && conflictCheck.hasWarnings) {
+    contextStatus = 'CONTEXT_WARNING';
+  } else if (isComplete) {
+    contextStatus = 'COMPLETE';
+  } else {
+    contextStatus = mode === 'STRICT_PRODUCTION_MODE' ? 'INSUFFICIENT_CONTEXT' : 'DEMO_CONTEXT_WITH_ASSUMPTIONS';
   }
 
   return {
-    contextStatus, // COMPLETE | INSUFFICIENT_CONTEXT | DEMO_CONTEXT_WITH_ASSUMPTIONS | CONTEXT_CONFLICT
-    isComplete: isComplete && !conflictCheck.hasConflicts,
+    contextStatus, // INVALID_INPUT | COMPLETE | CONTEXT_WARNING | CONTEXT_CONFLICT | INSUFFICIENT_CONTEXT | DEMO_CONTEXT_WITH_ASSUMPTIONS
+    isComplete: isComplete && !conflictCheck.hasConflicts && inputIssues.length === 0,
     executionMode: mode,
     missingParameters,
     assumptionRegistry,
+    inputIssues,
     hasConflicts: conflictCheck.hasConflicts,
     conflicts: conflictCheck.conflicts,
+    hasWarnings: conflictCheck.hasWarnings,
+    warnings: conflictCheck.warnings,
     canonicalContext
   };
 }
