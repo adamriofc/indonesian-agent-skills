@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [4.2.0] - 2026-08-10
+
+### Refined & Hardened
+- **Multi-Factor Statutory Conflict Resolution System (`engines/conflict-resolution.js`)**: Refactored statutory conflict resolution to implement the 4 Principles of Indonesian Jurisprudence:
+  1. `STATUTORY_HIERARCHY_PASAL_7` (Pasal 7 UU No. 12/2011: UUD 1945 > TAP MPR > UU/Perpu > PP > Perpres > Perda).
+  2. `DELEGATED_AUTHORITY_PASAL_8` (Pasal 8 UU No. 12/2011: Permen / SE bound by explicit statutory mandate).
+  3. `LEX_SPECIALIS_DEROGAT_LEGI_GENERALI` (Specific subject-matter rule overrides general rule).
+  4. `LEX_POSTERIORI_DEROGAT_LEGI_PRIORI` (Newer rule overrides older rule of equal rank and scope).
+- **Shared Business Archetype Contract Engine (`engines/business-archetype-contract.js`)**: Added canonical archetype contract engine (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`) mapping units of analysis, inventory characteristics, and value chain focus.
+- **Failure Taxonomy Expansion (`engines/failure-taxonomy.js`)**: Expanded failure taxonomy codes with `CONTEXT_CONFLICT` and `EVIDENCE_INSUFFICIENT`.
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `4.2.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [4.1.0] - 2026-08-10
 
 ### Refined & Hardened

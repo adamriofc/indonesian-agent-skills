@@ -1,69 +1,119 @@
 /**
- * Indonesian Legal Hierarchy & Statutory Conflict Resolution Engine
- * Implements the official statutory hierarchy under UU No. 12/2011 jo. UU No. 13/2022:
- * UUD 1945 > UU / Perpu > PP > Perpres > Perda > Permen / Surat Edaran (SE)
- * Applies the Lex Superior Derogat Legi Inferiori & Lex Posteriori Derogat Legi Priori principles.
+ * Multi-Factor Indonesian Statutory Conflict Resolution Engine
+ * Implements the legal hierarchy under Pasal 7 & Pasal 8 UU No. 12/2011 jo. UU No. 13/2022.
+ * Evaluates 4 Statutory Legal Principles:
+ *  1. Statutory Hierarchy (Pasal 7: UUD > TAP MPR > UU/Perpu > PP > Perpres > Perda)
+ *  2. Delegated Authority & Ministerial Scope (Pasal 8: Permen / SE bound by statutory mandate)
+ *  3. Lex Specialis Derogat Legi Generali (Specific subject-matter rule overrides general rule)
+ *  4. Lex Posterior Derogat Legi Priori (Newer rule overrides older rule of equal rank and scope)
+ *
+ * Status Output: RESOLVED | CONDITIONAL | UNRESOLVED_REQUIRES_LEGAL_COUNSEL
  */
 
-const LEGAL_HIERARCHY_RANK = {
+const PASAL_7_FORMAL_HIERARCHY = {
   UUD1945: 7,
-  UU: 6,
-  PERPU: 6,
-  PP: 5,
-  PERPRES: 4,
-  PERDA: 3,
-  PERMEN: 2,
-  SURAT_EDARAN: 1
+  TAP_MPR: 6,
+  UU: 5,
+  PERPU: 5,
+  PP: 4,
+  PERPRES: 3,
+  PERDA_PROVINSI: 2,
+  PERDA_KABUPATEN: 1
 };
 
-function resolveStatutoryConflict({
-  ruleA = { id: 'PP35-2021', statuteType: 'PP', hierarchyRank: 5, year: 2021, title: 'PP 35/2021 tentang PKWT & PHK' },
-  ruleB = { id: 'PERMEN-06-2016', statuteType: 'PERMEN', hierarchyRank: 2, year: 2016, title: 'Permenaker 6/2016 tentang THR' }
-}) {
-  const rankA = LEGAL_HIERARCHY_RANK[(ruleA.statuteType || '').toUpperCase()] || ruleA.hierarchyRank || 1;
-  const rankB = LEGAL_HIERARCHY_RANK[(ruleB.statuteType || '').toUpperCase()] || ruleB.hierarchyRank || 1;
+const PASAL_8_DELEGATED_REGULATIONS = ['PERMEN', 'PERATURAN_LEMBAGA', 'SURAT_EDARAN'];
 
+function resolveStatutoryConflict({
+  ruleA = { id: 'PP35-2021', statuteType: 'PP', year: 2021, title: 'PP 35/2021 tentang PKWT & PHK', isSpecialRule: false },
+  ruleB = { id: 'PERMEN-06-2016', statuteType: 'PERMEN', year: 2016, title: 'Permenaker 6/2016 tentang THR', isSpecialRule: true }
+}) {
+  const typeA = (ruleA.statuteType || '').toUpperCase().trim();
+  const typeB = (ruleB.statuteType || '').toUpperCase().trim();
+
+  const rankA = PASAL_7_FORMAL_HIERARCHY[typeA] || (PASAL_8_DELEGATED_REGULATIONS.includes(typeA) ? 1.5 : 1);
+  const rankB = PASAL_7_FORMAL_HIERARCHY[typeB] || (PASAL_8_DELEGATED_REGULATIONS.includes(typeB) ? 1.5 : 1);
+
+  const isSpecialA = Boolean(ruleA.isSpecialRule);
+  const isSpecialB = Boolean(ruleB.isSpecialRule);
+
+  let status = 'RESOLVED';
   let prevailingRule = ruleA;
   let supersededRule = ruleB;
   let resolutionPrinciple = 'LEX_SUPERIOR_DEROGAT_LEGI_INFERIORI';
   let reasoning = '';
+  const principlesApplied = [];
 
-  if (rankA > rankB) {
+  // 1. Lex Specialis check (Specific subject matter overrides general matter if rank is comparable or delegated)
+  if (isSpecialA && !isSpecialB && rankA >= rankB) {
+    status = 'RESOLVED';
     prevailingRule = ruleA;
     supersededRule = ruleB;
-    reasoning = `Statute '${ruleA.title}' (${ruleA.statuteType}) outranks '${ruleB.title}' (${ruleB.statuteType}) under UU No. 12/2011 statutory hierarchy.`;
-  } else if (rankB > rankA) {
+    resolutionPrinciple = 'LEX_SPECIALIS_DEROGAT_LEGI_GENERALI';
+    principlesApplied.push('LEX_SPECIALIS_DEROGAT_LEGI_GENERALI');
+    reasoning = `Rule '${ruleA.title}' is a specific subject-matter regulation (Lex Specialis) and prevails over general rule '${ruleB.title}'.`;
+  } else if (isSpecialB && !isSpecialA && rankB >= rankA) {
+    status = 'RESOLVED';
     prevailingRule = ruleB;
     supersededRule = ruleA;
-    reasoning = `Statute '${ruleB.title}' (${ruleB.statuteType}) outranks '${ruleA.title}' (${ruleA.statuteType}) under UU No. 12/2011 statutory hierarchy.`;
-  } else {
-    // Equal rank: apply Lex Posteriori (newer year prevails)
+    resolutionPrinciple = 'LEX_SPECIALIS_DEROGAT_LEGI_GENERALI';
+    principlesApplied.push('LEX_SPECIALIS_DEROGAT_LEGI_GENERALI');
+    reasoning = `Rule '${ruleB.title}' is a specific subject-matter regulation (Lex Specialis) and prevails over general rule '${ruleA.title}'.`;
+  }
+  // 2. Formal Hierarchy (Pasal 7 UU 12/2011)
+  else if (rankA !== rankB) {
+    principlesApplied.push('LEX_SUPERIOR_DEROGAT_LEGI_INFERIORI');
+    if (rankA > rankB) {
+      status = 'RESOLVED';
+      prevailingRule = ruleA;
+      supersededRule = ruleB;
+      reasoning = `Statute '${ruleA.title}' (${ruleA.statuteType}) outranks '${ruleB.title}' (${ruleB.statuteType}) under Pasal 7 UU No. 12/2011 hierarchy.`;
+    } else {
+      status = 'RESOLVED';
+      prevailingRule = ruleB;
+      supersededRule = ruleA;
+      reasoning = `Statute '${ruleB.title}' (${ruleB.statuteType}) outranks '${ruleA.title}' (${ruleA.statuteType}) under Pasal 7 UU No. 12/2011 hierarchy.`;
+    }
+  }
+  // 3. Lex Posterior (Same rank and equal subject matter scope)
+  else {
     const yearA = Number(ruleA.year) || 0;
     const yearB = Number(ruleB.year) || 0;
     resolutionPrinciple = 'LEX_POSTERIORI_DEROGAT_LEGI_PRIORI';
+    principlesApplied.push('LEX_POSTERIORI_DEROGAT_LEGI_PRIORI');
 
-    if (yearA >= yearB) {
-      prevailingRule = ruleA;
-      supersededRule = ruleB;
-      reasoning = `Statute '${ruleA.title}' (${ruleA.year}) supersedes older regulation '${ruleB.title}' (${ruleB.year}) at equal rank.`;
+    if (yearA !== yearB) {
+      status = 'RESOLVED';
+      if (yearA > yearB) {
+        prevailingRule = ruleA;
+        supersededRule = ruleB;
+        reasoning = `Newer statute '${ruleA.title}' (${ruleA.year}) supersedes older rule '${ruleB.title}' (${ruleB.year}) at equal rank under Lex Posterior.`;
+      } else {
+        prevailingRule = ruleB;
+        supersededRule = ruleA;
+        reasoning = `Newer statute '${ruleB.title}' (${ruleB.year}) supersedes older rule '${ruleA.title}' (${ruleA.year}) at equal rank under Lex Posterior.`;
+      }
     } else {
-      prevailingRule = ruleB;
-      supersededRule = ruleA;
-      reasoning = `Statute '${ruleB.title}' (${ruleB.year}) supersedes older regulation '${ruleA.title}' (${ruleA.year}) at equal rank.`;
+      // Ambiguous: Equal rank, equal year, equal specificity
+      status = 'CONDITIONAL';
+      resolutionPrinciple = 'UNRESOLVED_REQUIRES_LEGAL_COUNSEL';
+      reasoning = `Conflicting rules '${ruleA.title}' and '${ruleB.title}' share identical rank (${ruleA.statuteType}) and publication year (${ruleA.year}). Resolution requires formal legal opinion by qualified advocate.`;
     }
   }
 
   return {
+    status, // RESOLVED | CONDITIONAL | UNRESOLVED_REQUIRES_LEGAL_COUNSEL
     conflictDetected: true,
     resolutionPrinciple,
+    principlesApplied,
     prevailingRule,
     supersededRule,
     reasoning,
-    statutoryFramework: "UU No. 12 Tahun 2011 jo. UU No. 13 Tahun 2022 (Pembentukan Peraturan Perundang-Undangan)"
+    statutoryFramework: "Pasal 7 & Pasal 8 UU No. 12 Tahun 2011 jo. UU No. 13 Tahun 2022 (Pembentukan Peraturan Perundang-Undangan)"
   };
 }
 
 module.exports = {
-  LEGAL_HIERARCHY_RANK,
+  PASAL_7_FORMAL_HIERARCHY,
+  PASAL_8_DELEGATED_REGULATIONS,
   resolveStatutoryConflict
 };

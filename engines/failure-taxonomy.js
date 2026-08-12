@@ -7,7 +7,10 @@
 const FAILURE_TAXONOMY_CODES = {
   INVALID_INPUT: 'Input parameter format or numeric range is invalid.',
   MISSING_PARAMETER: 'Mandatory context parameter is missing in strict production mode.',
+  INSUFFICIENT_CONTEXT: 'Context is incomplete to produce an auditable decision without explicit assumptions.',
   AMBIGUOUS_CONTEXT: 'Context contains conflicting or ambiguous business identity fields.',
+  CONTEXT_CONFLICT: 'Conflict detected between KBLI 2020 code and user-stated business activity.',
+  EVIDENCE_INSUFFICIENT: 'Empirical market or financial evidence is insufficient to execute framework scoring.',
   OUTDATED_RULESET: 'Ruleset version has been superseded by a newer statutory regulation.',
   CONFLICTING_RULE: 'Conflicting statutory regulations detected across authority levels.',
   UNSUPPORTED_CASE: 'Scenario falls outside statutory scope or engine boundary constraints.',
