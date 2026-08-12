@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [4.1.0] - 2026-08-10
+
+### Refined & Hardened
+- **Strict Production Mode & DEMO Mode (`engines/context-contract.js`)**: Enforced explicit operational context separation (`DEMO_MODE` for default simulation vs `STRICT_PRODUCTION_MODE` returning `INSUFFICIENT_CONTEXT` with `missingParameters` and explicit `assumptionRegistry`).
+- **Indonesian Legal Hierarchy & Statutory Conflict Resolution Engine (`engines/conflict-resolution.js`)**: Implemented statutory hierarchy under UU No. 12/2011 jo. UU No. 13/2022 (*Lex Superior Derogat Legi Inferiori* & *Lex Posteriori Derogat Legi Priori*).
+- **Standard Failure Taxonomy Engine (`engines/failure-taxonomy.js`)**: Classified execution errors into standard audit categories (`INVALID_INPUT`, `MISSING_PARAMETER`, `INSUFFICIENT_CONTEXT`, `AMBIGUOUS_CONTEXT`, `OUTDATED_RULESET`, `CONFLICTING_RULE`, `UNSUPPORTED_CASE`, `ENGINE_ERROR`).
+- **4-State Strategic Framework Applicability Engine (`engines/framework-applicability.js`)**: Mapped framework applicability across 4 states (`NATIVE`, `ADAPTABLE`, `CONDITIONAL`, `NOT_RECOMMENDED`) and archetype units of analysis (`PHYSICAL_SKU`, `SERVICE_LINE_PRACTICE`, `CAPACITY_SLOT_OR_PROPERTY`, `GMV_TAKE_RATE_CHANNEL`).
+- **120-Case Multi-Category Benchmark Suite**: Partitioned benchmark suite into `tests/benchmarks/live/`, `tests/benchmarks/fixture/`, and `tests/benchmarks/synthetic/` (50 fixture cases + 70 synthetic/authored cases across 25 benchmark domains at **100.00% pass rate**).
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `4.1.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [4.0.0] - 2026-08-10
 
 ### Major System Maturity Release

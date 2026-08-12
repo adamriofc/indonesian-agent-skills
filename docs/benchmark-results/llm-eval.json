@@ -2,7 +2,7 @@
   "metadata": {
     "evaluatedModel": "Gemini 3.6 Flash",
     "evaluatorEngine": "OpenCode / Live Empirical LLM Evaluation Harness",
-    "evaluatedAt": "2026-08-11",
+    "evaluatedAt": "2026-08-12",
     "sampleSize": 25,
     "temperature": 0,
     "executionMode": "OFFLINE_DETERMINISTIC_VERIFICATION_MODE",
