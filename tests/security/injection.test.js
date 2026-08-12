@@ -6,7 +6,7 @@ const assert = require('assert');
 const SENSITIVE_INPUT_SKILLS = [
   'legal-id/skills/contract-reviewer/SKILL.md',
   'legal-id/skills/pdp-compliance/SKILL.md',
-  'ecommerce-id/skills/analisis-kompetitor-marketplace/SKILL.md',
+  'marketing-id/skills/analisis-kompetitor-marketplace/SKILL.md',
   'hr-id/skills/phk-calculator/SKILL.md'
 ];
 

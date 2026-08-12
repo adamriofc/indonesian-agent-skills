@@ -153,11 +153,11 @@ cp -r .agents/skills/* .cursor/skills/
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. The 7 plugins and 81 skills activate automatically.
+4. The 6 plugins and 81 skills activate automatically.
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (81 Skills Across 7 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (81 Skills Across 6 Plugins)
 
 All skills and computational engines are mapped in the **Machine-Readable Registry (`registry/index.json`)** with defined *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
@@ -204,30 +204,7 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `pkwtt-checker`: Audits permanent employment (PKWTT) contracts, probation rules (max 3 months), and automatic conversion triggers.
 * `struktur-skala-upah`: Builds statutory Wage Structure and Scale frameworks per Permenaker 1/2017.
 
-### 4. `ecommerce-id`: Marketplace Operations & SEO (10 Skills)
-* `deskripsi-produk-seo`: Structural product copy optimized for Shopee & Tokopedia search.
-* `cs-komplain-handler`: Customer service protocols for negative reviews and damaged packages.
-* `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.
-* `shopee-live-script`: Retention and flash-sale hosting scripts for live streaming.
-* `tokopedia-seo-optimizer`: Algorithmic title formula generator (`[Product] + [Brand] + [Spec] + [Keywords]`).
-* `buyer-negotiator`: Grosir wholesale B2B trade terms negotiation guidelines.
-* `margin-pricing-calculator`: Computes net seller payouts after Shopee/Tokopedia/TikTok Shop admin fees.
-* `klaim-logistik-retur`: Courier insurance claim SOPs and damage report templates.
-* `tiktok-shop-affiliate`: Affiliate campaign commission structures and creator outreach briefs.
-* `shopee-video-creator`: Short promotional video scripts and yellow-basket product tagging.
-
-### 5. `content-lokal-id`: Local Copywriting (9 Skills)
-* `whatsapp-broadcast`: High-conversion anti-spam WhatsApp Business copy.
-* `linkedin-x-thread-id`: B2B executive narrative storytelling formats.
-* `script-reels-tiktok`: Short-video scripts with visual directions and audio overlays.
-* `lokalisasi-slang-indonesia`: Adapts formal copy into natural Indonesian business casual or colloquial tone.
-* `press-release-id`: Indonesian 5W+1H journalistic press release template.
-* `instagram-reels-carousel`: Visual hooks for IG Reels and multi-slide Carousel post scripts.
-* `youtube-shorts-script`: Retention scripts for 0-60s Shorts and long-form video outlines.
-* `kol-brief-contract`: KOL/Influencer campaign briefs, SOWs, and content usage rights contracts.
-* `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
-
-### 6. `finance-id`: Business Finance & Accounting (15 Skills)
+### 4. `finance-id`: Business Finance & Accounting (15 Skills)
 * `accounting-basics`: Double-entry bookkeeping, journals, and accrual vs cash basis.
 * `financial-statements`: 3-statement structure and PSAK 1 presentation principles.
 * `cash-flow-analysis`: OCF/ICF/FCF analysis and cash runway.
@@ -244,7 +221,28 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `business-scenario`: Maps business profile across the 8 Stages of the Indonesian Business Lifecycle for an integrated compliance roadmap.
 * `decision-engine`: Evaluates financial & operational metrics to generate deterministic, prioritized business decision recommendations.
 
-### 7. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
+### 5. `marketing-id`: Marketing, Growth & Commerce (19 Skills)
+* `deskripsi-produk-seo`: Structural product copy optimized for Shopee & Tokopedia search.
+* `cs-komplain-handler`: Customer service protocols for negative reviews and damaged packages.
+* `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.
+* `shopee-live-script`: Retention and flash-sale hosting scripts for live streaming.
+* `tokopedia-seo-optimizer`: Algorithmic title formula generator (`[Product] + [Brand] + [Spec] + [Keywords]`).
+* `buyer-negotiator`: Grosir wholesale B2B trade terms negotiation guidelines.
+* `margin-pricing-calculator`: Computes net seller payouts after Shopee/Tokopedia/TikTok Shop admin fees.
+* `klaim-logistik-retur`: Courier insurance claim SOPs and damage report templates.
+* `tiktok-shop-affiliate`: Affiliate campaign commission structures and creator outreach briefs.
+* `shopee-video-creator`: Short promotional video scripts and yellow-basket product tagging.
+* `whatsapp-broadcast`: High-conversion anti-spam WhatsApp Business copy.
+* `linkedin-x-thread-id`: B2B executive narrative storytelling formats.
+* `script-reels-tiktok`: Short-video scripts with visual directions and audio overlays.
+* `lokalisasi-slang-indonesia`: Adapts formal copy into natural Indonesian business casual or colloquial tone.
+* `press-release-id`: Indonesian 5W+1H journalistic press release template.
+* `instagram-reels-carousel`: Visual hooks for IG Reels and multi-slide Carousel post scripts.
+* `youtube-shorts-script`: Retention scripts for 0-60s Shorts and long-form video outlines.
+* `kol-brief-contract`: KOL/Influencer campaign briefs, SOWs, and content usage rights contracts.
+* `gmb-local-seo`: Google Business Profile (GMB) map optimization and local search copy.
+
+### 6. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
 * `porter-three-tests`: Evaluates diversification and M&A strategies using Porter's 3 Tests (Attractiveness, Cost of Entry, Better-Off).
 * `porter-five-forces`: Analyzes industry structural attractiveness across Supplier, Buyer, Substitutes, Entrants, and Rivalry.
 * `bcg-matrix`: Portfolio matrix evaluation (Star, Cash Cow, Question Mark, Dog) with deterministic engine scoring.

@@ -1,35 +1,35 @@
 {
-  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "$schema": "https://json.schemastore.org/claude-plugin-marketplace.json",
   "name": "indonesian-business-agent-skills",
+  "description": "Production-oriented compliance, tax, legal, and operational domain-intelligence infrastructure for AI agents operating in the Indonesian business ecosystem.",
   "owner": {
-    "name": "adamriofc",
-    "url": "https://github.com/adamriofc"
+    "name": "adamriofc"
   },
-  "description": "Open-source Indonesian business intelligence, regulatory, tax, legal, HR, finance, and commerce skills for AI agents.",
   "plugins": [
     {
-      "name": "legal-id",
-      "source": "./legal-id"
+      "name": "tax-payroll-id",
+      "source": "./tax-payroll-id",
+      "description": "Production-grade Indonesian tax & payroll engine: TER PPh 21 (PP 58/2023), BPJS splits, e-Faktur PPN/PPnBM validation, and statutory THR."
     },
     {
-      "name": "tax-payroll-id",
-      "source": "./tax-payroll-id"
+      "name": "legal-id",
+      "source": "./legal-id",
+      "description": "Production-grade Indonesian legal compliance, contract auditing (with Risk Scoring 0-100), SPK drafting, and UU PDP audits."
     },
     {
       "name": "hr-id",
-      "source": "./hr-id"
+      "source": "./hr-id",
+      "description": "Production-grade Indonesian HR administration, compliant SP warning letters, SOP generation, BPJS SIPP portal setup, and severance calculations per PP 35/2021."
+    },
+    {
+      "name": "marketing-id",
+      "source": "./marketing-id",
+      "description": "Production-grade Indonesian Marketing, Growth & Commerce intelligence: marketplace SEO, copywriting, live streaming, B2B negotiations, and social media storytelling."
     },
     {
       "name": "finance-id",
-      "source": "./finance-id"
-    },
-    {
-      "name": "ecommerce-id",
-      "source": "./ecommerce-id"
-    },
-    {
-      "name": "content-lokal-id",
-      "source": "./content-lokal-id"
+      "source": "./finance-id",
+      "description": "Indonesian business finance & accounting: statements, budgeting, ratio analysis, unit economics, feasibility, and capital budgeting powered by deterministic engines."
     },
     {
       "name": "strategic-id",

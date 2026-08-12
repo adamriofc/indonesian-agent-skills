@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [5.0.0] - 2026-08-12
+
+### Major Architectural Consolidation
+- **6 Canonical Business Operating Intelligence Stack**: Refactored domain architecture by consolidating channel-level plugins (`ecommerce-id` 10 skills & `content-lokal-id` 9 skills) into a single unified business capability plugin: **`marketing-id`** (*Indonesian Marketing, Growth & Commerce* — 19 Skills).
+- **Consolidated Business Domain Hierarchy**:
+  1. `legal-id`: Commercial Law & Compliance (9 Skills)
+  2. `tax-payroll-id`: Tax Engineering & Payroll (19 Skills)
+  3. `hr-id`: Labor & Employment Compliance (9 Skills)
+  4. `finance-id`: Business Finance & Accounting (15 Skills)
+  5. `marketing-id`: Marketing, Growth & Commerce (19 Skills)
+  6. `strategic-id`: Strategic Management & Corporate Strategy (10 Skills)
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `5.0.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md` (verifying 6 plugins & 81 skills).
+
 ## [4.2.0] - 2026-08-10
 
 ### Refined & Hardened
