@@ -5,6 +5,11 @@ on:
     branches: [ master, main ]
     tags: [ 'v*' ]
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 jobs:
   full-test-matrix:
     name: Full Test Suite (Node ${{ matrix.node-version }})
