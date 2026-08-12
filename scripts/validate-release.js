@@ -174,7 +174,7 @@ function validateRelease() {
   const requiredFiles = [
     'README.md', 'LICENSE', 'CHANGELOG.md', 'SECURITY.md', 'PROVENANCE.md',
     'SKILL_PROTOCOL.md', 'REGULATORY_CHANGELOG.md', 'PRODUCTION_READINESS.md',
-    'docs/RELEASE.md', 'docs/METRICS.md', 'canonical-metadata.json'
+    'docs/RELEASE.md', 'docs/METRICS.md', 'docs/OPERATIONAL_RUNBOOK.md', 'canonical-metadata.json'
   ];
   let missingFiles = false;
   requiredFiles.forEach(file => {

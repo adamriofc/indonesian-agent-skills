@@ -3,7 +3,7 @@
 Official measurement definitions and exact metrics for `indonesian-business-agent-skills`.
 
 > **Single Source of Truth File**: [`canonical-metadata.json`](../canonical-metadata.json)  
-> **Last Generated**: 2026-08-12T10:13:31.585Z  
+> **Last Generated**: 2026-08-12T10:16:51.519Z  
 > **Generator Command**: `npm run generate:metadata`
 
 ---
@@ -12,7 +12,7 @@ Official measurement definitions and exact metrics for `indonesian-business-agen
 
 | Metric Name | Value | Exact Definition & Measurement Source |
 |---|---|---|
-| **Repository Version** | `v6.6.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
+| **Repository Version** | `v6.7.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
 | **Canonical Plugins** | `6` | Plugin directories containing `.claude-plugin/plugin.json` (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `87` | Total `SKILL.md` files registered across the 6 canonical plugins |
 | **Deterministic Engines** | `38` | Pure Node.js calculation & regulatory diff engine modules in `engines/*.js` |
@@ -36,6 +36,22 @@ To eliminate documentation drift and ambiguity:
 - **Node.js 20**: Minimum Supported Version
 - **Node.js 22**: LTS (Recommended)
 - **Node.js 24**: Current Tested Version
+
+---
+
+## 4. Repository Documentation Architecture Tree
+
+```text
+README.md (What / Why / Overview)
+  ├── ARCHITECTURE.md (How it works & engine isolation)
+  ├── DESIGN_PRINCIPLES.md (Why design choices were made)
+  ├── BENCHMARK.md (How measurement works & 3-Tier taxonomy)
+  ├── PROVENANCE.md (Where statutory rules come from)
+  ├── PRODUCTION_READINESS.md (Readiness levels & human review matrix)
+  ├── RELEASE.md (How releases are verified & 13-check gate)
+  ├── METRICS.md (Single source of truth metrics & definitions)
+  └── OPERATIONAL_RUNBOOK.md (Incident handling & emergency procedures)
+```
 
 ---
 

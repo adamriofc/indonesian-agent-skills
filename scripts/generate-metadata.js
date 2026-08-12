@@ -237,6 +237,22 @@ To eliminate documentation drift and ambiguity:
 
 ---
 
+## 4. Repository Documentation Architecture Tree
+
+\`\`\`text
+README.md (What / Why / Overview)
+  ├── ARCHITECTURE.md (How it works & engine isolation)
+  ├── DESIGN_PRINCIPLES.md (Why design choices were made)
+  ├── BENCHMARK.md (How measurement works & 3-Tier taxonomy)
+  ├── PROVENANCE.md (Where statutory rules come from)
+  ├── PRODUCTION_READINESS.md (Readiness levels & human review matrix)
+  ├── RELEASE.md (How releases are verified & 13-check gate)
+  ├── METRICS.md (Single source of truth metrics & definitions)
+  └── OPERATIONAL_RUNBOOK.md (Incident handling & emergency procedures)
+\`\`\`
+
+---
+
 *This document is automatically updated by \`npm run generate:metadata\`. Do not edit manual figures here.*
 `;
 

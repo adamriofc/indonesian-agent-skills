@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.7.0] - 2026-08-12
+
+### Added & Hardened (Production Hardening & Feature Freeze Release — Audit Roadmap Phase 3)
+- **Operational Runbook (`docs/OPERATIONAL_RUNBOOK.md`)**: Comprehensive emergency & maintenance SOPs covering statutory ruleset updates, SHA256 mismatches, benchmark throughput regressions, context conflicts, input errors, LLM timeouts, and model hallucinations.
+- **Documentation Architecture Tree**: Formalized 8-file documentation hierarchy in `docs/METRICS.md` and `README.md` (README -> ARCHITECTURE -> DESIGN_PRINCIPLES -> BENCHMARK -> PROVENANCE -> PRODUCTION_READINESS -> RELEASE -> METRICS -> OPERATIONAL_RUNBOOK).
+- **High-Risk Human-Review Matrix & Readiness Level L3**: Enforced Level L3 Production Decision-Support readiness controls and explicit human advocate/CPA review policies in `PRODUCTION_READINESS.md`.
+- **Deterministic Fallback & Isolation Safeguards**: Formally locked pure Node.js computational isolation, zero external API data leakage, and `INVALID_INPUT` fail-closed error boundaries.
+- **FEATURE FREEZE ANNOUNCEMENT**: Official feature freeze entered. Future updates will strictly maintain deterministic engine accuracy, statutory ruleset freshness, and release engineering integrity without adding redundant plugins or skills.
+
 ## [6.6.0] - 2026-08-12
 
 ### Added & Hardened (Evaluation Release — Audit Roadmap Phase 2)
