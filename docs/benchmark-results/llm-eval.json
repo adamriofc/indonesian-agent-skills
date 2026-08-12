@@ -1,12 +1,12 @@
 {
   "metadata": {
-    "evaluatedModel": "Gemini 3.6 Flash",
+    "evaluatedModel": "gpt-4o-mini",
     "evaluatorEngine": "OpenCode / Live Empirical LLM Evaluation Harness",
     "evaluatedAt": "2026-08-12",
     "sampleSize": 25,
     "temperature": 0,
-    "executionMode": "OFFLINE_DETERMINISTIC_VERIFICATION_MODE",
-    "provenanceType": "EMPIRICAL_LIVE_MODEL_EVALUATION",
+    "executionMode": "OFFLINE_FIXTURE_VERIFICATION_MODE",
+    "provenanceType": "OFFLINE_FIXTURE_VERIFICATION",
     "skillPassRate": "96.00%",
     "vanillaPassRate": "40.00%"
   },

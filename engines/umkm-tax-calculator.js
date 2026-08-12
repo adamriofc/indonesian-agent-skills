@@ -36,8 +36,9 @@ function getRulesForDate(dateStr) {
 
 function calculateUmkmFinalTax(grossRevenueYtd, currentMonthRevenue, taxpayerType = 'individual', dateStr = null) {
   const activeDateStr = dateStr || new Date().toISOString().split('T')[0];
-  const ytdBefore = Math.max(0, Number(grossRevenueYtd) || 0);
-  const currentRevenue = Math.max(0, Number(currentMonthRevenue) || 0);
+  const { requireRupiah } = require('./production-contract');
+  const ytdBefore = requireRupiah(grossRevenueYtd, 'grossRevenueYtd');
+  const currentRevenue = requireRupiah(currentMonthRevenue, 'currentMonthRevenue');
   const typeLower = (taxpayerType || 'individual').toLowerCase().trim();
 
   const rules = getRulesForDate(activeDateStr);

@@ -1,0 +1,33 @@
+{
+  "description": "Performance throughput baseline for indonesian-business-agent-skills (measured on Node v26.7.0)",
+  "thresholdDegradationMaxPercent": 30,
+  "baselineOpsPerSec": {
+    "PPh 21 (TER PP 58/2023)": 10000,
+    "BPJS (Perpres 64/2020 + PP 45/2015)": 10000,
+    "PHK (PP 35/2021)": 15000,
+    "UMKM Final Tax (PP 55/2022 & PP 20/2026)": 15000,
+    "THR (Permenaker 6/2016)": 40000,
+    "PPh 23/26 (withholding & treaty)": 40000,
+    "PKWT Compensation (PP 35/2021)": 50000,
+    "PKWTT Audit & Conversion (PP 35/2021)": 20000,
+    "Regulatory Diff Engine": 4000,
+    "PPh 21 Gross-Up (PMK 66/2023)": 4000,
+    "PPh Badan 22% & Pasal 31E": 10000,
+    "Thin Cap & TP Adjustment (PMK 172/2023)": 4000,
+    "PPN 12% & PPnBM (UU HPP & PMK 131/2024)": 15000,
+    "Marketplace Fee & Margin": 20000,
+    "VC Term-Sheet Waterfall": 4000,
+    "Regulatory Impact Intelligence": 3000,
+    "Compliance Risk Engine": 5000,
+    "Business Scenario & Lifecycle Engine": 10000,
+    "Business Decision Engine": 5000,
+    "Strategic Framework Engine (BCG & GE)": 15000,
+    "Decision Analysis Engine (MCDA)": 4000,
+    "Scenario & Sensitivity Analysis Engine": 8000,
+    "Strategic Risk Scoring & Heatmap Engine": 5000,
+    "KBLI Context Router & Archetype Classifier": 15000,
+    "Market Sizing Engine (TAM/SAM/SOM)": 4000,
+    "Marketing Unit Economics & LTV:CAC Engine": 8000,
+    "Finance (8 deterministic engines)": 5000
+  }
+}

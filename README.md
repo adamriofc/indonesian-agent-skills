@@ -20,6 +20,19 @@
 
 ## 📌 Overview & Value Proposition
 
+<!-- GENERATED:STATS -->
+| Metric | Single Source of Truth Value | Measurement Scope |
+|---|---|---|
+| **Repository Version** | `v6.5.0` | SemVer release boundary |
+| **Canonical Plugins** | `6` | Active plugin packages (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
+| **Agent Skills** | `87` | Machine-readable `SKILL.md` capability packs |
+| **Deterministic Engines** | `38` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
+| **Golden Cases** | `94` | Static corpus cases across 27 benchmark domains |
+| **Benchmark Assertions** | `424` | Deterministic assertions in `tests/benchmarks/` |
+| **Total Test Assertions** | `438+` | Deepened matrix assertions across full `npm test` suite |
+| **Node.js Compatibility** | `20 / 22 / 24` | `20` (Minimum), `22` (LTS Recommended), `24` (Current Tested) |
+<!-- /GENERATED:STATS -->
+
 **Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **87 Agent Skills** with **38 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations

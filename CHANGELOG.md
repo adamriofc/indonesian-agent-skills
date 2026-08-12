@@ -2,6 +2,21 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.5.0] - 2026-08-12
+
+### Added & Hardened (Reliability Release — Audit Roadmap Phase 1)
+- **13-Check Automated Release Gate (`scripts/validate-release.js`)**: Implemented `npm run validate:release` checking SemVer version alignment, CHANGELOG entries, plugin/skill/engine counts, SHA256 ruleset hashes, dynamic schema validation, required files, git cleanliness, and benchmark artifact freshness.
+- **Single Source of Truth (SSOT) Metadata Engine (`scripts/generate-metadata.js`)**: Generates `canonical-metadata.json`, updates `README.md` `<!-- GENERATED:STATS -->` block, and produces `docs/METRICS.md` to eliminate documentation drift.
+- **Documentation SSOT Validator (`scripts/validate-docs.js`)**: Implemented `npm run validate:docs` to verify 0-drift across README, BENCHMARK, METRICS, CHANGELOG, and SKILL_PROTOCOL.
+- **2-Tier Strategic CI Pipeline (`.github/workflows/`)**: Split CI into `ci-pr.yml` (fast PR confidence) and `ci-release.yml` (full release matrix Node 20/22/24, dedicated security jobs with CodeQL & npm audit, package smoke test, and benchmark artifact retention).
+- **Package Smoke Test (`scripts/package-smoke-test.sh`)**: Added `npm run test:smoke` packing the tarball, installing in an isolated environment, and verifying module exports.
+- **Lightweight Performance Regression Gate (`scripts/perf-gate.js`)**: Compares execution throughput against `docs/benchmark-results/baseline.json` and warns on >30% degradation.
+- **Tier A Boundary, Invalid & Invariant Suite (`tests/benchmarks/boundary-edge.test.js`)**: Added 27 explicit tests covering bracket boundaries (`threshold-1`, `threshold`, `threshold+1`), invalid fail-closed inputs, and post-condition invariants.
+- **Tier B Adversarial Expansion**: Added 5 `ADVERSARIAL_CASE` entries to `tests/benchmarks/business-scenario-regression.test.js` (30 scenarios total).
+- **Production Contract & Error Model (`engines/production-contract.js`)**: High-risk engines (`pph21`, `bpjs`, `umkm`, `transfer-pricing`) now throw `TypeError` with `INVALID_INPUT` messages rather than silently coercing malformed inputs to `0` ("no fabricated answer" principle).
+- **Mutually Exclusive LLM Evaluation Provenance**: `scripts/llm-benchmark-eval.js` enforces mutually exclusive schema (`OFFLINE_FIXTURE_VERIFICATION_MODE` vs `LIVE_NETWORK_API_INVOCATION`) and removed default private tunnel URL.
+- **Production Governance Docs**: Added `PRODUCTION_READINESS.md` (Readiness Levels L0-L4, Human-Review Matrix, Fallback Policy), `docs/RELEASE.md`, and `docs/NODE_SUPPORT.md`.
+
 ## [6.4.1] - 2026-08-12
 
 ### Corrected & Hardened (Final Audit Feedback)

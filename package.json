@@ -1,6 +1,6 @@
 {
   "name": "indonesian-business-agent-skills",
-  "version": "6.4.1",
+  "version": "6.5.0",
   "description": "Production-oriented AI domain-intelligence infrastructure for Indonesian legal, tax, HR, finance, marketing, and strategic business reasoning.",
   "scripts": {
     "test": "node tests/schema/validator.test.js && node tests/units/engines.test.js && node tests/units/new-engines.test.js && node tests/units/strategic-engines.test.js && node tests/units/strategic-management-engines.test.js && node tests/units/marketing-engines.test.js && node tests/units/context-contract.test.js && node tests/units/finance-engines.test.js && node tests/units/pph21-matrix.test.js && node tests/units/phk-matrix.test.js && node tests/integration/workflow.test.js && node tests/benchmarks/fixture/nlp-extraction-fixture.test.js && node tests/benchmarks/synthetic/cross-domain-synthetic.test.js && node tests/benchmarks/business-scenario-regression.test.js && node tests/security/injection.test.js && node tests/security/adversarial.test.js && node tests/security/supply-chain.test.js",
@@ -8,8 +8,29 @@
     "test:units": "node tests/units/engines.test.js && node tests/units/new-engines.test.js && node tests/units/strategic-engines.test.js && node tests/units/strategic-management-engines.test.js && node tests/units/marketing-engines.test.js && node tests/units/pph21-matrix.test.js && node tests/units/phk-matrix.test.js && node tests/units/finance-engines.test.js",
     "test:integration": "node tests/integration/workflow.test.js",
     "test:security": "node tests/security/injection.test.js && node tests/security/adversarial.test.js && node tests/security/supply-chain.test.js",
-    "test:benchmarks": "node tests/benchmarks/fixture/nlp-extraction-fixture.test.js && node tests/benchmarks/synthetic/cross-domain-synthetic.test.js && node tests/benchmarks/business-scenario-regression.test.js && node scripts/llm-benchmark-eval.js"
+    "test:benchmarks": "node tests/benchmarks/fixture/nlp-extraction-fixture.test.js && node tests/benchmarks/synthetic/cross-domain-synthetic.test.js && node tests/benchmarks/business-scenario-regression.test.js && node scripts/llm-benchmark-eval.js",
+    "test:smoke": "bash scripts/package-smoke-test.sh",
+    "test:perf": "node scripts/perf-gate.js",
+    "generate:metadata": "node scripts/generate-metadata.js",
+    "validate:release": "node scripts/validate-release.js",
+    "validate:docs": "node scripts/validate-docs.js"
   },
   "author": "adamriofc",
-  "license": "MIT"
+  "license": "MIT",
+  "files": [
+    "engines",
+    "legal-id",
+    "tax-id",
+    "hr-id",
+    "finance-id",
+    "marketing-id",
+    "strategic-id",
+    "registry",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "SKILL_PROTOCOL.md",
+    "PROVENANCE.md",
+    "canonical-metadata.json"
+  ]
 }

@@ -48,20 +48,14 @@ function runAdversarialTests() {
   // ---------------------------------------------------------------
   console.log("  [1/5] Testing Parameter Hijacking & Input Type Sanitization...");
   const badWageInput = "10000000; process.exit(1);";
-  const bpjsRes = calculateBpjs(badWageInput, 'low', '2026-03-01');
-  assert.ok(!isNaN(bpjsRes.baseWage), "Failed to sanitize string injection payload");
-  assert.strictEqual(bpjsRes.baseWage, 0, "Malicious string payload successfully coerced to safe zero balance without code execution");
+  assert.throws(() => calculateBpjs(badWageInput, 'low', '2026-03-01'), /INVALID_INPUT/, "Malicious string payload threw explicit INVALID_INPUT without code execution");
 
   const negativeWage = -5000000;
-  const pphRes = calculatePPh21Monthly(negativeWage, 'TK/0', true, '2026-03-01');
-  assert.strictEqual(pphRes.grossSalary, 0, "Failed to coerce negative grossSalary to 0");
-  assert.strictEqual(pphRes.monthlyTaxWithheld, 0, "Withholding should be 0 for negative grossSalary");
+  assert.throws(() => calculatePPh21Monthly(negativeWage, 'TK/0', true, '2026-03-01'), /INVALID_INPUT/, "Negative grossSalary threw explicit INVALID_INPUT without code execution or fabricated zero");
 
-  // NaN / Infinity / absurd scale inputs must clamp to zero, never crash
-  const nanWageRes = calculatePPh21Monthly(NaN, 'TK/0', true, '2026-03-01');
-  assert.strictEqual(nanWageRes.grossSalary, 0);
-  const infWageRes = calculatePPh21Monthly(Infinity, 'TK/0', true, '2026-03-01');
-  assert.strictEqual(infWageRes.grossSalary, 0);
+  // NaN / Infinity inputs must throw explicit INVALID_INPUT, never crash or return fabricated zeros
+  assert.throws(() => calculatePPh21Monthly(NaN, 'TK/0', true, '2026-03-01'), /INVALID_INPUT/);
+  assert.throws(() => calculatePPh21Monthly(Infinity, 'TK/0', true, '2026-03-01'), /INVALID_INPUT/);
   const hugeWageRes = calculatePPh21Monthly(1e15, 'TK/1', true, '2026-03-01');
   assert.strictEqual(hugeWageRes.ptkpStatus, 'TK/1');
   assert.ok(hugeWageRes.monthlyTaxWithheld > 0);

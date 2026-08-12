@@ -41,8 +41,7 @@ Allows native one-click plugin discovery and installation within Claude Code:
     { "name": "tax-id", "source": "./tax-id" },
     { "name": "legal-id", "source": "./legal-id" },
     { "name": "hr-id", "source": "./hr-id" },
-    { "name": "ecommerce-id", "source": "./ecommerce-id" },
-    { "name": "content-lokal-id", "source": "./content-lokal-id" },
+    { "name": "marketing-id", "source": "./marketing-id" },
     { "name": "finance-id", "source": "./finance-id" },
     { "name": "strategic-id", "source": "./strategic-id" }
   ]

@@ -129,12 +129,10 @@ function runNewEnginesTests() {
   const umkmAlias = calculateUmkmFinalTax(100000000, 50000000, 'orang_pribadi', '2025-01-01');
   assert.strictEqual(umkmAlias.taxableRevenue, 0);
 
-  // Zero / negative revenue clamp
+  // Zero revenue is valid (0 tax); negative revenue throws explicit INVALID_INPUT
   const umkmZero = calculateUmkmFinalTax(0, 0, 'individual', '2025-01-01');
   assert.strictEqual(umkmZero.finalTaxDue, 0);
-  const umkmNegative = calculateUmkmFinalTax(-100, -50, 'individual', '2025-01-01');
-  assert.strictEqual(umkmNegative.grossRevenueYtdBefore, 0);
-  assert.strictEqual(umkmNegative.finalTaxDue, 0);
+  assert.throws(() => calculateUmkmFinalTax(-100, -50, 'individual', '2025-01-01'), /INVALID_INPUT/);
 
   // --- Current Ruleset: UMKM-2026 (Effective 2026-04-22 onwards under PP 20/2026) ---
   // 1. Individual (OP) remains eligible with Rp 500M exemption

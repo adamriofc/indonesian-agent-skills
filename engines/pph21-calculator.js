@@ -35,11 +35,12 @@ function parseMaxLimit(val) {
   return val === 'Infinity' ? Infinity : Number(val);
 }
 
-// Deterministic non-negative Rupiah clamp: rejects NaN/Infinity/negative inputs
-// so hostile or malformed values can never propagate into tax math.
+// Deterministic non-negative Rupiah guard: INVALID_INPUT boundary instead of silent
+// zero-coercion, so hostile or malformed values can never propagate into tax math
+// as fabricated numbers (Production Contract: no fabricated answer).
+const { requireRupiah } = require('./production-contract');
 function clampRupiah(val) {
-  const n = Number(val);
-  return Number.isFinite(n) ? Math.max(0, n) : 0;
+  return requireRupiah(val, 'rupiahInput');
 }
 
 

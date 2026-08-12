@@ -15,9 +15,10 @@ function auditTransferPricingThinCap({
   hasValidDgtForm = false,
   treatyRatePercent = null
 }) {
-  const debt = Math.max(0, Number(totalInterestBearingDebt) || 0);
-  const equity = Math.max(0, Number(totalEquity) || 0);
-  const totalInterest = Math.max(0, Number(annualInterestExpense) || 0);
+  const { requireRupiah } = require('./production-contract');
+  const debt = requireRupiah(totalInterestBearingDebt, 'totalInterestBearingDebt');
+  const equity = requireRupiah(totalEquity, 'totalEquity');
+  const totalInterest = requireRupiah(annualInterestExpense, 'annualInterestExpense');
 
   // 1. Calculate Actual Debt-to-Equity Ratio
   const actualDerRatio = equity > 0 ? Number((debt / equity).toFixed(4)) : (debt > 0 ? Infinity : 0);

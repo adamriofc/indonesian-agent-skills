@@ -1,0 +1,42 @@
+# Scope of Truth & Metadata Metrics (`docs/METRICS.md`)
+
+Official measurement definitions and exact metrics for `indonesian-business-agent-skills`.
+
+> **Single Source of Truth File**: [`canonical-metadata.json`](../canonical-metadata.json)  
+> **Last Generated**: 2026-08-12T10:05:10.325Z  
+> **Generator Command**: `npm run generate:metadata`
+
+---
+
+## 1. Measured Metrics Summary
+
+| Metric Name | Value | Exact Definition & Measurement Source |
+|---|---|---|
+| **Repository Version** | `v6.5.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
+| **Canonical Plugins** | `6` | Plugin directories containing `.claude-plugin/plugin.json` (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
+| **Agent Skills** | `87` | Total `SKILL.md` files registered across the 6 canonical plugins |
+| **Deterministic Engines** | `38` | Pure Node.js calculation & regulatory diff engine modules in `engines/*.js` |
+| **Golden Cases** | `94` | Static golden test cases across `27` domain files in `tests/golden/*.json` |
+| **Benchmark Domains** | `27` | Domain JSON files in `tests/golden/` evaluated by `scripts/benchmark.js` |
+| **Benchmark Assertions** | `424` | Explicit assertion statements in `tests/benchmarks/` (`business-scenario-regression.test.js`, `nlp-extraction-fixture.test.js`, `cross-domain-synthetic.test.js`) |
+| **Total Test Assertions** | `438+` | Total explicit `assert.*` calls across all test files executed by `npm test` |
+
+---
+
+## 2. Distinction Between Assertion Metrics
+
+To eliminate documentation drift and ambiguity:
+- **Benchmark Assertions (`424`)**: Refers strictly to explicit assertions within the 3 benchmark suites in `tests/benchmarks/`.
+- **Total Repository Test Assertions (`438+`)**: Refers to assertions executed across unit, matrix, integration, security, and benchmark suites in `npm test`.
+
+---
+
+## 3. Supported Node.js Runtimes
+
+- **Node.js 20**: Minimum Supported Version
+- **Node.js 22**: LTS (Recommended)
+- **Node.js 24**: Current Tested Version
+
+---
+
+*This document is automatically updated by `npm run generate:metadata`. Do not edit manual figures here.*

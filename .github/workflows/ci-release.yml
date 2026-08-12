@@ -1,0 +1,110 @@
+name: Full Release Engineering & Verification Pipeline
+
+on:
+  push:
+    branches: [ master, main ]
+    tags: [ 'v*' ]
+
+jobs:
+  full-test-matrix:
+    name: Full Test Suite (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22, 24]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Verify Ruleset Cryptographic Hashes
+        run: ./scripts/sha256sums.sh verify
+
+      - name: Run Full Test Suite
+        run: npm test
+
+  security-and-vulnerability-analysis:
+    name: Security & Vulnerability Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Dedicated Security Test Suite
+        run: npm run test:security
+
+      - name: Run npm Audit Security Scan
+        run: npm audit --audit-level=high || true
+
+      - name: Initialize CodeQL Analysis
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  package-smoke-test:
+    name: Package Smoke Installation Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Package Smoke Test
+        run: npm run test:smoke
+
+  release-gate-and-artifact-retention:
+    name: Release Gate & Benchmark Artifact Retention
+    runs-on: ubuntu-latest
+    needs: [full-test-matrix, security-and-vulnerability-analysis, package-smoke-test]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Execute Deterministic Benchmark Harness
+        run: node scripts/benchmark.js --json-report docs/benchmark-results/latest.json
+
+      - name: Run Performance Regression Gate
+        run: npm run test:perf
+
+      - name: Run Documentation SSOT Validator
+        run: npm run validate:docs
+
+      - name: Execute 13-Check Release Gate
+        run: npm run validate:release
+
+      - name: Upload Benchmark Results Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results-latest.json
+          path: docs/benchmark-results/latest.json
+          retention-days: 90

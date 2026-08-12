@@ -4,6 +4,7 @@ const { auditComplianceRisk } = require('../../engines/compliance-risk-engine');
 const { resolveBusinessArchetype } = require('../../engines/kbli-context-router');
 const { auditPkwttStatus } = require('../../engines/pkwtt-calculator');
 const { auditTransferPricingThinCap } = require('../../engines/transfer-pricing-engine');
+const { validateBusinessContext } = require('../../engines/context-contract');
 
 const REGIME_ENUM = ['UMKM_FINAL_TAX', 'GENERAL_CORPORATE_TAX'];
 const ASSESSMENT_ENUM = ['HEALTHY', 'MODERATE_RISK', 'HIGH_RISK'];
@@ -15,7 +16,7 @@ const EXPECTED_EVIDENCE_KEYS = ['totalLifecycleStages', 'maxAllowableDebt', 'non
 const DERIVED_KEYS = ['hasWageStructureMandate'];
 const AUXILIARY_KEYS = ['expectedPenaltyBreakdown'];
 
-const CASE_SOURCE_TAXONOMY = ['AUTHORED_SOURCE_CASE', 'PARAMETRIC_CASE'];
+const CASE_SOURCE_TAXONOMY = ['AUTHORED_SOURCE_CASE', 'PARAMETRIC_CASE', 'ADVERSARIAL_CASE'];
 
 // 25 curated regression scenarios: 5 authored (statutory-sourced, authored by the repository
 // maintainer on verifiable statutory basis) + 20 parameterized stress variants.
@@ -135,6 +136,52 @@ for (let i = 6; i <= 25; i++) {
   });
 }
 
+// 5 Adversarial Scenarios: KBLI conflicts, entity structure mismatches, malformed inputs, and missing parameters.
+const ADVERSARIAL_CASES = [
+  {
+    caseId: 'CASE-AD-001',
+    sourceType: 'ADVERSARIAL_CASE',
+    description: 'Adversarial case 1: KBLI 70209 (Consulting) with activity description Pabrik Manufaktur Makanan',
+    citations: ['KBLI 2020 Context Router — Soft Warning (CONTEXT_WARNING) on KBLI vs activity name mismatch'],
+    contextInput: { entity: { type: 'pt', kbli: '70209', activityName: 'Pabrik Manufaktur Makanan' }, scale: { annualRevenue: 1000000000, employeeCount: 10 } },
+    expectedContextStatus: 'CONTEXT_WARNING'
+  },
+  {
+    caseId: 'CASE-AD-002',
+    sourceType: 'ADVERSARIAL_CASE',
+    description: 'Adversarial case 2: Individual taxpayer specified alongside Perseroan Terbatas corporate title',
+    citations: ['Business Context Contract — Hard Conflict (CONTEXT_CONFLICT) on entity type vs PT title mismatch'],
+    contextInput: { entity: { type: 'individual', kbli: '47911', activityName: 'Perseroan Terbatas Ritel Digital' }, scale: { annualRevenue: 300000000, employeeCount: 2 } },
+    expectedContextStatus: 'CONTEXT_CONFLICT'
+  },
+  {
+    caseId: 'CASE-AD-003',
+    sourceType: 'ADVERSARIAL_CASE',
+    description: 'Adversarial case 3: Malformed string annualRevenue ("abc") in context scale',
+    citations: ['Business Context Contract & Fail-Closed Error Model — INVALID_INPUT status'],
+    contextInput: { entity: { type: 'pt', kbli: '70209' }, scale: { annualRevenue: 'abc', employeeCount: 10 } },
+    expectedContextStatus: 'INVALID_INPUT'
+  },
+  {
+    caseId: 'CASE-AD-004',
+    sourceType: 'ADVERSARIAL_CASE',
+    description: 'Adversarial case 4: Negative annualRevenue (-500,000,000) in context scale',
+    citations: ['Business Context Contract & Range Validation — INVALID_INPUT status'],
+    contextInput: { entity: { type: 'pt', kbli: '70209' }, scale: { annualRevenue: -500000000, employeeCount: 10 } },
+    expectedContextStatus: 'INVALID_INPUT'
+  },
+  {
+    caseId: 'CASE-AD-005',
+    sourceType: 'ADVERSARIAL_CASE',
+    description: 'Adversarial case 5: Missing mandatory entity.type parameter in strict production mode',
+    citations: ['Business Context Contract — INSUFFICIENT_CONTEXT status in strict production mode'],
+    contextInput: { scale: { annualRevenue: 1000000000 } },
+    expectedContextStatus: 'INSUFFICIENT_CONTEXT'
+  }
+];
+
+SCENARIOS.push(...ADVERSARIAL_CASES);
+
 function executeCase(c) {
   const outputs = {};
   if (c.companyProfile) {
@@ -144,6 +191,7 @@ function executeCase(c) {
   if (c.complianceInput) outputs.audit = auditComplianceRisk(c.complianceInput);
   if (c.contractInput) outputs.pkwtt = auditPkwttStatus(c.contractInput);
   if (c.thinCapInput) outputs.tp = auditTransferPricingThinCap(c.thinCapInput);
+  if (c.contextInput) outputs.context = validateBusinessContext(c.contextInput, 'STRICT_PRODUCTION_MODE');
   return outputs;
 }
 
@@ -175,7 +223,20 @@ const ALL_COMPARED_KEYS = EXPECTED_CLASSIFICATION_KEYS.concat(EXPECTED_EVIDENCE_
 // its own 100% assertion below — scores are never derived from a single case-level boolean.
 function evaluateDimensions(c, out) {
   const dims = {};
-  const expected = c.expectedEvaluation;
+  const expected = c.expectedEvaluation || {};
+
+  if (c.expectedContextStatus) {
+    const statusMatch = out.context && out.context.contextStatus === c.expectedContextStatus;
+    dims.contextCorrectness = statusMatch;
+    dims.evidenceGrounding = statusMatch;
+    dims.recommendationSpecificity = out.context && typeof out.context.contextStatus === 'string';
+    dims.actionability = out.context && (Array.isArray(out.context.missingParameters) || Array.isArray(out.context.inputIssues));
+    dims.financialFeasibility = out.context && Boolean(out.context.canonicalContext);
+    dims.constraintAwareness = statusMatch;
+    dims.crossDomainConsistency = out.context && out.context.executionMode === 'STRICT_PRODUCTION_MODE';
+    dims.hallucinationAbsence = statusMatch && Boolean(out.context.canonicalContext);
+    return dims;
+  }
 
   // 1. Context Correctness: every structural classification expectation matches the engine output.
   dims.contextCorrectness = EXPECTED_CLASSIFICATION_KEYS.every((k) => !(k in expected) || valuesEqual(getActualValue(out, k), expected[k]));
@@ -309,7 +370,7 @@ function runBusinessScenarioRegressionBenchmark() {
   console.log("📊 Running Business Scenario Regression Benchmark — 25 Curated Scenarios (5 Authored Statutory-Sourced + 20 Parameterized)\n");
 
   const total = SCENARIOS.length;
-  const sourceTypeCounts = { AUTHORED_SOURCE_CASE: 0, PARAMETRIC_CASE: 0 };
+  const sourceTypeCounts = { AUTHORED_SOURCE_CASE: 0, PARAMETRIC_CASE: 0, ADVERSARIAL_CASE: 0 };
   SCENARIOS.forEach((c) => { sourceTypeCounts[c.sourceType]++; });
 
   const firstCaseHasCitations = SCENARIOS.slice(0, 5).every((c) => c.sourceType === 'AUTHORED_SOURCE_CASE' && Array.isArray(c.citations) && c.citations.length > 0);
@@ -337,9 +398,9 @@ function runBusinessScenarioRegressionBenchmark() {
 
   const pct = (n) => ((n / total) * 100).toFixed(2);
 
-  console.log(`  Scenarios Tested:             ${total} (${sourceTypeCounts.AUTHORED_SOURCE_CASE} Authored + ${sourceTypeCounts.PARAMETRIC_CASE} Parameterized)`);
+  console.log(`  Scenarios Tested:             ${total} (${sourceTypeCounts.AUTHORED_SOURCE_CASE} Authored + ${sourceTypeCounts.PARAMETRIC_CASE} Parameterized + ${sourceTypeCounts.ADVERSARIAL_CASE} Adversarial)`);
   console.log(`  Passed Scenarios:             ${passedCases}/${total}`);
-  console.log(`  Case Taxonomy Valid:          ${taxonomyValid ? 'YES (AUTHORED_SOURCE_CASE | PARAMETRIC_CASE)' : 'NO'}`);
+  console.log(`  Case Taxonomy Valid:          ${taxonomyValid ? 'YES (AUTHORED_SOURCE_CASE | PARAMETRIC_CASE | ADVERSARIAL_CASE)' : 'NO'}`);
   console.log(`  Authored Citations Present:   ${firstCaseHasCitations ? 'YES (statutory basis)' : 'NO'}`);
   console.log(`  Deterministic Pass Rate:      ${pct(passedCases)}%`);
   console.log("  Independent Dimension Scores (each evaluated & asserted separately):");

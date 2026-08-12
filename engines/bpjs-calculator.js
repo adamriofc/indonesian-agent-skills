@@ -37,7 +37,8 @@ function getRulesForDate(dateStr) {
 
 function calculateBpjs(baseWage, jkkHazardLevel = 'low', dateStr) {
   const activeDateStr = dateStr || new Date().toISOString().split('T')[0];
-  const wage = Math.max(0, Number(baseWage) || 0);
+  const { requireRupiah } = require('./production-contract');
+  const wage = requireRupiah(baseWage, 'baseWage');
   const rules = getRulesForDate(activeDateStr);
 
   // Strict Fail-Closed Verification (Audit P1): No silent fallback objects

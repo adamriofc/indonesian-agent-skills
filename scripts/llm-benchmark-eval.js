@@ -22,11 +22,11 @@ const { calculateThr } = require(path.join(ROOT, 'engines/thr-calculator'));
 const { calculatePkwtCompensation } = require(path.join(ROOT, 'engines/pkwt-compensation-calculator'));
 
 const apiKey = process.env.LLM_EVAL_KEY || '';
-const apiBase = process.env.LLM_EVAL_BASE || 'https://rpj8h39.abc-tunnel.us/v1';
-const modelName = process.env.LLM_EVAL_MODEL || 'sartrecotex';
+const apiBase = process.env.LLM_EVAL_BASE || '';
+const modelName = process.env.LLM_EVAL_MODEL || 'gpt-4o-mini';
 
 async function queryLlmApi(systemPrompt, userPrompt) {
-  if (!apiKey) return null;
+  if (!apiKey || !apiBase) return null;
 
   try {
     const res = await fetch(`${apiBase}/chat/completions`, {
@@ -80,9 +80,11 @@ function checkOutputMatch(actual, expected) {
 
 async function runEmpiricalLlmEvaluation() {
   console.log("🤖 Running Live Empirical LLM Evaluation Harness...\n");
-  console.log(`  - Target Model:        Gemini 3.6 Flash (${modelName})`);
-  console.log(`  - Target Endpoint:     ${apiBase}`);
-  console.log(`  - Live API Key Set:    ${apiKey ? 'YES (Live Network Mode Active)' : 'NO (Offline Verification Mode)'}\n`);
+  const isLiveMode = Boolean(apiKey && apiBase);
+
+  console.log(`  - Target Model:        ${modelName}`);
+  console.log(`  - Target Endpoint:     ${apiBase || '(None specified - Offline Fixture Mode)'}`);
+  console.log(`  - Live API Key Set:    ${isLiveMode ? 'YES (Live Network Mode Active)' : 'NO (Offline Fixture Verification Mode)'}\n`);
 
   // 25 Real-World Indonesian Business Cases
   const realWorldCases = [
@@ -243,16 +245,16 @@ async function runEmpiricalLlmEvaluation() {
   console.log(`  - Skill-Assisted Pass Rate:  ${skillPassRate}% (Deterministic Engine Isolation)`);
   console.log(`  - Accuracy Improvement:     +${(skillPassRate - vanillaPassRate).toFixed(2)} percentage points`);
 
-  // Write Structured Benchmark Artifact JSON with Full Provenance Metadata
+  // Write Structured Benchmark Artifact JSON with Mutually Exclusive Provenance Metadata
   const artifactData = {
     metadata: {
-      evaluatedModel: "Gemini 3.6 Flash",
+      evaluatedModel: modelName,
       evaluatorEngine: "OpenCode / Live Empirical LLM Evaluation Harness",
       evaluatedAt: new Date().toISOString().slice(0, 10),
       sampleSize: totalCases,
       temperature: 0,
-      executionMode: apiKey ? "LIVE_NETWORK_API_INVOCATION" : "OFFLINE_DETERMINISTIC_VERIFICATION_MODE",
-      provenanceType: "EMPIRICAL_LIVE_MODEL_EVALUATION",
+      executionMode: isLiveMode ? "LIVE_NETWORK_API_INVOCATION" : "OFFLINE_FIXTURE_VERIFICATION_MODE",
+      provenanceType: isLiveMode ? "EMPIRICAL_LIVE_MODEL_EVALUATION" : "OFFLINE_FIXTURE_VERIFICATION",
       skillPassRate: `${skillPassRate}%`,
       vanillaPassRate: `${vanillaPassRate}%`
     },
