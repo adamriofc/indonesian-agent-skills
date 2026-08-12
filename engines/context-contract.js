@@ -22,6 +22,9 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
 
   const archetypeRes = kbliCode ? resolveBusinessArchetype({ kbliCode, activityName: entity.activityName || '' }) : { businessArchetype: 'UNKNOWN', archetypeCharacteristics: {} };
 
+  const defaultHasNib = isStrict ? null : true;
+  const defaultHasNpwp = isStrict ? null : true;
+
   return {
     schemaVersion: STANDARD_CONTEXT_SCHEMA_VERSION,
     executionMode: mode, // 'DEMO_MODE' | 'STRICT_PRODUCTION_MODE'
@@ -31,8 +34,8 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
       type: entityType,
       kbli: kbliCode,
       activityName: entity.activityName || archetypeRes.activityName || 'Unspecified Activity',
-      hasNib: entity.hasNib !== undefined ? Boolean(entity.hasNib) : true,
-      hasNpwp: entity.hasNpwp !== undefined ? Boolean(entity.hasNpwp) : true
+      hasNib: entity.hasNib !== undefined ? Boolean(entity.hasNib) : defaultHasNib,
+      hasNpwp: entity.hasNpwp !== undefined ? Boolean(entity.hasNpwp) : defaultHasNpwp
     },
     businessArchetype: archetypeRes.businessArchetype,
     archetypeCharacteristics: archetypeRes.archetypeCharacteristics,
@@ -47,6 +50,7 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
 function detectContextConflicts(context = {}) {
   const conflicts = [];
   const entity = context.entity || {};
+  const activityName = (entity.activityName || '').toLowerCase();
   const archetypeRes = resolveBusinessArchetype({ kbliCode: entity.kbli, activityName: entity.activityName });
 
   if (archetypeRes.hasNameConflict) {

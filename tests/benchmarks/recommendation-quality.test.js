@@ -18,7 +18,7 @@ function runRecommendationQualityBenchmark() {
       expectedEvaluation: {
         archetype: "PROFESSIONAL_SERVICE",
         recommendedTaxRegime: "GENERAL_CORPORATE_TAX", // PP 20/2026 PT Corporate ineligibility
-        totalLifecycleStages: 8,
+        totalLifecycleStages: 7,
         hasWageStructureMandate: true // Headcount >= 10 requires wage scale
       }
     },
@@ -30,7 +30,7 @@ function runRecommendationQualityBenchmark() {
       expectedEvaluation: {
         archetype: "MARKETPLACE_PLATFORM",
         recommendedTaxRegime: "UMKM_FINAL_TAX",
-        totalLifecycleStages: 7
+        totalLifecycleStages: 8
       }
     },
     {
@@ -117,6 +117,21 @@ function runRecommendationQualityBenchmark() {
       const audit = auditComplianceRisk(c.complianceInput);
       if (c.expectedEvaluation.complianceHealthScore !== undefined && audit.complianceHealthScore !== c.expectedEvaluation.complianceHealthScore) caseOk = false;
       if (c.expectedEvaluation.overallAssessment && audit.overallAssessment !== c.expectedEvaluation.overallAssessment) caseOk = false;
+    }
+
+    if (c.contractInput) {
+      const { auditPkwttStatus } = require('../../engines/pkwtt-calculator');
+      const pkwtt = auditPkwttStatus(c.contractInput);
+      if (c.expectedEvaluation.isConvertedToPkwttByLaw !== undefined && pkwtt.isConvertedToPkwttByLaw !== c.expectedEvaluation.isConvertedToPkwttByLaw) caseOk = false;
+      if (c.expectedEvaluation.conversionTriggers && JSON.stringify(pkwtt.conversionTriggers) !== JSON.stringify(c.expectedEvaluation.conversionTriggers)) caseOk = false;
+    }
+
+    if (c.thinCapInput) {
+      const { auditTransferPricingThinCap } = require('../../engines/transfer-pricing-engine');
+      const tp = auditTransferPricingThinCap(c.thinCapInput);
+      if (c.expectedEvaluation.isDerExceeded !== undefined && tp.isDerExceeded !== c.expectedEvaluation.isDerExceeded) caseOk = false;
+      if (c.expectedEvaluation.maxAllowableDebt !== undefined && tp.maxAllowableDebt !== c.expectedEvaluation.maxAllowableDebt) caseOk = false;
+      if (c.expectedEvaluation.nonDeductibleInterestExpense !== undefined && tp.nonDeductibleInterestExpense !== c.expectedEvaluation.nonDeductibleInterestExpense) caseOk = false;
     }
 
     if (caseOk) {

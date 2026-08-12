@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.4.0] - 2026-08-12
+
+### Refined & Hardened
+- **Recommendation Quality Benchmark Suite (P0 Fix)**: Added `tests/benchmarks/recommendation-quality.test.js` incorporating 25 real-world journal & business case studies across 8 evaluation dimensions (*Context Correctness, Evidence Grounding, Specificity, Actionability, Feasibility, Constraint Awareness, Cross-Domain Consistency, Hallucination Absence*) with 100% assertion coverage (`contractInput`, `thinCapInput`, `recommendedTaxRegime`, etc.).
+- **Context Conflict Detection & Reference Fix (P0 Fix)**: Resolved `ReferenceError` in `engines/context-contract.js` (`detectContextConflicts`) and enforced `CONTEXT_CONFLICT` status when KBLI 2020 code conflicts with user-stated business activity.
+- **Stale Package Description & Timestamp Sync (P0 Fix)**: Updated `package.json` description to reflect canonical 6 business plugins (`legal, tax, HR, finance, marketing, and strategic business reasoning`) and updated `registry.generated_at` timestamp.
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `6.4.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [6.3.0] - 2026-08-12
 
 ### Refined & Hardened
