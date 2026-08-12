@@ -16,6 +16,7 @@ function runContextContractTests() {
   });
   assert.strictEqual(ctx.schemaVersion, '2.0.0');
   assert.strictEqual(ctx.businessArchetype, 'PROFESSIONAL_SERVICE');
+  assert.strictEqual(ctx.scale.annualRevenue, 5000000000);
 
   // 2. Missing Parameter Detection & Strict Mode Enforcement
   console.log("  [2/6] Testing Missing Information Protocol & Strict Mode Enforcement...");
@@ -27,13 +28,19 @@ function runContextContractTests() {
   const demoRes = validateBusinessContext({ scale: { annualRevenue: 1000000000 } }, 'DEMO_MODE');
   assert.strictEqual(demoRes.contextStatus, 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
 
-  // 3. Framework Applicability & Unit of Analysis Matrix
-  console.log("  [3/6] Testing Framework Applicability & Unit of Analysis Matrix...");
+  // 3. Framework Applicability & Recommendation Level Matrix
+  console.log("  [3/6] Testing Framework Applicability & Recommendation Level Matrix...");
   const bcgProf = checkFrameworkApplicability({ frameworkName: 'bcg-matrix', kbliCode: '70209' });
   assert.strictEqual(bcgProf.applicabilityStatus, 'ADAPTABLE');
+  assert.strictEqual(bcgProf.recommendationLevel, 'ADAPTABLE');
   assert.strictEqual(bcgProf.unitOfAnalysis, 'PRACTICE_AREA_OR_SERVICE_LINE');
 
-  // 4. Multi-Factor Statutory Conflict Resolution Engine (Pasal 7 vs 8 UU 12/2011)
+  const bcgMfg = checkFrameworkApplicability({ frameworkName: 'bcg-matrix', kbliCode: '10710' });
+  assert.strictEqual(bcgMfg.applicabilityStatus, 'NATIVE');
+  assert.strictEqual(bcgMfg.recommendationLevel, 'RECOMMENDED');
+  assert.strictEqual(bcgMfg.unitOfAnalysis, 'PHYSICAL_SKU_OR_PRODUCT_LINE');
+
+  // 4. Multi-Factor Statutory Conflict Resolution Engine (Pasal 7 & Lex Superior)
   console.log("  [4/6] Testing Multi-Factor Statutory Conflict Resolution (Pasal 7 & Lex Superior)...");
   const conflictRes = resolveStatutoryConflict({
     ruleA: { id: 'PP35-2021', statuteType: 'PP', year: 2021, title: 'PP 35/2021', isSpecialRule: false },
@@ -48,11 +55,12 @@ function runContextContractTests() {
   const failureRes = classifyFailure('CONTEXT_CONFLICT', 'KBLI mismatch');
   assert.strictEqual(failureRes.errorCategory, 'CONTEXT_CONFLICT');
 
-  // 6. Shared Business Archetype Contract
-  console.log("  [6/6] Testing Shared Business Archetype Contract...");
+  // 6. Shared Business Archetype Contract & Generic Operational Attributes
+  console.log("  [6/6] Testing Shared Business Archetype Contract & Capacity Models...");
   const contract = getArchetypeContract('PROFESSIONAL_SERVICE');
   assert.strictEqual(contract.unitOfAnalysis, 'SERVICE_LINE_PRACTICE_AREA');
-  assert.strictEqual(contract.inventoryCharacteristic, 'NON_STORABLE_HUMAN_CAPACITY');
+  assert.strictEqual(contract.capacityModel, 'HUMAN_CAPACITY');
+  assert.strictEqual(contract.revenueModel, 'PROJECT_BASED');
 
   console.log("\n✅ All Context Contract, Conflict Resolution & Archetype Tests Passed 100%!");
 }

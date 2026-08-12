@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.2.0] - 2026-08-12
+
+### Refined & Hardened
+- **Multi-Factor Statutory Conflict Resolution System (`engines/conflict-resolution.js`)**: Enhanced conflict resolution engine to evaluate `subjectMatterScope` (identical vs distinct subject matter), `explicitRepeal` evidence, and precise `effectiveFromDate` under UU No. 12/2011 jo. UU No. 13/2022.
+- **Shared Business Archetype Contract Expansion (`engines/business-archetype-contract.js`)**: Expanded archetype contracts with generic operational attributes (`capacityModel`, `revenueModel`, `deliveryModel`, `customerParticipation`, `scalabilityConstraint`).
+- **Structured Framework Applicability Levels (`engines/framework-applicability.js`)**: Replaced boolean recommendation flag with explicit 4-state `recommendationLevel` (`RECOMMENDED`, `ADAPTABLE`, `CONDITIONAL`, `NOT_RECOMMENDED`) and detailed `applicabilityReason`.
+- **Automated Audit Enforcer Upgrade**: Enhanced `tests/schema/validator.test.js` to automatically assert canonical version `6.2.0` across `package.json`, `package-lock.json`, `registry/index.json`, and `README.md`.
+
 ## [6.1.0] - 2026-08-12
 
 ### Refined & Hardened
