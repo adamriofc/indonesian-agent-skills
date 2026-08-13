@@ -149,20 +149,39 @@ The finance engines (`engines/break-even.js`, `depreciation.js`, `npv.js`, `irr.
 |---|---|---|---|---|---|---|
 | `FIN-BASIS-01` | PSAK 1 — Financial Statement Presentation (accrual, 3-statement linkage) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; parent domain live — verified manually) |
 | `FIN-DEP-01` | PSAK 16 — Fixed Assets: straight-line, double-declining balance (DDB), sum-of-years digits (SYD) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; verified manually) |
-| `FIN-REV-01` | PSAK 23 — Revenue from Contracts with Customers (accrual recognition) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; verified manually) |
-| `FIN-SAK-EMKM-01` | SAK EMKM — Financial Statements for Micro, Small and Medium Entities | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; verified manually) |
+| `FIN-REV-01` | PSAK 23 — Revenue from Contracts with Customers (accrual recognition) | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; parent domain live — verified manually) |
+| `FIN-SAK-EMKM-01` | SAK EMKM — Financial Statements for Micro, Small and Medium Entities | IAI | `STANDARD_REFERENCE` | `VERIFIED` | 2026-08-10 | [IAI — SAK](https://web.iaiglobal.or.id/SAK-IAI) (404 for automated clients; parent domain live — verified manually) |
 
 > **Non-claim**: standards above are professional references (IAI), not positive law. Their formulas (NPV, IRR, amortization, EOQ, ratios, break-even) are invariant math; skill interpretations are advisory, and formal opinions require licensed accountants.
 
 ---
 
-## 7. Expert Domain Review & Credential Register
+## 7. Internal Expert-Domain Review & Credential Register
 
-Every ruleset transition, calculation engine formula, and legal prompt boundary is reviewed against an internal verification checklist maintained by licensed Indonesian domain practitioners.
+This section records an **internal maintainer verification checklist** used to assess domain boundaries and source/rule consistency. The competency labels below describe the reviewer profiles against which the checklist is applied; they are **not claims of independent written review, certification of this repository, endorsement by named individuals, or public attestation by external licensed professionals**.
 
-| Domain | Reviewer Scope & Role | Credentials & Affiliation | Verification Method | Last Verified | Status |
-|---|---|---|---|---|---|
-| **Taxation & PPh/BPJS** | PPh 21 TER, PP 20/2026 UMKM, BPJS splits | Certified Tax Practitioner (BKP / CA) | Dual-source gazette audit + engine test suite | 2026-08-10 | `VERIFIED` |
-| **Employment & Severance** | PP 35/2021 PHK, PKWT, Permenaker 6/2016 THR | Employment Law Consultant (SH / Advocate) | Statutory text boundary check | 2026-08-10 | `VERIFIED` |
-| **Business Finance & Accounting** | 3-Statement Linkage, Financial Ratios, NPV/IRR | Certified Public Accountant (CPA / CA) | Financial statement balance assertions | 2026-08-10 | `VERIFIED` |
-| **E-Commerce Policy & Systems** | Marketplace fees, Coretax DJP & e-Faktur | Senior Systems & E-Commerce Specialist | Seller center policy & DJP PER-01/2025 audit | 2026-08-10 | `VERIFIED` |
+Independent external validation is currently **PENDING** and is governed by [`docs/EXTERNAL_VALIDATION.md`](docs/EXTERNAL_VALIDATION.md).
+
+| Domain | Review Scope / Competency Profile | Verification Method | Last Verified | Status |
+|---|---|---|---|---|
+| **Taxation & PPh/BPJS** | Certified Tax Practitioner (BKP / CA) competency profile | Dual-source gazette audit + engine test suite | 2026-08-10 | `INTERNAL_VERIFIED` |
+| **Employment & Severance** | Employment Law Consultant (SH / Advocate) competency profile | Statutory text boundary check | 2026-08-10 | `INTERNAL_VERIFIED` |
+| **Business Finance & Accounting** | Certified Public Accountant (CPA / CA) competency profile | Financial statement balance assertions | 2026-08-10 | `INTERNAL_VERIFIED` |
+| **E-Commerce Policy & Systems** | Senior Systems & E-Commerce Specialist competency profile | Seller center policy & DJP PER-01/2025 audit | 2026-08-10 | `INTERNAL_VERIFIED` |
+
+### Interpretation Rule
+
+`INTERNAL_VERIFIED` means the repository maintainer completed and recorded the internal verification checklist against the stated competency profile. It does **not** mean that an independent credentialed practitioner has reviewed or certified the repository.
+
+---
+
+## 8. External Validation & Enterprise Evidence Boundary
+
+The following claims remain explicitly unmade until external evidence exists:
+
+1. Independent professional certification or sign-off of the full repository.
+2. Universal correctness across every statutory rule and business scenario.
+3. Enterprise production proof across organizations.
+4. Community-reviewed long-term maintenance resilience.
+
+See `docs/AUDIT_CLOSURE.md` and `docs/EXTERNAL_VALIDATION.md` for the acceptance criteria before these claims can be upgraded.
