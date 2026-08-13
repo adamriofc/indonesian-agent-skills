@@ -6,189 +6,189 @@
       "cases": 6,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 18715,
+      "opsPerSec": 11787,
       "mismatches": []
     },
     "bpjs": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 12362,
+      "opsPerSec": 9151,
       "mismatches": []
     },
     "phk": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 18178,
+      "opsPerSec": 19013,
       "mismatches": []
     },
     "umkm": {
       "cases": 5,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 12193,
+      "opsPerSec": 11563,
       "mismatches": []
     },
     "thr": {
       "cases": 6,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 67387,
+      "opsPerSec": 65573,
       "mismatches": []
     },
     "pph23-26": {
       "cases": 8,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 83890,
+      "opsPerSec": 60933,
       "mismatches": []
     },
     "pkwt": {
       "cases": 8,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 104807,
+      "opsPerSec": 69162,
       "mismatches": []
     },
     "pkwtt": {
       "cases": 5,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 38230,
+      "opsPerSec": 28644,
       "mismatches": []
     },
     "regulatory-diff": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 10800,
+      "opsPerSec": 7900,
       "mismatches": []
     },
     "pph21-grossup": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 10767,
+      "opsPerSec": 7301,
       "mismatches": []
     },
     "pph-badan": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 30787,
+      "opsPerSec": 23282,
       "mismatches": []
     },
     "transfer-pricing": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 29066,
+      "opsPerSec": 15161,
       "mismatches": []
     },
     "ppn-ppnbm": {
       "cases": 5,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 51994,
+      "opsPerSec": 22904,
       "mismatches": []
     },
     "marketplace-fee": {
       "cases": 7,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 53541,
+      "opsPerSec": 27348,
       "mismatches": []
     },
     "term-sheet": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 14526,
+      "opsPerSec": 8680,
       "mismatches": []
     },
     "regulatory-impact": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 11624,
+      "opsPerSec": 8110,
       "mismatches": []
     },
     "compliance-risk": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 26820,
+      "opsPerSec": 12716,
       "mismatches": []
     },
     "business-scenario": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 32414,
+      "opsPerSec": 21275,
       "mismatches": []
     },
     "decision-engine": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 27222,
+      "opsPerSec": 22174,
       "mismatches": []
     },
     "strategic-framework": {
       "cases": 2,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 26348,
+      "opsPerSec": 24998,
       "mismatches": []
     },
     "decision-analysis": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 13886,
+      "opsPerSec": 9584,
       "mismatches": []
     },
     "scenario-analysis": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 28665,
+      "opsPerSec": 18202,
       "mismatches": []
     },
     "strategic-risk": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 25466,
+      "opsPerSec": 21134,
       "mismatches": []
     },
     "kbli-context": {
       "cases": 4,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 39084,
+      "opsPerSec": 34396,
       "mismatches": []
     },
     "market-sizing": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 12967,
+      "opsPerSec": 10772,
       "mismatches": []
     },
     "marketing-unit-economics": {
       "cases": 3,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 30141,
+      "opsPerSec": 26954,
       "mismatches": []
     },
     "finance": {
       "cases": 11,
       "accuracy": "100.00%",
       "determinismViolations": 0,
-      "opsPerSec": 7900,
+      "opsPerSec": 5488,
       "mismatches": []
     }
   }

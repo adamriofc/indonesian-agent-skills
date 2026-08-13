@@ -14,7 +14,10 @@ function runContextContractTests() {
     entity: { type: 'PT', kbli: '70209' },
     scale: { annualRevenue: 5000000000, employeeCount: 15 }
   });
-  assert.strictEqual(ctx.schemaVersion, '2.1.0');
+  assert.strictEqual(ctx.schemaVersion, '2.2.0');
+  assert.ok(ctx.productContext, 'Product Context layer should be initialized');
+  assert.ok(Array.isArray(ctx.facts), 'Facts array should be initialized');
+  assert.ok(Array.isArray(ctx.relations), 'Relations array should be initialized');
   assert.strictEqual(ctx.businessArchetype, 'PROFESSIONAL_SERVICE');
   assert.strictEqual(ctx.scale.annualRevenue, 5000000000);
 

@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.9.0] - 2026-08-12
+
+### Added & Architecture Extended (Product Context & Business Reasoning Substrate Release)
+- **Product Context Layer & Commodity Classification Engine (`engines/product-context.js`)**: Extended business context contract to support commodity classification anchor (`product`, `classification` with `scheme: "BTKI"`, `hs6`, `ahtn8`, `btkiCode`, `version: "BTKI-2022"`), Lartas permit auditing, and landed cost duty calculations (Import Duty, PPN 12%, PPh 22 Impor).
+- **Single Source of Truth BTKI Ruleset (`engines/rules/btki.json`)**: Added BTKI 2022 tariff entries for major commodities (Coffee 0901, Food 1905, Cosmetics 3304, Apparel 6109, Smartphones 8517, Electric Vehicles 8703) protected by cryptographic SHA-256 trust anchor verification (`0e0063cb...`).
+- **Product Classification Skill (`marketing-id/skills/product-classification/SKILL.md`)**: Registered 88th agent skill (`product-classification`) guiding commodity attribute extraction and BTKI 2022 tariff audits.
+- **Semantic Business Context Extensions**: `engines/context-contract.js` updated to version `2.2.0` supporting Facts (`facts`), Semantic Relations (`relations`), Multi-Domain Constraints (`constraints`), Business Objectives (`objectives`), and Decision Options (`options`).
+- **Product Context Unit Test Suite (`tests/units/product-context.test.js`)**: Added 100% passing test suite for product classification, non-NPWP 7.5% penalty rates, EV CBU exemption incentives, and fail-closed `INVALID_INPUT` error boundaries.
+
 ## [6.8.0] - 2026-08-12
 
 ### Expanded & Hardened (Golden Corpus Expansion & Cross-Engine Invariants Release)

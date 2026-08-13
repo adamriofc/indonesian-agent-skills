@@ -1,0 +1,79 @@
+{
+  "rulesets": [
+    {
+      "rulesetId": "BTKI-2022",
+      "rulesetVersion": "1.0.0",
+      "statute": "Buku Tarif Kepabeanan Indonesia 2022 (PMK No. 26/PMK.010/2022 jo. AHTN 2022)",
+      "effective_from": "2022-04-01",
+      "effective_to": "Infinity",
+      "tariff_entries": [
+        {
+          "hs6": "090121",
+          "btkiCode": "0901.21.10",
+          "description": "Kopi sangrai tidak didekafeinasi (Roasted non-decaffeinated coffee beans)",
+          "category": "agricultural_commodities",
+          "importDutyPercent": 20,
+          "ppnPercent": 12,
+          "pph22ImportPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Karantina Pertanian & BPOM"
+        },
+        {
+          "hs6": "190531",
+          "btkiCode": "1905.31.10",
+          "description": "Biskuit manis dan produk roti (Sweet biscuits and bakery products)",
+          "category": "processed_food",
+          "importDutyPercent": 15,
+          "ppnPercent": 12,
+          "pph22ImportPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "BPOM ML/MD"
+        },
+        {
+          "hs6": "330499",
+          "btkiCode": "3304.99.90",
+          "description": "Produk perawatan kulit dan kosmetik (Skincare and cosmetics preparations)",
+          "category": "cosmetics_personal_care",
+          "importDutyPercent": 10,
+          "ppnPercent": 12,
+          "pph22ImportPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "BPOM Izin Edar"
+        },
+        {
+          "hs6": "610910",
+          "btkiCode": "6109.10.10",
+          "description": "Pakaian jadi kaus rajutan bahan katun (Knitted T-shirts of cotton)",
+          "category": "apparel_textile",
+          "importDutyPercent": 25,
+          "ppnPercent": 12,
+          "pph22ImportPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Permendag Lartas Tekstil"
+        },
+        {
+          "hs6": "851713",
+          "btkiCode": "8517.13.00",
+          "description": "Telepon pintar dan telepon seluler (Smartphones and cellular phones)",
+          "category": "electronics_telecom",
+          "importDutyPercent": 0,
+          "ppnPercent": 12,
+          "pph22ImportPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Kominfo SDPPI & TKDN Kemenperin"
+        },
+        {
+          "hs6": "870380",
+          "btkiCode": "8703.80.19",
+          "description": "Kendaraan bermotor listrik berbasis baterai CBU (Battery Electric Vehicles EV CBU)",
+          "category": "automotive_ev",
+          "importDutyPercent": 0,
+          "ppnPercent": 12,
+          "pph22ImportPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Kemenhub SUT & Kemenperin Incentive"
+        }
+      ]
+    }
+  ]
+}

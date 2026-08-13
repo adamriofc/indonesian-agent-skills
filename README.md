@@ -23,17 +23,17 @@
 <!-- GENERATED:STATS -->
 | Metric | Single Source of Truth Value | Measurement Scope |
 |---|---|---|
-| **Repository Version** | `v6.8.0` | SemVer release boundary |
+| **Repository Version** | `v6.9.0` | SemVer release boundary |
 | **Canonical Plugins** | `6` | Active plugin packages (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
-| **Agent Skills** | `87` | Machine-readable `SKILL.md` capability packs |
-| **Deterministic Engines** | `38` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
+| **Agent Skills** | `88` | Machine-readable `SKILL.md` capability packs |
+| **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
 | **Golden Cases** | `121` | Static corpus cases across 27 benchmark domains |
 | **Benchmark Assertions** | `424` | Deterministic assertions in `tests/benchmarks/` |
-| **Total Test Assertions** | `453+` | Deepened matrix assertions across full `npm test` suite |
+| **Total Test Assertions** | `479+` | Deepened matrix assertions across full `npm test` suite |
 | **Node.js Compatibility** | `20 / 22 / 24` | `20` (Minimum), `22` (LTS Recommended), `24` (Current Tested) |
 <!-- /GENERATED:STATS -->
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **87 Agent Skills** with **38 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **88 Agent Skills** with **39 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
 Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
@@ -250,7 +250,8 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 * `business-scenario`: Maps business profile across the 8 Stages of the Indonesian Business Lifecycle for an integrated compliance roadmap.
 * `decision-engine`: Evaluates financial & operational metrics to generate deterministic, prioritized business decision recommendations.
 
-### 5. `marketing-id`: Marketing, Growth & Commerce (25 Skills)
+### 5. `marketing-id`: Marketing, Growth & Commerce (26 Skills)
+* `product-classification`: Classifies commercial goods into BTKI 2022 / HS Codes (0901, 1905, 3304, 6109, 8517, 8703) to audit import duties, PPN 12%, PPh 22, and Lartas permits.
 * `deskripsi-produk-seo`: Structural product copy optimized for Shopee & Tokopedia search.
 * `cs-komplain-handler`: Customer service protocols for negative reviews and damaged packages.
 * `analisis-kompetitor-marketplace`: Extracts feedback gaps from competitor listings.

@@ -5,8 +5,9 @@
  */
 
 const { resolveBusinessArchetype } = require('./kbli-context-router');
+const { createDefaultProductContext } = require('./product-context');
 
-const STANDARD_CONTEXT_SCHEMA_VERSION = "2.1.0";
+const STANDARD_CONTEXT_SCHEMA_VERSION = "2.2.0";
 
 function normalizeNonNegativeNumber(value, fieldName, issues) {
   if (value === undefined || value === null) return null;
@@ -59,6 +60,12 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
       monthlyOpEx: scale.monthlyOpEx !== undefined ? normalizeNonNegativeNumber(scale.monthlyOpEx, 'scale.monthlyOpEx', scaleInputIssues) : null,
       employeeCount: scale.employeeCount !== undefined ? normalizeNonNegativeNumber(scale.employeeCount, 'scale.employeeCount', scaleInputIssues) : null
     },
+    productContext: createDefaultProductContext(overrides.productContext || {}),
+    facts: overrides.facts || [],
+    relations: overrides.relations || [],
+    constraints: overrides.constraints || { financial: null, regulatory: null, capacity: null, time: null },
+    objectives: overrides.objectives || { primary: 'GROWTH', secondary: 'COMPLIANCE' },
+    options: overrides.options || [],
     inputIssues: scaleInputIssues
   };
 }

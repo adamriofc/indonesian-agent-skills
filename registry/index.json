@@ -1,10 +1,10 @@
 {
-  "version": "6.8.0",
+  "version": "6.9.0",
   "generated_at": "2026-08-12T08:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
-  "total_skills": 87,
-  "total_engines": 38,
+  "total_skills": 88,
+  "total_engines": 39,
   "quality_tiers": {
     "tested": 18,
     "source-verified": 31,
@@ -967,6 +967,17 @@
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
       "engine": null
+    },
+    {
+      "id": "product-classification",
+      "name": "product-classification",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "type": "classification",
+      "quality_tier": "tested",
+      "risk_level": "medium",
+      "rule_type": "statutory",
+      "engine": "engines/product-context.js"
     }
   ]
 }
