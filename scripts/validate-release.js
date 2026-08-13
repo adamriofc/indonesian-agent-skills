@@ -18,7 +18,7 @@ const { execSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 
 function validateRelease() {
-  console.log("🚪 Running Automated Release Gate (16-Check Pipeline)...\n");
+  console.log("🚪 Running Automated Release Gate (17-Check Pipeline)...\n");
   let errors = 0;
   let checksPassed = 0;
 
@@ -198,12 +198,19 @@ function validateRelease() {
     }
   }
 
+  // 17. Agent capability contract validation
+  console.log("  [17/17] Executing Agent Capability Contract Validator...");
+  try {
+    execSync('npm run validate:capabilities', { cwd: ROOT, stdio: 'pipe' });
+    checksPassed++; console.log(`    ✅ Agent capability contract validator passed`);
+  } catch (e) { console.error(`❌ Agent Capability Contract Validation Failed: ${e.message}`); errors++; }
+
   console.log(`\n---------------------------------------------------`);
   if (errors > 0) {
-    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/16 checks passed)`);
+    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/17 checks passed)`);
     process.exit(1);
   } else {
-    console.log(`✅ Release Gate PASSED. All 16 Release Integrity Checks Passed.`);
+    console.log(`✅ Release Gate PASSED. All 17 Release Integrity Checks Passed.`);
   }
 }
 

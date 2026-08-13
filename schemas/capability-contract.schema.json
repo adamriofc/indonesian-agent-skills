@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentCapabilityContract",
+  "type": "object",
+  "required": [
+    "domain",
+    "purpose",
+    "not_for",
+    "requires",
+    "produces",
+    "consumes",
+    "deterministic",
+    "risk",
+    "cross_domain_relevance"
+  ],
+  "properties": {
+    "domain": {
+      "type": "string",
+      "enum": ["legal", "tax", "hr", "finance", "marketing", "strategic"]
+    },
+    "purpose": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "not_for": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "required"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean" },
+          "nullable": { "type": "boolean" },
+          "values": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "minItems": 1
+    },
+    "produces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" }
+        }
+      },
+      "minItems": 1
+    },
+    "consumes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "deterministic": {
+      "type": "boolean"
+    },
+    "risk": {
+      "type": "object",
+      "required": ["level", "human_review_required"],
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "human_review_required": { "type": "boolean" }
+      }
+    },
+    "cross_domain_relevance": {
+      "type": "object"
+    }
+  }
+}

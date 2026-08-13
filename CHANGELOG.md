@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.14.0] - 2026-08-13
+
+### Typed Agent Capability Contract & Agent-Native Catalog Release
+- **Canonical Capability Catalog (`registry/capabilities.json` & `scripts/generate-capability-catalog.js`)**: Added machine-readable agent capability catalog indexing all 88 skill contracts across 6 plugins for instant host agent discovery without scanning disk.
+- **Dedicated Capability Contract Validator (`scripts/validate-capabilities.js`)**: Added `npm run validate:capabilities` enforcing `schemas/capability-contract.schema.json` validation across 88 skills.
+- **17-Check Release Gate Pipeline (`scripts/validate-release.js`)**: Added Check 17 capability contract validation check to automated release pipeline.
+- **Refined Capability Schema**: Added `schemas/capability-contract.schema.json` formalizing typed `requires`, `produces`, `deterministic`, `risk`, and `cross_domain_relevance` properties.
+
 ## [6.13.0] - 2026-08-13
 
 ### In-Code Capability Contract Enforcement & Agent Capability Discovery Benchmark Release

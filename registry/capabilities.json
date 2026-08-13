@@ -1,0 +1,2050 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-13T10:04:09.561Z",
+  "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
+  "total_capabilities": 88,
+  "capabilities": [
+    {
+      "id": "accounting-basics",
+      "skillName": "accounting-basics",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Apply double-entry bookkeeping fundamentals, journal entries, and accrual vs cash basis rules for Indonesian SME bookkeeping.",
+      "risk_level": "LOW",
+      "rule_type": "internal-policy",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<transaction>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "break-even-analysis",
+      "skillName": "break-even-analysis",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Compute break-even units, break-even revenue, contribution margin, and margin of safety with the deterministic break-even engine.",
+      "risk_level": "LOW",
+      "rule_type": "professional-standard",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<fixed_costs> <selling_price> <variable_cost> <actual_revenue>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "budgeting-forecasting",
+      "skillName": "budgeting-forecasting",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Build top-down or bottom-up budgets, variance analysis, and rolling forecasts for Indonesian SME planning cycles.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<target> <history> <assumptions>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "business-feasibility",
+      "skillName": "business-feasibility",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Structure Indonesian SME feasibility assessments across market, technical, financial, legal, and risk aspects with consistent financial figures.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<business_idea> <investment> <projections>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "business-scenario",
+      "skillName": "business-scenario",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Maps a business profile across the 8 Stages of the Indonesian Business Lifecycle (Incorporation, Onboarding, Payroll, Contracts, Taxation, E-Commerce, Reporting, Exit) to produce an integrated compliance, tax, legal, and operational roadmap.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<entityType> <annualRevenue> <employeeCount> <salesChannels>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "capital-budgeting",
+      "skillName": "capital-budgeting",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Evaluate Indonesian SME investment projects with NPV, IRR, and payback using the deterministic npv and irr engines against a simple WACC.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<investment> <annual_cashflow> <wacc>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "cash-flow-analysis",
+      "skillName": "cash-flow-analysis",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Analyze operating, investing, and financing cash flows, free cash flow, and cash runway for Indonesian businesses.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<cash_flow_statement> <capex> <monthly_burn>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "cost-accounting",
+      "skillName": "cost-accounting",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Compute cost of goods sold, absorption vs variable costing, and simple product costing for Indonesian SME operations.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<beginning_inventory> <purchases> <ending_inventory>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "decision-engine",
+      "skillName": "decision-engine",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Evaluates corporate financial and operational metrics (cash runway, gross margin, DER ratio, PPh 21 tax burden, severance liability) to generate deterministic, prioritized business decision recommendations and driver classifications.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<monthlyRevenue> <monthlyOpEx> <cashBalance> <cogs> <totalDebt> <totalEquity>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "financial-modeling",
+      "skillName": "financial-modeling",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Build 3-statement financial models with scenario and sensitivity tables for Indonesian SME planning, staying deterministic and auditable.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<assumptions> <scenarios>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "financial-ratio-analysis",
+      "skillName": "financial-ratio-analysis",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Compute and interpret 14 liquidity, solvency, profitability, and efficiency ratios for Indonesian SMEs using the deterministic financial-ratios engine.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<balance_sheet> <income_statement>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "financial-statements",
+      "skillName": "financial-statements",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Structure Indonesian financial statements (income statement, balance sheet, cash flow) per PSAK 1 presentation principles with accrual linkage.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<trial_balance> <period>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "unit-economics",
+      "skillName": "unit-economics",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Model customer-level economics — LTV, CAC, contribution margin per unit, and the LTV:CAC heuristic — for Indonesian digital and D2C businesses.",
+      "risk_level": "LOW",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<arppu> <churn> <cac>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "vc-term-sheet-waterfall",
+      "skillName": "vc-term-sheet-waterfall",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Calculate Indonesian venture capital startup exit liquidation preference waterfalls across share classes (Seniority, Pari Passu, Participating with Caps, Non-Participating).",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<exit_valuation> <investor_tiers_json> <common_ownership_percent>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "working-capital",
+      "skillName": "working-capital",
+      "plugin": "finance-id",
+      "domain": "finance",
+      "description": "Calculate net working capital, working capital ratio, cash conversion cycle, and funding requirements with the deterministic working-capital engine.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<current_assets> <current_liabilities> <cycle_days> <daily_cogs>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "bpjs-calculator",
+      "skillName": "bpjs-calculator",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Calculate monthly employer and employee contributions for BPJS Ketenagakerjaan and BPJS Kesehatan.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<base_salary>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "bpjs-tenagakerja-admin",
+      "skillName": "bpjs-tenagakerja-admin",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Guide for HR administrators managing the BPJS Ketenagakerjaan corporate portal (SIPP).",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<task_description_e_g_register_new_hire>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "interview-id",
+      "skillName": "interview-id",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Create structured candidate assessment scorecards and competency interviews tailored for Indonesian workplaces.",
+      "risk_level": "LOW",
+      "rule_type": "internal-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<candidate_role> <job_specifications>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "phk-advanced-matrix",
+      "skillName": "phk-advanced-matrix",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Evaluate complex Indonesian employment termination (PHK) multi-condition scenarios (retirement crossover, efficiency due to loss vs prevention of loss, merger employee/employer refusal).",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<monthly_wage> <tenure_years> <phk_reason_code> <unused_leave_days>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "phk-calculator",
+      "skillName": "phk-calculator",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Calculate statutory employee severance packages (Pesangon) under Government Regulation PP No. 35/2021 using hybrid execution.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<gaji_pokok_tunjangan_tetap> <masa_kerja_tahun> <alasan_phk> [sisa_cuti]"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pkwt-pkwtt-checker",
+      "skillName": "pkwt-pkwtt-checker",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Audit contract employment limits (PKWT max 5 years) and calculate mandatory PKWT Compensation Payout under PP No. 35/2021.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<monthly_wage> <tenure_months>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pkwtt-checker",
+      "skillName": "pkwtt-checker",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Audit PKWTT permanent employment contracts, probation limits (max 3 months), auto-conversion triggers, minimum wage compliance, and statutory severance rights under PP 35/2021 & UU 6/2023.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "sop-perusahaan",
+      "skillName": "sop-perusahaan",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Generate operational Standard Operating Procedures (SOPs) for local Indonesian workplace operations, shift plans, and leaves.",
+      "risk_level": "MEDIUM",
+      "rule_type": "internal-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<department> <process_scope>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "spt-tahunan-guide",
+      "skillName": "spt-tahunan-guide",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Step-by-step guidance for filing individual annual tax returns (SPT Tahunan Wajib Pajak Orang Pribadi) on DJP Online.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<spt_form_type> <has_1721_a1>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "struktur-skala-upah",
+      "skillName": "struktur-skala-upah",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Build statutory Wage Structure and Scale (Struktur dan Skala Upah) compliant with Permenaker No. 1/2017.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<job_positions_list> <ump_umr_minimum>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "surat-peringatan",
+      "skillName": "surat-peringatan",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Generate legally compliant warning letters (Surat Peringatan 1, 2, 3) and termination (PHK) notices based on Indonesian Labor Law.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<employee_name> <violation_reason> <warning_level_1_2_3>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "thr-calculator",
+      "skillName": "thr-calculator",
+      "plugin": "hr-id",
+      "domain": "hr",
+      "description": "Calculate statutory Indonesian religious holiday allowance (Tunjangan Hari Raya - THR) per Permenaker No. 6/2016.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "compliance-risk",
+      "skillName": "compliance-risk",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Multi-Domain Compliance Health Audit (Tax, HR, Legal, Data/PDP, Commerce). Evaluates operational practices against Indonesian statutory mandates to output a Compliance Health Score (0-100), domain health flags, detected violations, and a prioritized remediation roadmap.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<company_profile_and_practices_json>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "contract-reviewer",
+      "skillName": "contract-reviewer",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Audit commercial and vendor agreements to identify hidden risks, asymmetrical clauses, and compliance issues under Indonesian law, outputting a Contract Risk Score (0-100).",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<paste_contract_text>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "haki-trademark-check",
+      "skillName": "haki-trademark-check",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Audit trademark availability, DJKI Nice Classifications (Kelas Merek 1-45), and rejection risks under UU No. 20/2016.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<brand_name> <business_category_or_products>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "legal-memo-id",
+      "skillName": "legal-memo-id",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Format disputes or commercial conflicts into structured legal opinions (Memorandum Hukum) following Indonesian court formats.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<dispute_facts> <questions_of_law>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "nda-indonesia",
+      "skillName": "nda-indonesia",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Draft non-disclosure agreements (NDAs) tailored for Indonesian corporate transactions and partner sharing.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<disclosing_party> <receiving_party> <duration_years>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "oss-kbli-navigator",
+      "skillName": "oss-kbli-navigator",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Map business activities to 5-digit KBLI 2020 codes, assess Risk-Based Licensing levels (OSS-RBA), and verify PB-UMKU requirements.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<business_description_or_services>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pdp-compliance",
+      "skillName": "pdp-compliance",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Assess corporate business processes against Indonesian UU No. 27/2022 on Personal Data Protection (UU PDP) across all 6 Lawful Bases.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<process_description>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "somasi-draft-id",
+      "skillName": "somasi-draft-id",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Draft formal legal warning letters (Surat Somasi 1, 2, 3) for breach of contract, unpaid invoices, or NDA violations under KUHPerdata.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<debtor_party> <breach_facts> <demanded_action> <deadline_days>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "spk-generator",
+      "skillName": "spk-generator",
+      "plugin": "legal-id",
+      "domain": "legal",
+      "description": "Generate legally binding Indonesian Service Agreements (SPK) or partnership contracts compliant with Article 1320 and 1338 of KUHPerdata.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<contractor_role> <project_name> <price_termijn>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "analisis-kompetitor-marketplace",
+      "skillName": "analisis-kompetitor-marketplace",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Analyze competitor listings, customer review complaints, and pricing to find market gaps and optimization opportunities.",
+      "risk_level": "MEDIUM",
+      "rule_type": "commercial-policy",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<paste_competitor_reviews_or_specifications>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "buyer-negotiator",
+      "skillName": "buyer-negotiator",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Strategy and communication templates for negotiating wholesale (grosir) and distribution terms with local Indonesian B2B buyers.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<buyer_type_distributor_retailer> <order_volume> <target_margin>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "cs-komplain-handler",
+      "skillName": "cs-komplain-handler",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Draft empathetic, professional, and brand-aligned customer support responses for negative reviews and order issues.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<customer_review_or_complaint> <issue_type_damaged_delayed_missing>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "customer-segmentation",
+      "skillName": "customer-segmentation",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Segments customer markets using firmographic, demographic, behavioral, needs-based, and willingness-to-pay criteria to target high-value customer clusters.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<market_and_customer_data>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "deskripsi-produk-seo",
+      "skillName": "deskripsi-produk-seo",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Generate high-converting and SEO-friendly product descriptions optimized for Shopee, Tokopedia, and TikTok Shop.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<product_name> <features_specs> <brand>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "gmb-local-seo",
+      "skillName": "gmb-local-seo",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Optimize Google Business Profile (GMB) listings, local search keywords, and customer review response strategies.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<business_name> <location_city> <service_category>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "go-to-market",
+      "skillName": "go-to-market",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Formulates structured Go-To-Market (GTM) strategies defining target segment, value proposition, channel distribution, launch motion, and acquisition KPIs.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<productName> <targetMarket> <launchBudget>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "instagram-reels-carousel",
+      "skillName": "instagram-reels-carousel",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Draft high-engagement Instagram Reels visual hooks and multi-slide Carousel scripts tailored for Indonesian D2C and service brands.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<topic_or_product> <target_audience> <post_format_reels_or_carousel>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "jobs-to-be-done",
+      "skillName": "jobs-to-be-done",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Evaluates customer underlying functional, emotional, and social Jobs-To-Be-Done (JTBD) to isolate product hiring criteria and value drivers.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<customer_context_and_use_case>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "klaim-logistik-retur",
+      "skillName": "klaim-logistik-retur",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "SOP guidelines and claim submission templates for lost or damaged courier packages (J&T, JNE, SiCepat, Shopee Xpress).",
+      "risk_level": "MEDIUM",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<waybill_number> <courier_name> <damage_or_lost_details>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "kol-brief-contract",
+      "skillName": "kol-brief-contract",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Draft KOL/Influencer campaign briefs, Scope of Work (SOW), competitor exclusivity clauses, and content usage rights.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<kol_tier_nano_micro_macro> <deliverables_sow> <exclusivity_period>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "linkedin-x-thread-id",
+      "skillName": "linkedin-x-thread-id",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Write engaging professional business narratives (storytelling) tailored for Indonesian LinkedIn and X (Twitter) audiences.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<business_case_or_milestone> <key_takeaways>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "lokalisasi-slang-indonesia",
+      "skillName": "lokalisasi-slang-indonesia",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Translate or adapt standard English marketing copy into natural Indonesian business casual or colloquial slang.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<original_english_or_formal_text> <target_tone_casual_jaksel>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "margin-pricing-calculator",
+      "skillName": "margin-pricing-calculator",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Calculate net seller payout and profit margins after marketplace admin fees (Shopee Star/Mall, Tokopedia Power Merchant, TikTok Shop), extra shipping fees, and ad budgets.",
+      "risk_level": "MEDIUM",
+      "rule_type": "commercial-policy",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<selling_price> <platform> <seller_tier> [free_shipping_extra] [ad_budget]"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "market-sizing",
+      "skillName": "market-sizing",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Evaluates Total Addressable Market (TAM), Serviceable Addressable Market (SAM), and Serviceable Obtainable Market (SOM) using top-down adoption models and deterministic calculations.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<totalPopulation> <adoptionPercent> <avgAnnualSpend>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "positioning-analysis",
+      "skillName": "positioning-analysis",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Establishes strategic brand positioning frameworks by defining target customer, frame of reference, point of difference, and reason to believe.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<targetSegment> <categoryReference> <pointOfDifference>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "press-release-id",
+      "skillName": "press-release-id",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Write professional corporate press releases matching standard Indonesian journalistic styles (5W+1H).",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<corporate_event_announcement> <quotes_from_key_executives>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "product-classification",
+      "skillName": "product-classification",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Classify commercial goods into BTKI 2022 / HS Codes (0901, 1905, 3304, 6109, 8517, 8703) to audit import duties, PPN 12%, PPh 22, and Lartas permits.",
+      "risk_level": "medium",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "productName",
+          "description",
+          "attributes",
+          "targetHsCode",
+          "cifValueIdr"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "script-reels-tiktok",
+      "skillName": "script-reels-tiktok",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Write highly engaging short-form video scripts (15-60s) complete with visual directions and audio overlays for TikTok/Reels.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<product_hook> <story_outline>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "shopee-live-script",
+      "skillName": "shopee-live-script",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Generate high-engagement hosting scripts and voucher-drop routines for live stream shopping.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<product_details> <discount_rate> <campaign_type>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "shopee-video-creator",
+      "skillName": "shopee-video-creator",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Optimize short promotional video scripts and product tagging strategies for Shopee Video.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<product_name> <promo_angle>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tiktok-shop-affiliate",
+      "skillName": "tiktok-shop-affiliate",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Plan TikTok Shop Affiliate campaigns, target/open commission structures, and creator briefing templates.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<product_category> <target_sales_volume> <margin_allowance>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tokopedia-seo-optimizer",
+      "skillName": "tokopedia-seo-optimizer",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Optimize product titles and listing metadata to achieve high visibility in search rankings.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<brand_name> <product_type> <specifications> <target_keywords>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "voice-of-customer",
+      "skillName": "voice-of-customer",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Synthesizes customer reviews, survey responses, interview transcripts, and complaint logs to extract recurring pain points, desires, and language patterns.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<customer_feedback_transcripts_or_reviews>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "whatsapp-broadcast",
+      "skillName": "whatsapp-broadcast",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Generate high-conversion WhatsApp blast and broadcast message copy that avoids trigger-words which lead to account blocks.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<promo_angle> <product_features> <cta_link>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "youtube-shorts-script",
+      "skillName": "youtube-shorts-script",
+      "plugin": "marketing-id",
+      "domain": "marketing",
+      "description": "Write retention-focused YouTube Shorts scripts (0-60s) and long-form video outlines with localized title/SEO formulas.",
+      "risk_level": "LOW",
+      "rule_type": "commercial-policy",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<video_topic> <video_format_shorts_or_longform>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "ansoff-matrix",
+      "skillName": "ansoff-matrix",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Evaluates corporate growth vectors using Igor Ansoff's Growth Matrix (Market Penetration, Market Development, Product Development, Diversification) to balance growth vs risk.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<productType: existing|new> <marketType: existing|new>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "bcg-matrix",
+      "skillName": "bcg-matrix",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Evaluates corporate portfolio business units using BCG Growth-Share Matrix (Star, Cash Cow, Question Mark, Dog) with KBLI archetype adaptation and deterministic engine scoring.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<kbliCode> <marketGrowthRatePercent> <relativeMarketShare>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "decision-making",
+      "skillName": "decision-making",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Executive decision-making framework powered by Multi-Criteria Decision Analysis (MCDA) weighted scoring to evaluate strategic trade-offs objectively.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<decision_title_and_alternatives_json>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "porter-five-forces",
+      "skillName": "porter-five-forces",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Analyzes industry structure and competitive intensity using Michael Porter's Five Forces Framework (Supplier Power, Buyer Power, Threat of Substitutes, Threat of New Entrants, Industry Rivalry).",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<industry_name_and_market_context>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "porter-three-tests",
+      "skillName": "porter-three-tests",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Evaluates corporate diversification and M&A strategies using Michael Porter's Three Tests (Attractiveness, Cost of Entry, Better-Off) combined with the 12-Step Strategic Protocol.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<kbliCode> <targetIndustry> <costOfEntry> <expectedSynergies>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "scenario-planning",
+      "skillName": "scenario-planning",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Evaluates macro and micro What-If scenarios (exchange rate shifts, cost spikes, demand shocks) using deterministic sensitivity simulation.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<baseCaseRevenue> <cogs> <opex> <revenueDeltaPercent> <cogsDeltaPercent>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "strategic-planning",
+      "skillName": "strategic-planning",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Structured corporate strategic planning framework linking Vision/Mission to Strategic Objectives, KPIs, Initiatives, Timelines, and Resource Allocation.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<company_vision_and_objectives>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "strategic-risk-analysis",
+      "skillName": "strategic-risk-analysis",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Evaluates corporate strategic risks across Likelihood, Impact, and Velocity to classify risks on a 4-Tier Risk Heatmap and generate prioritized mitigations.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<risks_list_json>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "value-chain-analysis",
+      "skillName": "value-chain-analysis",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Deconstructs corporate activities into Primary and Support activities, adapted for Product vs Service vs Capacity business archetypes via the Strategic Protocol.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<kbliCode> <company_operations_description>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "vrio-analysis",
+      "skillName": "vrio-analysis",
+      "plugin": "strategic-id",
+      "domain": "strategic",
+      "description": "Evaluates internal corporate resources and capabilities using the VRIO Framework (Valuable, Rare, Inimitable, Organized) to determine sustainable competitive advantage.",
+      "risk_level": "HIGH",
+      "rule_type": "professional-standard",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<resource_or_capability_description>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "efaktur-helper",
+      "skillName": "efaktur-helper",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Validate and audit e-Faktur tax invoices (Faktur Pajak) for PPN 12% statutory rate and 11/12 DPP Nilai Lain effective burden filings.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<paste_invoice_details_or_qr_url>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "laporan-keuangan-psak",
+      "skillName": "laporan-keuangan-psak",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Structure trial balances into financial statements conforming to Indonesian SAK EMKM / SAK EP accounting standards for bank credit applications and tax audits.",
+      "risk_level": "MEDIUM",
+      "rule_type": "professional-standard",
+      "quality_tier": "source-verified",
+      "capability": {
+        "requires": [
+          "<trial_balance_data> <accounting_standard>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pph-badan-calculator",
+      "skillName": "pph-badan-calculator",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Calculate Corporate Income Tax (PPh Badan) 22% with statutory Pasal 31E UU PPh sliding scale facility and positive/negative fiscal reconciliations.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<gross_turnover> <commercial_net_profit> <positive_fiscal_adjustments> <negative_fiscal_adjustments>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pph-final-umkm",
+      "skillName": "pph-final-umkm",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Calculate statutory 0.5% MSME final income tax under PP No. 55/2022 & PP No. 20/2026 including the Rp 500M annual threshold exemption for Individual Taxpayers.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<ytd_revenue> <current_month_revenue> <taxpayer_type_individual_or_single_person_company_or_cooperative>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pph21-calculator",
+      "skillName": "pph21-calculator",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Calculate Indonesian monthly income tax (PPh Pasal 21) based on the TER (Tarif Efektif Rata-Rata) per PP 58/2023 and PMK 168/2023, supporting December Annual Reconciliation.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pph21-grossup",
+      "skillName": "pph21-grossup",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Solve circular PPh 21 tax allowance equations (Gross-Up) and evaluate PMK 66/2023 benefit-in-kind (Natura/Kenikmatan) monthly taxability thresholds.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<base_salary> <regular_allowances> <ptkp_status> <natura_amount>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "pph23-26-calculator",
+      "skillName": "pph23-26-calculator",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Calculate Indonesian withholding tax on domestic services/rent (PPh 23) and foreign offshore payments (PPh 26 / Tax Treaty DGT Form).",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<gross_amount> <transaction_type> <has_npwp> [has_dgt_form]"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "ppn-ppnbm-advanced",
+      "skillName": "ppn-ppnbm-advanced",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Calculate statutory 12% PPN, PPnBM Luxury Tax (10% to 200%), Other Basis DPP (11/12), import CIF tax bases, and DJP Coretax equalisation.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "regulatory-diff",
+      "skillName": "regulatory-diff",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Compare Indonesian statutory and platform ruleset transitions across effective date windows (e.g. PP 55/2022 vs PP 20/2026 or BPJS 2025 vs 2026).",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "tested",
+      "capability": {
+        "requires": [
+          "<domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "regulatory-impact",
+      "skillName": "regulatory-impact",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Evaluates regulatory changes and ruleset transitions (e.g. PP 55/2022 to PP 20/2026, BPJS wage cap updates) against a company profile to compute business impact, affected domains, required action checklists, and compliance deadlines.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<domain: umkm|bpjs|phk> <fromRuleset> <toRuleset>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tax-audit-preparation",
+      "skillName": "tax-audit-preparation",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Structure tax audit defense packages, DJP SP2DK response letters, and tax equalisation reconciliation statements.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<sp2dk_letter_details_or_tax_audit_year>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tax-cross-border",
+      "skillName": "tax-cross-border",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Evaluate Indonesian offshore withholding taxes (PPh 26 20% vs Tax Treaty / P3B DGT Form rate reductions) and Permanent Establishment (BUT) risk.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tax-optimization",
+      "skillName": "tax-optimization",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Optimize deductible business expenses (UU PPh Arts. 6 vs 9), PPh 21 December annual reconciliations, and PPh 23 withholding efficiency.",
+      "risk_level": "MEDIUM",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<expense_breakdown_or_payroll_reconciliation>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tax-planning",
+      "skillName": "tax-planning",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Evaluate strategic Indonesian tax planning scenarios (PP 20/2026 final tax vs general corporate PPh, gross-up vs net salary tax, dividend vs salary distribution).",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<entity_type_and_revenue_data>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "tax-risk-analysis",
+      "skillName": "tax-risk-analysis",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Analyze Indonesian corporate tax compliance risks, transfer pricing / affiliate transaction indicators (PMK 172/2023), and SP2DK audit triggers.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<financial_data_or_affiliate_transactions>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    },
+    {
+      "id": "transfer-pricing-audit",
+      "skillName": "transfer-pricing-audit",
+      "plugin": "tax-id",
+      "domain": "tax",
+      "description": "Audit intercompany transactions, Thin Capitalization debt-to-equity ratio (DER 4:1 max ceiling), interest deduction barriers, and secondary dividend tax adjustments under PMK 172/2023.",
+      "risk_level": "HIGH",
+      "rule_type": "statutory",
+      "quality_tier": "expert-reviewed",
+      "capability": {
+        "requires": [
+          "<total_interest_bearing_debt> <total_equity> <annual_interest_expense> <is_affiliate_lender>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {}
+      }
+    }
+  ]
+}
