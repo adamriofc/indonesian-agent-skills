@@ -9,7 +9,7 @@ This document defines the architectural specification and interoperability stand
 All skills and computational engines adhere to **3 Core Architectural Principles**:
 
 1. **Decoupled Reasoning & Calculation**: LLMs handle natural language understanding and parameter extraction; Node.js engines (`engines/*.js`) handle invariant calculations.
-2. **KBLI-Aware Context Routing**: Business activities are mapped via KBLI 2020 codes (`engines/kbli-context-router.js`) into Business Archetypes (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`).
+2. **Semantic Business Context Routing**: Business activities are mapped via KBLI codes (`engines/kbli-context-router.js`) into Business Archetypes (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`), while goods/products can be anchored through the Product Context / BTKI layer.
 3. **Closed Security Boundary**: Ingestion skills wrap untrusted user content inside explicit, closed runtime delimiters: `[SYSTEM INSTRUCTION] ... [UNTRUSTED DATA PAYLOAD] ... [END PAYLOAD]`.
 
 ---
@@ -20,7 +20,7 @@ All skills and computational engines adhere to **3 Core Architectural Principles
 Supported across OpenWork Desktop, OpenCode CLI, Claude Code, Cursor IDE, Codex, and custom frameworks:
 
 ```bash
-# Install all 81 skills across 7 plugins
+# Install all 88 skills across 6 canonical plugins
 npx skills add adamriofc/indonesian-business-agent-skills
 
 # Install specific domain plugins
