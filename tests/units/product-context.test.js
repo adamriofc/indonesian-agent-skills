@@ -43,6 +43,8 @@ function runProductContextEngineTests() {
   assert.strictEqual(coffeeRes.totalLandedTaxes, 37400000);
   assert.strictEqual(coffeeRes.totalLandedCost, 137400000);
   assert.strictEqual(coffeeRes.requiresLartasPermit, true);
+  assert.strictEqual(coffeeRes.lartas.status, "REVIEW_REQUIRED");
+  assert.ok(Array.isArray(coffeeRes.classificationEvidence) && coffeeRes.classificationEvidence.length >= 3);
   assert.strictEqual(coffeeRes._production.safeToUse, "REQUIRES_REVIEW");
 
   // 3. Importer API vs Non-API vs No-NPWP PPh 22 Rate Determination (2.5% vs 7.5% vs 15.0%)

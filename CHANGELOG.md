@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.11.0] - 2026-08-13
+
+### Hardened & Full Audit Closure (Semantic Classification Evidence & 15-Check Release Gate Release)
+- **Structured Classification Evidence (`engines/product-context.js`)**: Added explicit `classificationEvidence` array detailing matched product attributes (`product_name`, `category`, `btki_code`) for transparent explainability.
+- **Detailed Lartas Permit Governance**: Added structured `lartas` object (`required`, `authority`, `regulation`, `status`) to clearly distinguish trade restrictions from tariff duties.
+- **15-Check Automated Release Gate (`scripts/validate-release.js`)**: Added Check 15 for deep semantic alignment verification between `docs/benchmark-results/latest.json` and canonical metadata.
+- **SSOT README & Hero SVG Sync**: Updated README hero SVG (`?v=6.11.0`) and aligned all SSOT metadata boundaries across `package.json`, `package-lock.json`, `registry/index.json`, `canonical-metadata.json`, and `release-manifest.json`.
+
 ## [6.10.0] - 2026-08-13
 
 ### Hardened & Refined (Fail-Closed BTKI Commodity Engine & PPh 22 API Semantics Release)

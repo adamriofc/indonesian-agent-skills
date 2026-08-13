@@ -29,7 +29,7 @@ const { execSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 
 function validateRelease() {
-  console.log("🚪 Running Automated Release Gate (14-Check Pipeline)...\n");
+  console.log("🚪 Running Automated Release Gate (15-Check Pipeline)...\n");
   let errors = 0;
   let checksPassed = 0;
 
@@ -219,7 +219,7 @@ function validateRelease() {
   }
 
   // 14. High & Critical Dependency Vulnerability Audit Check (npm audit)
-  console.log("  [14/14] Executing High & Critical Dependency Vulnerability Audit Check...");
+  console.log("  [14/15] Executing High & Critical Dependency Vulnerability Audit Check...");
   try {
     execSync('npm audit --audit-level=high', { cwd: ROOT, stdio: 'pipe' });
     console.log(`    ✅ High & Critical dependency vulnerability audit passed (0 high/critical vulnerabilities found)`);
@@ -229,12 +229,29 @@ function validateRelease() {
     errors++;
   }
 
+  // 15. Deep Benchmark Artifact Semantic Validation
+  console.log("  [15/15] Verifying Benchmark Artifact Semantic Alignment...");
+  try {
+    const artifact = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/benchmark-results/latest.json'), 'utf8'));
+    const domainCount = artifact.domains ? Object.keys(artifact.domains).length : 0;
+    if (domainCount !== metadata.benchmarkDomains) {
+      console.error(`❌ Benchmark Artifact Semantic Mismatch: artifact contains ${domainCount} domains, metadata expects ${metadata.benchmarkDomains}`);
+      errors++;
+    } else {
+      console.log(`    ✅ Benchmark artifact semantic alignment verified (${domainCount} domains, 0 discrepancies)`);
+      checksPassed++;
+    }
+  } catch (e) {
+    console.error(`❌ Benchmark Artifact Semantic Check Failed: ${e.message}`);
+    errors++;
+  }
+
   console.log(`\n---------------------------------------------------`);
   if (errors > 0) {
-    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/14 checks passed)`);
+    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/15 checks passed)`);
     process.exit(1);
   } else {
-    console.log(`✅ Release Gate PASSED 100%! All 14 Release Integrity Checks Passed.`);
+    console.log(`✅ Release Gate PASSED 100%! All 15 Release Integrity Checks Passed.`);
   }
 }
 

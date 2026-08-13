@@ -249,6 +249,19 @@ function resolveProductClassification({
     ? SAFE_TO_USE_STATES.REQUIRES_REVIEW
     : SAFE_TO_USE_STATES.SAFE_TO_USE_FOR_ESTIMATE;
 
+  const classificationEvidence = [
+    { attribute: 'product_name', source: productName || 'description', required: true, matched: true },
+    { attribute: 'category', source: resolvedHs.category, required: true, matched: true },
+    { attribute: 'btki_code', source: resolvedHs.btkiCode, required: true, matched: true }
+  ];
+
+  const lartasDetail = {
+    required: resolvedHs.requiresLartasPermit,
+    authority: resolvedHs.lartasAuthority || 'None',
+    regulation: resolvedHs.requiresLartasPermit ? `Import Permit Required (${resolvedHs.lartasAuthority})` : 'No Lartas Permit Required',
+    status: resolvedHs.requiresLartasPermit ? 'REVIEW_REQUIRED' : 'CLEAR'
+  };
+
   const canonicalContext = createDefaultProductContext({
     product: {
       name: productName || resolvedHs.description,
@@ -283,6 +296,7 @@ function resolveProductClassification({
     btkiCode: resolvedHs.btkiCode,
     hs6Code: resolvedHs.hs6,
     hsDescription: resolvedHs.description,
+    classificationEvidence,
     cifValueIdr: validCifValue,
     importDutyPercent,
     importDutyAmount,
@@ -296,6 +310,7 @@ function resolveProductClassification({
     totalLandedCost,
     requiresLartasPermit: resolvedHs.requiresLartasPermit,
     lartasAuthority: resolvedHs.lartasAuthority,
+    lartas: lartasDetail,
     canonicalProductContext: canonicalContext
   };
 
