@@ -1,63 +1,55 @@
 # Roadmap
 
-Status legend: `[x]` shipped · `[→]` in progress · `[ ]` planned.
+Status legend: `[x]` shipped · `[→]` active hardening / validation · `[ ]` future-gated.
 
-## Shipped (`v2.0.1`)
+## Current State — v6.11.2
 
-- [x] **Regulatory Diff Engine (`regulatory-diff`)** — deterministic comparison across temporal ruleset windows (`UMKM-2022` ➔ `UMKM-2026`, `BPJS-2025` ➔ `BPJS-2026`)
-- [x] **PP 20/2026 & PPN 12% Coretax updates** — `UMKM-2026` ruleset, e-Faktur 12% statutory rate & 11/12 DPP Nilai Lain effective 11% burden
-- [x] **Claude Code Marketplace Manifest & Portability** — official `$schema`, `owner` object, `source` declarations, and `npx skills add` support
-- [x] **Web Playground Generator (`scripts/build-playground.js`)** — client-side static calculator interface (`docs/playground.html`)
-- [x] **LLM vs Deterministic Benchmark Methodology** — evaluation framework (`docs/LLM_BENCHMARK_METHODOLOGY.md`)
-- [x] **Named Expert Register** — Section 7 in `PROVENANCE.md` (CPAs, employment law consultants, e-commerce specialists)
+The repository is currently in **stabilization & evidence mode**. The six canonical business-domain plugins and the existing reasoning substrate are intentionally feature-stable. The priority is correctness, documentation integrity, release governance, independent validation, and distribution — not horizontal feature expansion.
 
-## Shipped (`v2.0.0`)
+### Shipped capabilities
 
-- [x] **Finance Core (`finance-id`)** — 12 business finance & accounting skills + 8 deterministic engines (break-even, depreciation SL/DDB/SYD, NPV, IRR, loan amortization, 14 financial ratios, working capital, EOQ) + golden corpus (11 cases) + 100% domain benchmark
-- [x] **Rebrand & repositioning** — repo name `indonesian-business-agent-skills`, tagline *"Give AI agents a business brain for Indonesia."*, CORE/BUSINESS/CREATIVE architecture, scope 6 domains · 54 skills · 16 engines
-- [x] **Finance & Accounting Standard Register** — PROVENANCE.md section 6 (`STANDARD_REFERENCE` access path; PSAK 1/16/23, SAK EMKM from IAI)
-- [x] **Benchmark harness** — finance domain + deep-array match + space-tolerant `--json-report` parser
+- [x] **6 canonical plugins / 88 Agent Skills** — `legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`.
+- [x] **39 deterministic engines** with zero third-party runtime dependencies.
+- [x] **Semantic Business Context** — entity, KBLI/activity, Product Context, facts, relations, constraints, objectives, and decision options.
+- [x] **Business Archetype routing** — `PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`.
+- [x] **Product Context / BTKI layer** — curated BTKI 2022 commodity classification, temporal resolution, tariff/tax separation, Lartas governance, classification evidence, and fail-closed ambiguity handling.
+- [x] **Regulatory temporal rulesets & provenance** — effective windows, lifecycle states, SHA-256 integrity, and auditable source register.
+- [x] **Cross-domain deterministic reasoning** — legal, tax, HR, finance, marketing, and strategic engines consuming shared context.
+- [x] **121 golden cases / 27 benchmark domains / 424 benchmark assertions** plus cross-engine invariants.
+- [x] **Apples-to-apples LLM evaluation harness** with 5-condition ablation and blind rubric methodology.
+- [x] **Production governance L3** — Production Decision-Support with explicit human-review boundaries.
+- [x] **Release engineering** — SSOT metadata, benchmark artifacts, SHA-256 verification, dependency audit, package smoke test, performance gate, documentation validation, and automated release gate.
 
-## Shipped (`v1.1.0`)
+## Active Hardening & Validation
 
-- [x] **Release Trust Anchor** — `SHA256SUMS.txt` + `scripts/sha256sums.sh`, verified in CI
-- [x] **Benchmark harness** — `scripts/benchmark.js` + `docs/BENCHMARK.md` (100% corpus accuracy, determinism, throughput; LLM baseline ready, awaiting external run)
-- [x] **Provenance precision** — per-rule Access Path, Audit Scope & Non-Claims, 2 dead-link fixes + 5 precision fixes
-- [x] **15 short skills enriched** (Scope & Safety + Worked Example) — content depth consistency
-- [x] **Community readiness** — CODE_OF_CONDUCT, regulatory issue template, GitHub topics
-- [x] **Metadata-backed compatibility matrix** — Verification Method + Last Verified columns per platform (honest: OpenWork 🟢 schema-validated; others 🟡 Adapter / 🔵 Manual)
+- [→] **Documentation integrity** — validate current-state metrics and architecture claims across README, Skill Protocol, Roadmap, Benchmark, Metrics, Release, and governance documents, including fenced code blocks and historical-vs-current section boundaries.
+- [→] **External domain validation** — obtain independent review from Indonesian tax, employment-law, accounting, and/or business practitioners using cases they supply or approve. Results will be published with scope, reviewer identity (where permission is granted), methodology, and limitations.
+- [→] **Community / maintainer continuity** — maintain an explicit hand-off runbook for ruleset ownership, incident response, and release recovery; pursue a trusted co-maintainer only when a suitable person is actually available.
+- [→] **Empirical LLM benchmark publication** — run the same model on the same held-out business cases with Vanilla vs Context vs Skills vs Engines vs Full Stack conditions and publish reproducible results.
+- [→] **Release governance** — treat normal releases as deliberate stabilization checkpoints. Emergency security or statutory corrections are the only exceptions to an accelerated release cadence.
 
-## Shipping (`v1.0.0`)
+## Future-Gated (Do Not Expand Scope Prematurely)
 
-- [x] 42 enterprise skills across 5 domain plugins (legal-id, tax-payroll-id, hr-id, ecommerce-id, content-lokal-id)
-- [x] 8 deterministic calculation engines with hybrid execution (LLM extraction + Node.js math)
-- [x] SSOT rulesets with temporal versioning (`engines/rules/pph21.json`, `bpjs.json`)
-- [x] Cryptographic SHA-256 ruleset integrity with byte-level tamper detection
-- [x] Golden corpus, matrix tests (425 PPh21 + 225 PHK), injection & adversarial security tests
-- [x] CI matrix Node 20/22/24, full `npm test` green
-- [x] Skill metadata: `risk_level` + `rule_type` on all 42 skills
-- [x] Trust Envelope (confidence contract) on flagship engine-driven skills
-- [x] Regulatory Update Pipeline, Granular Provenance Register, Community governance docs
+- [ ] **Regional derivatives** — Malaysia, Singapore, Philippines only after Indonesian core has meaningful external validation and documented demand.
+- [ ] **Ruleset lifecycle promotion tooling** — scripted `DRAFT → VERIFIED → RELEASED` promotion after governance evidence is mature enough to justify automation.
+- [ ] **Ruleset UI / diff tooling** — human-readable effective-window diffs and changelog generation when maintenance volume justifies it.
+- [ ] **Plugin registry sync automation** — publish automation only when external contributor/adoption volume makes manual publishing a bottleneck.
+- [ ] **Future Indonesian regulatory versions** — add new statutory rulesets only when an official source and effective-date evidence exist.
 
-## In Progress
+## Explicit Non-Goals / Feature Boundary
 
-- [→] **Finance × Tax × HR integration** — cross-plugin workflows (finance output → tax entries via efaktur-helper → payroll via pph21/bpjs)
-- [→] **Operations domain (Phase 3)** — `operations-id` plugin (procurement, inventory, logistics SOP)
-- [→] Ruleset lifecycle promotion tooling (scripted `DRAFT → VERIFIED → RELEASED`)
-- [→] Signed manifest anchoring (Git tag signing / attestation for integrity chain-of-custody)
-- [→] **LLM baseline benchmark run** — `scripts/benchmark.js --llm` with a production model + publishing results in `docs/BENCHMARK.md` (no-fiction: the table is only populated after a real run)
+The roadmap intentionally does **not** add new top-level business plugins such as `operations-id`, `branding-id`, `payroll-id`, `customer-id`, or `transaction-id` merely for completeness. Product Context is a shared semantic primitive, not a new top-level plugin. The repository is also not intended to become a customs/INSW filing platform, ERP, vector database, graph database, custom agent runtime, MCP/A2A orchestration platform, or licensed tax/legal filing product.
 
-## Planned
+## Historical Release Milestones
 
-- [ ] **Compatibility verification levels** — E2E register for OpenCode CLI & Claude Code (moving 🟡 → 🟢 with run evidence)
-- [ ] **Regional derivatives** — Malaysia, Singapore, Philippines statutory modules reusing the same ruleset architecture (preview: architecture is domain-agnostic)
-- [ ] **Ruleset UI/diff tooling** — human-readable diff between effective windows and changelog automation from `REGULATORY_CHANGELOG.md`
-- [ ] **Plugin registry sync automation** — one-command publish of skill updates to OpenWork Cloud
-- [ ] **Indonesian tax year 2027 ruleset** — pre-release `DRAFT` rulesets published 90 days before gazette effective dates
+The repository's early releases are retained as history, not as the current roadmap. Major milestones include:
 
-## Non-Goals
+- **v1.x** — foundational hybrid LLM + deterministic engine architecture, provenance, security, CI, and initial plugins.
+- **v2.x** — finance domain, rebrand to `indonesian-business-agent-skills`, and expanded provenance/benchmarking.
+- **v6.5.x** — release gate, canonical metadata, and documentation SSOT.
+- **v6.6.x** — empirical LLM evaluation harness, ablation study, blind rubric, and statistics.
+- **v6.7.x** — production-readiness model and operational governance stabilization checkpoint.
+- **v6.8.x** — expanded golden corpus, cross-engine invariants, and release trace manifest.
+- **v6.9.x–v6.11.2** — Product Context / BTKI, fail-closed classification, tax-treatment semantics, semantic context normalization, release provenance hardening, and CodeQL remediation.
 
-- Replacing licensed tax/legal/accounting software. This is decision-support intelligence, not filing software.
-- Non-Indonesian regulatory domains before the regional-derivatives milestone.
-- Fabricated historical rates: rulesets only exist for windows we can prove.
-- Trading & investment products (stock/crypto analysis) — out of the business-finance core scope.
+> **Governance note:** the v6.7 "feature freeze" announcement should be understood as a **stabilization checkpoint**: no redundant horizontal expansion. Later Product Context work was an explicit closure of a documented ontology gap, not a change of product direction. Current policy is: do not expand capability surface unless the change closes a verified architectural gap or a high-severity correctness/security issue.
