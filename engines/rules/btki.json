@@ -3,7 +3,8 @@
     {
       "rulesetId": "BTKI-2022",
       "rulesetVersion": "1.0.0",
-      "statute": "Buku Tarif Kepabeanan Indonesia 2022 (PMK No. 26/PMK.010/2022 jo. AHTN 2022)",
+      "statute": "Buku Tarif Kepabeanan Indonesia 2022 (PMK No. 26/PMK.010/2022 jo. PMK No. 10/2024 & AHTN 2022)",
+      "coverage": "CURATED_BTKI_2022_SUBSET",
       "effective_from": "2022-04-01",
       "effective_to": "Infinity",
       "tariff_entries": [
@@ -14,9 +15,22 @@
           "category": "agricultural_commodities",
           "importDutyPercent": 20,
           "ppnPercent": 12,
-          "pph22ImportPercent": 2.5,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
           "requiresLartasPermit": true,
           "lartasAuthority": "Karantina Pertanian & BPOM"
+        },
+        {
+          "hs6": "100630",
+          "btkiCode": "1006.30.99",
+          "description": "Beras olahan premium (Premium milled rice)",
+          "category": "essential_food_staples",
+          "importDutyPercent": 0,
+          "ppnPercent": 0,
+          "ppnTreatment": "EXEMPT",
+          "pph22ApiPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Bapanas & Kementan"
         },
         {
           "hs6": "190531",
@@ -25,9 +39,22 @@
           "category": "processed_food",
           "importDutyPercent": 15,
           "ppnPercent": 12,
-          "pph22ImportPercent": 2.5,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
           "requiresLartasPermit": true,
           "lartasAuthority": "BPOM ML/MD"
+        },
+        {
+          "hs6": "300490",
+          "btkiCode": "3004.90.99",
+          "description": "Obat-obatan formulasi untuk dosis eceran (Formulated medicaments for retail sale)",
+          "category": "pharmaceuticals",
+          "importDutyPercent": 5,
+          "ppnPercent": 12,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "BPOM Izin Edar Alkes & Obat"
         },
         {
           "hs6": "330499",
@@ -36,7 +63,8 @@
           "category": "cosmetics_personal_care",
           "importDutyPercent": 10,
           "ppnPercent": 12,
-          "pph22ImportPercent": 2.5,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
           "requiresLartasPermit": true,
           "lartasAuthority": "BPOM Izin Edar"
         },
@@ -47,9 +75,34 @@
           "category": "apparel_textile",
           "importDutyPercent": 25,
           "ppnPercent": 12,
-          "pph22ImportPercent": 2.5,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
           "requiresLartasPermit": true,
           "lartasAuthority": "Permendag Lartas Tekstil"
+        },
+        {
+          "hs6": "720839",
+          "btkiCode": "7208.39.90",
+          "description": "Baja gulungan panas tidak diolah (Hot rolled iron or steel coils)",
+          "category": "metals_heavy_industry",
+          "importDutyPercent": 12.5,
+          "ppnPercent": 12,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Permendag Lartas Besi Baja"
+        },
+        {
+          "hs6": "847130",
+          "btkiCode": "8471.30.20",
+          "description": "Komputer jinjing dan laptop (Portable laptops and notebooks)",
+          "category": "electronics_it",
+          "importDutyPercent": 0,
+          "ppnPercent": 12,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Kominfo SDPPI & TKDN"
         },
         {
           "hs6": "851713",
@@ -58,7 +111,8 @@
           "category": "electronics_telecom",
           "importDutyPercent": 0,
           "ppnPercent": 12,
-          "pph22ImportPercent": 2.5,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
           "requiresLartasPermit": true,
           "lartasAuthority": "Kominfo SDPPI & TKDN Kemenperin"
         },
@@ -69,9 +123,34 @@
           "category": "automotive_ev",
           "importDutyPercent": 0,
           "ppnPercent": 12,
-          "pph22ImportPercent": 2.5,
+          "ppnTreatment": "INCENTIVE_DTP",
+          "pph22ApiPercent": 2.5,
           "requiresLartasPermit": true,
           "lartasAuthority": "Kemenhub SUT & Kemenperin Incentive"
+        },
+        {
+          "hs6": "901890",
+          "btkiCode": "9018.90.90",
+          "description": "Peralatan dan instrumen medis (Medical instruments and appliances)",
+          "category": "medical_devices",
+          "importDutyPercent": 5,
+          "ppnPercent": 12,
+          "ppnTreatment": "STANDARD_12",
+          "pph22ApiPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "Kemenkes Izin Edar Alkes"
+        },
+        {
+          "hs6": "940360",
+          "btkiCode": "9403.60.90",
+          "description": "Mebel dan furnitur kayu (Wooden furniture)",
+          "category": "furniture_manufacturing",
+          "importDutyPercent": 15,
+          "ppnPercent": 12,
+          "ppnTreatment": "NON_LUXURY_DPP_11_12",
+          "pph22ApiPercent": 2.5,
+          "requiresLartasPermit": true,
+          "lartasAuthority": "SVLK KLHK"
         }
       ]
     }

@@ -26,10 +26,10 @@
   <rect x="0" y="0" width="1200" height="4" rx="2" fill="url(#flag-grad)"/>
   
   <!-- Top Right Release Version Badge -->
-  <g transform="translate(1030, 36)">
-    <rect x="0" y="0" width="122" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <g transform="translate(1020, 36)">
+    <rect x="0" y="0" width="132" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
     <circle cx="16" cy="14" r="4" fill="#34D399"/>
-    <text x="28" y="18" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#F8FAFC" letter-spacing="0.3">v6.7.0 RELEASE</text>
+    <text x="28" y="18" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#F8FAFC" letter-spacing="0.3">v6.10.0 RELEASE</text>
   </g>
 
   <!-- Main Title & Subtitle -->
@@ -51,19 +51,19 @@
     <!-- Stat 1: Agent Skills -->
     <g transform="translate(48, 0)">
       <text x="0" y="0" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.8">AGENT SKILLS</text>
-      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#38BDF8">87 Skills (6 Plugins)</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#38BDF8">88 Skills (6 Plugins)</text>
     </g>
 
     <!-- Stat 2: Computational Engines -->
     <g transform="translate(278, 0)">
       <text x="0" y="0" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.8">COMPUTATIONAL ENGINES</text>
-      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#34D399">38 Deterministic</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#34D399">39 Deterministic</text>
     </g>
 
     <!-- Stat 3: Golden Corpus -->
     <g transform="translate(518, 0)">
       <text x="0" y="0" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.8">GOLDEN CORPUS</text>
-      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#FBBF24">94 Cases (27 Domains)</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#FBBF24">121 Cases (27 Domains)</text>
     </g>
 
     <!-- Stat 4: Benchmark Assertions -->
@@ -75,7 +75,7 @@
     <!-- Stat 5: Release Boundary -->
     <g transform="translate(988, 0)">
       <text x="0" y="0" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.8">RELEASE BOUNDARY</text>
-      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#F43F5E">v6.7.0 (Level L3)</text>
+      <text x="0" y="24" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="17" font-weight="700" fill="#F43F5E">v6.10.0 (Level L3)</text>
     </g>
   </g>
 </svg>

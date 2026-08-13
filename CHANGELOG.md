@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.10.0] - 2026-08-13
+
+### Hardened & Refined (Fail-Closed BTKI Commodity Engine & PPh 22 API Semantics Release)
+- **Fail-Closed Classification Safeguard (P0 Audit Fix)**: `engines/product-context.js` updated to enforce zero-fabrication math on `UNRESOLVED` or `AMBIGUOUS` commodity statuses; landed tax calculations are withheld (`importDutyAmount: null`, `nilaiImpor: null`, `ppnAmount: null`, `totalLandedCost: null`) and flag `safeToUse: "REQUIRES_REVIEW"`.
+- **PPh 22 Import API Semantics Correction (P0 Audit Fix)**: Importer status now strictly evaluates `usesApi` (API Importer rate 2.5% vs Non-API rate 7.5% vs No-NPWP penalty 15.0%), rectifying the previous NPWP-only ambiguity.
+- **PPN Treatment Schemes (P0 Audit Fix)**: Supported multi-scheme PPN import calculations (`STANDARD_12`, `NON_LUXURY_DPP_11_12` effective 11% burden, `EXEMPT`, `INCENTIVE_DTP`).
+- **Temporal Date Resolution (P0 Audit Fix)**: `getBtkirulesetForDate(dateStr)` dynamically resolves active BTKI rulesets by statutory effective date window.
+- **BTKI 2022 Curated Dataset Expansion (P1 Audit Fix)**: Expanded `engines/rules/btki.json` to 12 curated commodities (Coffee 0901, Rice 1006, Food 1905, Medicaments 3004, Cosmetics 3304, Apparel 6109, Steel Coils 7208, Laptops 8471, Smartphones 8517, EV CBU 8703, Medical Instruments 9018, Furniture 9403) with SHA-256 integrity hash protection (`d5ca820d...`).
+- **Strict Release Security Audit (P0 Audit Fix)**: Added Check 14 to `scripts/validate-release.js` and updated `.github/workflows/ci-release.yml` for blocking `npm audit --audit-level=high` checks.
+- **SSOT README & Hero SVG Sync**: Updated README hero SVG (`?v=6.10.0`), ASCII Semantic Business Context Graph architecture diagram, and documentation SSOT metrics.
+
 ## [6.9.0] - 2026-08-12
 
 ### Added & Architecture Extended (Product Context & Business Reasoning Substrate Release)

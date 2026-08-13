@@ -33,7 +33,7 @@ Maintainers must execute the following checklist prior to creating a release tag
 
 [3] Deterministic Benchmark Execution & Artifact Update
     └─► node scripts/benchmark.js --json-report docs/benchmark-results/latest.json
-        (Verifies 94 golden cases across 27 domains with 100% determinism)
+        (Verifies 121 golden cases across 27 domains with 100% determinism)
 
 [4] Documentation Consistency Validation
     └─► npm run validate:docs
@@ -53,7 +53,7 @@ Maintainers must execute the following checklist prior to creating a release tag
 
 [8] Automated Release Gate
     └─► npm run validate:release
-        (Executes 13-check automated release gate pipeline)
+        (Executes 14-check automated release gate pipeline including blocking npm audit & release manifest validation)
 
 [9] Git Tagging & GitHub Release
     └─► git tag vX.Y.Z && git push origin vX.Y.Z

@@ -2,10 +2,14 @@
  * Product Context & Commodity Classification Engine (`engines/product-context.js`)
  *
  * Provides a canonical Product Context Layer for commodity classification,
- * HS Code / BTKI 2022 mapping, tariff calculation (Import Duty, PPN 12%, PPh 22),
+ * BTKI 2022 / HS 6-digit & AHTN 8-digit mapping, tariff calculation
+ * (Import Duty, PPN 12% / DPP Nilai Lain / Exempt / DTP, PPh 22 Impor API vs Non-API),
  * and Lartas regulatory requirement analysis.
  *
- * Enforces cryptographic ruleset runtime integrity and fail-closed validation.
+ * Enforces cryptographic ruleset runtime integrity and fail-closed validation:
+ *  - UNRESOLVED or AMBIGUOUS classifications NEVER produce fabricated landed tax math.
+ *  - Importer API status (`usesApi`) strictly determines PPh 22 Import rate (2.5% vs 7.5% vs 15.0%).
+ *  - Temporal date resolution matches active ruleset by effective date window.
  */
 
 const { verifyRulesetIntegrity } = require('./rules/integrity');
@@ -25,6 +29,36 @@ const PRODUCT_CLASSIFICATION_STATUSES = {
   REVIEW_REQUIRED: 'REVIEW_REQUIRED',
   SUPERSEDED: 'SUPERSEDED'
 };
+
+const PPN_TREATMENTS = {
+  STANDARD_12: 'STANDARD_12',
+  NON_LUXURY_DPP_11_12: 'NON_LUXURY_DPP_11_12',
+  EXEMPT: 'EXEMPT',
+  INCENTIVE_DTP: 'INCENTIVE_DTP'
+};
+
+/**
+ * Resolves active BTKI ruleset by effective date window.
+ */
+function getBtkirulesetForDate(dateStr) {
+  const activeDateStr = dateStr || new Date().toISOString().slice(0, 10);
+  const checkDate = new Date(activeDateStr);
+  
+  if (isNaN(checkDate.getTime())) {
+    throw new TypeError(`INVALID_INPUT: 'dateStr' must be a valid ISO date string (received: ${dateStr})`);
+  }
+
+  for (const r of btkiRules.rulesets) {
+    const fromDate = new Date(r.effective_from);
+    const toDate = r.effective_to === 'Infinity' ? new Date('9999-12-31') : new Date(r.effective_to);
+    
+    if (checkDate >= fromDate && checkDate <= toDate) {
+      return r;
+    }
+  }
+
+  return btkiRules.rulesets[0]; // Default to baseline
+}
 
 /**
  * Creates a default canonical Product Context object.
@@ -73,7 +107,7 @@ function createDefaultProductContext(overrides = {}) {
 }
 
 /**
- * Resolves product classification & tariff duties against BTKI 2022.
+ * Resolves product classification & tariff duties against BTKI rulesets.
  */
 function resolveProductClassification({
   productName = '',
@@ -81,14 +115,20 @@ function resolveProductClassification({
   attributes = {},
   targetHsCode = null,
   cifValueIdr = 0,
+  importerStatus = {},
   hasNpwp = true,
+  usesApi = true,
   dateStr = null
 }) {
   const activeDateStr = dateStr || new Date().toISOString().slice(0, 10);
-  const activeRuleset = btkiRules.rulesets[0];
+  const activeRuleset = getBtkirulesetForDate(activeDateStr);
   const entries = activeRuleset.tariff_entries;
 
   const validCifValue = requireRupiah(cifValueIdr, 'cifValueIdr');
+
+  // Importer status normalization (API vs Non-API vs No-NPWP)
+  const apiActive = importerStatus.usesApi !== undefined ? Boolean(importerStatus.usesApi) : Boolean(usesApi);
+  const npwpActive = importerStatus.hasNpwp !== undefined ? Boolean(importerStatus.hasNpwp) : Boolean(hasNpwp);
 
   let candidate = null;
   let matches = [];
@@ -98,6 +138,7 @@ function resolveProductClassification({
   if (targetHsCode) {
     const cleanHs = String(targetHsCode).replace(/[\.\s]/g, '');
     candidate = entries.find(e => e.btkiCode.replace(/[\.\s]/g, '') === cleanHs || e.hs6 === cleanHs.slice(0, 6));
+    if (candidate) matches = [candidate];
   }
 
   if (!candidate && queryText.trim()) {
@@ -109,44 +150,102 @@ function resolveProductClassification({
 
     if (matches.length === 1) {
       candidate = matches[0];
-    } else if (matches.length > 1) {
-      candidate = matches[0]; // Primary candidate
     }
   }
 
-  // Fallback to general goods if unclassified
-  const isAmbiguous = !targetHsCode && matches.length > 1;
-  const isUnresolved = !candidate;
+  const isAmbiguous = matches.length > 1;
+  const isUnresolved = !candidate && matches.length === 0;
 
-  const resolvedHs = candidate || {
-    hs6: '000000',
-    btkiCode: '0000.00.00',
-    description: 'Unclassified General Goods',
-    category: 'general_goods',
-    importDutyPercent: 10,
-    ppnPercent: 12,
-    pph22ImportPercent: hasNpwp ? 2.5 : 7.5,
-    requiresLartasPermit: false,
-    lartasAuthority: 'None'
-  };
+  // Fail-Closed Guard: UNRESOLVED or AMBIGUOUS status NEVER produces fabricated landed tax calculations
+  if (isUnresolved || isAmbiguous) {
+    const classificationStatus = isAmbiguous
+      ? PRODUCT_CLASSIFICATION_STATUSES.AMBIGUOUS
+      : PRODUCT_CLASSIFICATION_STATUSES.UNRESOLVED;
+
+    const canonicalContext = createDefaultProductContext({
+      product: { name: productName || 'Unclassified Commodity', description, specifications: attributes },
+      classification: { scheme: 'BTKI', version: activeRuleset.rulesetId },
+      status: classificationStatus,
+      confidence: 'LOW',
+      evidence: [
+        isAmbiguous ? `Ambiguous: Matched ${matches.length} candidate BTKI tariff lines` : 'Unresolved: No matching BTKI tariff line found',
+        'Fail-Closed Safety: Landed tax calculation withheld until classification is resolved'
+      ]
+    });
+
+    const baseResult = {
+      productName: canonicalContext.product.name,
+      classificationStatus,
+      btkiCode: null,
+      hs6Code: null,
+      hsDescription: null,
+      candidates: matches.map(m => ({ btkiCode: m.btkiCode, description: m.description, category: m.category })),
+      cifValueIdr: validCifValue,
+      importDutyAmount: null,
+      nilaiImpor: null,
+      ppnAmount: null,
+      pph22Amount: null,
+      totalLandedTaxes: null,
+      totalLandedCost: null,
+      requiresLartasPermit: null,
+      lartasAuthority: null,
+      canonicalProductContext: canonicalContext
+    };
+
+    return buildResultEnvelope({
+      result: baseResult,
+      status: RESULT_STATUSES.REQUIRES_REVIEW,
+      safeToUse: SAFE_TO_USE_STATES.REQUIRES_REVIEW,
+      confidence: 'LOW',
+      evidence: canonicalContext.evidence,
+      provenance: {
+        rulesetId: activeRuleset.rulesetId,
+        statute: activeRuleset.statute,
+        calculatedAt: activeDateStr
+      }
+    });
+  }
+
+  // Single exact candidate resolved
+  const resolvedHs = candidate;
+
+  // PPh 22 Import Rate Determination (API 2.5%, Non-API 7.5%, No-NPWP 15.0%)
+  let pph22RatePercent = 2.5;
+  if (!npwpActive) {
+    pph22RatePercent = 15.0; // 100% penalty on non-API rate
+  } else if (!apiActive) {
+    pph22RatePercent = 7.5; // Non-API rate
+  } else {
+    pph22RatePercent = resolvedHs.pph22ApiPercent || 2.5;
+  }
 
   // Tariff duty calculations
   const importDutyPercent = resolvedHs.importDutyPercent;
-  const ppnPercent = resolvedHs.ppnPercent;
-  const pph22RatePercent = hasNpwp ? resolvedHs.pph22ImportPercent : resolvedHs.pph22ImportPercent * 3; // 2.5% vs 7.5%
-
   const importDutyAmount = Math.round(validCifValue * (importDutyPercent / 100));
   const nilaiImpor = validCifValue + importDutyAmount;
-  const ppnAmount = Math.round(nilaiImpor * (ppnPercent / 100));
+
+  // PPN Treatment Calculation
+  const ppnTreatment = resolvedHs.ppnTreatment || PPN_TREATMENTS.STANDARD_12;
+  let ppnPercent = 12;
+  let ppnAmount = 0;
+
+  if (ppnTreatment === PPN_TREATMENTS.EXEMPT || ppnTreatment === PPN_TREATMENTS.INCENTIVE_DTP) {
+    ppnPercent = 0;
+    ppnAmount = 0;
+  } else if (ppnTreatment === PPN_TREATMENTS.NON_LUXURY_DPP_11_12) {
+    ppnPercent = 11; // Effective 11% burden (12% x 11/12)
+    ppnAmount = Math.round(nilaiImpor * (11 / 12) * 0.12);
+  } else {
+    ppnPercent = 12;
+    ppnAmount = Math.round(nilaiImpor * 0.12);
+  }
+
   const pph22Amount = Math.round(nilaiImpor * (pph22RatePercent / 100));
   const totalLandedTaxes = importDutyAmount + ppnAmount + pph22Amount;
   const totalLandedCost = validCifValue + totalLandedTaxes;
 
-  const classificationStatus = isUnresolved
-    ? PRODUCT_CLASSIFICATION_STATUSES.UNRESOLVED
-    : (isAmbiguous ? PRODUCT_CLASSIFICATION_STATUSES.AMBIGUOUS : PRODUCT_CLASSIFICATION_STATUSES.CLASSIFIED);
-
-  const safeToUse = isUnresolved || isAmbiguous || resolvedHs.requiresLartasPermit
+  const classificationStatus = PRODUCT_CLASSIFICATION_STATUSES.CLASSIFIED;
+  const safeToUse = resolvedHs.requiresLartasPermit
     ? SAFE_TO_USE_STATES.REQUIRES_REVIEW
     : SAFE_TO_USE_STATES.SAFE_TO_USE_FOR_ESTIMATE;
 
@@ -168,10 +267,12 @@ function resolveProductClassification({
       unitCostIdr: totalLandedCost
     },
     status: classificationStatus,
-    confidence: classificationStatus === PRODUCT_CLASSIFICATION_STATUSES.CLASSIFIED ? 'HIGH' : 'MEDIUM',
+    confidence: 'HIGH',
     evidence: [
       `BTKI 2022 Code: ${resolvedHs.btkiCode}`,
       `Statute: ${activeRuleset.statute}`,
+      `PPN Treatment: ${ppnTreatment}`,
+      `PPh 22 Impor Rate: ${pph22RatePercent}% (${apiActive ? 'API Importer' : (npwpActive ? 'Non-API Importer' : 'No-NPWP Penalty')})`,
       `Lartas Status: ${resolvedHs.requiresLartasPermit ? 'Requires Permit (' + resolvedHs.lartasAuthority + ')' : 'No Lartas Permit Required'}`
     ]
   });
@@ -186,6 +287,7 @@ function resolveProductClassification({
     importDutyPercent,
     importDutyAmount,
     nilaiImpor,
+    ppnTreatment,
     ppnPercent,
     ppnAmount,
     pph22RatePercent,
@@ -199,9 +301,9 @@ function resolveProductClassification({
 
   return buildResultEnvelope({
     result: baseResult,
-    status: classificationStatus === PRODUCT_CLASSIFICATION_STATUSES.CLASSIFIED ? RESULT_STATUSES.COMPLETE : RESULT_STATUSES.REQUIRES_REVIEW,
+    status: RESULT_STATUSES.COMPLETE,
     safeToUse,
-    confidence: canonicalContext.confidence,
+    confidence: 'HIGH',
     evidence: canonicalContext.evidence,
     provenance: {
       rulesetId: activeRuleset.rulesetId,
@@ -215,6 +317,7 @@ function resolveProductClassification({
 module.exports = {
   STANDARD_PRODUCT_CONTEXT_SCHEMA_VERSION,
   PRODUCT_CLASSIFICATION_STATUSES,
+  PPN_TREATMENTS,
   createDefaultProductContext,
   resolveProductClassification
 };

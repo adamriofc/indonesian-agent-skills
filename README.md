@@ -5,7 +5,7 @@
 **Open-source Indonesian business intelligence for AI agents — combining regulatory-grounded skills, temporal rulesets, deterministic engines, and auditable provenance.**
 
 <p align="center">
-  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.7.0" alt="Indonesian Business Agent Skills Banner" width="100%">
+  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.10.0" alt="Indonesian Business Agent Skills Banner" width="100%">
 </p>
 
 <p align="center">
@@ -23,13 +23,13 @@
 <!-- GENERATED:STATS -->
 | Metric | Single Source of Truth Value | Measurement Scope |
 |---|---|---|
-| **Repository Version** | `v6.9.0` | SemVer release boundary |
+| **Repository Version** | `v6.10.0` | SemVer release boundary |
 | **Canonical Plugins** | `6` | Active plugin packages (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Machine-readable `SKILL.md` capability packs |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
 | **Golden Cases** | `121` | Static corpus cases across 27 benchmark domains |
 | **Benchmark Assertions** | `424` | Deterministic assertions in `tests/benchmarks/` |
-| **Total Test Assertions** | `479+` | Deepened matrix assertions across full `npm test` suite |
+| **Total Test Assertions** | `499+` | Deepened matrix assertions across full `npm test` suite |
 | **Node.js Compatibility** | `20 / 22 / 24` | `20` (Minimum), `22` (LTS Recommended), `24` (Current Tested) |
 <!-- /GENERATED:STATS -->
 
@@ -83,41 +83,45 @@ Agent (Skill-Assisted Execution):
                                             │
                                             ▼
                         ┌──────────────────────────────────────┐
-                        │      KBLI CONTEXT ROUTER ENGINE      │
-                        │ Maps KBLI 2020 ➔ Business Archetype  │
+                        │      SEMANTIC BUSINESS CONTEXT       │
+                        │ Entity, KBLI, Product, Facts, Scale  │
                         └──────────────────┬───────────────────┘
                                            │
+                        ┌──────────────────┴───────────────────┐
+                        ▼                                      ▼
+            ┌──────────────────────┐               ┌──────────────────────┐
+            │   KBLI 2020 ROUTER   │               │   PRODUCT CONTEXT    │
+            │  Business Activity   │               │ BTKI 2022 / HS-6 /   │
+            │  ➔ Business Archetype│               │ Lartas / Landed Cost │
+            └───────────┬──────────┘               └──────────┬───────────┘
+                        │                                     │
+                        └──────────────────┬──────────────────┘
                                            ▼
-                        ┌──────────────────────────────────────┐
-                        │   STRATEGIC APPLICATION PROTOCOL     │
-                        │ 12-Step Context & Evidence Discipline│
-                        └──────────────────┬───────────────────┘
-                                           │
-                                           ▼
-               ┌──────────────────────────────────────────────────────┐
-               │      39 Deterministic Node.js Math & Diff Engines    │
-               │ 28 statutory (engines/*.js + SSOT temporal rulesets) │
-               │ 8 finance (engines/*.js — pure standard math)        │
-               └──────────────────┬───────────────────┬───────────────┘
-                                  │                   │
-                                  ▼                   ▼
-       ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
-       │ Single Source of Truth Rules │   │ Cryptographic SHA-256 Checksums     │
-       │ (engines/rules/*.json)       │   │ (engines/rules/integrity.js +        │
-       │ — statutory & policy only    │   │  SHA256SUMS.txt)                     │
-       └──────────────┬───────────────┘   └──────────────────┬───────────────────┘
-                      │                                      │
-                      └──────────────────────────┬───────────┘
-                                                 │
-                                                 ▼
-                          ┌──────────────────────────────────────┐
-                          │  Validated Statutory Output + Math   │
-                          └──────────────────┬───────────────────┘
-                                             │
-                                             ▼
+                ┌──────────────────────────────────────────────────────┐
+                │      39 Deterministic Node.js Math & Diff Engines    │
+                │ 28 statutory (engines/*.js + SSOT temporal rulesets) │
+                │ 8 finance (engines/*.js — pure standard math)        │
+                │ 3 strategic & product classification engines         │
+                └──────────────────┬───────────────────┬───────────────┘
+                                   │                   │
+                                   ▼                   ▼
+        ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
+        │ Single Source of Truth Rules │   │ Cryptographic SHA-256 Checksums     │
+        │ (engines/rules/*.json)       │   │ (engines/rules/integrity.js +        │
+        │ — statutory & policy only    │   │  SHA256SUMS.txt)                     │
+        └──────────────┬───────────────┘   └──────────────────┬───────────────────┘
+                       │                                      │
+                       └──────────────────────────┬───────────┘
+                                                  │
+                                                  ▼
                            ┌──────────────────────────────────────┐
-                           │ LLM Narrative Synthesis & Formatting │
-                           └──────────────────────────────────────┘
+                           │  Validated Statutory Output + Math   │
+                           └──────────────────┬───────────────────┘
+                                              │
+                                              ▼
+                            ┌──────────────────────────────────────┐
+                            │ LLM Narrative Synthesis & Formatting │
+                            └──────────────────────────────────────┘
 ```
 
 ---

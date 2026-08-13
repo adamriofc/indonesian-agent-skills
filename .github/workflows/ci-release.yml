@@ -54,7 +54,7 @@ jobs:
         run: npm run test:security
 
       - name: Run npm Audit Security Scan
-        run: npm audit --audit-level=high || true
+        run: npm audit --audit-level=high
 
       - name: Initialize CodeQL Analysis
         uses: github/codeql-action/init@v3

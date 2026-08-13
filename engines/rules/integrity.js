@@ -10,7 +10,7 @@ const EXPECTED_HASHES = {
   "pph21.json": "ed1198d3b5c151a1dd8ff2653743bd04af03d73f7ea18dbbca6bac0e64e921ed",
   "marketplace.json": "551fa957822cde264463b62c647f19d7759fb9c171f051c49406d325d89ebfa2",
   "umkm.json": "1b06c261a9d06eb0359817dbe12bf1d4cf8ba9f8875cc025a6d49edef3cdd03a",
-  "btki.json": "0e0063cb1eccbe672984474962573d39bd72a37437731bf4e80679605795b74a"
+  "btki.json": "d5ca820d377edde092bcbaf6a16c105c27da4d7114a548d93dad9f5a6a90320e"
 };
 
 function verifyRulesetIntegrity(fileBasename, overrideFilePath = null) {

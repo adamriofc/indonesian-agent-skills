@@ -29,7 +29,7 @@ const { execSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 
 function validateRelease() {
-  console.log("🚪 Running Automated Release Gate (13-Check Pipeline)...\n");
+  console.log("🚪 Running Automated Release Gate (14-Check Pipeline)...\n");
   let errors = 0;
   let checksPassed = 0;
 
@@ -208,7 +208,7 @@ function validateRelease() {
   }
 
   // 13. BENCHMARK.md Version Alignment Check
-  console.log("  [13/13] Verifying BENCHMARK.md Version Alignment...");
+  console.log("  [13/14] Verifying BENCHMARK.md Version Alignment...");
   const benchmarkMd = fs.readFileSync(path.join(ROOT, 'docs/BENCHMARK.md'), 'utf8');
   if (!benchmarkMd.includes(`v${metadata.version}`)) {
     console.error(`❌ BENCHMARK.md Version Mismatch: header does not match v${metadata.version}`);
@@ -218,12 +218,23 @@ function validateRelease() {
     checksPassed++;
   }
 
+  // 14. High & Critical Dependency Vulnerability Audit Check (npm audit)
+  console.log("  [14/14] Executing High & Critical Dependency Vulnerability Audit Check...");
+  try {
+    execSync('npm audit --audit-level=high', { cwd: ROOT, stdio: 'pipe' });
+    console.log(`    ✅ High & Critical dependency vulnerability audit passed (0 high/critical vulnerabilities found)`);
+    checksPassed++;
+  } catch (e) {
+    console.error(`❌ Dependency Security Audit Failed: high or critical vulnerabilities detected by npm audit.`);
+    errors++;
+  }
+
   console.log(`\n---------------------------------------------------`);
   if (errors > 0) {
-    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/13 checks passed)`);
+    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/14 checks passed)`);
     process.exit(1);
   } else {
-    console.log(`✅ Release Gate PASSED 100%! All 13 Release Integrity Checks Passed.`);
+    console.log(`✅ Release Gate PASSED 100%! All 14 Release Integrity Checks Passed.`);
   }
 }
 
