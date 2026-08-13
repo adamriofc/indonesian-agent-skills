@@ -6,16 +6,16 @@ This document consolidates the independent audit findings supplied by the reposi
 
 | Finding | Severity | Remediation | Status |
 |---|---|---|---|
-| Documentation drift in `SKILL_PROTOCOL.md` | Medium | Current counts and semantic Product Context description synchronized; validator now checks fenced code content. | **CLOSED** |
-| `ROADMAP.md` stale and anchored to early releases | Medium | Rewritten around current v6.11.2 state; historical milestones separated from active roadmap. | **CLOSED** |
+| Documentation Drift in `SKILL_PROTOCOL.md` | Medium | Current counts and semantic Product Context description synchronized; validator now checks fenced code content. | **CLOSED** |
+| `ROADMAP.md` stale and anchored to early releases | Medium | Rewritten around current v6.11.3 state; historical milestones separated from active roadmap. | **CLOSED** |
 | Validator did not enforce all current-state documentation claims | Medium | `validate-docs.js` expanded to current roadmap, protocol, provenance framing, governance, stale numeric claims, and audit-closure checks. | **CLOSED** |
-| "Feature freeze" wording conflicted with later Product Context evolution | Minor–Medium | Current roadmap and release-governance policy redefine v6.7 as a stabilization checkpoint; documented architecture-gap exceptions are allowed. | **CLOSED AS GOVERNANCE WORDING** |
+| Feature Freeze wording conflicted with later Product Context evolution | Minor–Medium | Current roadmap and release-governance policy redefine v6.7 as a stabilization checkpoint; documented architecture-gap exceptions are allowed. | **CLOSED AS GOVERNANCE WORDING** |
 | Expert Domain Review framing could imply independent professional sign-off | Medium | Provenance register now explicitly labels the section as **internal maintainer verification**, uses `INTERNAL_VERIFIED`, and points to an independent-validation process that is still pending. | **CLOSED AS CLAIM-BOUNDARY ISSUE** |
-| Validation is self-referential | Medium | Independent external-validation protocol added with held-out cases, blind scoring, reviewer disclosure and publication criteria. | **PROCESS CLOSED / EVIDENCE PENDING** |
-| Real-world traction effectively zero | Critical for market proof | Added explicit external-validation and distribution roadmap. Adoption itself cannot be manufactured by code. | **OPEN — REQUIRES REAL USERS** |
-| Bus factor = 1 | Medium | Added operational continuity/release-governance requirements and a maintainer hand-off expectation. | **MITIGATED; CO-MAINTAINER PENDING** |
+| External Validation is self-referential | Medium | Independent external-validation protocol added with held-out cases, blind scoring, reviewer disclosure and publication criteria. | **PROCESS CLOSED / EVIDENCE PENDING** |
+| Real-world traction effectively zero | Critical for market proof | Added explicit External Validation and distribution roadmap. Adoption itself cannot be manufactured by code. | **OPEN — REQUIRES REAL USERS** |
+| Bus Factor = 1 | Medium | Added operational continuity/release-governance requirements and a maintainer hand-off expectation. | **MITIGATED; CO-MAINTAINER PENDING** |
 | Source-code discoverability limited by crawler/tooling | Minor | Added `docs/CODE_NAVIGATION.md` with a concise map of high-risk source/test/release paths. | **CLOSED AS DOCUMENTATION GAP** |
-| Rapid historical release velocity | Medium–Critical | Added release-class and cadence governance; historical cadence is retained honestly and no longer treated as maturity evidence. | **CLOSED AS FUTURE GOVERNANCE** |
+| Release Cadence velocity | Medium–Critical | Added release-class and cadence governance; historical cadence is retained honestly and no longer treated as maturity evidence. | **CLOSED AS FUTURE GOVERNANCE** |
 | "Production-ready" can be read too broadly | Critical | L3 remains the explicit current state; L4 autonomous filing is unsupported, and independent enterprise proof remains unclaimed. | **CLOSED AS CLAIM BOUNDARY** |
 | Independent regulatory spot-check should be distinguished from full validation | Medium | External validation protocol requires held-out cases and independent review before broader claims. | **CLOSED AS METHODOLOGY** |
 | Community activity is effectively absent | Medium | Roadmap prioritizes distribution and external review instead of additional feature growth; a public reviewer call is tracked in GitHub Issue #3. | **OPEN — REQUIRES COMMUNITY ADOPTION** |

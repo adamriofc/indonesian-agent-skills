@@ -32,8 +32,7 @@ function agentIngestParser(untrustedInputDocument, systemInstructionTemplate) {
   do {
     prev = sanitizedPayload;
     sanitizedPayload = sanitizedPayload
-      .replace(/<script\b[^>]*>/gi, '')
-      .replace(/<\/script\b[^>]*>/gi, '')
+      .replace(/<script\b[\s\S]*?<\/script\s*>/gi, '')
       .replace(/\[[^\]]*\]\((https?:\/\/[^)\s]+)\)/gi, '[REDACTED_URL]')
       .replace(/https?:\/\/[^\s)\]]+/gi, '[REDACTED_URL]');
   } while (sanitizedPayload !== prev);

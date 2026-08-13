@@ -18,7 +18,7 @@ To prevent misapplication and set realistic operational expectations, this repos
 
 > **Current Production Capability**: **Level L3 — Production Decision-Support Infrastructure**.
 >
-> **Independent external validation status: PENDING.** L3 is an internal engineering/readiness classification and must not be interpreted as evidence that every domain calculation has been independently validated in a live enterprise environment.
+> **Independent external validation status: **PENDING**.** L3 is an internal engineering/readiness classification and must not be interpreted as evidence that every domain calculation has been independently validated in a live enterprise environment.
 
 ---
 

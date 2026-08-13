@@ -2,7 +2,7 @@
 
 Status legend: `[x]` shipped · `[→]` active hardening / validation · `[ ]` future-gated.
 
-## Current State — v6.11.2
+## Current State — v6.11.3
 
 The repository is currently in **stabilization & evidence mode**. The six canonical business-domain plugins and the existing reasoning substrate are intentionally feature-stable. The priority is correctness, documentation integrity, release governance, independent validation, and distribution — not horizontal feature expansion.
 

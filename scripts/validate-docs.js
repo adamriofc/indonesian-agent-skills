@@ -92,7 +92,7 @@ function validateDocs() {
     'Product Context / BTKI layer'
   ], 'SKILL_PROTOCOL.md current-state contract');
   errors += containsAll(roadmap, [
-    '## Current State — v6.11.2',
+    '## Current State — v6.11.3',
     '**6 canonical plugins / 88 Agent Skills**',
     '**39 deterministic engines**',
     '## Active Hardening & Validation',

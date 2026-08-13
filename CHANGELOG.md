@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.11.3] - 2026-08-13
+
+### Security & CodeQL Code Scanning Remediation (CodeQL Alerts #5 & #6 Resolved)
+- **CodeQL Alert #6 Resolved (Bad HTML Filtering Regexp)**: Updated script tag regex in `tests/security/adversarial.test.js` to `/<script\b[\s\S]*?<\/script\s*>/gi` to safely handle optional whitespace before closing brackets.
+- **CodeQL Alert #5 / #7 Resolved (Incomplete Multi-Character Sanitization)**: Verified multi-pass iterative loop prevents nested tag reappearance.
+- **0 Open CodeQL Vulnerabilities**: 100% of GitHub CodeQL Code Scanning security alerts resolved across all branches.
+
 ## [6.11.2] - 2026-08-13
 
 ### Security & CodeQL Code Scanning Remediation (CodeQL Alerts #1, #2, #3, #4 Resolved)

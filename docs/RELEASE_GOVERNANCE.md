@@ -34,7 +34,7 @@ npm run test:perf
 
 ### Security / Statutory Emergency Release
 
-Accelerated release is permitted when delaying the correction would materially increase security or regulatory risk. The release notes must state the trigger and why the normal cadence was bypassed.
+Emergency security or statutory corrections permit an accelerated release when delaying the correction would materially increase security or regulatory risk. The release notes must state the trigger and why the normal cadence was bypassed.
 
 ### Unreleased Development State
 
