@@ -6,11 +6,31 @@
       "exitValuation": 100000000000,
       "commonOwnershipPercent": 0.65,
       "investorTiers": [
-        { "tierName": "Series B", "investmentAmount": 20000000000, "preferenceMultiple": 1.0, "isParticipating": true, "capMultiple": null, "ownershipPercent": 0.15, "seniorityOrder": 1 },
-        { "tierName": "Series A", "investmentAmount": 10000000000, "preferenceMultiple": 1.0, "isParticipating": false, "capMultiple": null, "ownershipPercent": 0.20, "seniorityOrder": 2 }
+        {
+          "tierName": "Series B",
+          "investmentAmount": 20000000000,
+          "preferenceMultiple": 1,
+          "isParticipating": true,
+          "capMultiple": null,
+          "ownershipPercent": 0.15,
+          "seniorityOrder": 1
+        },
+        {
+          "tierName": "Series A",
+          "investmentAmount": 10000000000,
+          "preferenceMultiple": 1,
+          "isParticipating": false,
+          "capMultiple": null,
+          "ownershipPercent": 0.2,
+          "seniorityOrder": 2
+        }
       ]
     },
-    "expected": { "totalInvestorPayout": 52000000000, "commonShareholdersPayout": 48000000000, "remainingUnallocated": 0 }
+    "expected": {
+      "totalInvestorPayout": 52000000000,
+      "commonShareholdersPayout": 48000000000,
+      "remainingUnallocated": 0
+    }
   },
   {
     "caseId": "TS-SINGLE-A",
@@ -19,9 +39,45 @@
       "exitValuation": 100000000000,
       "commonOwnershipPercent": 0.8,
       "investorTiers": [
-        { "tierName": "Series A", "investmentAmount": 10000000000, "preferenceMultiple": 1.0, "isParticipating": false, "capMultiple": null, "ownershipPercent": 0.20, "seniorityOrder": 1 }
+        {
+          "tierName": "Series A",
+          "investmentAmount": 10000000000,
+          "preferenceMultiple": 1,
+          "isParticipating": false,
+          "capMultiple": null,
+          "ownershipPercent": 0.2,
+          "seniorityOrder": 1
+        }
       ]
     },
-    "expected": { "totalInvestorPayout": 20000000000, "commonShareholdersPayout": 80000000000, "remainingUnallocated": 0 }
+    "expected": {
+      "totalInvestorPayout": 20000000000,
+      "commonShareholdersPayout": 80000000000,
+      "remainingUnallocated": 0
+    }
+  },
+  {
+    "caseId": "TS-SERIES-A-CAP-003",
+    "description": "Series A participating with 2x cap on payout",
+    "input": {
+      "exitValuation": 100000000000,
+      "commonOwnershipPercent": 0.7,
+      "investorTiers": [
+        {
+          "tierName": "Series A",
+          "investmentAmount": 10000000000,
+          "preferenceMultiple": 1,
+          "isParticipating": true,
+          "capMultiple": 2,
+          "ownershipPercent": 0.3,
+          "seniorityOrder": 1
+        }
+      ]
+    },
+    "expected": {
+      "totalInvestorPayout": 20000000000,
+      "commonShareholdersPayout": 80000000000,
+      "remainingUnallocated": 0
+    }
   }
 ]

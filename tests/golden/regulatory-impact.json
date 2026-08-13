@@ -6,9 +6,16 @@
       "domain": "umkm",
       "fromRuleset": "UMKM-2022",
       "toRuleset": "UMKM-2026",
-      "companyProfile": { "entityType": "corporate", "annualRevenue": 5000000000, "employeeCount": 15 }
+      "companyProfile": {
+        "entityType": "corporate",
+        "annualRevenue": 5000000000,
+        "employeeCount": 15
+      }
     },
-    "expected": { "impactLevel": "HIGH", "totalChecklistItems": 3 }
+    "expected": {
+      "impactLevel": "HIGH",
+      "totalChecklistItems": 3
+    }
   },
   {
     "caseId": "REG-IMP-UMKM-INDIV",
@@ -17,8 +24,50 @@
       "domain": "umkm",
       "fromRuleset": "UMKM-2022",
       "toRuleset": "UMKM-2026",
-      "companyProfile": { "entityType": "individual", "annualRevenue": 200000000, "employeeCount": 2 }
+      "companyProfile": {
+        "entityType": "individual",
+        "annualRevenue": 200000000,
+        "employeeCount": 2
+      }
     },
-    "expected": { "impactLevel": "MEDIUM", "totalChecklistItems": 1 }
+    "expected": {
+      "impactLevel": "MEDIUM",
+      "totalChecklistItems": 1
+    }
+  },
+  {
+    "caseId": "REG-IMP-BPJS-2026-003",
+    "description": "BPJS 2026 wage cap transition for 50-employee PT (Medium Impact)",
+    "input": {
+      "domain": "bpjs",
+      "fromRuleset": "BPJS-2025",
+      "toRuleset": "BPJS-2026",
+      "companyProfile": {
+        "entityType": "pt",
+        "annualRevenue": 10000000000,
+        "employeeCount": 50
+      }
+    },
+    "expected": {
+      "impactLevel": "MEDIUM"
+    }
+  },
+  {
+    "caseId": "REG-IMP-UMKM-INDIV-SMALL",
+    "description": "PP 20/2026 transition for small Individual taxpayer with 100M turnover",
+    "input": {
+      "domain": "umkm",
+      "fromRuleset": "UMKM-2022",
+      "toRuleset": "UMKM-2026",
+      "companyProfile": {
+        "entityType": "individual",
+        "annualRevenue": 100000000,
+        "employeeCount": 1
+      }
+    },
+    "expected": {
+      "impactLevel": "MEDIUM",
+      "totalChecklistItems": 1
+    }
   }
 ]

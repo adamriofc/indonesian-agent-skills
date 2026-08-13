@@ -3,9 +3,63 @@
     "caseId": "SCENARIO-STRESS-TEST-001",
     "description": "Revenue -20% & COGS +10% stress test converting 200M profit into 60M loss",
     "input": {
-      "baseCase": { "monthlyRevenue": 1000000000, "cogs": 600000000, "operatingExpenses": 200000000 },
-      "scenarioDeltas": { "revenueChangePercent": -20, "cogsChangePercent": 10, "opexChangePercent": 0 }
+      "baseCase": {
+        "monthlyRevenue": 1000000000,
+        "cogs": 600000000,
+        "operatingExpenses": 200000000
+      },
+      "scenarioDeltas": {
+        "revenueChangePercent": -20,
+        "cogsChangePercent": 10,
+        "opexChangePercent": 0
+      }
     },
-    "expected": { "baseNetProfit": 200000000, "simulatedNetProfit": -60000000, "resilienceAssessment": "VULNERABLE_LOSS_MAKING" }
+    "expected": {
+      "baseNetProfit": 200000000,
+      "simulatedNetProfit": -60000000,
+      "resilienceAssessment": "VULNERABLE_LOSS_MAKING"
+    }
+  },
+  {
+    "caseId": "SCENARIO-EXPANSION-002",
+    "description": "Revenue +30%, COGS +10%, OpEx +10% expansion simulation (net profit 500M -> 950M)",
+    "input": {
+      "baseCase": {
+        "monthlyRevenue": 2000000000,
+        "cogs": 1000000000,
+        "operatingExpenses": 500000000
+      },
+      "scenarioDeltas": {
+        "revenueChangePercent": 30,
+        "cogsChangePercent": 10,
+        "opexChangePercent": 10
+      }
+    },
+    "expected": {
+      "baseNetProfit": 500000000,
+      "simulatedNetProfit": 950000000,
+      "resilienceAssessment": "RESILIENT"
+    }
+  },
+  {
+    "caseId": "SCENARIO-SUPPLY-SPIKE-003",
+    "description": "COGS +25% & Rev -10% severe supply chain spike converting 200M profit to 215M loss",
+    "input": {
+      "baseCase": {
+        "monthlyRevenue": 1500000000,
+        "cogs": 1000000000,
+        "operatingExpenses": 300000000
+      },
+      "scenarioDeltas": {
+        "revenueChangePercent": -10,
+        "cogsChangePercent": 25,
+        "opexChangePercent": 5
+      }
+    },
+    "expected": {
+      "baseNetProfit": 200000000,
+      "simulatedNetProfit": -215000000,
+      "resilienceAssessment": "VULNERABLE_LOSS_MAKING"
+    }
   }
 ]

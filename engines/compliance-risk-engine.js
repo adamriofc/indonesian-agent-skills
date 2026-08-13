@@ -173,7 +173,9 @@ function auditComplianceRisk({
       statute: v.statute
     }));
 
-  return {
+  const { buildResultEnvelope, deriveAssessmentSafeToUse } = require('./production-contract');
+
+  const baseResult = {
     complianceHealthScore: finalScore,
     overallAssessment: finalScore >= 85 ? 'HEALTHY' : finalScore >= 65 ? 'MODERATE_RISK' : 'HIGH_RISK',
     domainHealth,
@@ -183,6 +185,13 @@ function auditComplianceRisk({
     remediationRoadmap,
     statutoryDisclaimer: "This audit is an automated preliminary review and does not substitute formal legal/tax counsel."
   };
+
+  return buildResultEnvelope({
+    result: baseResult,
+    status: baseResult.overallAssessment === 'HEALTHY' ? 'COMPLETE' : 'REQUIRES_REVIEW',
+    safeToUse: deriveAssessmentSafeToUse(baseResult.overallAssessment),
+    confidence: 'HIGH'
+  });
 }
 
 module.exports = {

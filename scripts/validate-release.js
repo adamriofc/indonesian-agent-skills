@@ -104,11 +104,11 @@ function validateRelease() {
 
   // 6. Golden Case Count Check
   console.log("  [6/13] Verifying Golden Test Corpus...");
-  if (metadata.goldenCases !== 94 || metadata.benchmarkDomains !== 27) {
-    console.error(`❌ Golden Corpus Mismatch: expected 94 golden cases across 27 domains, got ${metadata.goldenCases}/${metadata.benchmarkDomains}`);
+  if (metadata.goldenCases !== 121 || metadata.benchmarkDomains !== 27) {
+    console.error(`❌ Golden Corpus Mismatch: expected 121 golden cases across 27 domains, got ${metadata.goldenCases}/${metadata.benchmarkDomains}`);
     errors++;
   } else {
-    console.log(`    ✅ Golden test corpus verified: 94 cases across 27 benchmark domains`);
+    console.log(`    ✅ Golden test corpus verified: 121 cases across 27 benchmark domains`);
     checksPassed++;
   }
 
@@ -174,7 +174,8 @@ function validateRelease() {
   const requiredFiles = [
     'README.md', 'LICENSE', 'CHANGELOG.md', 'SECURITY.md', 'PROVENANCE.md',
     'SKILL_PROTOCOL.md', 'REGULATORY_CHANGELOG.md', 'PRODUCTION_READINESS.md',
-    'docs/RELEASE.md', 'docs/METRICS.md', 'docs/OPERATIONAL_RUNBOOK.md', 'canonical-metadata.json'
+    'docs/RELEASE.md', 'docs/METRICS.md', 'docs/OPERATIONAL_RUNBOOK.md',
+    'canonical-metadata.json', 'release-manifest.json'
   ];
   let missingFiles = false;
   requiredFiles.forEach(file => {

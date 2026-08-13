@@ -49,3 +49,53 @@ Step 6: Run Release Gate
 - **Rule 1: No Fabricated Answers**. If an engine receives invalid parameters, it throws an explicit `INVALID_INPUT` error rather than guessing zero or returning rounded placeholders.
 - **Rule 2: Engine Primacy**. Pure Node.js calculations override LLM probabilistic token predictions for all statutory tax and severance figures.
 - **Rule 3: Cryptographic Ruleset Anchor**. If `SHA256SUMS.txt` fails verification, engines fail closed on load.
+
+---
+
+## 4. Rollback Policy (Code Defect vs Statutory Correction)
+
+When a production rollback is required, operators must distinguish between two rollback types:
+
+1. **Code Defect Rollback (`INC-CRITICAL` / `INC-HIGH`)**:
+   - Trigger: Engine calculation bug or logic exception.
+   - Action: Revert commit or check out previous SemVer release tag (e.g. `v6.7.0`).
+   - Run `npm run validate:release` to confirm workspace cleanliness and release gate pass.
+
+2. **Statutory Correction Rollback (`REG-AMENDMENT`)**:
+   - Trigger: Government revokes or amends a newly issued regulation with retroactive effect.
+   - Action: **Do not delete historical rulesets**. Set `effective_to` on the amended ruleset and append the corrected ruleset with the new `effective_from`. Re-generate SHA256 hashes (`bash scripts/sha256sums.sh generate`).
+
+---
+
+## 5. Change Impact Matrix & Audit Pipeline
+
+```text
+Statutory / Engine Change Trigger
+               │
+               ▼
+┌──────────────────────────────┐
+│  1. Ruleset & Engine Update  │ ➔ Update engines/rules/*.json & engines/*.js
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│  2. Trust Anchor Re-Hash    │ ➔ bash scripts/sha256sums.sh generate
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│  3. Golden Corpus & Test Matrix│ ➔ npm test (All unit, matrix, integration, security tests)
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│  4. Benchmark & Provenance    │ ➔ node scripts/benchmark.js --json-report
+│     Changelog Sync           │ ➔ Update REGULATORY_CHANGELOG.md & PROVENANCE.md
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│  5. Release Gate & Release    │ ➔ npm run validate:release
+└──────────────────────────────┘
+```
+

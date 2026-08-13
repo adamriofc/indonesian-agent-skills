@@ -12,6 +12,54 @@
       "adSpendBudget": 30000000,
       "campaignRevenueGenerated": 120000000
     },
-    "expected": { "cac": 200000, "ltv": 2400000, "ltvCacRatio": "12x", "roas": "4x", "healthStatus": "HEALTHY" }
+    "expected": {
+      "cac": 200000,
+      "ltv": 2400000,
+      "ltvCacRatio": "12x",
+      "roas": "4x",
+      "healthStatus": "HEALTHY"
+    }
+  },
+  {
+    "caseId": "MKTG-UNIT-ECON-SAAS",
+    "description": "B2B SaaS unit economics with 1M CAC, 19.2M LTV, 19.2x LTV:CAC and 5x ROAS",
+    "input": {
+      "totalMarketingAndSalesCost": 100000000,
+      "newCustomersAcquired": 100,
+      "averageOrderValue": 1000000,
+      "annualPurchaseFrequency": 12,
+      "grossMarginPercent": 80,
+      "customerLifespanYears": 2,
+      "adSpendBudget": 60000000,
+      "campaignRevenueGenerated": 300000000
+    },
+    "expected": {
+      "cac": 1000000,
+      "ltv": 19200000,
+      "ltvCacRatio": "19.2x",
+      "roas": "5x",
+      "healthStatus": "HEALTHY"
+    }
+  },
+  {
+    "caseId": "MKTG-UNIT-ECON-UNHEALTHY",
+    "description": "Uneconomic marketing burn with 2M CAC, 300k LTV, 0.15x LTV:CAC and 0.67x ROAS",
+    "input": {
+      "totalMarketingAndSalesCost": 200000000,
+      "newCustomersAcquired": 100,
+      "averageOrderValue": 500000,
+      "annualPurchaseFrequency": 2,
+      "grossMarginPercent": 30,
+      "customerLifespanYears": 1,
+      "adSpendBudget": 150000000,
+      "campaignRevenueGenerated": 100000000
+    },
+    "expected": {
+      "cac": 2000000,
+      "ltv": 300000,
+      "ltvCacRatio": "0.15x",
+      "roas": "0.67x",
+      "healthStatus": "CRITICAL_UNECONOMIC"
+    }
   }
 ]

@@ -7,10 +7,16 @@
         "entityType": "pt",
         "annualRevenue": 5000000000,
         "employeeCount": 15,
-        "salesChannels": ["marketplace", "b2b_direct"]
+        "salesChannels": [
+          "marketplace",
+          "b2b_direct"
+        ]
       }
     },
-    "expected": { "totalLifecycleStages": 8, "recommendedRegime": "GENERAL_CORPORATE_TAX" }
+    "expected": {
+      "totalLifecycleStages": 8,
+      "recommendedRegime": "GENERAL_CORPORATE_TAX"
+    }
   },
   {
     "caseId": "SCENARIO-INDIV-UMKM-TAX",
@@ -20,9 +26,53 @@
         "entityType": "individual",
         "annualRevenue": 300000000,
         "employeeCount": 2,
-        "salesChannels": ["b2b_direct"]
+        "salesChannels": [
+          "b2b_direct"
+        ]
       }
     },
-    "expected": { "totalLifecycleStages": 7, "recommendedRegime": "UMKM_FINAL_TAX" }
+    "expected": {
+      "totalLifecycleStages": 7,
+      "recommendedRegime": "UMKM_FINAL_TAX"
+    }
+  },
+  {
+    "caseId": "SCENARIO-CLINIC-HEALTHCARE-003",
+    "description": "PT Hospital & Healthcare clinic with 8B turnover & 30 employees (8 stages)",
+    "input": {
+      "companyProfile": {
+        "entityType": "pt",
+        "annualRevenue": 8000000000,
+        "employeeCount": 30,
+        "kbliCode": "86103",
+        "salesChannels": [
+          "marketplace",
+          "b2b_direct"
+        ]
+      }
+    },
+    "expected": {
+      "totalLifecycleStages": 8,
+      "recommendedRegime": "GENERAL_CORPORATE_TAX"
+    }
+  },
+  {
+    "caseId": "SCENARIO-LOGISTICS-INDIV-004",
+    "description": "Individual goods transport operator with 1B turnover & 4 employees (7 stages)",
+    "input": {
+      "companyProfile": {
+        "entityType": "individual",
+        "annualRevenue": 1000000000,
+        "employeeCount": 4,
+        "kbliCode": "49231",
+        "salesChannels": [
+          "b2b_direct"
+        ]
+      }
+    },
+    "expected": {
+      "totalLifecycleStages": 7,
+      "recommendedRegime": "UMKM_FINAL_TAX"
+    }
   }
 ]

@@ -4,10 +4,68 @@
     "description": "Critical supply spike (5x5x5) evaluation yielding Critical Overall Risk Tier",
     "input": {
       "risks": [
-        { "riskTitle": "Critical Supply Spike", "likelihoodScore": 5, "impactScore": 5, "velocityScore": 5 },
-        { "riskTitle": "Minor Tech Delay", "likelihoodScore": 2, "impactScore": 2, "velocityScore": 2 }
+        {
+          "riskTitle": "Critical Supply Spike",
+          "likelihoodScore": 5,
+          "impactScore": 5,
+          "velocityScore": 5
+        },
+        {
+          "riskTitle": "Minor Tech Delay",
+          "likelihoodScore": 2,
+          "impactScore": 2,
+          "velocityScore": 2
+        }
       ]
     },
-    "expected": { "overallRiskTier": "CRITICAL", "criticalRisksCount": 1, "topRiskTitle": "Critical Supply Spike" }
+    "expected": {
+      "overallRiskTier": "CRITICAL",
+      "criticalRisksCount": 1,
+      "topRiskTitle": "Critical Supply Spike"
+    }
+  },
+  {
+    "caseId": "STRATEGIC-RISK-HIGH-002",
+    "description": "Supply chain & currency risks yielding High Overall Risk Tier",
+    "input": {
+      "risks": [
+        {
+          "riskTitle": "Supply Chain Interruption",
+          "likelihoodScore": 4,
+          "impactScore": 3,
+          "velocityScore": 3
+        },
+        {
+          "riskTitle": "Currency Fluctuation",
+          "likelihoodScore": 3,
+          "impactScore": 2,
+          "velocityScore": 2
+        }
+      ]
+    },
+    "expected": {
+      "overallRiskTier": "HIGH",
+      "criticalRisksCount": 0,
+      "topRiskTitle": "Supply Chain Interruption"
+    }
+  },
+  {
+    "caseId": "STRATEGIC-RISK-LOW-003",
+    "description": "Minor office equipment delay yielding Low Overall Risk Tier",
+    "input": {
+      "risks": [
+        {
+          "riskTitle": "Minor Office Equipment Delay",
+          "likelihoodScore": 1,
+          "impactScore": 1,
+          "velocityScore": 1
+        }
+      ]
+    },
+    "expected": {
+      "overallRiskTier": "LOW",
+      "criticalRisksCount": 0,
+      "topRiskTitle": "Minor Office Equipment Delay"
+    }
   }
 ]

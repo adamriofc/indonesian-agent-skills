@@ -6,9 +6,48 @@
       "totalPopulationOrEntities": 270000000,
       "targetCategoryAdoptionPercent": 10,
       "averageAnnualSpendingPerCustomer": 1000000,
-      "serviceableGeographicFraction": 0.50,
+      "serviceableGeographicFraction": 0.5,
       "targetObtainableSharePercent": 10
     },
-    "expected": { "totalAddressableCustomers": 27000000, "tamAmount": 27000000000000, "samAmount": 13500000000000, "somAmount": 1350000000000 }
+    "expected": {
+      "totalAddressableCustomers": 27000000,
+      "tamAmount": 27000000000000,
+      "samAmount": 13500000000000,
+      "somAmount": 1350000000000
+    }
+  },
+  {
+    "caseId": "MARKET-SIZING-B2B-SOFTWARE",
+    "description": "B2B enterprise SaaS market sizing for 500k Indonesian companies",
+    "input": {
+      "totalPopulationOrEntities": 500000,
+      "targetCategoryAdoptionPercent": 20,
+      "averageAnnualSpendingPerCustomer": 12000000,
+      "serviceableGeographicFraction": 0.6,
+      "targetObtainableSharePercent": 15
+    },
+    "expected": {
+      "totalAddressableCustomers": 100000,
+      "tamAmount": 1200000000000,
+      "samAmount": 720000000000,
+      "somAmount": 108000000000
+    }
+  },
+  {
+    "caseId": "MARKET-SIZING-D2C-BEAUTY",
+    "description": "D2C beauty consumer market sizing for 50M target segment",
+    "input": {
+      "totalPopulationOrEntities": 50000000,
+      "targetCategoryAdoptionPercent": 30,
+      "averageAnnualSpendingPerCustomer": 1500000,
+      "serviceableGeographicFraction": 0.4,
+      "targetObtainableSharePercent": 10
+    },
+    "expected": {
+      "totalAddressableCustomers": 15000000,
+      "tamAmount": 22500000000000,
+      "samAmount": 9000000000000,
+      "somAmount": 900000000000
+    }
   }
 ]

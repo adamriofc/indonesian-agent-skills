@@ -5,14 +5,108 @@
     "input": {
       "decisionTitle": "Acquisition Target Evaluation",
       "criteriaConfig": {
-        "strategicFit": { "weight": 0.5, "direction": "benefit" },
-        "financialCost": { "weight": 0.5, "direction": "cost" }
+        "strategicFit": {
+          "weight": 0.5,
+          "direction": "benefit"
+        },
+        "financialCost": {
+          "weight": 0.5,
+          "direction": "cost"
+        }
       },
       "alternatives": [
-        { "optionName": "Target A (Cheap)", "scores": { "strategicFit": 8, "financialCost": 2 } },
-        { "optionName": "Target B (Expensive)", "scores": { "strategicFit": 8, "financialCost": 8 } }
+        {
+          "optionName": "Target A (Cheap)",
+          "scores": {
+            "strategicFit": 8,
+            "financialCost": 2
+          }
+        },
+        {
+          "optionName": "Target B (Expensive)",
+          "scores": {
+            "strategicFit": 8,
+            "financialCost": 8
+          }
+        }
       ]
     },
-    "expected": { "topRecommendedOption": "Target A (Cheap)", "topScore": 8.0 }
+    "expected": {
+      "topRecommendedOption": "Target A (Cheap)",
+      "topScore": 8
+    }
+  },
+  {
+    "caseId": "MCDA-VENDOR-SELECTION-002",
+    "description": "MCDA selecting Vendor A based on weighted price vs quality scores",
+    "input": {
+      "decisionTitle": "Vendor Selection",
+      "criteriaConfig": {
+        "priceCost": {
+          "weight": 0.4,
+          "direction": "cost"
+        },
+        "qualityScore": {
+          "weight": 0.6,
+          "direction": "benefit"
+        }
+      },
+      "alternatives": [
+        {
+          "optionName": "Vendor A",
+          "scores": {
+            "priceCost": 4,
+            "qualityScore": 9
+          }
+        },
+        {
+          "optionName": "Vendor B",
+          "scores": {
+            "priceCost": 8,
+            "qualityScore": 6
+          }
+        }
+      ]
+    },
+    "expected": {
+      "topRecommendedOption": "Vendor A",
+      "topScore": 7.8
+    }
+  },
+  {
+    "caseId": "MCDA-OFFICE-EXPANSION-003",
+    "description": "MCDA selecting Location A for regional office expansion",
+    "input": {
+      "decisionTitle": "Office Location Selection",
+      "criteriaConfig": {
+        "rentCost": {
+          "weight": 0.3,
+          "direction": "cost"
+        },
+        "talentPool": {
+          "weight": 0.7,
+          "direction": "benefit"
+        }
+      },
+      "alternatives": [
+        {
+          "optionName": "Location A",
+          "scores": {
+            "rentCost": 5,
+            "talentPool": 9
+          }
+        },
+        {
+          "optionName": "Location B",
+          "scores": {
+            "rentCost": 3,
+            "talentPool": 6
+          }
+        }
+      ]
+    },
+    "expected": {
+      "topRecommendedOption": "Location A"
+    }
   }
 ]

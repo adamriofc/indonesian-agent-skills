@@ -10,14 +10,14 @@ To ensure scientific rigor, clear nomenclature, and eliminate unsubstantiated cl
 
 | Tier | Evaluation Focus | Question Answered | Test Tool / Suite | Status / Pass Rate |
 |---|---|---|---|---|
-| **Tier 1: Deterministic Engine Math** | Calculation & invariant precision | Does the Node.js engine compute equations with 0% arithmetic error per official rulesets? | `scripts/benchmark.js` | **100.00% Pass Rate** (94 Golden Cases) |
+| **Tier 1: Deterministic Engine Math** | Calculation & invariant precision | Does the Node.js engine compute equations with 0% arithmetic error per official rulesets? | `scripts/benchmark.js` | **100.00% Pass Rate** (121 Golden Cases) |
 | **Tier 2: Rule-Based Parameter Extraction** | Pattern & slot extraction fixture | Does the extraction parser parse numeric values, PTKP statuses, and dates from natural language text? | `tests/benchmarks/fixture/nlp-extraction-fixture.test.js` | **100.00% Pass Rate** (50 Fixture Cases) |
 | **Tier 3: Business Scenario Regression** | Deterministic multi-domain regression | Do curated business scenarios (authored statutory-sourced + parameterized + adversarial) reproduce expected domain outputs across 8 independently evaluated dimensions? | `tests/benchmarks/business-scenario-regression.test.js` | **100.00% Pass Rate** (30 Curated Scenarios) |
 
 > **Honest scoping note:** Tier 3 is a deterministic regression benchmark — every expected value is compared exactly against ruleset-derived outputs. It is **not** an LLM recommendation-quality measurement; recommendation-quality claims are reserved for the empirical LLM baseline comparison in Section 3.
 
 ### Golden Corpus & Benchmark Artifact Scope:
-- **Static Golden Corpus (`tests/golden/`)**: **94 golden cases across all 38 engine modules** (27 benchmark domains) — fast batch, deterministic, zero-dependency.
+- **Static Golden Corpus (`tests/golden/`)**: **121 golden cases across all 38 engine modules** (27 benchmark domains) — fast batch, deterministic, zero-dependency.
 - **Deepened Matrix in CI**: 425 PPh 21 cases, 225 PHK cases, 50 enterprise integration scenario assertions, 38 engine modules, security suite (see `npm test`).
 - **Benchmark Artifact**: Automatically generated at `docs/benchmark-results/latest.json`.
 
@@ -27,7 +27,7 @@ Run command: `node scripts/benchmark.js [--llm] [--json-report docs/benchmark-re
 
 ## 2. Latest Deterministic Execution Results (Tier 1)
 
-**Date: 2026-08-12 — Node.js v26.7.0 — `scripts/benchmark.js` v6.7.0 (38-engine coverage, 27 domains, 94 golden cases)**
+**Date: 2026-08-12 — Node.js v26.7.0 — `scripts/benchmark.js` v6.8.0 (38-engine coverage, 27 domains, 121 golden cases)**
 
 | Benchmark Domain | Cases | Golden Accuracy Pass Rate | Determinism (3×) | Throughput |
 |---|---|---|---|---|

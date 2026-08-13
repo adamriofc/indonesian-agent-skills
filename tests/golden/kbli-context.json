@@ -2,13 +2,49 @@
   {
     "caseId": "KBLI-ROUTER-PROF-SERVICE-001",
     "description": "KBLI 70209 (Konsultasi Manajemen) maps to PROFESSIONAL_SERVICE archetype",
-    "input": { "kbliCode": "70209", "activityName": "Konsultasi Manajemen" },
-    "expected": { "businessArchetype": "PROFESSIONAL_SERVICE", "hasPhysicalInventory": false }
+    "input": {
+      "kbliCode": "70209",
+      "activityName": "Konsultasi Manajemen"
+    },
+    "expected": {
+      "businessArchetype": "PROFESSIONAL_SERVICE",
+      "hasPhysicalInventory": false
+    }
   },
   {
     "caseId": "KBLI-ROUTER-MFG-001",
     "description": "KBLI 10710 (Industri Makanan) maps to PRODUCT_MANUFACTURING archetype",
-    "input": { "kbliCode": "10710", "activityName": "Industri Makanan" },
-    "expected": { "businessArchetype": "PRODUCT_MANUFACTURING", "hasPhysicalInventory": true }
+    "input": {
+      "kbliCode": "10710",
+      "activityName": "Industri Makanan"
+    },
+    "expected": {
+      "businessArchetype": "PRODUCT_MANUFACTURING",
+      "hasPhysicalInventory": true
+    }
+  },
+  {
+    "caseId": "KBLI-ROUTER-MARKETPLACE-003",
+    "description": "KBLI 47911 (Ritel Online/Marketplace) maps to MARKETPLACE_PLATFORM archetype",
+    "input": {
+      "kbliCode": "47911",
+      "activityName": "Ritel Online Digital"
+    },
+    "expected": {
+      "businessArchetype": "MARKETPLACE_PLATFORM",
+      "hasPhysicalInventory": false
+    }
+  },
+  {
+    "caseId": "KBLI-ROUTER-HEALTHCARE-004",
+    "description": "KBLI 86103 (Klinik/Rumah Sakit) maps to PROFESSIONAL_SERVICE archetype",
+    "input": {
+      "kbliCode": "86103",
+      "activityName": "Klinik Kesehatan"
+    },
+    "expected": {
+      "businessArchetype": "CAPACITY_SERVICE",
+      "hasPhysicalInventory": false
+    }
   }
 ]

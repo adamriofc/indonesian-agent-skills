@@ -12,6 +12,45 @@
         "totalEquity": 10000000000
       }
     },
-    "expected": { "priorityLevel": "HIGH", "totalDriversCount": 3, "cashRunwayMonths": 4, "derRatio": "5:1" }
+    "expected": {
+      "priorityLevel": "HIGH",
+      "totalDriversCount": 3,
+      "cashRunwayMonths": 4,
+      "derRatio": "5:1"
+    }
+  },
+  {
+    "caseId": "DECISION-HEALTHY-OPERATIONS-002",
+    "description": "Healthy operations with 10B cash buffer, net positive profit, and 1:1 DER",
+    "input": {
+      "financialMetrics": {
+        "monthlyRevenue": 2000000000,
+        "monthlyOperatingExpense": 1000000000,
+        "cashBalance": 10000000000,
+        "cogs": 500000000,
+        "totalDebt": 10000000000,
+        "totalEquity": 10000000000
+      }
+    },
+    "expected": {
+      "priorityLevel": "LOW"
+    }
+  },
+  {
+    "caseId": "DECISION-CRITICAL-RUNWAY-003",
+    "description": "Critical 2-month cash runway triggering immediate OpEx rationalization",
+    "input": {
+      "financialMetrics": {
+        "monthlyRevenue": 500000000,
+        "monthlyOperatingExpense": 900000000,
+        "cashBalance": 800000000,
+        "cogs": 300000000,
+        "totalDebt": 30000000000,
+        "totalEquity": 10000000000
+      }
+    },
+    "expected": {
+      "priorityLevel": "HIGH"
+    }
   }
 ]

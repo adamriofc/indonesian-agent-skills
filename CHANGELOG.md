@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.8.0] - 2026-08-12
+
+### Expanded & Hardened (Golden Corpus Expansion & Cross-Engine Invariants Release)
+- **Golden Test Corpus Expansion (121 Golden Cases)**: Expanded static golden corpus from 94 to 121 golden cases across 27 benchmark domains in `tests/golden/*.json` (`transfer-pricing`, `market-sizing`, `marketing-unit-economics`, `scenario-analysis`, `strategic-risk`, `decision-analysis`, `decision-engine`, `business-scenario`, `compliance-risk`, `regulatory-impact`, `regulatory-diff`, `pph21-grossup`, `term-sheet`, `kbli-context`).
+- **Cross-Engine Invariants Suite (`tests/units/cross-engine-invariants.test.js`)**: Added 23 explicit invariant assertions verifying mathematical conservation laws (Exit Waterfall conservation, Net Seller Payout accounting, DER 4:1 secondary dividend adjustment, TER 35% cap, KBLI capacity model contracts).
+- **Immutable Release Trace Manifest (`release-manifest.json` & `scripts/generate-release-manifest.js`)**: Generates machine-readable release trace capturing version, git commit hash, SHA256 ruleset checksums, benchmark artifact hash, and Node matrix status.
+- **Strict Release Gate Upgrade (`scripts/validate-release.js`)**: Added Check 11 verification for `release-manifest.json` and strict workspace cleanliness verification (`REQUIRE_CLEAN_GIT=true`).
+- **SSOT Alignment Wording**: Updated documentation alignment wording across README, BENCHMARK, and METRICS ("All validated documentation fields are in SSOT alignment").
+
 ## [6.7.0] - 2026-08-12
 
 ### Added & Hardened (Production Hardening & Feature Freeze Release — Audit Roadmap Phase 3)
