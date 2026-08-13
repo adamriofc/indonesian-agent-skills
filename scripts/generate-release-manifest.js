@@ -2,11 +2,16 @@
 /**
  * Automated Release Manifest Generator (`scripts/generate-release-manifest.js`)
  *
- * Produces an immutable, machine-readable release trace (`release-manifest.json`)
- * capturing repository version, git commit hash, SHA256 ruleset checksums,
- * benchmark artifact hash, generated timestamp, and Node.js support matrix.
+ * Produces a machine-readable release trace (`release-manifest.json`) capturing
+ * the exact release tag target, SHA256 ruleset checksums, benchmark artifact hash,
+ * generated timestamp, and Node.js support matrix.
+ *
+ * A committed manifest must not be expected to contain its own commit hash
+ * (that would create circular self-reference). The authoritative release boundary
+ * is the Git tag; the manifest records that tag's target commit.
  *
  * Usage:
+ *   RELEASE_TAG=v6.11.2 node scripts/generate-release-manifest.js
  *   node scripts/generate-release-manifest.js
  */
 
@@ -17,11 +22,23 @@ const { execSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
 
-function getGitCommitHash() {
+function getReleaseTag(version) {
+  return process.env.RELEASE_TAG || `v${version}`;
+}
+
+function getReleaseCommitHash(version) {
+  const explicit = process.env.RELEASE_COMMIT_HASH;
+  if (explicit) return explicit;
+
+  const tag = getReleaseTag(version);
   try {
-    return execSync('git rev-parse HEAD', { cwd: ROOT, encoding: 'utf8' }).trim();
+    return execSync(`git rev-list -n 1 ${tag}`, { cwd: ROOT, encoding: 'utf8' }).trim();
   } catch {
-    return 'UNKNOWN_COMMIT';
+    try {
+      return execSync('git rev-parse HEAD', { cwd: ROOT, encoding: 'utf8' }).trim();
+    } catch {
+      return 'UNKNOWN_COMMIT';
+    }
   }
 }
 
@@ -32,7 +49,7 @@ function calculateFileHash(filePath) {
 }
 
 function generateReleaseManifest() {
-  console.log("📜 Generating Immutable Release Manifest (`release-manifest.json`)...\n");
+  console.log("📜 Generating Release Manifest (`release-manifest.json`)...\n");
 
   const metadataPath = path.join(ROOT, 'canonical-metadata.json');
   if (!fs.existsSync(metadataPath)) {
@@ -41,15 +58,17 @@ function generateReleaseManifest() {
   }
   const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
 
-  const commitHash = getGitCommitHash();
+  const releaseTag = getReleaseTag(metadata.version);
+  const releaseCommitHash = getReleaseCommitHash(metadata.version);
   const benchmarkHash = calculateFileHash(path.join(ROOT, 'docs/benchmark-results/latest.json'));
   const sha256sumsHash = calculateFileHash(path.join(ROOT, 'SHA256SUMS.txt'));
 
   const manifest = {
-    manifestVersion: "1.0.0",
+    manifestVersion: "1.1.0",
     repository: "https://github.com/adamriofc/indonesian-business-agent-skills",
     releaseVersion: `v${metadata.version}`,
-    gitCommitHash: commitHash,
+    releaseTag,
+    releaseCommitHash,
     generatedAt: new Date().toISOString(),
     metrics: {
       plugins: metadata.plugins,
@@ -57,7 +76,8 @@ function generateReleaseManifest() {
       engines: metadata.engines,
       goldenCases: metadata.goldenCases,
       benchmarkDomains: metadata.benchmarkDomains,
-      benchmarkAssertions: metadata.benchmarkAssertions
+      benchmarkAssertions: metadata.benchmarkAssertions,
+      totalTestAssertions: metadata.totalTestAssertions
     },
     integrityHashes: {
       sha256sumsFileHash: sha256sumsHash,
@@ -75,8 +95,8 @@ function generateReleaseManifest() {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
 
   console.log(`✅ Generated ${manifestPath}`);
-  console.log(`    ✓ Release Version: v${metadata.version}`);
-  console.log(`    ✓ Commit Hash:     ${commitHash}`);
+  console.log(`    ✓ Release Tag:     ${releaseTag}`);
+  console.log(`    ✓ Commit Hash:     ${releaseCommitHash}`);
   console.log(`    ✓ Ruleset Hash:    ${sha256sumsHash ? sha256sumsHash.slice(0, 16) + '...' : 'N/A'}`);
 }
 
