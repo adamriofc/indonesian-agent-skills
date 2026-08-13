@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.11.2] - 2026-08-13
+
+### Security & CodeQL Code Scanning Remediation (CodeQL Alerts #1, #2, #3, #4 Resolved)
+- **CodeQL Alert #4 Resolved (Bad HTML Filtering Regexp)**: Replaced non-greedy script tag regex in `tests/security/adversarial.test.js` with safer `<script[\s\S]*?>[\s\S]*?<\/script>` matching to prevent ReDoS / parser bypass.
+- **CodeQL Alert #3 Resolved (Incomplete Multi-Character Sanitization)**: Implemented iterative sanitization loop in `agentIngestParser` preventing multi-character replacement bypasses.
+- **CodeQL Alerts #1 & #2 Resolved (Incomplete URL Substring Sanitization)**: Replaced string inclusion check `includes("http://evil-attacker.com")` with strict scheme regex test `/https?:\/\//i` in security assertions.
+- **0 Open CodeQL Vulnerabilities**: All 4 GitHub CodeQL Code Scanning security alerts resolved.
+
 ## [6.11.1] - 2026-08-13
 
 ### Hardened & Provenance Synchronized (Semantic Precision & Release Provenance Patch Release)
