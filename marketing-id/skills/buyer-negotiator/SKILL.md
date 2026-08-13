@@ -1,9 +1,19 @@
 ---
 name: buyer-negotiator
-description: Strategy and communication templates for negotiating wholesale (grosir) and distribution terms with local Indonesian B2B buyers.
-argument-hint: "<buyer_type_distributor_retailer> <order_volume> <target_margin>"
+description: "Strategy and communication templates for negotiating wholesale (grosir) and distribution terms with local Indonesian B2B buyers."
+argument-hint: <buyer_type_distributor_retailer> <order_volume> <target_margin>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<buyer_type_distributor_retailer> <order_volume> <target_margin>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # B2B Wholesale Trade Negotiator

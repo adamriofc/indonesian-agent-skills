@@ -1,11 +1,19 @@
 ---
 name: pkwtt-checker
-description: Audit PKWTT permanent employment contracts, probation limits (max 3 months), auto-conversion triggers, minimum wage compliance, and statutory severance rights under PP 35/2021 & UU 6/2023.
-argument-hint: "<monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: tested
+description: "Audit PKWTT permanent employment contracts, probation limits (max 3 months), auto-conversion triggers, minimum wage compliance, and statutory severance rights under PP 35/2021 & UU 6/2023."
+argument-hint: <monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # PKWTT Permanent Employment & Contract Conversion Auditor

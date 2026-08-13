@@ -1,10 +1,19 @@
 ---
 name: go-to-market
-description: Formulates structured Go-To-Market (GTM) strategies defining target segment, value proposition, channel distribution, launch motion, and acquisition KPIs.
-argument-hint: "<productName> <targetMarket> <launchBudget>"
+description: "Formulates structured Go-To-Market (GTM) strategies defining target segment, value proposition, channel distribution, launch motion, and acquisition KPIs."
+argument-hint: <productName> <targetMarket> <launchBudget>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<productName> <targetMarket> <launchBudget>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Go-To-Market (GTM) Strategy Framework

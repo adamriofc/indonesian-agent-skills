@@ -1,11 +1,19 @@
 ---
 name: pph-badan-calculator
-description: Calculate Corporate Income Tax (PPh Badan) 22% with statutory Pasal 31E UU PPh sliding scale facility and positive/negative fiscal reconciliations.
-argument-hint: "<gross_turnover> <commercial_net_profit> <positive_fiscal_adjustments> <negative_fiscal_adjustments>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Calculate Corporate Income Tax (PPh Badan) 22% with statutory Pasal 31E UU PPh sliding scale facility and positive/negative fiscal reconciliations."
+argument-hint: <gross_turnover> <commercial_net_profit> <positive_fiscal_adjustments> <negative_fiscal_adjustments>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<gross_turnover> <commercial_net_profit> <positive_fiscal_adjustments> <negative_fiscal_adjustments>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Corporate Income Tax (PPh Badan) & Pasal 31E Calculator

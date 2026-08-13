@@ -1,5 +1,5 @@
 {
-  "version": "6.12.0",
+  "version": "6.13.0",
   "generated_at": "2026-08-12T08:00:00Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
@@ -20,7 +20,24 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<paste_contract_text>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "spk-generator",
@@ -31,7 +48,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<contractor_role> <project_name> <price_termijn>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "nda-indonesia",
@@ -42,7 +76,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<disclosing_party> <receiving_party> <duration_years>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "pdp-compliance",
@@ -53,7 +104,24 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<process_description>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "legal-memo-id",
@@ -64,7 +132,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<dispute_facts> <questions_of_law>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "haki-trademark-check",
@@ -75,7 +160,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<brand_name> <business_category_or_products>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "oss-kbli-navigator",
@@ -86,7 +188,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<business_description_or_services>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "somasi-draft-id",
@@ -97,7 +216,24 @@
       "quality_tier": "source-verified",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<debtor_party> <breach_facts> <demanded_action> <deadline_days>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "pph21-calculator",
@@ -108,7 +244,24 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pph21-calculator.js"
+      "engine": "engines/pph21-calculator.js",
+      "capability": {
+        "requires": [
+          "<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "pph21-grossup",
@@ -119,7 +272,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pph21-grossup-calculator.js"
+      "engine": "engines/pph21-grossup-calculator.js",
+      "capability": {
+        "requires": [
+          "<base_salary> <regular_allowances> <ptkp_status> <natura_amount>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "pph23-26-calculator",
@@ -130,7 +300,24 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pph23-26-calculator.js"
+      "engine": "engines/pph23-26-calculator.js",
+      "capability": {
+        "requires": [
+          "<gross_amount> <transaction_type> <has_npwp> [has_dgt_form]"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "pph-final-umkm",
@@ -141,7 +328,24 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/umkm-tax-calculator.js"
+      "engine": "engines/umkm-tax-calculator.js",
+      "capability": {
+        "requires": [
+          "<ytd_revenue> <current_month_revenue> <taxpayer_type_individual_or_single_person_company_or_cooperative>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "pph-badan-calculator",
@@ -152,7 +356,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pph-badan-calculator.js"
+      "engine": "engines/pph-badan-calculator.js",
+      "capability": {
+        "requires": [
+          "<gross_turnover> <commercial_net_profit> <positive_fiscal_adjustments> <negative_fiscal_adjustments>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "transfer-pricing-audit",
@@ -163,7 +384,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/transfer-pricing-engine.js"
+      "engine": "engines/transfer-pricing-engine.js",
+      "capability": {
+        "requires": [
+          "<total_interest_bearing_debt> <total_equity> <annual_interest_expense> <is_affiliate_lender>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "ppn-ppnbm-advanced",
@@ -174,7 +412,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/ppn-ppnbm-calculator.js"
+      "engine": "engines/ppn-ppnbm-calculator.js",
+      "capability": {
+        "requires": [
+          "<transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "tax-planning",
@@ -185,7 +440,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/umkm-tax-calculator.js"
+      "engine": "engines/umkm-tax-calculator.js",
+      "capability": {
+        "requires": [
+          "<entity_type_and_revenue_data>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "tax-optimization",
@@ -196,7 +468,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<expense_breakdown_or_payroll_reconciliation>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "tax-risk-analysis",
@@ -207,7 +496,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<financial_data_or_affiliate_transactions>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "tax-audit-preparation",
@@ -218,7 +524,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<sp2dk_letter_details_or_tax_audit_year>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "tax-cross-border",
@@ -229,7 +552,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pph23-26-calculator.js"
+      "engine": "engines/pph23-26-calculator.js",
+      "capability": {
+        "requires": [
+          "<offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "regulatory-diff",
@@ -240,7 +580,24 @@
       "quality_tier": "tested",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": "engines/regulatory-diff.js"
+      "engine": "engines/regulatory-diff.js",
+      "capability": {
+        "requires": [
+          "<domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "laporan-keuangan-psak",
@@ -251,7 +608,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<trial_balance_data> <accounting_standard>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "efaktur-helper",
@@ -262,7 +636,24 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<paste_invoice_details_or_qr_url>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "thr-calculator",
@@ -273,7 +664,23 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/thr-calculator.js"
+      "engine": "engines/thr-calculator.js",
+      "capability": {
+        "requires": [
+          "<gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "bpjs-calculator",
@@ -284,7 +691,23 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/bpjs-calculator.js"
+      "engine": "engines/bpjs-calculator.js",
+      "capability": {
+        "requires": [
+          "<base_salary>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "spt-tahunan-guide",
@@ -295,7 +718,23 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<spt_form_type> <has_1721_a1>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "surat-peringatan",
@@ -306,7 +745,23 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<employee_name> <violation_reason> <warning_level_1_2_3>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "sop-perusahaan",
@@ -317,7 +772,23 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "internal-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<department> <process_scope>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "interview-id",
@@ -328,7 +799,23 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "internal-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<candidate_role> <job_specifications>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "bpjs-tenagakerja-admin",
@@ -339,7 +826,23 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<task_description_e_g_register_new_hire>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "phk-calculator",
@@ -350,7 +853,23 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/phk-calculator.js"
+      "engine": "engines/phk-calculator.js",
+      "capability": {
+        "requires": [
+          "<gaji_pokok_tunjangan_tetap> <masa_kerja_tahun> <alasan_phk> [sisa_cuti]"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "phk-advanced-matrix",
@@ -361,7 +880,23 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/phk-calculator.js"
+      "engine": "engines/phk-calculator.js",
+      "capability": {
+        "requires": [
+          "<monthly_wage> <tenure_years> <phk_reason_code> <unused_leave_days>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "pkwt-pkwtt-checker",
@@ -372,7 +907,23 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pkwt-compensation-calculator.js"
+      "engine": "engines/pkwt-compensation-calculator.js",
+      "capability": {
+        "requires": [
+          "<monthly_wage> <tenure_months>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "pkwtt-checker",
@@ -383,7 +934,23 @@
       "quality_tier": "tested",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/pkwtt-calculator.js"
+      "engine": "engines/pkwtt-calculator.js",
+      "capability": {
+        "requires": [
+          "<monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "struktur-skala-upah",
@@ -394,7 +961,23 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<job_positions_list> <ump_umr_minimum>"
+        ],
+        "produces": [
+          "payoutAmount",
+          "statutoryEntitlements",
+          "complianceStatus"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "high",
+          "finance": "high",
+          "legal": "high"
+        }
+      }
     },
     {
       "id": "deskripsi-produk-seo",
@@ -405,7 +988,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<product_name> <features_specs> <brand>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "cs-komplain-handler",
@@ -416,7 +1017,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<customer_review_or_complaint> <issue_type_damaged_delayed_missing>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "analisis-kompetitor-marketplace",
@@ -427,7 +1046,25 @@
       "quality_tier": "tested",
       "risk_level": "MEDIUM",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<paste_competitor_reviews_or_specifications>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "shopee-live-script",
@@ -438,7 +1075,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<product_details> <discount_rate> <campaign_type>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "tokopedia-seo-optimizer",
@@ -449,7 +1104,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<brand_name> <product_type> <specifications> <target_keywords>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "buyer-negotiator",
@@ -460,7 +1133,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<buyer_type_distributor_retailer> <order_volume> <target_margin>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "margin-pricing-calculator",
@@ -471,7 +1162,25 @@
       "quality_tier": "tested",
       "risk_level": "MEDIUM",
       "rule_type": "commercial-policy",
-      "engine": "engines/marketplace-fee-calculator.js"
+      "engine": "engines/marketplace-fee-calculator.js",
+      "capability": {
+        "requires": [
+          "<selling_price> <platform> <seller_tier> [free_shipping_extra] [ad_budget]"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "klaim-logistik-retur",
@@ -482,7 +1191,25 @@
       "quality_tier": "source-verified",
       "risk_level": "MEDIUM",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<waybill_number> <courier_name> <damage_or_lost_details>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "tiktok-shop-affiliate",
@@ -493,7 +1220,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<product_category> <target_sales_volume> <margin_allowance>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "shopee-video-creator",
@@ -504,7 +1249,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<product_name> <promo_angle>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "whatsapp-broadcast",
@@ -515,7 +1278,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<promo_angle> <product_features> <cta_link>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "linkedin-x-thread-id",
@@ -526,7 +1307,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<business_case_or_milestone> <key_takeaways>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "script-reels-tiktok",
@@ -537,7 +1336,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<product_hook> <story_outline>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "lokalisasi-slang-indonesia",
@@ -548,7 +1365,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<original_english_or_formal_text> <target_tone_casual_jaksel>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "press-release-id",
@@ -559,7 +1394,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<corporate_event_announcement> <quotes_from_key_executives>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "instagram-reels-carousel",
@@ -570,7 +1423,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<topic_or_product> <target_audience> <post_format_reels_or_carousel>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "youtube-shorts-script",
@@ -581,7 +1452,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<video_topic> <video_format_shorts_or_longform>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "kol-brief-contract",
@@ -592,7 +1481,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<kol_tier_nano_micro_macro> <deliverables_sow> <exclusivity_period>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "gmb-local-seo",
@@ -603,7 +1510,25 @@
       "quality_tier": "source-verified",
       "risk_level": "LOW",
       "rule_type": "commercial-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<business_name> <location_city> <service_category>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "accounting-basics",
@@ -614,7 +1539,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "LOW",
       "rule_type": "internal-policy",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<transaction>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "financial-statements",
@@ -625,7 +1567,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<trial_balance> <period>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "cash-flow-analysis",
@@ -636,7 +1595,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<cash_flow_statement> <capex> <monthly_burn>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "budgeting-forecasting",
@@ -647,7 +1623,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<target> <history> <assumptions>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "financial-ratio-analysis",
@@ -658,7 +1651,24 @@
       "quality_tier": "tested",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": "engines/financial-ratios.js"
+      "engine": "engines/financial-ratios.js",
+      "capability": {
+        "requires": [
+          "<balance_sheet> <income_statement>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "working-capital",
@@ -669,7 +1679,24 @@
       "quality_tier": "tested",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": "engines/working-capital.js"
+      "engine": "engines/working-capital.js",
+      "capability": {
+        "requires": [
+          "<current_assets> <current_liabilities> <cycle_days> <daily_cogs>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "cost-accounting",
@@ -680,7 +1707,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<beginning_inventory> <purchases> <ending_inventory>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "break-even-analysis",
@@ -691,7 +1735,24 @@
       "quality_tier": "tested",
       "risk_level": "LOW",
       "rule_type": "professional-standard",
-      "engine": "engines/break-even.js"
+      "engine": "engines/break-even.js",
+      "capability": {
+        "requires": [
+          "<fixed_costs> <selling_price> <variable_cost> <actual_revenue>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "unit-economics",
@@ -702,7 +1763,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "LOW",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<arppu> <churn> <cac>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "business-feasibility",
@@ -713,7 +1791,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<business_idea> <investment> <projections>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "financial-modeling",
@@ -724,7 +1819,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<assumptions> <scenarios>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "capital-budgeting",
@@ -735,7 +1847,24 @@
       "quality_tier": "tested",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": "engines/npv.js"
+      "engine": "engines/npv.js",
+      "capability": {
+        "requires": [
+          "<investment> <annual_cashflow> <wacc>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "vc-term-sheet-waterfall",
@@ -746,7 +1875,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/term-sheet-waterfall.js"
+      "engine": "engines/term-sheet-waterfall.js",
+      "capability": {
+        "requires": [
+          "<exit_valuation> <investor_tiers_json> <common_ownership_percent>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "regulatory-impact",
@@ -757,7 +1903,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/regulatory-impact-engine.js"
+      "engine": "engines/regulatory-impact-engine.js",
+      "capability": {
+        "requires": [
+          "<domain: umkm|bpjs|phk> <fromRuleset> <toRuleset>"
+        ],
+        "produces": [
+          "taxAmount",
+          "effectiveRatePercent",
+          "statutoryReference",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "hr": "high",
+          "finance": "high",
+          "legal": "medium"
+        }
+      }
     },
     {
       "id": "compliance-risk",
@@ -768,7 +1931,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "statutory",
-      "engine": "engines/compliance-risk-engine.js"
+      "engine": "engines/compliance-risk-engine.js",
+      "capability": {
+        "requires": [
+          "<company_profile_and_practices_json>"
+        ],
+        "produces": [
+          "riskScore",
+          "detectedViolations",
+          "redlines",
+          "safeToUse"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "tax": "medium",
+          "hr": "high",
+          "finance": "medium"
+        }
+      }
     },
     {
       "id": "business-scenario",
@@ -779,7 +1959,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "statutory",
-      "engine": "engines/business-scenario-engine.js"
+      "engine": "engines/business-scenario-engine.js",
+      "capability": {
+        "requires": [
+          "<entityType> <annualRevenue> <employeeCount> <salesChannels>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "decision-engine",
@@ -790,7 +1987,24 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/decision-engine.js"
+      "engine": "engines/decision-engine.js",
+      "capability": {
+        "requires": [
+          "<monthlyRevenue> <monthlyOpEx> <cashBalance> <cogs> <totalDebt> <totalEquity>"
+        ],
+        "produces": [
+          "financialRatio",
+          "cashRunwayMonths",
+          "netProfit",
+          "feasible"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "strategy": "high",
+          "marketing": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "porter-three-tests",
@@ -801,7 +2015,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/strategic-framework-engine.js"
+      "engine": "engines/strategic-framework-engine.js",
+      "capability": {
+        "requires": [
+          "<kbliCode> <targetIndustry> <costOfEntry> <expectedSynergies>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "porter-five-forces",
@@ -812,7 +2044,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<industry_name_and_market_context>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "bcg-matrix",
@@ -823,7 +2073,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/strategic-framework-engine.js"
+      "engine": "engines/strategic-framework-engine.js",
+      "capability": {
+        "requires": [
+          "<kbliCode> <marketGrowthRatePercent> <relativeMarketShare>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "ansoff-matrix",
@@ -834,7 +2102,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<productType: existing|new> <marketType: existing|new>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "vrio-analysis",
@@ -845,7 +2131,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<resource_or_capability_description>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "value-chain-analysis",
@@ -856,7 +2160,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<kbliCode> <company_operations_description>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "strategic-planning",
@@ -867,7 +2189,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<company_vision_and_objectives>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "decision-making",
@@ -878,7 +2218,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/decision-analysis-engine.js"
+      "engine": "engines/decision-analysis-engine.js",
+      "capability": {
+        "requires": [
+          "<decision_title_and_alternatives_json>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "scenario-planning",
@@ -889,7 +2247,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/scenario-analysis-engine.js"
+      "engine": "engines/scenario-analysis-engine.js",
+      "capability": {
+        "requires": [
+          "<baseCaseRevenue> <cogs> <opex> <revenueDeltaPercent> <cogsDeltaPercent>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "strategic-risk-analysis",
@@ -900,7 +2276,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/strategic-risk-engine.js"
+      "engine": "engines/strategic-risk-engine.js",
+      "capability": {
+        "requires": [
+          "<risks_list_json>"
+        ],
+        "produces": [
+          "businessArchetype",
+          "compositeScore",
+          "resilienceAssessment",
+          "topOption"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "marketing": "high",
+          "hr": "medium",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "market-sizing",
@@ -911,7 +2305,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": "engines/market-sizing-engine.js"
+      "engine": "engines/market-sizing-engine.js",
+      "capability": {
+        "requires": [
+          "<totalPopulation> <adoptionPercent> <avgAnnualSpend>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "customer-segmentation",
@@ -922,7 +2334,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<market_and_customer_data>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "jobs-to-be-done",
@@ -933,7 +2363,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<customer_context_and_use_case>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "voice-of-customer",
@@ -944,7 +2392,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "MEDIUM",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<customer_feedback_transcripts_or_reviews>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "positioning-analysis",
@@ -955,7 +2421,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<targetSegment> <categoryReference> <pointOfDifference>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "go-to-market",
@@ -966,7 +2450,25 @@
       "quality_tier": "expert-reviewed",
       "risk_level": "HIGH",
       "rule_type": "professional-standard",
-      "engine": null
+      "engine": null,
+      "capability": {
+        "requires": [
+          "<productName> <targetMarket> <launchBudget>"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": false,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     },
     {
       "id": "product-classification",
@@ -977,7 +2479,29 @@
       "quality_tier": "tested",
       "risk_level": "medium",
       "rule_type": "statutory",
-      "engine": "engines/product-context.js"
+      "engine": "engines/product-context.js",
+      "capability": {
+        "requires": [
+          "productName",
+          "description",
+          "attributes",
+          "targetHsCode",
+          "cifValueIdr"
+        ],
+        "produces": [
+          "cac",
+          "ltv",
+          "btkiCode",
+          "classificationStatus",
+          "landedCost"
+        ],
+        "deterministic": true,
+        "cross_domain_relevance": {
+          "finance": "high",
+          "strategy": "high",
+          "tax": "medium"
+        }
+      }
     }
   ]
 }

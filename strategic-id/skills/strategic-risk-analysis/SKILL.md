@@ -1,10 +1,20 @@
 ---
 name: strategic-risk-analysis
-description: Evaluates corporate strategic risks across Likelihood, Impact, and Velocity to classify risks on a 4-Tier Risk Heatmap and generate prioritized mitigations.
-argument-hint: "<risks_list_json>"
+description: "Evaluates corporate strategic risks across Likelihood, Impact, and Velocity to classify risks on a 4-Tier Risk Heatmap and generate prioritized mitigations."
+argument-hint: <risks_list_json>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<risks_list_json>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Strategic Risk Scoring & Mitigation Framework

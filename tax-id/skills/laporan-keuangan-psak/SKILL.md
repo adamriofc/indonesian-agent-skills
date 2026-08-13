@@ -1,9 +1,19 @@
 ---
 name: laporan-keuangan-psak
-description: Structure trial balances into financial statements conforming to Indonesian SAK EMKM / SAK EP accounting standards for bank credit applications and tax audits.
-argument-hint: "<trial_balance_data> <accounting_standard>"
+description: "Structure trial balances into financial statements conforming to Indonesian SAK EMKM / SAK EP accounting standards for bank credit applications and tax audits."
+argument-hint: <trial_balance_data> <accounting_standard>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<trial_balance_data> <accounting_standard>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Financial Statement Generator (SAK EMKM / SAK EP)

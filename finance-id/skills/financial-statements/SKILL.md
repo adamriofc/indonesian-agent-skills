@@ -1,9 +1,19 @@
 ---
 name: financial-statements
-description: Structure Indonesian financial statements (income statement, balance sheet, cash flow) per PSAK 1 presentation principles with accrual linkage.
-argument-hint: "<trial_balance> <period>"
+description: "Structure Indonesian financial statements (income statement, balance sheet, cash flow) per PSAK 1 presentation principles with accrual linkage."
+argument-hint: <trial_balance> <period>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<trial_balance> <period>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Financial Statements

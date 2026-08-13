@@ -1,10 +1,20 @@
 ---
 name: porter-three-tests
-description: Evaluates corporate diversification and M&A strategies using Michael Porter's Three Tests (Attractiveness, Cost of Entry, Better-Off) combined with the 12-Step Strategic Protocol.
-argument-hint: "<kbliCode> <targetIndustry> <costOfEntry> <expectedSynergies>"
+description: "Evaluates corporate diversification and M&A strategies using Michael Porter's Three Tests (Attractiveness, Cost of Entry, Better-Off) combined with the 12-Step Strategic Protocol."
+argument-hint: <kbliCode> <targetIndustry> <costOfEntry> <expectedSynergies>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<kbliCode> <targetIndustry> <costOfEntry> <expectedSynergies>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Porter's Three Tests of Corporate Strategy

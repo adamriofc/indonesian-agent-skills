@@ -1,11 +1,19 @@
 ---
 name: tax-planning
-description: Evaluate strategic Indonesian tax planning scenarios (PP 20/2026 final tax vs general corporate PPh, gross-up vs net salary tax, dividend vs salary distribution).
-argument-hint: "<entity_type_and_revenue_data>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Evaluate strategic Indonesian tax planning scenarios (PP 20/2026 final tax vs general corporate PPh, gross-up vs net salary tax, dividend vs salary distribution)."
+argument-hint: <entity_type_and_revenue_data>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<entity_type_and_revenue_data>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Strategic Tax Planning & Structure Evaluation

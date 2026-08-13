@@ -1,9 +1,19 @@
 ---
 name: cs-komplain-handler
-description: Draft empathetic, professional, and brand-aligned customer support responses for negative reviews and order issues.
-argument-hint: "<customer_review_or_complaint> <issue_type_damaged_delayed_missing>"
+description: "Draft empathetic, professional, and brand-aligned customer support responses for negative reviews and order issues."
+argument-hint: <customer_review_or_complaint> <issue_type_damaged_delayed_missing>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<customer_review_or_complaint> <issue_type_damaged_delayed_missing>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Customer Service Complaint Handler

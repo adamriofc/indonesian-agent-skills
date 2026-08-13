@@ -1,9 +1,19 @@
 ---
 name: budgeting-forecasting
-description: Build top-down or bottom-up budgets, variance analysis, and rolling forecasts for Indonesian SME planning cycles.
-argument-hint: "<target> <history> <assumptions>"
+description: "Build top-down or bottom-up budgets, variance analysis, and rolling forecasts for Indonesian SME planning cycles."
+argument-hint: <target> <history> <assumptions>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<target> <history> <assumptions>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Budgeting & Forecasting

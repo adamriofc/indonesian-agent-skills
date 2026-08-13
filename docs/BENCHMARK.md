@@ -13,6 +13,7 @@ To ensure scientific rigor, clear nomenclature, and eliminate unsubstantiated cl
 | **Tier 1: Deterministic Engine Math** | Calculation & invariant precision | Does the Node.js engine compute equations with 0% arithmetic error per official rulesets? | `scripts/benchmark.js` | **100.00% Pass Rate** (121 Golden Cases) |
 | **Tier 2: Rule-Based Parameter Extraction** | Pattern & slot extraction fixture | Does the extraction parser parse numeric values, PTKP statuses, and dates from natural language text? | `tests/benchmarks/fixture/nlp-extraction-fixture.test.js` | **100.00% Pass Rate** (50 Fixture Cases) |
 | **Tier 3: Business Scenario Regression** | Deterministic multi-domain regression | Do curated business scenarios (authored statutory-sourced + parameterized + adversarial) reproduce expected domain outputs across 8 independently evaluated dimensions? | `tests/benchmarks/business-scenario-regression.test.js` | **100.00% Pass Rate** (30 Curated Scenarios) |
+| **Tier 4: Agent Capability & Composition** | Capability discovery & multi-domain composition | Does the host agent discover, select, and compose single-domain, partial, and full cross-domain capabilities accurately? | `tests/benchmarks/agent-capability.test.js` | **100.00% Pass Rate** (3 Task Suites) |
 
 > **Honest scoping note:** Tier 3 is a deterministic regression benchmark — every expected value is compared exactly against ruleset-derived outputs. It is **not** an LLM recommendation-quality measurement; recommendation-quality claims are reserved for the empirical LLM baseline comparison in Section 3.
 
@@ -27,7 +28,7 @@ Run command: `node scripts/benchmark.js [--llm] [--json-report docs/benchmark-re
 
 ## 2. Latest Deterministic Execution Results (Tier 1)
 
-**Date: 2026-08-13 — Node.js v26.7.0 — `scripts/benchmark.js` v6.12.0 (39-engine coverage, 27 domains, 121 golden cases)**
+**Date: 2026-08-13 — Node.js v26.7.0 — `scripts/benchmark.js` v6.13.0 (39-engine coverage, 27 domains, 121 golden cases)**
 
 | Benchmark Domain | Cases | Golden Accuracy Pass Rate | Determinism (3×) | Throughput |
 |---|---|---|---|---|
@@ -90,7 +91,7 @@ The benchmark harness (`scripts/llm-benchmark-eval.js`) compares identical LLM m
 
 ## 4. Limits & Non-Claims
 
-- **Pass Rate Scope**: The 100.00% pass rate refers specifically to execution on the published 94 golden cases + CI test matrix (424 assertion statements measured on 2026-08-12).
+- **Pass Rate Scope**: The 100.00% pass rate refers specifically to execution on the published 121 golden cases + CI test matrix (434 benchmark assertion statements measured on 2026-08-13).
 - **Benchmark Semantics**: The Business Scenario Regression suite (`tests/benchmarks/business-scenario-regression.test.js`) measures deterministic output reproduction across 8 independently evaluated dimensions (Context Correctness, Evidence Grounding, Recommendation Specificity, Actionability, Financial Feasibility, Constraint Awareness, Cross-Domain Consistency, Hallucination Absence). It evaluates engines, not LLM behaviors; LLM comparison claims come only from Section 3's empirical baseline.
 - **Case Provenance**: The 30 regression scenarios are labeled `AUTHORED_SOURCE_CASE` (5 scenarios authored on verifiable statutory basis with citations), `PARAMETRIC_CASE` (20 programmatic stress variants), or `ADVERSARIAL_CASE` (5 context & input violation edge cases). No scenario is presented as a published journal case study.
 - **Human Review Boundary**: Outputs serve as decision-support intelligence and do not replace licensed advocate or CPA consultation for high-stakes filings.

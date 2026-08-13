@@ -1,9 +1,19 @@
 ---
 name: haki-trademark-check
-description: Audit trademark availability, DJKI Nice Classifications (Kelas Merek 1-45), and rejection risks under UU No. 20/2016.
-argument-hint: "<brand_name> <business_category_or_products>"
+description: "Audit trademark availability, DJKI Nice Classifications (Kelas Merek 1-45), and rejection risks under UU No. 20/2016."
+argument-hint: <brand_name> <business_category_or_products>
 risk_level: MEDIUM
 rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<brand_name> <business_category_or_products>]
+  produces: [riskScore, detectedViolations, redlines, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    tax: medium
+    hr: high
+    finance: medium
 ---
 
 # DJKI Trademark Search & Classification Audit

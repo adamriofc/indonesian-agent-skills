@@ -1,10 +1,19 @@
 ---
 name: decision-engine
-description: Evaluates corporate financial and operational metrics (cash runway, gross margin, DER ratio, PPh 21 tax burden, severance liability) to generate deterministic, prioritized business decision recommendations and driver classifications.
-argument-hint: "<monthlyRevenue> <monthlyOpEx> <cashBalance> <cogs> <totalDebt> <totalEquity>"
+description: "Evaluates corporate financial and operational metrics (cash runway, gross margin, DER ratio, PPh 21 tax burden, severance liability) to generate deterministic, prioritized business decision recommendations and driver classifications."
+argument-hint: <monthlyRevenue> <monthlyOpEx> <cashBalance> <cogs> <totalDebt> <totalEquity>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<monthlyRevenue> <monthlyOpEx> <cashBalance> <cogs> <totalDebt> <totalEquity>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Deterministic Business Decision Engine

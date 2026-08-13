@@ -1,10 +1,19 @@
 ---
 name: compliance-risk
-description: Multi-Domain Compliance Health Audit (Tax, HR, Legal, Data/PDP, Commerce). Evaluates operational practices against Indonesian statutory mandates to output a Compliance Health Score (0-100), domain health flags, detected violations, and a prioritized remediation roadmap.
-argument-hint: "<company_profile_and_practices_json>"
+description: "Multi-Domain Compliance Health Audit (Tax, HR, Legal, Data/PDP, Commerce). Evaluates operational practices against Indonesian statutory mandates to output a Compliance Health Score (0-100), domain health flags, detected violations, and a prioritized remediation roadmap."
+argument-hint: <company_profile_and_practices_json>
 risk_level: HIGH
 rule_type: statutory
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<company_profile_and_practices_json>]
+  produces: [riskScore, detectedViolations, redlines, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    tax: medium
+    hr: high
+    finance: medium
 ---
 
 # Multi-Domain Compliance Risk Engine

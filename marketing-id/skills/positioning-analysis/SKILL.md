@@ -1,10 +1,19 @@
 ---
 name: positioning-analysis
-description: Establishes strategic brand positioning frameworks by defining target customer, frame of reference, point of difference, and reason to believe.
-argument-hint: "<targetSegment> <categoryReference> <pointOfDifference>"
+description: "Establishes strategic brand positioning frameworks by defining target customer, frame of reference, point of difference, and reason to believe."
+argument-hint: <targetSegment> <categoryReference> <pointOfDifference>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<targetSegment> <categoryReference> <pointOfDifference>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Brand Positioning & Value Proposition Framework

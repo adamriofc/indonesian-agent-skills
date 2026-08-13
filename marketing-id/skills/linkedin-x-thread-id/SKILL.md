@@ -1,9 +1,19 @@
 ---
 name: linkedin-x-thread-id
-description: Write engaging professional business narratives (storytelling) tailored for Indonesian LinkedIn and X (Twitter) audiences.
-argument-hint: "<business_case_or_milestone> <key_takeaways>"
+description: "Write engaging professional business narratives (storytelling) tailored for Indonesian LinkedIn and X (Twitter) audiences."
+argument-hint: <business_case_or_milestone> <key_takeaways>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<business_case_or_milestone> <key_takeaways>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Executive Storytelling & Thread Writer

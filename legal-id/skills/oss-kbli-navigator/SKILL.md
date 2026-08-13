@@ -1,9 +1,19 @@
 ---
 name: oss-kbli-navigator
-description: Map business activities to 5-digit KBLI 2020 codes, assess Risk-Based Licensing levels (OSS-RBA), and verify PB-UMKU requirements.
-argument-hint: "<business_description_or_services>"
+description: "Map business activities to 5-digit KBLI 2020 codes, assess Risk-Based Licensing levels (OSS-RBA), and verify PB-UMKU requirements."
+argument-hint: <business_description_or_services>
 risk_level: MEDIUM
 rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<business_description_or_services>]
+  produces: [riskScore, detectedViolations, redlines, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    tax: medium
+    hr: high
+    finance: medium
 ---
 
 # OSS-RBA & KBLI 2020 Business Licensing Navigator

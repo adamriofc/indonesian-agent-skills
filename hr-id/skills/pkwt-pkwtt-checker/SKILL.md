@@ -1,9 +1,19 @@
 ---
 name: pkwt-pkwtt-checker
-description: Audit contract employment limits (PKWT max 5 years) and calculate mandatory PKWT Compensation Payout under PP No. 35/2021.
-argument-hint: "<monthly_wage> <tenure_months>"
+description: "Audit contract employment limits (PKWT max 5 years) and calculate mandatory PKWT Compensation Payout under PP No. 35/2021."
+argument-hint: <monthly_wage> <tenure_months>
 risk_level: HIGH
 rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<monthly_wage> <tenure_months>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # PKWT Contract & Compensation Auditor (PP 35/2021)

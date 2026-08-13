@@ -20,31 +20,40 @@ function discoverPlugins(rootDir) {
 function parseYamlFrontmatter(yamlStr) {
   const lines = yamlStr.split('\n');
   const result = {};
-  
+  let currentTopKey = null;
+
   for (const line of lines) {
+    if (!line.trim() || line.trim().startsWith('#')) continue;
+    const isIndented = /^\s+/.test(line);
+
+    if (isIndented && currentTopKey) {
+      // Sub-key inside current top key object
+      const trimmed = line.trim();
+      const colonIdx = trimmed.indexOf(':');
+      if (colonIdx !== -1) {
+        const subKey = trimmed.slice(0, colonIdx).trim();
+        const subVal = trimmed.slice(colonIdx + 1).trim().replace(/^['"]|['"]$/g, '');
+        if (typeof result[currentTopKey] !== 'object' || result[currentTopKey] === null) {
+          result[currentTopKey] = {};
+        }
+        result[currentTopKey][subKey] = subVal;
+      }
+      continue;
+    }
+
     const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) continue;
-    
     const colonIdx = trimmed.indexOf(':');
-    if (colonIdx === -1) {
-      throw new Error(`Malformed YAML frontmatter line: "${line}"`);
-    }
-    
+    if (colonIdx === -1) continue;
+
     const key = trimmed.slice(0, colonIdx).trim();
-    const value = trimmed.slice(colonIdx + 1).trim();
-    
-    if (!key) {
-      throw new Error(`Empty key in YAML frontmatter line: "${line}"`);
+    const value = trimmed.slice(colonIdx + 1).trim().replace(/^['"]|['"]$/g, '');
+
+    if (key) {
+      currentTopKey = key;
+      result[key] = value || {};
     }
-    if (result.hasOwnProperty(key)) {
-      throw new Error(`Duplicate YAML frontmatter key: "${key}"`);
-    }
-    
-    // Strip surrounding quotes if present
-    const cleanValue = value.replace(/^['"]|['"]$/g, '');
-    result[key] = cleanValue;
   }
-  
+
   return result;
 }
 
@@ -157,13 +166,28 @@ function validate() {
             }
           }
 
-          // 3. Frontmatter Keys & Metadata Validation
-          const ALLOWED_KEYS = ['name', 'description', 'argument-hint', 'risk_level', 'rule_type', 'quality_tier', 'metadata', 'allowed-tools', 'license', 'compatibility'];
+          // 3. Frontmatter Keys & Capability Contract Validation
+          const ALLOWED_KEYS = ['name', 'description', 'argument-hint', 'risk_level', 'rule_type', 'quality_tier', 'metadata', 'allowed-tools', 'license', 'compatibility', 'capability'];
           Object.keys(frontmatter).forEach(key => {
             if (!ALLOWED_KEYS.includes(key)) {
               console.warn(`⚠️ Warning in ${skillFilePath}: non-standard frontmatter key '${key}'. Custom metadata should be placed inside 'metadata:'.`);
             }
           });
+
+          // 4. Agent Capability Contract Validation
+          if (!frontmatter.capability || typeof frontmatter.capability !== 'object') {
+            console.error(`❌ Agent Capability Contract Violation in ${skillFilePath}: 'capability' metadata block missing or invalid.`);
+            errors++;
+          } else {
+            if (!frontmatter.capability.requires) {
+              console.error(`❌ Agent Capability Contract Violation in ${skillFilePath}: 'capability.requires' is required.`);
+              errors++;
+            }
+            if (!frontmatter.capability.produces) {
+              console.error(`❌ Agent Capability Contract Violation in ${skillFilePath}: 'capability.produces' is required.`);
+              errors++;
+            }
+          }
         } catch (err) {
           console.error(`❌ YAML Frontmatter parse error in ${skillFilePath}: ${err.message}`);
           errors++;

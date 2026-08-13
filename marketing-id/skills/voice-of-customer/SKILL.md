@@ -1,10 +1,19 @@
 ---
 name: voice-of-customer
-description: Synthesizes customer reviews, survey responses, interview transcripts, and complaint logs to extract recurring pain points, desires, and language patterns.
-argument-hint: "<customer_feedback_transcripts_or_reviews>"
+description: "Synthesizes customer reviews, survey responses, interview transcripts, and complaint logs to extract recurring pain points, desires, and language patterns."
+argument-hint: <customer_feedback_transcripts_or_reviews>
 risk_level: MEDIUM
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<customer_feedback_transcripts_or_reviews>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Voice of Customer (VOC) Synthesis

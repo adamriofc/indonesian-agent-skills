@@ -1,9 +1,19 @@
 ---
 name: bpjs-calculator
-description: Calculate monthly employer and employee contributions for BPJS Ketenagakerjaan and BPJS Kesehatan.
-argument-hint: "<base_salary>"
+description: "Calculate monthly employer and employee contributions for BPJS Ketenagakerjaan and BPJS Kesehatan."
+argument-hint: <base_salary>
 risk_level: HIGH
 rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<base_salary>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # BPJS Split & Contribution Calculator

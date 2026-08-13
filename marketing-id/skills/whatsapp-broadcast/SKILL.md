@@ -1,9 +1,19 @@
 ---
 name: whatsapp-broadcast
-description: Generate high-conversion WhatsApp blast and broadcast message copy that avoids trigger-words which lead to account blocks.
-argument-hint: "<promo_angle> <product_features> <cta_link>"
+description: "Generate high-conversion WhatsApp blast and broadcast message copy that avoids trigger-words which lead to account blocks."
+argument-hint: <promo_angle> <product_features> <cta_link>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<promo_angle> <product_features> <cta_link>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # WhatsApp Broadcast Copywriter

@@ -1,11 +1,19 @@
 ---
 name: phk-advanced-matrix
-description: Evaluate complex Indonesian employment termination (PHK) multi-condition scenarios (retirement crossover, efficiency due to loss vs prevention of loss, merger employee/employer refusal).
-argument-hint: "<monthly_wage> <tenure_years> <phk_reason_code> <unused_leave_days>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: tested
+description: "Evaluate complex Indonesian employment termination (PHK) multi-condition scenarios (retirement crossover, efficiency due to loss vs prevention of loss, merger employee/employer refusal)."
+argument-hint: <monthly_wage> <tenure_years> <phk_reason_code> <unused_leave_days>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<monthly_wage> <tenure_years> <phk_reason_code> <unused_leave_days>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # Advanced Complex PHK Multi-Condition Severance Matrix

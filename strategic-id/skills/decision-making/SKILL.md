@@ -1,10 +1,20 @@
 ---
 name: decision-making
-description: Executive decision-making framework powered by Multi-Criteria Decision Analysis (MCDA) weighted scoring to evaluate strategic trade-offs objectively.
-argument-hint: "<decision_title_and_alternatives_json>"
+description: "Executive decision-making framework powered by Multi-Criteria Decision Analysis (MCDA) weighted scoring to evaluate strategic trade-offs objectively."
+argument-hint: <decision_title_and_alternatives_json>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<decision_title_and_alternatives_json>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Multi-Criteria Decision Analysis (MCDA) Framework

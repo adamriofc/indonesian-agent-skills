@@ -1,11 +1,19 @@
 ---
 name: tax-cross-border
-description: Evaluate Indonesian offshore withholding taxes (PPh 26 20% vs Tax Treaty / P3B DGT Form rate reductions) and Permanent Establishment (BUT) risk.
-argument-hint: "<offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Evaluate Indonesian offshore withholding taxes (PPh 26 20% vs Tax Treaty / P3B DGT Form rate reductions) and Permanent Establishment (BUT) risk."
+argument-hint: <offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Cross-Border Tax & Treaty (P3B) Optimization

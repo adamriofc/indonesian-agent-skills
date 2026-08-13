@@ -1,9 +1,19 @@
 ---
 name: thr-calculator
-description: Calculate statutory Indonesian religious holiday allowance (Tunjangan Hari Raya - THR) per Permenaker No. 6/2016.
-argument-hint: "<gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>"
+description: "Calculate statutory Indonesian religious holiday allowance (Tunjangan Hari Raya - THR) per Permenaker No. 6/2016."
+argument-hint: <gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>
 risk_level: HIGH
 rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # Statutory THR Payout Calculator

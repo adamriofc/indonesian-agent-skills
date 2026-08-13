@@ -1,10 +1,20 @@
 ---
 name: scenario-planning
-description: Evaluates macro and micro What-If scenarios (exchange rate shifts, cost spikes, demand shocks) using deterministic sensitivity simulation.
-argument-hint: "<baseCaseRevenue> <cogs> <opex> <revenueDeltaPercent> <cogsDeltaPercent>"
+description: "Evaluates macro and micro What-If scenarios (exchange rate shifts, cost spikes, demand shocks) using deterministic sensitivity simulation."
+argument-hint: <baseCaseRevenue> <cogs> <opex> <revenueDeltaPercent> <cogsDeltaPercent>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<baseCaseRevenue> <cogs> <opex> <revenueDeltaPercent> <cogsDeltaPercent>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Strategic Scenario & Sensitivity Planning

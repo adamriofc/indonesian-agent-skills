@@ -1,10 +1,19 @@
 ---
 name: regulatory-diff
-description: Compare Indonesian statutory and platform ruleset transitions across effective date windows (e.g. PP 55/2022 vs PP 20/2026 or BPJS 2025 vs 2026).
-argument-hint: "<domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>"
-metadata:
-  risk_level: MEDIUM
-  rule_type: statutory
+description: "Compare Indonesian statutory and platform ruleset transitions across effective date windows (e.g. PP 55/2022 vs PP 20/2026 or BPJS 2025 vs 2026)."
+argument-hint: <domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>
+risk_level: MEDIUM
+rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Regulatory & Ruleset Diff Engine

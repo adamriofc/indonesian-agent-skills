@@ -1,10 +1,20 @@
 ---
 name: porter-five-forces
-description: Analyzes industry structure and competitive intensity using Michael Porter's Five Forces Framework (Supplier Power, Buyer Power, Threat of Substitutes, Threat of New Entrants, Industry Rivalry).
-argument-hint: "<industry_name_and_market_context>"
+description: "Analyzes industry structure and competitive intensity using Michael Porter's Five Forces Framework (Supplier Power, Buyer Power, Threat of Substitutes, Threat of New Entrants, Industry Rivalry)."
+argument-hint: <industry_name_and_market_context>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<industry_name_and_market_context>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Porter's Five Forces Industry Analysis

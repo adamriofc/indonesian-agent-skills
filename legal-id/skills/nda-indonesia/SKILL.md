@@ -1,9 +1,19 @@
 ---
 name: nda-indonesia
-description: Draft non-disclosure agreements (NDAs) tailored for Indonesian corporate transactions and partner sharing.
-argument-hint: "<disclosing_party> <receiving_party> <duration_years>"
+description: "Draft non-disclosure agreements (NDAs) tailored for Indonesian corporate transactions and partner sharing."
+argument-hint: <disclosing_party> <receiving_party> <duration_years>
 risk_level: MEDIUM
 rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<disclosing_party> <receiving_party> <duration_years>]
+  produces: [riskScore, detectedViolations, redlines, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    tax: medium
+    hr: high
+    finance: medium
 ---
 
 # NDA Indonesia Generator

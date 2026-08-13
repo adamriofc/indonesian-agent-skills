@@ -1,10 +1,20 @@
 ---
 name: strategic-planning
-description: Structured corporate strategic planning framework linking Vision/Mission to Strategic Objectives, KPIs, Initiatives, Timelines, and Resource Allocation.
-argument-hint: "<company_vision_and_objectives>"
+description: "Structured corporate strategic planning framework linking Vision/Mission to Strategic Objectives, KPIs, Initiatives, Timelines, and Resource Allocation."
+argument-hint: <company_vision_and_objectives>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<company_vision_and_objectives>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Corporate Strategic Planning Framework

@@ -1,9 +1,19 @@
 ---
 name: financial-modeling
-description: Build 3-statement financial models with scenario and sensitivity tables for Indonesian SME planning, staying deterministic and auditable.
-argument-hint: "<assumptions> <scenarios>"
+description: "Build 3-statement financial models with scenario and sensitivity tables for Indonesian SME planning, staying deterministic and auditable."
+argument-hint: <assumptions> <scenarios>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<assumptions> <scenarios>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Financial Modeling

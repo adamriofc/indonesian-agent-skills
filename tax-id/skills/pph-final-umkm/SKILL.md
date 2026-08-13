@@ -1,10 +1,19 @@
 ---
 name: pph-final-umkm
-description: Calculate statutory 0.5% MSME final income tax under PP No. 55/2022 & PP No. 20/2026 including the Rp 500M annual threshold exemption for Individual Taxpayers.
-argument-hint: "<ytd_revenue> <current_month_revenue> <taxpayer_type_individual_or_single_person_company_or_cooperative>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
+description: "Calculate statutory 0.5% MSME final income tax under PP No. 55/2022 & PP No. 20/2026 including the Rp 500M annual threshold exemption for Individual Taxpayers."
+argument-hint: <ytd_revenue> <current_month_revenue> <taxpayer_type_individual_or_single_person_company_or_cooperative>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<ytd_revenue> <current_month_revenue> <taxpayer_type_individual_or_single_person_company_or_cooperative>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # UMKM Final Tax 0.5% Calculator (PP 55/2022 & PP 20/2026)

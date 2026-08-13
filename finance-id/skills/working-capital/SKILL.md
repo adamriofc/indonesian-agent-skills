@@ -1,9 +1,19 @@
 ---
 name: working-capital
-description: Calculate net working capital, working capital ratio, cash conversion cycle, and funding requirements with the deterministic working-capital engine.
-argument-hint: "<current_assets> <current_liabilities> <cycle_days> <daily_cogs>"
+description: "Calculate net working capital, working capital ratio, cash conversion cycle, and funding requirements with the deterministic working-capital engine."
+argument-hint: <current_assets> <current_liabilities> <cycle_days> <daily_cogs>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<current_assets> <current_liabilities> <cycle_days> <daily_cogs>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Working Capital Management

@@ -1,9 +1,19 @@
 ---
 name: sop-perusahaan
-description: Generate operational Standard Operating Procedures (SOPs) for local Indonesian workplace operations, shift plans, and leaves.
-argument-hint: "<department> <process_scope>"
+description: "Generate operational Standard Operating Procedures (SOPs) for local Indonesian workplace operations, shift plans, and leaves."
+argument-hint: <department> <process_scope>
 risk_level: MEDIUM
 rule_type: internal-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<department> <process_scope>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # Statutory Company SOP Generator

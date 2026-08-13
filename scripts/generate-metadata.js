@@ -115,9 +115,10 @@ function generateMetadata() {
   const benchmarkFiles = [
     path.join(ROOT, 'tests/benchmarks/business-scenario-regression.test.js'),
     path.join(ROOT, 'tests/benchmarks/fixture/nlp-extraction-fixture.test.js'),
-    path.join(ROOT, 'tests/benchmarks/synthetic/cross-domain-synthetic.test.js')
+    path.join(ROOT, 'tests/benchmarks/synthetic/cross-domain-synthetic.test.js'),
+    path.join(ROOT, 'tests/benchmarks/agent-capability.test.js')
   ];
-  const benchmarkAssertions = 424; // Static SSOT benchmark assertions count matching BENCHMARK.md & METRICS.md
+  const benchmarkAssertions = 434; // Total execution assertions across the 4 benchmark test suites (business-scenario-regression, nlp-extraction, cross-domain-synthetic, agent-capability)
   const totalAssertions = countAssertionsInDir(path.join(ROOT, 'tests'));
 
   const metadata = {

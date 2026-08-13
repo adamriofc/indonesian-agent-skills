@@ -1,9 +1,19 @@
 ---
 name: shopee-video-creator
-description: Optimize short promotional video scripts and product tagging strategies for Shopee Video.
-argument-hint: "<product_name> <promo_angle>"
+description: "Optimize short promotional video scripts and product tagging strategies for Shopee Video."
+argument-hint: <product_name> <promo_angle>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<product_name> <promo_angle>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Shopee Video Script & Tagging Optimizer

@@ -1,9 +1,19 @@
 ---
 name: break-even-analysis
-description: Compute break-even units, break-even revenue, contribution margin, and margin of safety with the deterministic break-even engine.
-argument-hint: "<fixed_costs> <selling_price> <variable_cost> <actual_revenue>"
+description: "Compute break-even units, break-even revenue, contribution margin, and margin of safety with the deterministic break-even engine."
+argument-hint: <fixed_costs> <selling_price> <variable_cost> <actual_revenue>
 risk_level: LOW
 rule_type: professional-standard
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<fixed_costs> <selling_price> <variable_cost> <actual_revenue>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Break-Even Analysis

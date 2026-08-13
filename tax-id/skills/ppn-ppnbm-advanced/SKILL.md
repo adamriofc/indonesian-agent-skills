@@ -1,11 +1,19 @@
 ---
 name: ppn-ppnbm-advanced
-description: Calculate statutory 12% PPN, PPnBM Luxury Tax (10% to 200%), Other Basis DPP (11/12), import CIF tax bases, and DJP Coretax equalisation.
-argument-hint: "<transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Calculate statutory 12% PPN, PPnBM Luxury Tax (10% to 200%), Other Basis DPP (11/12), import CIF tax bases, and DJP Coretax equalisation."
+argument-hint: <transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # PPN 12% & PPnBM Luxury Tax Advanced Calculator

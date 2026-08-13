@@ -1,11 +1,19 @@
 ---
 name: tax-risk-analysis
-description: Analyze Indonesian corporate tax compliance risks, transfer pricing / affiliate transaction indicators (PMK 172/2023), and SP2DK audit triggers.
-argument-hint: "<financial_data_or_affiliate_transactions>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Analyze Indonesian corporate tax compliance risks, transfer pricing / affiliate transaction indicators (PMK 172/2023), and SP2DK audit triggers."
+argument-hint: <financial_data_or_affiliate_transactions>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<financial_data_or_affiliate_transactions>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Corporate Tax Risk & SP2DK Trigger Analysis

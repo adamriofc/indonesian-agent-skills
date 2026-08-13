@@ -1,9 +1,19 @@
 ---
 name: business-feasibility
-description: Structure Indonesian SME feasibility assessments across market, technical, financial, legal, and risk aspects with consistent financial figures.
-argument-hint: "<business_idea> <investment> <projections>"
+description: "Structure Indonesian SME feasibility assessments across market, technical, financial, legal, and risk aspects with consistent financial figures."
+argument-hint: <business_idea> <investment> <projections>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<business_idea> <investment> <projections>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Business Feasibility Study

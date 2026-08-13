@@ -1,10 +1,19 @@
 ---
 name: regulatory-impact
-description: Evaluates regulatory changes and ruleset transitions (e.g. PP 55/2022 to PP 20/2026, BPJS wage cap updates) against a company profile to compute business impact, affected domains, required action checklists, and compliance deadlines.
-argument-hint: "<domain: umkm|bpjs|phk> <fromRuleset> <toRuleset>"
+description: "Evaluates regulatory changes and ruleset transitions (e.g. PP 55/2022 to PP 20/2026, BPJS wage cap updates) against a company profile to compute business impact, affected domains, required action checklists, and compliance deadlines."
+argument-hint: <domain: umkm|bpjs|phk> <fromRuleset> <toRuleset>
 risk_level: HIGH
 rule_type: statutory
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<domain: umkm|bpjs|phk> <fromRuleset> <toRuleset>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Regulatory Change Intelligence Engine

@@ -1,11 +1,19 @@
 ---
 name: transfer-pricing-audit
-description: Audit intercompany transactions, Thin Capitalization debt-to-equity ratio (DER 4:1 max ceiling), interest deduction barriers, and secondary dividend tax adjustments under PMK 172/2023.
-argument-hint: "<total_interest_bearing_debt> <total_equity> <annual_interest_expense> <is_affiliate_lender>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Audit intercompany transactions, Thin Capitalization debt-to-equity ratio (DER 4:1 max ceiling), interest deduction barriers, and secondary dividend tax adjustments under PMK 172/2023."
+argument-hint: <total_interest_bearing_debt> <total_equity> <annual_interest_expense> <is_affiliate_lender>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<total_interest_bearing_debt> <total_equity> <annual_interest_expense> <is_affiliate_lender>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Transfer Pricing & Thin Capitalization Audit

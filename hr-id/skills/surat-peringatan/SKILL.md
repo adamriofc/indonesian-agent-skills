@@ -1,9 +1,19 @@
 ---
 name: surat-peringatan
-description: Generate legally compliant warning letters (Surat Peringatan 1, 2, 3) and termination (PHK) notices based on Indonesian Labor Law.
-argument-hint: "<employee_name> <violation_reason> <warning_level_1_2_3>"
+description: "Generate legally compliant warning letters (Surat Peringatan 1, 2, 3) and termination (PHK) notices based on Indonesian Labor Law."
+argument-hint: <employee_name> <violation_reason> <warning_level_1_2_3>
 risk_level: MEDIUM
 rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<employee_name> <violation_reason> <warning_level_1_2_3>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # Warning Letter Generator (SP1, SP2, SP3)

@@ -1,9 +1,19 @@
 ---
 name: press-release-id
-description: Write professional corporate press releases matching standard Indonesian journalistic styles (5W+1H).
-argument-hint: "<corporate_event_announcement> <quotes_from_key_executives>"
+description: "Write professional corporate press releases matching standard Indonesian journalistic styles (5W+1H)."
+argument-hint: <corporate_event_announcement> <quotes_from_key_executives>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<corporate_event_announcement> <quotes_from_key_executives>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Indonesian Press Release Generator

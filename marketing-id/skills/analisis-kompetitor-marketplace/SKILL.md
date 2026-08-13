@@ -1,9 +1,19 @@
 ---
 name: analisis-kompetitor-marketplace
-description: Analyze competitor listings, customer review complaints, and pricing to find market gaps and optimization opportunities.
-argument-hint: "<paste_competitor_reviews_or_specifications>"
+description: "Analyze competitor listings, customer review complaints, and pricing to find market gaps and optimization opportunities."
+argument-hint: <paste_competitor_reviews_or_specifications>
 risk_level: MEDIUM
 rule_type: commercial-policy
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<paste_competitor_reviews_or_specifications>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Competitor Marketplace Analyzer

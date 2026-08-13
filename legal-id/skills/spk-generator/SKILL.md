@@ -1,9 +1,19 @@
 ---
 name: spk-generator
-description: Generate legally binding Indonesian Service Agreements (SPK) or partnership contracts compliant with Article 1320 and 1338 of KUHPerdata.
-argument-hint: "<contractor_role> <project_name> <price_termijn>"
+description: "Generate legally binding Indonesian Service Agreements (SPK) or partnership contracts compliant with Article 1320 and 1338 of KUHPerdata."
+argument-hint: <contractor_role> <project_name> <price_termijn>
 risk_level: MEDIUM
 rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<contractor_role> <project_name> <price_termijn>]
+  produces: [riskScore, detectedViolations, redlines, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    tax: medium
+    hr: high
+    finance: medium
 ---
 
 # SPK Generator (Service Agreement / Partnership Contract)

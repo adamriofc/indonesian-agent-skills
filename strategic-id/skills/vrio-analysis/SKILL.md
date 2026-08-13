@@ -1,10 +1,20 @@
 ---
 name: vrio-analysis
-description: Evaluates internal corporate resources and capabilities using the VRIO Framework (Valuable, Rare, Inimitable, Organized) to determine sustainable competitive advantage.
-argument-hint: "<resource_or_capability_description>"
+description: "Evaluates internal corporate resources and capabilities using the VRIO Framework (Valuable, Rare, Inimitable, Organized) to determine sustainable competitive advantage."
+argument-hint: <resource_or_capability_description>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<resource_or_capability_description>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # VRIO Internal Resource & Capability Analysis

@@ -1,10 +1,20 @@
 ---
 name: value-chain-analysis
-description: Deconstructs corporate activities into Primary and Support activities, adapted for Product vs Service vs Capacity business archetypes via the Strategic Protocol.
-argument-hint: "<kbliCode> <company_operations_description>"
+description: "Deconstructs corporate activities into Primary and Support activities, adapted for Product vs Service vs Capacity business archetypes via the Strategic Protocol."
+argument-hint: <kbliCode> <company_operations_description>
 risk_level: MEDIUM
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<kbliCode> <company_operations_description>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Value Chain Deconstruction & Analysis

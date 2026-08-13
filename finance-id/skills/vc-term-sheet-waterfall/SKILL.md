@@ -1,11 +1,19 @@
 ---
 name: vc-term-sheet-waterfall
-description: Calculate Indonesian venture capital startup exit liquidation preference waterfalls across share classes (Seniority, Pari Passu, Participating with Caps, Non-Participating).
-argument-hint: "<exit_valuation> <investor_tiers_json> <common_ownership_percent>"
-metadata:
-  risk_level: HIGH
-  rule_type: professional-standard
-  quality_tier: expert-reviewed
+description: "Calculate Indonesian venture capital startup exit liquidation preference waterfalls across share classes (Seniority, Pari Passu, Participating with Caps, Non-Participating)."
+argument-hint: <exit_valuation> <investor_tiers_json> <common_ownership_percent>
+risk_level: HIGH
+rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<exit_valuation> <investor_tiers_json> <common_ownership_percent>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # VC Startup Exit Liquidation Preference Waterfall

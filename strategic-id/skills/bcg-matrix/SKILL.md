@@ -1,10 +1,20 @@
 ---
 name: bcg-matrix
-description: Evaluates corporate portfolio business units using BCG Growth-Share Matrix (Star, Cash Cow, Question Mark, Dog) with KBLI archetype adaptation and deterministic engine scoring.
-argument-hint: "<kbliCode> <marketGrowthRatePercent> <relativeMarketShare>"
+description: "Evaluates corporate portfolio business units using BCG Growth-Share Matrix (Star, Cash Cow, Question Mark, Dog) with KBLI archetype adaptation and deterministic engine scoring."
+argument-hint: <kbliCode> <marketGrowthRatePercent> <relativeMarketShare>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<kbliCode> <marketGrowthRatePercent> <relativeMarketShare>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # BCG Growth-Share Portfolio Matrix

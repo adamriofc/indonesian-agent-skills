@@ -1,11 +1,19 @@
 ---
 name: pph21-grossup
-description: Solve circular PPh 21 tax allowance equations (Gross-Up) and evaluate PMK 66/2023 benefit-in-kind (Natura/Kenikmatan) monthly taxability thresholds.
-argument-hint: "<base_salary> <regular_allowances> <ptkp_status> <natura_amount>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Solve circular PPh 21 tax allowance equations (Gross-Up) and evaluate PMK 66/2023 benefit-in-kind (Natura/Kenikmatan) monthly taxability thresholds."
+argument-hint: <base_salary> <regular_allowances> <ptkp_status> <natura_amount>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<base_salary> <regular_allowances> <ptkp_status> <natura_amount>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # PPh 21 Circular Gross-Up & Natura Tax Optimization

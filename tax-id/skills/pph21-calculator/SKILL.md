@@ -1,9 +1,19 @@
 ---
 name: pph21-calculator
-description: Calculate Indonesian monthly income tax (PPh Pasal 21) based on the TER (Tarif Efektif Rata-Rata) per PP 58/2023 and PMK 168/2023, supporting December Annual Reconciliation.
-argument-hint: "<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]"
+description: "Calculate Indonesian monthly income tax (PPh Pasal 21) based on the TER (Tarif Efektif Rata-Rata) per PP 58/2023 and PMK 168/2023, supporting December Annual Reconciliation."
+argument-hint: <gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]
 risk_level: HIGH
 rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # PPh 21 TER Hybrid Tax Calculator

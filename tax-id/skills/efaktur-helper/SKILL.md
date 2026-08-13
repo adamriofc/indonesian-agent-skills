@@ -1,10 +1,19 @@
 ---
 name: efaktur-helper
-description: Validate and audit e-Faktur tax invoices (Faktur Pajak) for PPN 12% statutory rate and 11/12 DPP Nilai Lain effective burden filings.
-argument-hint: "<paste_invoice_details_or_qr_url>"
-metadata:
-  risk_level: MEDIUM
-  rule_type: statutory
+description: "Validate and audit e-Faktur tax invoices (Faktur Pajak) for PPN 12% statutory rate and 11/12 DPP Nilai Lain effective burden filings."
+argument-hint: <paste_invoice_details_or_qr_url>
+risk_level: MEDIUM
+rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<paste_invoice_details_or_qr_url>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # e-Faktur & Coretax Invoice Auditor & Helper

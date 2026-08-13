@@ -1,9 +1,19 @@
 ---
 name: cost-accounting
-description: Compute cost of goods sold, absorption vs variable costing, and simple product costing for Indonesian SME operations.
-argument-hint: "<beginning_inventory> <purchases> <ending_inventory>"
+description: "Compute cost of goods sold, absorption vs variable costing, and simple product costing for Indonesian SME operations."
+argument-hint: <beginning_inventory> <purchases> <ending_inventory>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<beginning_inventory> <purchases> <ending_inventory>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Cost Accounting

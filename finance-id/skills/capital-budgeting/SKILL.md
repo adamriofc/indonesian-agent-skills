@@ -1,9 +1,19 @@
 ---
 name: capital-budgeting
-description: Evaluate Indonesian SME investment projects with NPV, IRR, and payback using the deterministic npv and irr engines against a simple WACC.
-argument-hint: "<investment> <annual_cashflow> <wacc>"
+description: "Evaluate Indonesian SME investment projects with NPV, IRR, and payback using the deterministic npv and irr engines against a simple WACC."
+argument-hint: <investment> <annual_cashflow> <wacc>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<investment> <annual_cashflow> <wacc>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Capital Budgeting

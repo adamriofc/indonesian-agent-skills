@@ -1,9 +1,19 @@
 ---
 name: pph23-26-calculator
-description: Calculate Indonesian withholding tax on domestic services/rent (PPh 23) and foreign offshore payments (PPh 26 / Tax Treaty DGT Form).
-argument-hint: "<gross_amount> <transaction_type> <has_npwp> [has_dgt_form]"
+description: "Calculate Indonesian withholding tax on domestic services/rent (PPh 23) and foreign offshore payments (PPh 26 / Tax Treaty DGT Form)."
+argument-hint: <gross_amount> <transaction_type> <has_npwp> [has_dgt_form]
 risk_level: HIGH
 rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<gross_amount> <transaction_type> <has_npwp> [has_dgt_form]]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # PPh 23 & PPh 26 Tax Calculator (Hybrid Engine)

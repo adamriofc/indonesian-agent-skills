@@ -1,11 +1,19 @@
 ---
 name: product-classification
-description: Classify commercial goods into BTKI 2022 / HS Codes (0901, 1905, 3304, 6109, 8517, 8703) to audit import duties, PPN 12%, PPh 22, and Lartas permits.
+description: "Classify commercial goods into BTKI 2022 / HS Codes (0901, 1905, 3304, 6109, 8517, 8703) to audit import duties, PPN 12%, PPh 22, and Lartas permits."
 argument-hint: productName, description, attributes, targetHsCode, cifValueIdr
 risk_level: medium
 rule_type: statutory
 quality_tier: tested
 allowed-tools: bash
+capability:
+  requires: [productName, description, attributes, targetHsCode, cifValueIdr]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: true
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Product & Commodity BTKI Classification Skill (`product-classification`)

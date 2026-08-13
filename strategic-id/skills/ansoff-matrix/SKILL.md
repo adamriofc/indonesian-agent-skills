@@ -1,10 +1,20 @@
 ---
 name: ansoff-matrix
-description: Evaluates corporate growth vectors using Igor Ansoff's Growth Matrix (Market Penetration, Market Development, Product Development, Diversification) to balance growth vs risk.
-argument-hint: "<productType: existing|new> <marketType: existing|new>"
+description: "Evaluates corporate growth vectors using Igor Ansoff's Growth Matrix (Market Penetration, Market Development, Product Development, Diversification) to balance growth vs risk."
+argument-hint: <productType: existing|new> <marketType: existing|new>
 risk_level: MEDIUM
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<productType: existing|new> <marketType: existing|new>]
+  produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    marketing: high
+    hr: medium
+    tax: medium
 ---
 
 # Ansoff Product-Market Growth Matrix

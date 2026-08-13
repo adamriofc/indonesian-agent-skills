@@ -1,10 +1,19 @@
 ---
 name: jobs-to-be-done
-description: Evaluates customer underlying functional, emotional, and social Jobs-To-Be-Done (JTBD) to isolate product hiring criteria and value drivers.
-argument-hint: "<customer_context_and_use_case>"
+description: "Evaluates customer underlying functional, emotional, and social Jobs-To-Be-Done (JTBD) to isolate product hiring criteria and value drivers."
+argument-hint: <customer_context_and_use_case>
 risk_level: MEDIUM
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<customer_context_and_use_case>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Jobs-To-Be-Done (JTBD) Framework

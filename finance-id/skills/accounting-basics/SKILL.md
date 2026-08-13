@@ -1,9 +1,19 @@
 ---
 name: accounting-basics
-description: Apply double-entry bookkeeping fundamentals, journal entries, and accrual vs cash basis rules for Indonesian SME bookkeeping.
-argument-hint: "<transaction>"
+description: "Apply double-entry bookkeeping fundamentals, journal entries, and accrual vs cash basis rules for Indonesian SME bookkeeping."
+argument-hint: <transaction>
 risk_level: LOW
 rule_type: internal-policy
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<transaction>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Accounting Basics

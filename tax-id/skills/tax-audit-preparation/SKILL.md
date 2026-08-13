@@ -1,11 +1,19 @@
 ---
 name: tax-audit-preparation
-description: Structure tax audit defense packages, DJP SP2DK response letters, and tax equalisation reconciliation statements.
-argument-hint: "<sp2dk_letter_details_or_tax_audit_year>"
-metadata:
-  risk_level: HIGH
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Structure tax audit defense packages, DJP SP2DK response letters, and tax equalisation reconciliation statements."
+argument-hint: <sp2dk_letter_details_or_tax_audit_year>
+risk_level: HIGH
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<sp2dk_letter_details_or_tax_audit_year>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Tax Audit Preparation & SP2DK Defense Workflow

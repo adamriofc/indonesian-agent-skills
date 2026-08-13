@@ -1,9 +1,19 @@
 ---
 name: contract-reviewer
-description: Audit commercial and vendor agreements to identify hidden risks, asymmetrical clauses, and compliance issues under Indonesian law, outputting a Contract Risk Score (0-100).
-argument-hint: "<paste_contract_text>"
+description: "Audit commercial and vendor agreements to identify hidden risks, asymmetrical clauses, and compliance issues under Indonesian law, outputting a Contract Risk Score (0-100)."
+argument-hint: <paste_contract_text>
 risk_level: HIGH
 rule_type: statutory
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<paste_contract_text>]
+  produces: [riskScore, detectedViolations, redlines, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    tax: medium
+    hr: high
+    finance: medium
 ---
 
 # Expert Contract Auditor (Indonesian Commercial Law)

@@ -1,11 +1,19 @@
 ---
 name: tax-optimization
-description: Optimize deductible business expenses (UU PPh Arts. 6 vs 9), PPh 21 December annual reconciliations, and PPh 23 withholding efficiency.
-argument-hint: "<expense_breakdown_or_payroll_reconciliation>"
-metadata:
-  risk_level: MEDIUM
-  rule_type: statutory
-  quality_tier: expert-reviewed
+description: "Optimize deductible business expenses (UU PPh Arts. 6 vs 9), PPh 21 December annual reconciliations, and PPh 23 withholding efficiency."
+argument-hint: <expense_breakdown_or_payroll_reconciliation>
+risk_level: MEDIUM
+rule_type: statutory
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<expense_breakdown_or_payroll_reconciliation>]
+  produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  deterministic: true
+  cross_domain_relevance:
+    hr: high
+    finance: high
+    legal: medium
 ---
 
 # Tax Deductibility & Withholding Optimization

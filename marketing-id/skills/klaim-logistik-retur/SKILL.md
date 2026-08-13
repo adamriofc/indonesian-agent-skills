@@ -1,9 +1,19 @@
 ---
 name: klaim-logistik-retur
-description: SOP guidelines and claim submission templates for lost or damaged courier packages (J&T, JNE, SiCepat, Shopee Xpress).
-argument-hint: "<waybill_number> <courier_name> <damage_or_lost_details>"
+description: "SOP guidelines and claim submission templates for lost or damaged courier packages (J&T, JNE, SiCepat, Shopee Xpress)."
+argument-hint: <waybill_number> <courier_name> <damage_or_lost_details>
 risk_level: MEDIUM
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<waybill_number> <courier_name> <damage_or_lost_details>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Logistics Claim & Return SOP Generator

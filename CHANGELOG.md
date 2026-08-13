@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.13.0] - 2026-08-13
+
+### In-Code Capability Contract Enforcement & Agent Capability Discovery Benchmark Release
+- **88 SKILL.md Machine-Readable Capability Metadata (P0 Audit Fix)**: Enriched frontmatter across **all 88 SKILL.md files** in 6 canonical plugins with machine-readable `capability` blocks (`requires`, `produces`, `deterministic`, `cross_domain_relevance`).
+- **Dynamic Schema Validator Enforcement (P0 Audit Fix)**: `tests/schema/validator.test.js` updated to enforce `capability` block schema validation across all 88 skill manifests.
+- **Agent Capability Discovery & Composition Benchmark (`tests/benchmarks/agent-capability.test.js`)**: Added Tier 4 benchmark suite evaluating capability selection precision (100%), selection recall (100%), composition success (100%), and output interpretability (100%) across single-domain, partial, and full enterprise tasks.
+- **README Test Assertion Badge Sync (P0 Audit Fix)**: Corrected README badge from 900+ to `514+ Test Assertions` matching SSOT canonical metadata.
+
 ## [6.12.0] - 2026-08-13
 
 ### Added & Architecture Refined (Agent Capability Contract & Cognitive Instrument Architecture Release)

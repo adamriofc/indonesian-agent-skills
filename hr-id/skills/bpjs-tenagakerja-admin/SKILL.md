@@ -1,9 +1,19 @@
 ---
 name: bpjs-tenagakerja-admin
-description: Guide for HR administrators managing the BPJS Ketenagakerjaan corporate portal (SIPP).
-argument-hint: "<task_description_e_g_register_new_hire>"
+description: "Guide for HR administrators managing the BPJS Ketenagakerjaan corporate portal (SIPP)."
+argument-hint: <task_description_e_g_register_new_hire>
 risk_level: MEDIUM
 rule_type: statutory
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<task_description_e_g_register_new_hire>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # SIPP BPJS Portal Administration Guide

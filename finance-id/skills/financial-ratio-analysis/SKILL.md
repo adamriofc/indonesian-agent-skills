@@ -1,9 +1,19 @@
 ---
 name: financial-ratio-analysis
-description: Compute and interpret 14 liquidity, solvency, profitability, and efficiency ratios for Indonesian SMEs using the deterministic financial-ratios engine.
-argument-hint: "<balance_sheet> <income_statement>"
+description: "Compute and interpret 14 liquidity, solvency, profitability, and efficiency ratios for Indonesian SMEs using the deterministic financial-ratios engine."
+argument-hint: <balance_sheet> <income_statement>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: tested
+allowed-tools: bash
+capability:
+  requires: [<balance_sheet> <income_statement>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Financial Ratio Analysis

@@ -1,10 +1,19 @@
 ---
 name: market-sizing
-description: Evaluates Total Addressable Market (TAM), Serviceable Addressable Market (SAM), and Serviceable Obtainable Market (SOM) using top-down adoption models and deterministic calculations.
-argument-hint: "<totalPopulation> <adoptionPercent> <avgAnnualSpend>"
+description: "Evaluates Total Addressable Market (TAM), Serviceable Addressable Market (SAM), and Serviceable Obtainable Market (SOM) using top-down adoption models and deterministic calculations."
+argument-hint: <totalPopulation> <adoptionPercent> <avgAnnualSpend>
 risk_level: HIGH
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<totalPopulation> <adoptionPercent> <avgAnnualSpend>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Market Sizing & Opportunity Evaluation (TAM / SAM / SOM)

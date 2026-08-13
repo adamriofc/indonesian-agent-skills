@@ -1,9 +1,19 @@
 ---
 name: cash-flow-analysis
-description: Analyze operating, investing, and financing cash flows, free cash flow, and cash runway for Indonesian businesses.
-argument-hint: "<cash_flow_statement> <capex> <monthly_burn>"
+description: "Analyze operating, investing, and financing cash flows, free cash flow, and cash runway for Indonesian businesses."
+argument-hint: <cash_flow_statement> <capex> <monthly_burn>
 risk_level: MEDIUM
 rule_type: professional-standard
+quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<cash_flow_statement> <capex> <monthly_burn>]
+  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  deterministic: true
+  cross_domain_relevance:
+    strategy: high
+    marketing: medium
+    tax: medium
 ---
 
 # Cash Flow Analysis

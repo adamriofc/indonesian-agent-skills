@@ -1,10 +1,19 @@
 ---
 name: customer-segmentation
-description: Segments customer markets using firmographic, demographic, behavioral, needs-based, and willingness-to-pay criteria to target high-value customer clusters.
-argument-hint: "<market_and_customer_data>"
+description: "Segments customer markets using firmographic, demographic, behavioral, needs-based, and willingness-to-pay criteria to target high-value customer clusters."
+argument-hint: <market_and_customer_data>
 risk_level: MEDIUM
 rule_type: professional-standard
 quality_tier: expert-reviewed
+allowed-tools: bash
+capability:
+  requires: [<market_and_customer_data>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Customer Segmentation & Cluster Analysis

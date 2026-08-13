@@ -1,9 +1,19 @@
 ---
 name: gmb-local-seo
-description: Optimize Google Business Profile (GMB) listings, local search keywords, and customer review response strategies.
-argument-hint: "<business_name> <location_city> <service_category>"
+description: "Optimize Google Business Profile (GMB) listings, local search keywords, and customer review response strategies."
+argument-hint: <business_name> <location_city> <service_category>
 risk_level: LOW
 rule_type: commercial-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<business_name> <location_city> <service_category>]
+  produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  deterministic: false
+  cross_domain_relevance:
+    finance: high
+    strategy: high
+    tax: medium
 ---
 
 # Google Business Profile & Local SEO Optimizer

@@ -1,9 +1,19 @@
 ---
 name: interview-id
-description: Create structured candidate assessment scorecards and competency interviews tailored for Indonesian workplaces.
-argument-hint: "<candidate_role> <job_specifications>"
+description: "Create structured candidate assessment scorecards and competency interviews tailored for Indonesian workplaces."
+argument-hint: <candidate_role> <job_specifications>
 risk_level: LOW
 rule_type: internal-policy
+quality_tier: source-verified
+allowed-tools: bash
+capability:
+  requires: [<candidate_role> <job_specifications>]
+  produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  deterministic: true
+  cross_domain_relevance:
+    tax: high
+    finance: high
+    legal: high
 ---
 
 # Competency & Culture Fit Interview Scorecard
