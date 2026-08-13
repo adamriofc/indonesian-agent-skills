@@ -1,6 +1,6 @@
-# Production Readiness Model & Operational Governance (\`PRODUCTION_READINESS.md\`)
+# Production Readiness Model & Operational Governance (`PRODUCTION_READINESS.md`)
 
-Operational governance, readiness levels, human-review boundaries, and deterministic fallback policies for \`indonesian-business-agent-skills\`.
+Operational governance, readiness levels, human-review boundaries, and deterministic fallback policies for `indonesian-business-agent-skills`.
 
 ---
 
@@ -17,6 +17,8 @@ To prevent misapplication and set realistic operational expectations, this repos
 | **L4** | High-Stakes Autonomous Filing | Direct auto-filing to DJP/OSS without human CPA/advocate review | **Unsupported** (Explicitly Out of Scope) |
 
 > **Current Production Capability**: **Level L3 — Production Decision-Support Infrastructure**.
+>
+> **Independent external validation status: PENDING.** L3 is an internal engineering/readiness classification and must not be interpreted as evidence that every domain calculation has been independently validated in a live enterprise environment.
 
 ---
 
@@ -52,10 +54,12 @@ To maintain system reliability and prevent unhandled agent crashes:
 3. **Context Conflicts or Ambiguities**:
    - If KBLI code conflicts with business activity description, `validateBusinessContext` returns `CONTEXT_WARNING` (`KBLI_ARCHETYPE_MISMATCH`).
    - If taxpayer entity structure contradicts business title (e.g. Individual with PT title), returns `CONTEXT_CONFLICT`.
+   - If Product/BTKI classification is unresolved or ambiguous, the engine withholds landed-tax arithmetic and returns `REQUIRES_REVIEW`.
 
-4. **Stale Statutory Rulesets**:
+4. **Stale or Unresolved Statutory Rulesets**:
    - Ruleset versions carry explicit statutory effective dates (`effective_from` / `effective_to`).
-   - Out-dated rulesets trigger `OUTDATED_RULESET` warnings in result envelopes.
+   - An out-of-coverage date does **not** fall back to an arbitrary baseline ruleset; it returns a review-required state.
+   - Outdated but applicable rulesets trigger `OUTDATED_RULESET` warnings in result envelopes.
 
 ---
 
@@ -68,8 +72,9 @@ To maintain system reliability and prevent unhandled agent crashes:
 - High-throughput batch processing of financial metrics and unit economics.
 
 ### ❌ Unsupported / Prohibited Use Cases:
-- Submitting final corporate tax returns (SPT 1771) or legal dispute filings without advocate review.
-- Automated termination of employees without statutory mediation.
+- Submitting final corporate tax returns (SPT 1771) or legal dispute filings without advocate/CPA review.
+- Automated termination of employees without statutory mediation or legal review.
+- Treating Product/BTKI candidate classification as a binding customs ruling without review.
 - Real-time high-frequency automated stock trading or unregulated financial advice.
 
 ---
@@ -77,5 +82,17 @@ To maintain system reliability and prevent unhandled agent crashes:
 ## 5. Security & Runtime Assumptions
 
 - **Local / On-Premise Execution**: Engines run locally inside the host agent runtime environment.
-- **Zero External Data Leakage**: No PII, corporate revenues, or payroll numbers are sent to third-party endpoints by deterministic engines.
+- **Zero External Data Leakage from Deterministic Engines**: No PII, corporate revenues, or payroll numbers are sent to third-party endpoints by deterministic engines.
 - **Cryptographic Trust Anchor**: `engines/rules/integrity.js` validates SHA256 hashes of statutory rulesets on module load.
+
+---
+
+## 6. Evidence & External Validation Boundary
+
+The repository separates three evidence levels:
+
+1. **Maintainer-owned engineering evidence** — unit/integration/security tests, deterministic benchmark corpus, cross-engine invariants, provenance checks, and release gates.
+2. **Independent domain validation** — external practitioner review of held-out cases using a frozen rubric. This is currently **PENDING** and is tracked in `docs/EXTERNAL_VALIDATION.md`.
+3. **Enterprise production proof** — sustained use by external organizations with operational feedback, incident history, and documented case studies. This is currently **NOT CLAIMED**.
+
+Accordingly, the repository may state that it is **L3 Production Decision-Support**, but it should not imply that the repository is independently certified, enterprise-proven, or universally production-safe for high-stakes filing.
