@@ -92,6 +92,7 @@ function runProductContextEngineTests() {
   assert.strictEqual(ambiguousRes.importDutyAmount, null);
   assert.strictEqual(ambiguousRes.totalLandedCost, null);
   assert.ok(Array.isArray(ambiguousRes.candidates) && ambiguousRes.candidates.length > 1);
+  assert.strictEqual(ambiguousRes.candidates[0].rankingScore, 1.0);
 
   // 5. PPN Treatment Modes (NON_LUXURY_DPP_11_12, EXEMPT, INCENTIVE_DTP)
   console.log("  [5/7] Testing PPN Treatment Schemes (11% Effective DPP Nilai Lain, Exempt, DTP Incentive)...");
@@ -101,7 +102,9 @@ function runProductContextEngineTests() {
     cifValueIdr: 100000000
   });
   assert.strictEqual(furnitureRes.ppnTreatment, PPN_TREATMENTS.NON_LUXURY_DPP_11_12);
-  assert.strictEqual(furnitureRes.ppnPercent, 11);
+  assert.strictEqual(furnitureRes.importTax.statutoryRatePercent, 12);
+  assert.strictEqual(furnitureRes.importTax.dppFactor, "11/12");
+  assert.strictEqual(furnitureRes.importTax.effectiveRatePercent, 11);
   assert.strictEqual(furnitureRes.ppnAmount, Math.round(115000000 * (11 / 12) * 0.12));
 
   const riceRes = resolveProductClassification({

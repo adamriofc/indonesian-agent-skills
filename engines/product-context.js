@@ -183,8 +183,20 @@ function resolveProductClassification({
 
   if (targetHsCode) {
     const cleanHs = String(targetHsCode).replace(/[\.\s]/g, '');
-    candidate = entries.find(e => e.btkiCode.replace(/[\.\s]/g, '') === cleanHs || e.hs6 === cleanHs.slice(0, 6));
-    if (candidate) matches = [candidate];
+    const exactMatches = entries.filter(e => e.btkiCode.replace(/[\.\s]/g, '') === cleanHs);
+    if (exactMatches.length === 1) {
+      candidate = exactMatches[0];
+      matches = exactMatches;
+    } else {
+      const hs6Matches = entries.filter(e => e.hs6 === cleanHs.slice(0, 6) || e.btkiCode.replace(/[\.\s]/g, '').startsWith(cleanHs));
+      if (hs6Matches.length === 1) {
+        candidate = hs6Matches[0];
+        matches = hs6Matches;
+      } else if (hs6Matches.length > 1) {
+        matches = hs6Matches;
+        candidate = null; // AMBIGUOUS: multiple 8-digit BTKI tariff lines under this 6-digit HS heading
+      }
+    }
   }
 
   if (!candidate && queryText.trim()) {
@@ -213,7 +225,7 @@ function resolveProductClassification({
       btkiCode: m.btkiCode,
       description: m.description,
       category: m.category,
-      confidenceScore: Number((1 / (idx + 1)).toFixed(2))
+      rankingScore: Number((1 / (idx + 1)).toFixed(2))
     }));
 
     const canonicalContext = createDefaultProductContext({
@@ -352,8 +364,13 @@ function resolveProductClassification({
     importDutyAmount
   };
 
+  const dppFactor = ppnTreatment === PPN_TREATMENTS.NON_LUXURY_DPP_11_12 ? '11/12' : (ppnTreatment === PPN_TREATMENTS.EXEMPT || ppnTreatment === PPN_TREATMENTS.INCENTIVE_DTP ? '0/1' : '1/1');
+
   const importTax = {
     ppnTreatment,
+    statutoryRatePercent: 12,
+    dppFactor,
+    effectiveRatePercent: ppnPercent,
     ppnPercent,
     ppnAmount,
     pph22RatePercent,

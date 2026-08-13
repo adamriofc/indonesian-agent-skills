@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.11.1] - 2026-08-13
+
+### Hardened & Provenance Synchronized (Semantic Precision & Release Provenance Patch Release)
+- **Synchronized Release Manifest Commit Provenance (P0)**: `release-manifest.json` updated so `releaseCommitHash` aligns precisely with tag `v6.11.1` target commit.
+- **Fail-Closed Temporal BTKI Date Resolution (P0)**: `getBtkirulesetForDate(dateStr)` returns `null` for out-of-coverage date windows, setting `status: "UNRESOLVED"` (`safeToUse: "REQUIRES_REVIEW"`) rather than defaulting to baseline rulesets.
+- **Refined Semantic Confidence & Option Sanitization (P0)**: `normalizeFact` assigns `UNVERIFIED` confidence for unverified `user_input` sources; `normalizeOption` sets non-numeric cost strings to `null` rather than coercing to `0`; `normalizeObjective` strictly requires input in `STRICT_PRODUCTION_MODE` instead of assuming `GROWTH`.
+- **Multi-Candidate HS6 Ambiguity Handling**: 6-digit HS searches returning multiple 8-digit BTKI tariff lines resolve to `AMBIGUOUS` with candidate rankings (`rankingScore`), withholding landed tax calculations until clarified.
+- **PPN Statutory vs Effective Rate Structure**: Expressed PPN import tax structure explicitly (`statutoryRatePercent: 12`, `dppFactor: "11/12"`, `effectiveRatePercent: 11`).
+
 ## [6.11.0] - 2026-08-13
 
 ### Hardened & Full Audit Closure (Semantic Classification Evidence & 15-Check Release Gate Release)

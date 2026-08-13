@@ -83,7 +83,7 @@ function validateRelease() {
   }
 
   // 4. Skill Count Check
-  console.log("  [4/13] Verifying Machine-Readable Skill Count...");
+  console.log("  [4/15] Verifying Machine-Readable Skill Count...");
   if (registry.total_skills !== metadata.skills) {
     console.error(`❌ Skill Count Mismatch: registry (${registry.total_skills}) !== metadata (${metadata.skills})`);
     errors++;
@@ -93,7 +93,7 @@ function validateRelease() {
   }
 
   // 5. Engine Count Check
-  console.log("  [5/13] Verifying Deterministic Engine Count...");
+  console.log("  [5/15] Verifying Deterministic Engine Count...");
   if (registry.total_engines !== metadata.engines) {
     console.error(`❌ Engine Count Mismatch: registry (${registry.total_engines}) !== metadata (${metadata.engines})`);
     errors++;
@@ -103,7 +103,7 @@ function validateRelease() {
   }
 
   // 6. Golden Case Count Check
-  console.log("  [6/13] Verifying Golden Test Corpus...");
+  console.log("  [6/15] Verifying Golden Test Corpus...");
   if (metadata.goldenCases !== 121 || metadata.benchmarkDomains !== 27) {
     console.error(`❌ Golden Corpus Mismatch: expected 121 golden cases across 27 domains, got ${metadata.goldenCases}/${metadata.benchmarkDomains}`);
     errors++;
@@ -113,7 +113,7 @@ function validateRelease() {
   }
 
   // 7. Benchmark Artifact Check
-  console.log("  [7/13] Verifying Latest Benchmark Results Artifact...");
+  console.log("  [7/15] Verifying Latest Benchmark Results Artifact...");
   const artifactPath = path.join(ROOT, 'docs/benchmark-results/latest.json');
   if (!fs.existsSync(artifactPath)) {
     console.error(`❌ Benchmark Artifact Missing: ${artifactPath} does not exist`);
@@ -130,7 +130,7 @@ function validateRelease() {
   }
 
   // 8. SHA256SUMS Integrity Verification
-  console.log("  [8/13] Verifying SHA256 Ruleset Integrity Hashes...");
+  console.log("  [8/15] Verifying SHA256 Ruleset Integrity Hashes...");
   try {
     execSync('bash scripts/sha256sums.sh verify', { cwd: ROOT, stdio: 'pipe' });
     console.log(`    ✅ Ruleset SHA256 trust anchor hashes verified`);
@@ -141,7 +141,7 @@ function validateRelease() {
   }
 
   // 9. Schema Validator Execution
-  console.log("  [9/13] Executing Dynamic Skill & Plugin Schema Validator...");
+  console.log("  [9/15] Executing Dynamic Skill & Plugin Schema Validator...");
   try {
     execSync('node tests/schema/validator.test.js', { cwd: ROOT, stdio: 'pipe' });
     console.log(`    ✅ Dynamic schema validator passed 100%`);
@@ -152,7 +152,7 @@ function validateRelease() {
   }
 
   // 10. Stale Taxonomy Check
-  console.log("  [10/13] Checking for Stale Taxonomy References...");
+  console.log("  [10/15] Checking for Stale Taxonomy References...");
   const stalePlugins = ['tax-payroll-id', 'ecommerce-id', 'content-lokal-id'];
   const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
   let staleFound = false;
@@ -170,7 +170,7 @@ function validateRelease() {
   }
 
   // 11. Required Files Check
-  console.log("  [11/13] Checking Required Production & Governance Files...");
+  console.log("  [11/15] Checking Required Production & Governance Files...");
   const requiredFiles = [
     'README.md', 'LICENSE', 'CHANGELOG.md', 'SECURITY.md', 'PROVENANCE.md',
     'SKILL_PROTOCOL.md', 'REGULATORY_CHANGELOG.md', 'PRODUCTION_READINESS.md',
@@ -192,7 +192,7 @@ function validateRelease() {
   }
 
   // 12. Git Workspace Status Check (warning in dev, check mode)
-  console.log("  [12/13] Checking Git Workspace Cleanliness...");
+  console.log("  [12/15] Checking Git Workspace Cleanliness...");
   try {
     const gitStatus = execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf8' }).trim();
     if (gitStatus.length > 0 && process.env.REQUIRE_CLEAN_GIT === 'true') {
@@ -208,7 +208,7 @@ function validateRelease() {
   }
 
   // 13. BENCHMARK.md Version Alignment Check
-  console.log("  [13/14] Verifying BENCHMARK.md Version Alignment...");
+  console.log("  [13/15] Verifying BENCHMARK.md Version Alignment...");
   const benchmarkMd = fs.readFileSync(path.join(ROOT, 'docs/BENCHMARK.md'), 'utf8');
   if (!benchmarkMd.includes(`v${metadata.version}`)) {
     console.error(`❌ BENCHMARK.md Version Mismatch: header does not match v${metadata.version}`);

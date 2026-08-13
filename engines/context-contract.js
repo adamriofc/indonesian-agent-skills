@@ -24,14 +24,19 @@ function normalizeNonNegativeNumber(value, fieldName, issues) {
 }
 
 function normalizeFact(fact) {
-  if (typeof fact === 'string') return { subject: fact, value: true, unit: 'boolean', confidence: 'HIGH' };
+  if (typeof fact === 'string') {
+    return { subject: fact, value: true, unit: 'boolean', source: 'user_input', confidence: 'UNVERIFIED' };
+  }
+  const source = fact.source || 'user_input';
+  const defaultConfidence = (source === 'statutory_ruleset' || source === 'verified_engine') ? 'VERIFIED' : 'UNVERIFIED';
+
   return {
     subject: fact.subject || 'unspecified_fact',
     value: fact.value !== undefined ? fact.value : null,
     unit: fact.unit || 'dimensionless',
     asOf: fact.asOf || new Date().toISOString().slice(0, 10),
-    source: fact.source || 'user_input',
-    confidence: fact.confidence || 'HIGH'
+    source,
+    confidence: fact.confidence || defaultConfidence
   };
 }
 
@@ -40,7 +45,7 @@ function normalizeRelation(rel) {
     subject: rel.subject || 'unspecified_subject',
     predicate: rel.predicate || 'affects',
     object: rel.object || 'unspecified_object',
-    confidence: rel.confidence || 'HIGH',
+    confidence: rel.confidence || 'MEDIUM',
     evidence: rel.evidence || []
   };
 }
@@ -55,24 +60,47 @@ function normalizeConstraint(c = {}) {
   };
 }
 
-function normalizeObjective(o = {}) {
+function normalizeObjective(o = {}, mode = 'DEMO_MODE') {
+  if (!o.primary && mode === 'STRICT_PRODUCTION_MODE') {
+    return {
+      status: 'UNSPECIFIED',
+      requiresInput: true,
+      primary: null,
+      secondary: null,
+      timeHorizon: null
+    };
+  }
+
   const primary = typeof o.primary === 'string' ? { type: o.primary, weight: 0.6, priority: 1 } : (o.primary || { type: 'GROWTH', weight: 0.6, priority: 1 });
   const secondary = typeof o.secondary === 'string' ? { type: o.secondary, weight: 0.4 } : (o.secondary || { type: 'COMPLIANCE', weight: 0.4 });
   return {
+    status: o.primary ? 'SPECIFIED' : 'DEMO_DEFAULT_ASSUMPTION',
+    requiresInput: false,
     primary,
     secondary,
     timeHorizon: o.timeHorizon || '12_MONTHS'
   };
 }
 
-function normalizeOption(opt) {
+function normalizeOption(opt, issues = []) {
+  let costValue = null;
+  if (opt.cost !== undefined && opt.cost !== null) {
+    const numCost = Number(opt.cost);
+    if (Number.isFinite(numCost) && numCost >= 0) {
+      costValue = numCost;
+    } else {
+      issues.push({ field: `option.${opt.id || 'OPT'}.cost`, issue: 'INVALID_NUMERIC_VALUE', received: opt.cost });
+      costValue = null; // Do not coerce invalid non-numeric string to 0
+    }
+  }
+
   return {
     id: opt.id || 'OPT-1',
     name: opt.name || 'Default Option',
-    cost: opt.cost !== undefined ? Number(opt.cost) || 0 : 0,
+    cost: costValue,
     risk: opt.risk || 'MEDIUM',
     benefit: opt.benefit || 'MEDIUM',
-    feasible: opt.feasible !== undefined ? Boolean(opt.feasible) : true
+    feasible: opt.feasible !== undefined ? Boolean(opt.feasible) : null // Requires evidence, not default true
   };
 }
 
@@ -97,8 +125,8 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
   const facts = (overrides.facts || []).map(normalizeFact);
   const relations = (overrides.relations || []).map(normalizeRelation);
   const constraints = normalizeConstraint(overrides.constraints);
-  const objectives = normalizeObjective(overrides.objectives);
-  const options = (overrides.options || []).map(normalizeOption);
+  const objectives = normalizeObjective(overrides.objectives, mode);
+  const options = (overrides.options || []).map(opt => normalizeOption(opt, scaleInputIssues));
 
   return {
     schemaVersion: STANDARD_CONTEXT_SCHEMA_VERSION,
