@@ -3,7 +3,7 @@
 Official measurement definitions and exact metrics for `indonesian-business-agent-skills`.
 
 > **Single Source of Truth File**: [`canonical-metadata.json`](../canonical-metadata.json)  
-> **Last Generated**: 2026-08-13T03:59:56.178Z  
+> **Last Generated**: 2026-08-13T04:10:02.300Z  
 > **Generator Command**: `npm run generate:metadata`
 
 ---

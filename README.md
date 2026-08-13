@@ -66,7 +66,7 @@ Agent (Skill-Assisted Execution):
 
 | Agent Runtime / Environment | Integration Level | Status | Verification Mechanism |
 |---|---|---|---|
-| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 438+ matrix assertions & 94 golden cases) |
+| **Node.js (v20, v22, v24)** | Native Engine Execution (`engines/`) | ✅ **Verified** | CI Matrix (`npm test` 479+ matrix assertions & 121 golden cases) |
 | **OpenCode CLI** | Native Skill Integration (`.opencode/skills/`) | ✅ **Verified** | Automated Schema & Skill Protocol Tests |
 | **OpenWork Desktop & Cloud** | Native Plugin Manifest (`.claude-plugin/`) | ✅ **Verified** | Marketplace Schema Store & SHA-256 Ruleset Integrity |
 | **Claude Code (CLI)** | Native Plugin Installer (`npx skills`) | ✅ **Verified** | Universal Skill Protocol (`SKILL_PROTOCOL.md`) |
@@ -95,7 +95,7 @@ Agent (Skill-Assisted Execution):
                                            │
                                            ▼
                ┌──────────────────────────────────────────────────────┐
-               │      38 Deterministic Node.js Math & Diff Engines    │
+               │      39 Deterministic Node.js Math & Diff Engines    │
                │ 28 statutory (engines/*.js + SSOT temporal rulesets) │
                │ 8 finance (engines/*.js — pure standard math)        │
                └──────────────────┬───────────────────┬───────────────┘
@@ -182,11 +182,11 @@ cp -r .agents/skills/* .cursor/skills/
 1. Open **Settings > Plugins**.
 2. Click **Add Plugin from Repository**.
 3. Input the GitHub URL: `https://github.com/adamriofc/indonesian-business-agent-skills`.
-4. The 6 plugins and 87 skills activate automatically.
+4. The 6 plugins and 88 skills activate automatically.
 
 ---
 
-## 📦 Plugin Inventory & Skill Catalog (87 Skills Across 6 Plugins)
+## 📦 Plugin Inventory & Skill Catalog (88 Skills Across 6 Plugins)
 
 All skills and computational engines are mapped in the **Machine-Readable Registry (`registry/index.json`)** with defined *Quality Tiers* (`source-verified`, `tested`, `expert-reviewed`):
 
