@@ -1,16 +1,18 @@
 {
-  "manifestVersion": "1.0.0",
+  "manifestVersion": "1.1.0",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "releaseVersion": "v6.11.2",
-  "gitCommitHash": "b164a9e55630b70795285736bd3f65f85b93f20a",
-  "generatedAt": "2026-08-13T06:31:24.545Z",
+  "releaseTag": "v6.11.2",
+  "releaseCommitHash": "65ba776b6c39f04b82bfe6d102e57a077fb4523f",
+  "generatedAt": "2026-08-13T06:59:00Z",
   "metrics": {
     "plugins": 6,
     "skills": 88,
     "engines": 39,
     "goldenCases": 121,
     "benchmarkDomains": 27,
-    "benchmarkAssertions": 424
+    "benchmarkAssertions": 424,
+    "totalTestAssertions": 508
   },
   "integrityHashes": {
     "sha256sumsFileHash": "f9f46ba56a97d8bf2c2db7d3853813b47caa85461f349221a84d6e6631b6a82b",
