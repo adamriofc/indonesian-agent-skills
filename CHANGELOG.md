@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.12.0] - 2026-08-13
+
+### Added & Architecture Refined (Agent Capability Contract & Cognitive Instrument Architecture Release)
+- **Agent Capability Contract Standard (`SKILL_PROTOCOL.md`)**: Formalized architectural boundary: Agent/LLM acts as the reasoning brain and orchestrator; Skills and Engines act as agent-native cognitive instruments declaring `requires`, `produces`, `deterministic`, and `cross_domain_relevance`.
+- **Refined Semantic Confidence Governance**: `normalizeFact` assigns `UNVERIFIED` confidence for unverified `user_input` sources; `normalizeOption` sets non-numeric cost strings to `null` rather than coercing to `0`; `normalizeObjective` strictly requires input in `STRICT_PRODUCTION_MODE` (`requiresInput: true`) rather than assuming `GROWTH`.
+- **Unit Test Coverage Expansion**: Added 100% passing tests in `tests/units/context-contract.test.js` verifying strict mode objective requirements, unverified fact confidence, and option cost sanitization.
+
 ## [6.11.3] - 2026-08-13
 
 ### Security & CodeQL Code Scanning Remediation (CodeQL Alerts #5 & #6 Resolved)

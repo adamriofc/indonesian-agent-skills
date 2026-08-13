@@ -6,11 +6,12 @@ This document defines the architectural specification and interoperability stand
 
 ## 1. Architectural Principles
 
-All skills and computational engines adhere to **3 Core Architectural Principles**:
+All skills and computational engines adhere to **4 Core Architectural Principles**:
 
-1. **Decoupled Reasoning & Calculation**: LLMs handle natural language understanding and parameter extraction; Node.js engines (`engines/*.js`) handle invariant calculations.
-2. **Semantic Business Context Routing**: Business activities are mapped via KBLI codes (`engines/kbli-context-router.js`) into Business Archetypes (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`), while goods/products can be anchored through the Product Context / BTKI layer.
-3. **Closed Security Boundary**: Ingestion skills wrap untrusted user content inside explicit, closed runtime delimiters: `[SYSTEM INSTRUCTION] ... [UNTRUSTED DATA PAYLOAD] ... [END PAYLOAD]`.
+1. **Decoupled Reasoning & Calculation**: The Host Agent / LLM acts as the reasoning brain and orchestrator (intent parsing, context elicitation, tool selection, cross-domain plan, decision synthesis). Plugins, Skills, and Engines act as agent-native cognitive instruments / domain tools.
+2. **Agent Capability Contract**: Skills declare explicit capability metadata (`requires`, `produces`, `deterministic`, `cross_domain_relevance`) and return structured result envelopes (`status`, `result`, `evidence`, `assumptions`, `warnings`, `safeToUse`) allowing seamless agent orchestration.
+3. **Semantic Business Context Routing**: Business activities are mapped via KBLI codes (`engines/kbli-context-router.js`) into Business Archetypes (`PRODUCT_MANUFACTURING`, `PROFESSIONAL_SERVICE`, `CAPACITY_SERVICE`, `MARKETPLACE_PLATFORM`, `HYBRID`), while goods/products are anchored via the Product Context / BTKI layer (`engines/product-context.js`).
+4. **Closed Security Boundary**: Ingestion skills wrap untrusted user content inside explicit, closed runtime delimiters: `[SYSTEM INSTRUCTION] ... [UNTRUSTED DATA PAYLOAD] ... [END PAYLOAD]`.
 
 ---
 

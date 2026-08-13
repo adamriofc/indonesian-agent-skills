@@ -27,9 +27,22 @@ function runContextContractTests() {
   assert.strictEqual(strictRes.isComplete, false);
   assert.strictEqual(strictRes.contextStatus, 'INSUFFICIENT_CONTEXT');
   assert.ok(strictRes.missingParameters.includes('entity.type'));
+  assert.strictEqual(strictRes.canonicalContext.objectives.status, 'UNSPECIFIED');
+  assert.strictEqual(strictRes.canonicalContext.objectives.requiresInput, true);
 
   const demoRes = validateBusinessContext({ scale: { annualRevenue: 1000000000 } }, 'DEMO_MODE');
   assert.strictEqual(demoRes.contextStatus, 'DEMO_CONTEXT_WITH_ASSUMPTIONS');
+  assert.strictEqual(demoRes.canonicalContext.objectives.status, 'DEMO_DEFAULT_ASSUMPTION');
+
+  // 2a. Unverified User Input Fact & Non-Coercive Option Sanitization
+  console.log("  [2a/6] Testing Unverified User Input Fact Confidence & Option Sanitization...");
+  const unverifiedCtx = createDefaultBusinessContext({
+    facts: [{ subject: 'customer_concentration', value: 0.61, source: 'user_input' }],
+    options: [{ id: 'OPT-1', name: 'Branch Expansion', cost: 'invalid_number' }]
+  });
+  assert.strictEqual(unverifiedCtx.facts[0].confidence, 'UNVERIFIED');
+  assert.strictEqual(unverifiedCtx.options[0].cost, null);
+  assert.strictEqual(unverifiedCtx.inputIssues.length, 1);
 
   const conflictContextRes = validateBusinessContext({ entity: { type: 'pt', kbli: '70209', activityName: 'Pabrik Manufaktur Makanan' }, scale: { annualRevenue: 1000000000, employeeCount: 10 } });
   assert.strictEqual(conflictContextRes.contextStatus, 'CONTEXT_WARNING');

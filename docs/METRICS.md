@@ -3,7 +3,7 @@
 Official measurement definitions and exact metrics for `indonesian-business-agent-skills`.
 
 > **Single Source of Truth File**: [`canonical-metadata.json`](../canonical-metadata.json)  
-> **Last Generated**: 2026-08-13T07:27:44.752Z  
+> **Last Generated**: 2026-08-13T07:48:53.812Z  
 > **Generator Command**: `npm run generate:metadata`
 
 ---
@@ -12,14 +12,14 @@ Official measurement definitions and exact metrics for `indonesian-business-agen
 
 | Metric Name | Value | Exact Definition & Measurement Source |
 |---|---|---|
-| **Repository Version** | `v6.11.3` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
+| **Repository Version** | `v6.12.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
 | **Canonical Plugins** | `6` | Plugin directories containing `.claude-plugin/plugin.json` (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Total `SKILL.md` files registered across the 6 canonical plugins |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engine modules in `engines/*.js` |
 | **Golden Cases** | `121` | Static golden test cases across `27` domain files in `tests/golden/*.json` |
 | **Benchmark Domains** | `27` | Domain JSON files in `tests/golden/` evaluated by `scripts/benchmark.js` |
 | **Benchmark Assertions** | `424` | Explicit assertion statements in `tests/benchmarks/` (`business-scenario-regression.test.js`, `nlp-extraction-fixture.test.js`, `cross-domain-synthetic.test.js`) |
-| **Total Test Assertions** | `508+` | Total explicit `assert.*` calls across all test files executed by `npm test` |
+| **Total Test Assertions** | `514+` | Total explicit `assert.*` calls across all test files executed by `npm test` |
 
 ---
 
@@ -27,7 +27,7 @@ Official measurement definitions and exact metrics for `indonesian-business-agen
 
 To eliminate documentation drift and ambiguity:
 - **Benchmark Assertions (`424`)**: Refers strictly to explicit assertions within the 3 benchmark suites in `tests/benchmarks/`.
-- **Total Repository Test Assertions (`508+`)**: Refers to assertions executed across unit, matrix, integration, security, and benchmark suites in `npm test`.
+- **Total Repository Test Assertions (`514+`)**: Refers to assertions executed across unit, matrix, integration, security, and benchmark suites in `npm test`.
 
 ---
 
