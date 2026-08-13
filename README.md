@@ -2,7 +2,7 @@
 
 *Give AI agents a business brain for Indonesia.*
 
-**Open-source Indonesian business intelligence for AI agents — combining regulatory-grounded skills, temporal rulesets, deterministic engines, and auditable provenance.**
+**Open-source Indonesian business intelligence for AI agents — combining domain-specific skills, semantic business context, deterministic engines, temporal rulesets, and auditable provenance across Legal, Tax, HR, Finance, Marketing, and Strategy.**
 
 <p align="center">
   <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.11.2" alt="Indonesian Business Agent Skills Banner" width="100%">
@@ -33,20 +33,42 @@
 | **Node.js Compatibility** | `20 / 22 / 24` | `20` (Minimum), `22` (LTS Recommended), `24` (Current Tested) |
 <!-- /GENERATED:STATS -->
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **88 Agent Skills** with **39 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business reasoning layer. It is intentionally **not tax-only or legal-only**: the six canonical domains are independently useful and can compose through a shared Semantic Business Context. The repository supports **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks.
+
+### 🧠 One Business Context, Six Specialized Lenses
+
+```text
+                         SEMANTIC BUSINESS CONTEXT
+                                      │
+       ┌──────────────┬──────────────┼──────────────┬──────────────┬──────────────┐
+       ▼              ▼              ▼              ▼              ▼              ▼
+     LEGAL           TAX             HR           FINANCE       MARKETING      STRATEGY
+       │              │              │               │              │              │
+       └──────────────┴──────────────┴──────┬────────┴──────────────┴──────────────┘
+                                             ▼
+                                    CROSS-DOMAIN DECISION
+```
+
+Each domain should remain useful on its own. Cross-domain composition is activated only when the user's problem actually requires it; the agent should not invoke every plugin by default.
+
+See [`docs/DOMAIN_CAPABILITY_MATRIX.md`](docs/DOMAIN_CAPABILITY_MATRIX.md) for the intended domain boundaries and validation matrix.
 
 > **Validation boundary:** The repository currently targets **L3 Production Decision-Support**. Automated tests, deterministic benchmarks, provenance checks, and release gates are maintainer-owned engineering evidence. **Independent external domain validation and enterprise production proof are still pending and are not claimed.** See [`PRODUCTION_READINESS.md`](PRODUCTION_READINESS.md), [`docs/EXTERNAL_VALIDATION.md`](docs/EXTERNAL_VALIDATION.md), and [`docs/AUDIT_CLOSURE.md`](docs/AUDIT_CLOSURE.md).
 
-### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
-Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
-1. **Arithmetic Hallucination**: AI models guess numbers rather than computing equations, leading to incorrect tax bracket assignments and faulty severance math.
-2. **Temporal Ambiguity**: AI models fail to track statutory wage caps and rate adjustments across transition windows (such as BPJS JP wage cap adjustments in March 2025 vs March 2026).
-3. **Unverifiable Lineage**: Standard AI responses lack traceable references to official gazettes (*lembaran negara*), rendering them unsuited for corporate audits.
+### 💡 Why Standard LLMs Fail at Indonesian Business Reasoning
+
+Generic AI models often provide broad or generic advice when the user needs a domain-specific business decision grounded in Indonesian context. Typical failure modes include:
+1. **Arithmetic Hallucination**: probabilistic models can produce incorrect calculations for tax, finance, payroll, unit economics, and other numeric decisions.
+2. **Temporal Ambiguity**: models can miss effective-date changes across Indonesian regulatory and policy windows.
+3. **Weak Business Grounding**: models can produce formally plausible but generic recommendations when they lack structured business context, domain procedures, constraints, objectives, or local classifications.
+4. **Unverifiable Lineage**: business-critical outputs may lack traceable rule or evidence lineage.
 
 ### 🛡️ The Hybrid Architecture Solution
-This repository decouples AI **reasoning** from **calculation**:
-- **AI (Agent Skill)**: Understands natural language, extracts parameters, and synthesizes explanations.
-- **Engine (Node.js)**: Computes exact invariant mathematics (deterministic computation removes LLM arithmetic hallucination within the engine) per official government rulesets.
+This repository separates specialized AI reasoning from deterministic computation and shared business context:
+- **Agent Skills**: domain-specific procedures for Legal, Tax, HR, Finance, Marketing, and Strategy.
+- **Semantic Business Context**: shared KBLI/activity, Product Context/BTKI where relevant, facts, relations, constraints, objectives, and decision options.
+- **Deterministic Engines**: exact invariant mathematics and temporal rule execution where computation should not be delegated to probabilistic generation.
+- **LLM**: synthesizes the validated domain outputs into a user-facing decision or recommendation.
 
 ---
 
@@ -54,17 +76,32 @@ This repository decouples AI **reasoning** from **calculation**:
 
 ```text
 User: "My company is a PT Management Consulting firm (KBLI 70209) with IDR 5 Billion turnover and 15 employees.
-       We want to open a second branch and add 10 employees. Is this expansion compliant across Tax, HR, Legal, and Strategy?"
+       We want to open a second branch and add 10 employees. Is this expansion feasible, and what should we change?"
 
 Agent (Skill-Assisted Execution):
-1. [KBLI Router]: KBLI 70209 ➔ PROFESSIONAL_SERVICE Archetype (Capacity Unit: Service Practice Lines).
-2. [Tax Engine]: PP 20/2026 Ineligibility Flagged (PT Corporate must use General PPh 31E at 11%/22%, not 0.5% UMKM).
-3. [HR Engine]: 25 Total Employees ➔ Mandatory Wage Structure & Scale (Permenaker 1/2017) + BPJS JP Cap update.
-4. [Legal Engine]: Audit Article 1266 KUHPerdata waiver & PDP Data Processing Addendum (UU 27/2022).
-5. [Decision Engine]: MCDA Weighted Score = 8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH).
+1. [KBLI Router]   → PROFESSIONAL_SERVICE business archetype and operating context.
+2. [Tax]           → evaluates the applicable tax regime and transition implications.
+3. [HR]            → models headcount, payroll, BPJS, and workforce compliance impacts.
+4. [Legal]         → checks contract/data/compliance implications relevant to expansion.
+5. [Finance]       → evaluates incremental payroll/capacity economics and financial feasibility.
+6. [Strategy]      → compares expansion options and trade-offs using the shared objectives/constraints.
+7. [Decision Layer]→ returns a prioritized recommendation with domain dependencies and review boundaries.
 ```
 
-## ⚙️ Compatibility & Testing Matrix
+### 🔎 Domain Coverage Is Independently Useful
+
+The repository is designed to answer very different user needs without forcing unrelated domains into the workflow:
+
+| User need | Primary lens | Typical secondary lenses |
+|---|---|---|
+| Contract / legal risk | Legal | HR, Tax, Strategy |
+| Tax calculation / planning | Tax | Finance, Legal, Product |
+| Hiring / payroll / termination | HR | Tax, Finance, Legal |
+| Valuation / financing / unit economics | Finance | Strategy, Marketing, Tax |
+| Market / pricing / marketplace problem | Marketing | Finance, Product, Strategy |
+| Strategic planning / decision-making | Strategy | Finance, Marketing, HR, Legal |
+
+### ⚙️ Compatibility & Testing Matrix
 
 | Agent Runtime / Environment | Integration Level | Status | Verification Mechanism |
 |---|---|---|---|
@@ -86,27 +123,28 @@ Agent (Skill-Assisted Execution):
                                             ▼
                         ┌──────────────────────────────────────┐
                         │      SEMANTIC BUSINESS CONTEXT       │
-                        │ Entity, KBLI, Product, Facts, Scale  │
+                        │ Entity, KBLI, Product, Facts,       │
+                        │ Relations, Constraints, Objectives  │
                         └──────────────────┬───────────────────┘
                                            │
-                        ┌──────────────────┴───────────────────┐
-                        ▼                                      ▼
-            ┌──────────────────────┐               ┌──────────────────────┐
-            │   KBLI 2020 ROUTER   │               │   PRODUCT CONTEXT    │
-            │  Business Activity   │               │ BTKI 2022 / HS-6 /   │
-            │  ➔ Business Archetype│               │ Lartas / Landed Cost │
-            └───────────┬──────────┘               └──────────┬───────────┘
-                        │                                     │
-                        └──────────────────┬──────────────────┘
-                                           ▼
+                  ┌────────────────────────┼─────────────────────────┐
+                  ▼                        ▼                         ▼
+         ┌─────────────────┐     ┌────────────────────┐     ┌────────────────────┐
+         │ DOMAIN SKILLS   │     │ PRODUCT / KBLI     │     │ DECISION CONTEXT   │
+         │ Legal / Tax /   │     │ Business Activity  │     │ Options / Tradeoffs│
+         │ HR / Finance /  │     │ + Product/BTKI     │     │ + Objectives       │
+         │ Marketing /     │     │ where relevant     │     │ + Constraints      │
+         │ Strategy        │     └────────────────────┘     └────────────────────┘
+         └────────┬────────┘
+                  │
+                  └─────────────────────┬───────────────────────────
+                                        ▼
                 ┌──────────────────────────────────────────────────────┐
                 │      39 Deterministic Node.js Math & Diff Engines    │
-                │ 28 statutory (engines/*.js + SSOT temporal rulesets) │
-                │ 8 finance (engines/*.js — pure standard math)        │
-                │ 3 strategic & product classification engines         │
-                └──────────────────┬───────────────────┬───────────────┘
-                                   │                   │
-                                   ▼                   ▼
+                │ 28 statutory + 8 finance + strategic/product engines │
+                └──────────────────┬───────────────────────────────────┘
+                                   │
+                                   ▼
         ┌──────────────────────────────┐   ┌──────────────────────────────────────┐
         │ Single Source of Truth Rules │   │ Cryptographic SHA-256 Checksums     │
         │ (engines/rules/*.json)       │   │ (engines/rules/integrity.js +        │
@@ -117,6 +155,17 @@ Agent (Skill-Assisted Execution):
                                                   │
                                                   ▼
                            ┌──────────────────────────────────────┐
-                           │  Validated Statutory Output + Math   │
+                           │ Validated Domain Outputs + Evidence  │
                            └──────────────────┬───────────────────┘
                                               │
+                                              ▼
+                                   Cross-Domain Decision Layer
+                                              │
+                                              ▼
+                                         LLM Synthesis
+                                              │
+                                              ▼
+                                    Specific User Response
+```
+
+---
