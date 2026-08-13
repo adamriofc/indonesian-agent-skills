@@ -60,7 +60,8 @@ function validateDocs() {
     `\`v${metadata.version}\``,
     `**${metadata.skills}`,
     `**${metadata.plugins}`,
-    `**${metadata.engines}`
+    `**${metadata.engines}`,
+    'Independent external domain validation and enterprise production proof are still pending'
   ], 'README.md alignment');
 
   // 3. METRICS.md checks
@@ -80,10 +81,11 @@ function validateDocs() {
     errors++;
   }
 
-  // 5. Current Skill Protocol and Roadmap checks.
-  console.log("  [5/8] Verifying current Skill Protocol & Roadmap contracts...");
+  // 5. Current Skill Protocol, Roadmap and provenance checks.
+  console.log("  [5/8] Verifying current Skill Protocol, Roadmap & provenance contracts...");
   const skillProtocol = read('SKILL_PROTOCOL.md');
   const roadmap = read('ROADMAP.md');
+  const provenance = read('PROVENANCE.md');
   errors += containsAll(skillProtocol, [
     'Install all 88 skills across 6 canonical plugins',
     'Semantic Business Context Routing',
@@ -96,6 +98,12 @@ function validateDocs() {
     '## Active Hardening & Validation',
     '## Explicit Non-Goals / Feature Boundary'
   ], 'ROADMAP.md current-state contract');
+  errors += containsAll(provenance, [
+    'Internal Expert-Domain Review & Credential Register',
+    'internal maintainer verification checklist',
+    'Independent external validation is currently **PENDING**',
+    '`INTERNAL_VERIFIED`'
+  ], 'PROVENANCE.md review-status contract');
 
   // 6. Stale taxonomy and stale numeric claims in current docs.
   console.log("  [6/8] Checking stale taxonomy / stale numeric claims in current documentation...");
@@ -103,7 +111,8 @@ function validateDocs() {
     'README.md', 'SKILL_PROTOCOL.md', 'ROADMAP.md', 'PROVENANCE.md',
     'REGULATORY_CHANGELOG.md', 'PRODUCTION_READINESS.md', 'docs/RELEASE.md',
     'docs/METRICS.md', 'docs/BENCHMARK.md', 'docs/OPERATIONAL_RUNBOOK.md',
-    'docs/RELEASE_GOVERNANCE.md', 'docs/EXTERNAL_VALIDATION.md', 'docs/AUDIT_CLOSURE.md'
+    'docs/RELEASE_GOVERNANCE.md', 'docs/EXTERNAL_VALIDATION.md', 'docs/AUDIT_CLOSURE.md',
+    'docs/CODE_NAVIGATION.md'
   ];
   const staleTerms = ['tax-payroll-id', 'ecommerce-id', 'content-lokal-id'];
   const staleCountClaims = [
@@ -121,7 +130,6 @@ function validateDocs() {
         errors++;
       }
     });
-    // Do not flag intentional history in CHANGELOG; these files represent current-state docs.
     staleCountClaims.forEach(claim => {
       if (content.includes(claim)) {
         console.error(`❌ Stale Numeric Claim in ${docFile}: '${claim}'`);
@@ -137,8 +145,8 @@ function validateDocs() {
     '20 / 22 / 24'
   ], 'README.md Node support');
   const production = read('PRODUCTION_READINESS.md');
-  const releaseGovernance = fs.existsSync(path.join(ROOT, 'docs/RELEASE_GOVERNANCE.md')) ? read('docs/RELEASE_GOVERNANCE.md') : '';
-  const externalValidation = fs.existsSync(path.join(ROOT, 'docs/EXTERNAL_VALIDATION.md')) ? read('docs/EXTERNAL_VALIDATION.md') : '';
+  const releaseGovernance = read('docs/RELEASE_GOVERNANCE.md');
+  const externalValidation = read('docs/EXTERNAL_VALIDATION.md');
   errors += containsAll(production, [
     'Level L3 — Production Decision-Support Infrastructure',
     'Independent external validation status: **PENDING**'
