@@ -29,7 +29,7 @@
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
 | **Golden Cases** | `121` | Static corpus cases across 27 benchmark domains |
 | **Benchmark Assertions** | `424` | Deterministic assertions in `tests/benchmarks/` |
-| **Total Test Assertions** | `501+` | Deepened matrix assertions across full `npm test` suite |
+| **Total Test Assertions** | `505+` | Deepened matrix assertions across full `npm test` suite |
 | **Node.js Compatibility** | `20 / 22 / 24` | `20` (Minimum), `22` (LTS Recommended), `24` (Current Tested) |
 <!-- /GENERATED:STATS -->
 

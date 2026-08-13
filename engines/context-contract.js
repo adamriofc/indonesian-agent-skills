@@ -23,6 +23,59 @@ function normalizeNonNegativeNumber(value, fieldName, issues) {
   return numericValue;
 }
 
+function normalizeFact(fact) {
+  if (typeof fact === 'string') return { subject: fact, value: true, unit: 'boolean', confidence: 'HIGH' };
+  return {
+    subject: fact.subject || 'unspecified_fact',
+    value: fact.value !== undefined ? fact.value : null,
+    unit: fact.unit || 'dimensionless',
+    asOf: fact.asOf || new Date().toISOString().slice(0, 10),
+    source: fact.source || 'user_input',
+    confidence: fact.confidence || 'HIGH'
+  };
+}
+
+function normalizeRelation(rel) {
+  return {
+    subject: rel.subject || 'unspecified_subject',
+    predicate: rel.predicate || 'affects',
+    object: rel.object || 'unspecified_object',
+    confidence: rel.confidence || 'HIGH',
+    evidence: rel.evidence || []
+  };
+}
+
+function normalizeConstraint(c = {}) {
+  return {
+    financial: c.financial || null,
+    regulatory: c.regulatory || null,
+    capacity: c.capacity || null,
+    time: c.time || null,
+    risk: c.risk || null
+  };
+}
+
+function normalizeObjective(o = {}) {
+  const primary = typeof o.primary === 'string' ? { type: o.primary, weight: 0.6, priority: 1 } : (o.primary || { type: 'GROWTH', weight: 0.6, priority: 1 });
+  const secondary = typeof o.secondary === 'string' ? { type: o.secondary, weight: 0.4 } : (o.secondary || { type: 'COMPLIANCE', weight: 0.4 });
+  return {
+    primary,
+    secondary,
+    timeHorizon: o.timeHorizon || '12_MONTHS'
+  };
+}
+
+function normalizeOption(opt) {
+  return {
+    id: opt.id || 'OPT-1',
+    name: opt.name || 'Default Option',
+    cost: opt.cost !== undefined ? Number(opt.cost) || 0 : 0,
+    risk: opt.risk || 'MEDIUM',
+    benefit: opt.benefit || 'MEDIUM',
+    feasible: opt.feasible !== undefined ? Boolean(opt.feasible) : true
+  };
+}
+
 function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
   const entity = overrides.entity || {};
   const scale = overrides.scale || {};
@@ -40,6 +93,12 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
 
   const defaultHasNib = isStrict ? null : true;
   const defaultHasNpwp = isStrict ? null : true;
+
+  const facts = (overrides.facts || []).map(normalizeFact);
+  const relations = (overrides.relations || []).map(normalizeRelation);
+  const constraints = normalizeConstraint(overrides.constraints);
+  const objectives = normalizeObjective(overrides.objectives);
+  const options = (overrides.options || []).map(normalizeOption);
 
   return {
     schemaVersion: STANDARD_CONTEXT_SCHEMA_VERSION,
@@ -61,11 +120,11 @@ function createDefaultBusinessContext(overrides = {}, mode = 'DEMO_MODE') {
       employeeCount: scale.employeeCount !== undefined ? normalizeNonNegativeNumber(scale.employeeCount, 'scale.employeeCount', scaleInputIssues) : null
     },
     productContext: createDefaultProductContext(overrides.productContext || {}),
-    facts: overrides.facts || [],
-    relations: overrides.relations || [],
-    constraints: overrides.constraints || { financial: null, regulatory: null, capacity: null, time: null },
-    objectives: overrides.objectives || { primary: 'GROWTH', secondary: 'COMPLIANCE' },
-    options: overrides.options || [],
+    facts,
+    relations,
+    constraints,
+    objectives,
+    options,
     inputIssues: scaleInputIssues
   };
 }

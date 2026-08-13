@@ -57,7 +57,7 @@ function getBtkirulesetForDate(dateStr) {
     }
   }
 
-  return btkiRules.rulesets[0]; // Default to baseline
+  return null; // Return null if date is out of statutory ruleset coverage (RULESET_UNRESOLVED)
 }
 
 /**
@@ -122,9 +122,55 @@ function resolveProductClassification({
 }) {
   const activeDateStr = dateStr || new Date().toISOString().slice(0, 10);
   const activeRuleset = getBtkirulesetForDate(activeDateStr);
-  const entries = activeRuleset.tariff_entries;
-
   const validCifValue = requireRupiah(cifValueIdr, 'cifValueIdr');
+
+  // Ruleset Unresolved Fail-Closed Safeguard
+  if (!activeRuleset) {
+    const canonicalContext = createDefaultProductContext({
+      product: { name: productName || 'Unresolved Commodity', description, specifications: attributes },
+      classification: { scheme: 'BTKI', version: 'NONE' },
+      status: PRODUCT_CLASSIFICATION_STATUSES.UNRESOLVED,
+      confidence: 'LOW',
+      evidence: [`Ruleset Unresolved: No BTKI ruleset effective for date ${activeDateStr}`]
+    });
+
+    const baseResult = {
+      productName: canonicalContext.product.name,
+      classificationStatus: PRODUCT_CLASSIFICATION_STATUSES.UNRESOLVED,
+      btkiCode: null,
+      hs6Code: null,
+      hsDescription: null,
+      candidates: [],
+      cifValueIdr: validCifValue,
+      customsDuty: { importDutyPercent: null, importDutyAmount: null },
+      importTax: { ppnTreatment: null, ppnPercent: null, ppnAmount: null, pph22RatePercent: null, pph22Amount: null },
+      taxIncentive: { eligibleIncentives: [], isDtpApplied: false, dtpAmount: 0 },
+      importDutyAmount: null,
+      nilaiImpor: null,
+      ppnAmount: null,
+      pph22Amount: null,
+      totalLandedTaxes: null,
+      totalLandedCost: null,
+      requiresLartasPermit: null,
+      lartasAuthority: null,
+      canonicalProductContext: canonicalContext
+    };
+
+    return buildResultEnvelope({
+      result: baseResult,
+      status: RESULT_STATUSES.REQUIRES_REVIEW,
+      safeToUse: SAFE_TO_USE_STATES.REQUIRES_REVIEW,
+      confidence: 'LOW',
+      evidence: canonicalContext.evidence,
+      provenance: {
+        rulesetId: 'NONE',
+        statute: 'OUT_OF_COVERAGE_DATE',
+        calculatedAt: activeDateStr
+      }
+    });
+  }
+
+  const entries = activeRuleset.tariff_entries;
 
   // Importer status normalization (API vs Non-API vs No-NPWP)
   const apiActive = importerStatus.usesApi !== undefined ? Boolean(importerStatus.usesApi) : Boolean(usesApi);
@@ -162,6 +208,14 @@ function resolveProductClassification({
       ? PRODUCT_CLASSIFICATION_STATUSES.AMBIGUOUS
       : PRODUCT_CLASSIFICATION_STATUSES.UNRESOLVED;
 
+    const candidateRankings = matches.map((m, idx) => ({
+      rank: idx + 1,
+      btkiCode: m.btkiCode,
+      description: m.description,
+      category: m.category,
+      confidenceScore: Number((1 / (idx + 1)).toFixed(2))
+    }));
+
     const canonicalContext = createDefaultProductContext({
       product: { name: productName || 'Unclassified Commodity', description, specifications: attributes },
       classification: { scheme: 'BTKI', version: activeRuleset.rulesetId },
@@ -179,8 +233,11 @@ function resolveProductClassification({
       btkiCode: null,
       hs6Code: null,
       hsDescription: null,
-      candidates: matches.map(m => ({ btkiCode: m.btkiCode, description: m.description, category: m.category })),
+      candidates: candidateRankings,
       cifValueIdr: validCifValue,
+      customsDuty: { importDutyPercent: null, importDutyAmount: null },
+      importTax: { ppnTreatment: null, ppnPercent: null, ppnAmount: null, pph22RatePercent: null, pph22Amount: null },
+      taxIncentive: { eligibleIncentives: [], isDtpApplied: false, dtpAmount: 0 },
       importDutyAmount: null,
       nilaiImpor: null,
       ppnAmount: null,
@@ -290,6 +347,25 @@ function resolveProductClassification({
     ]
   });
 
+  const customsDuty = {
+    importDutyPercent,
+    importDutyAmount
+  };
+
+  const importTax = {
+    ppnTreatment,
+    ppnPercent,
+    ppnAmount,
+    pph22RatePercent,
+    pph22Amount
+  };
+
+  const taxIncentive = {
+    eligibleIncentives: ppnTreatment === PPN_TREATMENTS.INCENTIVE_DTP ? ['PPN DTP'] : (ppnTreatment === PPN_TREATMENTS.EXEMPT ? ['PPN Pembebasan'] : []),
+    isDtpApplied: ppnTreatment === PPN_TREATMENTS.INCENTIVE_DTP,
+    dtpAmount: ppnTreatment === PPN_TREATMENTS.INCENTIVE_DTP ? Math.round(nilaiImpor * 0.12) : 0
+  };
+
   const baseResult = {
     productName: canonicalContext.product.name,
     classificationStatus,
@@ -298,6 +374,9 @@ function resolveProductClassification({
     hsDescription: resolvedHs.description,
     classificationEvidence,
     cifValueIdr: validCifValue,
+    customsDuty,
+    importTax,
+    taxIncentive,
     importDutyPercent,
     importDutyAmount,
     nilaiImpor,

@@ -134,8 +134,8 @@ function runProductContextEngineTests() {
     "Non-numeric CIF value must throw explicit INVALID_INPUT"
   );
 
-  // 7. Temporal Ruleset Resolution by Date
-  console.log("  [7/7] Testing Temporal Ruleset Date Window Resolution...");
+  // 7. Temporal Ruleset Resolution & Out-of-Coverage Date Guard
+  console.log("  [7/7] Testing Temporal Ruleset Date Window Resolution & Out-of-Coverage Guard...");
   const tempRes = resolveProductClassification({
     productName: "Kopi sangrai arabika gayo",
     targetHsCode: "0901.21.10",
@@ -143,7 +143,18 @@ function runProductContextEngineTests() {
     dateStr: "2026-05-01"
   });
   assert.strictEqual(tempRes._production.provenance.rulesetId, "BTKI-2022");
-  assert.strictEqual(tempRes._production.provenance.calculatedAt, "2026-05-01");
+  assert.strictEqual(tempRes.customsDuty.importDutyAmount, 20000000);
+  assert.strictEqual(tempRes.importTax.ppnAmount, 14400000);
+
+  const outOfCoverageRes = resolveProductClassification({
+    productName: "Kopi sangrai arabika gayo",
+    targetHsCode: "0901.21.10",
+    cifValueIdr: 100000000,
+    dateStr: "2015-01-01"
+  });
+  assert.strictEqual(outOfCoverageRes.classificationStatus, PRODUCT_CLASSIFICATION_STATUSES.UNRESOLVED);
+  assert.strictEqual(outOfCoverageRes.importDutyAmount, null);
+  assert.strictEqual(outOfCoverageRes._production.safeToUse, "REQUIRES_REVIEW");
 
   console.log("\n✅ All Product Context & BTKI Commodity Engine Tests Passed 100%!");
 }
