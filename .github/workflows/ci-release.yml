@@ -104,8 +104,8 @@ jobs:
       - name: Run Documentation SSOT Validator
         run: npm run validate:docs
 
-      - name: Execute 13-Check Release Gate
-        run: npm run validate:release
+      - name: Execute 17-Check Release Gate
+        run: REQUIRE_RELEASE_TAG=true npm run validate:release
 
       - name: Upload Benchmark Results Artifact
         uses: actions/upload-artifact@v4

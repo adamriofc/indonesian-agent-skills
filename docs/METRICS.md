@@ -3,7 +3,7 @@
 Official measurement definitions and exact metrics for `indonesian-business-agent-skills`.
 
 > **Single Source of Truth File**: [`canonical-metadata.json`](../canonical-metadata.json)  
-> **Last Generated**: 2026-08-13T10:04:09.485Z  
+> **Last Generated**: 2026-08-15T00:00:00.000Z  
 > **Generator Command**: `npm run generate:metadata`
 
 ---
@@ -12,7 +12,7 @@ Official measurement definitions and exact metrics for `indonesian-business-agen
 
 | Metric Name | Value | Exact Definition & Measurement Source |
 |---|---|---|
-| **Repository Version** | `v6.14.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
+| **Repository Version** | `v6.15.0` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
 | **Canonical Plugins** | `6` | Plugin directories containing `.claude-plugin/plugin.json` (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Total `SKILL.md` files registered across the 6 canonical plugins |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engine modules in `engines/*.js` |
@@ -48,7 +48,7 @@ README.md (What / Why / Overview)
   ├── BENCHMARK.md (How measurement works & 3-Tier taxonomy)
   ├── PROVENANCE.md (Where statutory rules come from)
   ├── PRODUCTION_READINESS.md (Readiness levels & human review matrix)
-  ├── RELEASE.md (How releases are verified & 13-check gate)
+  ├── RELEASE.md (How releases are verified & 17-check gate)
   ├── METRICS.md (Single source of truth metrics & definitions)
   └── OPERATIONAL_RUNBOOK.md (Incident handling & emergency procedures)
 ```

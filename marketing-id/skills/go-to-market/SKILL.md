@@ -7,8 +7,11 @@ rule_type: professional-standard
 quality_tier: expert-reviewed
 allowed-tools: bash
 capability:
+  purpose: [market_sizing, commodity_classification]
+  not_for: [guaranteed_revenue_forecasting, customs_auto_clearance]
   requires: [<productName> <targetMarket> <launchBudget>]
   produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  consumes: [context.productContext, finance.unitCostIdr]
   deterministic: false
   cross_domain_relevance:
     finance: high

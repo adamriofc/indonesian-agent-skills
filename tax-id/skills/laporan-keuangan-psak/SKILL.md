@@ -7,8 +7,11 @@ rule_type: professional-standard
 quality_tier: source-verified
 allowed-tools: bash
 capability:
+  purpose: [tax_calculation, statutory_compliance]
+  not_for: [tax_legal_opinion, autonomous_filing]
   requires: [<trial_balance_data> <accounting_standard>]
   produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  consumes: [hr.payroll_cost, context.asOfDate]
   deterministic: true
   cross_domain_relevance:
     hr: high

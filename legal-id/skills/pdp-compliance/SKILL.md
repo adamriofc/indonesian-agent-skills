@@ -7,8 +7,11 @@ rule_type: statutory
 quality_tier: tested
 allowed-tools: bash
 capability:
+  purpose: [contract_audit, regulatory_compliance]
+  not_for: [court_representation, formal_advocate_opinion]
   requires: [<process_description>]
   produces: [riskScore, detectedViolations, redlines, safeToUse]
+  consumes: [context.entity, context.kbli]
   deterministic: true
   cross_domain_relevance:
     tax: medium

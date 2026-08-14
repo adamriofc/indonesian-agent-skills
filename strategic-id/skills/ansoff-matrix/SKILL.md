@@ -7,8 +7,11 @@ rule_type: professional-standard
 quality_tier: expert-reviewed
 allowed-tools: bash
 capability:
+  purpose: [framework_evaluation, scenario_planning]
+  not_for: [board_of_directors_guarantee, hostile_takeover_advisory]
   requires: [<productType: existing|new> <marketType: existing|new>]
   produces: [businessArchetype, compositeScore, resilienceAssessment, topOption]
+  consumes: [context.businessArchetype, finance.netProfit]
   deterministic: false
   cross_domain_relevance:
     finance: high

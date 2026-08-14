@@ -29,7 +29,7 @@ Maintainers must execute the following checklist prior to creating a release tag
 
 [2] Full Test Suite & Benchmark Matrix
     └─► npm test
-        (Executes 424+ assertions across unit, matrix, integration, security, & benchmark suites)
+        (Executes 526+ assertions across unit, matrix, integration, security, & benchmark suites)
 
 [3] Deterministic Benchmark Execution & Artifact Update
     └─► node scripts/benchmark.js --json-report docs/benchmark-results/latest.json
@@ -53,7 +53,7 @@ Maintainers must execute the following checklist prior to creating a release tag
 
 [8] Automated Release Gate
     └─► npm run validate:release
-        (Executes 14-check automated release gate pipeline including blocking npm audit & release manifest validation)
+        (Executes 17-check automated release gate pipeline including blocking npm audit & release manifest validation)
 
 [9] Git Tagging & GitHub Release
     └─► git tag vX.Y.Z && git push origin vX.Y.Z

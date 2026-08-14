@@ -7,8 +7,11 @@ rule_type: statutory
 quality_tier: expert-reviewed
 allowed-tools: bash
 capability:
+  purpose: [tax_calculation, statutory_compliance]
+  not_for: [tax_legal_opinion, autonomous_filing]
   requires: [<offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>]
   produces: [taxAmount, effectiveRatePercent, statutoryReference, safeToUse]
+  consumes: [hr.payroll_cost, context.asOfDate]
   deterministic: true
   cross_domain_relevance:
     hr: high

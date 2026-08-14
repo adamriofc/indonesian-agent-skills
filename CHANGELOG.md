@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.15.0] - 2026-08-15
+
+### Last-Mile Integrity Hardening — Typed Capability Contracts & SSOT Audit Completion
+
+- **Fully Typed Capability Contracts (P0 Audit Fix)**: All 88 skills in `registry/index.json` and `registry/capabilities.json` now carry machine-readable typed `requires` arrays (objects with `name`, `type`, `required`) and semantic `produces` arrays (objects with `name`, `type`) parsed directly from `argument-hint` frontmatter via regex extraction (`/<([^>]+)>/g`). No more string-literal `<param>` names or generic domain-level placeholder outputs.
+- **Per-Skill Semantic Produces (P1 Audit Fix)**: All 88 skills have skill-specific `produces` arrays reflecting actual engine outputs (e.g. `break-even-analysis` now produces `bep_units`, `bep_revenue`, `contribution_margin`, `contribution_margin_ratio`, `margin_of_safety` — not generic `financialRatio`, `cashRunwayMonths`).
+- **Type Inference Engine**: Added `inferType()` in `fix-registry.js` assigning `money_idr`, `percentage`, `integer`, `boolean`, `enum`, `array`, `object`, or `string` per parameter name pattern — eliminating all untyped `string` fallback for numeric/monetary params.
+- **Enriched Cross-Domain Relevance (P1 Audit Fix)**: All 6 domain clusters now carry structured `cross_domain_relevance` objects with `{ relevance, outputs }` per related domain, replacing empty `{}` placeholders.
+- **Generator Fixed (P0 Audit Fix)**: `scripts/generate-capability-catalog.js` now reads typed `requires`/`produces` from `registry/index.json` (SSOT) instead of attempting to split comma-delimited `argument-hint` strings — resolving the root cause of all 87 bad `requires[].name` entries.
+- **Capability Validator Hardened (P0 Audit Fix)**: `scripts/validate-capabilities.js` now enforces full typed schema: `requires[i].name`, `requires[i].type`, `requires[i].required` (boolean), `produces[i].name`, `produces[i].type`, `purpose` non-empty array, `not_for` non-empty array — matching `schemas/capability-contract.schema.json`.
+- **Documentation SSOT Cleanup (P1 Audit Fix)**: Fixed all stale stats across `README.md`, `docs/RELEASE.md`, `docs/METRICS.md`, `docs/BENCHMARK.md`: 424+ → 526+, 479+ → 526+, 14-check → 17-check, 13-check → 17-check, v6.14.0 → v6.15.0.
+- **Release Provenance Verified**: `release-manifest.json` `releaseCommitHash` correctly locked to tag `v6.14.0` → `4c155bb`. CI enforces `REQUIRE_RELEASE_TAG=true` as blocking gate check [16/17].
+
 ## [6.14.0] - 2026-08-13
 
 ### Typed Agent Capability Contract & Agent-Native Catalog Release

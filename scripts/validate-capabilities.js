@@ -50,10 +50,34 @@ function validateCapabilities() {
     if (!Array.isArray(entry.capability.requires) || entry.capability.requires.length === 0) {
       console.error(`❌ Capability Contract Violation in capability '${entry.id}': 'capability.requires' must be a non-empty array`);
       errors++;
+    } else {
+      entry.capability.requires.forEach(req => {
+        if (!req.name || !req.type || typeof req.required !== 'boolean') {
+          console.error(`❌ Capability Contract Violation in capability '${entry.id}': typed 'requires' item missing name/type/required`);
+          errors++;
+        }
+      });
     }
 
     if (!Array.isArray(entry.capability.produces) || entry.capability.produces.length === 0) {
       console.error(`❌ Capability Contract Violation in capability '${entry.id}': 'capability.produces' must be a non-empty array`);
+      errors++;
+    } else {
+      entry.capability.produces.forEach(prod => {
+        if (!prod.name || !prod.type) {
+          console.error(`❌ Capability Contract Violation in capability '${entry.id}': typed 'produces' item missing name/type`);
+          errors++;
+        }
+      });
+    }
+
+    if (!Array.isArray(entry.capability.purpose) || entry.capability.purpose.length === 0) {
+      console.error(`❌ Capability Contract Violation in capability '${entry.id}': 'capability.purpose' must be non-empty array`);
+      errors++;
+    }
+
+    if (!Array.isArray(entry.capability.not_for) || entry.capability.not_for.length === 0) {
+      console.error(`❌ Capability Contract Violation in capability '${entry.id}': 'capability.not_for' must be non-empty array`);
       errors++;
     }
 

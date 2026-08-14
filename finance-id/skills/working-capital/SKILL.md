@@ -7,8 +7,11 @@ rule_type: professional-standard
 quality_tier: tested
 allowed-tools: bash
 capability:
+  purpose: [financial_analysis, unit_economics_modelling]
+  not_for: [certified_audit_opinion, public_offering_prospectus]
   requires: [<current_assets> <current_liabilities> <cycle_days> <daily_cogs>]
-  produces: [financialRatio, cashRunwayMonths, netProfit, feasible]
+  produces: [bep_units, bep_revenue, contribution_margin, margin_of_safety]
+  consumes: [context.scale, marketing.cac]
   deterministic: true
   cross_domain_relevance:
     strategy: high

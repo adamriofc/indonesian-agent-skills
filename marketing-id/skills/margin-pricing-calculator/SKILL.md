@@ -7,8 +7,11 @@ rule_type: commercial-policy
 quality_tier: tested
 allowed-tools: bash
 capability:
+  purpose: [market_sizing, commodity_classification]
+  not_for: [guaranteed_revenue_forecasting, customs_auto_clearance]
   requires: [<selling_price> <platform> <seller_tier> [free_shipping_extra] [ad_budget]]
   produces: [cac, ltv, btkiCode, classificationStatus, landedCost]
+  consumes: [context.productContext, finance.unitCostIdr]
   deterministic: false
   cross_domain_relevance:
     finance: high

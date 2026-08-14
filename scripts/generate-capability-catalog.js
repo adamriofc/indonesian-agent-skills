@@ -77,6 +77,38 @@ function generateCapabilityCatalog() {
 
       const domainName = pluginName.replace('-id', '');
 
+      const registryPath = path.join(ROOT, 'registry/index.json');
+      const registry = JSON.parse(fs.readFileSync(registryPath, 'utf8'));
+      const registryEntry = registry.skills.find(e => e.id === skillFolder);
+      const capObj = (registryEntry && registryEntry.capability) || {};
+
+      // Use typed requires/produces from registry/index.json (SSOT — already patched with correct typed schema)
+      const typedRequires = Array.isArray(capObj.requires) && capObj.requires.length > 0
+        ? capObj.requires
+        : [{ name: 'input', type: 'string', required: true }];
+
+      const typedProduces = Array.isArray(capObj.produces) && capObj.produces.length > 0
+        ? capObj.produces
+        : [{ name: 'output', type: 'string' }];
+
+      const purposeNames = Array.isArray(capObj.purpose) && capObj.purpose.length > 0
+        ? capObj.purpose
+        : (typeof fm.capability === 'object' && fm.capability.purpose
+            ? String(fm.capability.purpose).replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean)
+            : [domainName + '_procedure']);
+
+      const notForNames = Array.isArray(capObj.not_for) && capObj.not_for.length > 0
+        ? capObj.not_for
+        : (typeof fm.capability === 'object' && fm.capability.not_for
+            ? String(fm.capability.not_for).replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean)
+            : ['autonomous_filing']);
+
+      const consumesNames = Array.isArray(capObj.consumes) && capObj.consumes.length > 0
+        ? capObj.consumes
+        : (typeof fm.capability === 'object' && fm.capability.consumes
+            ? String(fm.capability.consumes).replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean)
+            : ['context.entity']);
+
       const capabilityEntry = {
         id: fm.name || skillFolder,
         skillName: fm.name || skillFolder,
@@ -87,9 +119,13 @@ function generateCapabilityCatalog() {
         rule_type: fm.rule_type || 'statutory',
         quality_tier: fm.quality_tier || 'tested',
         capability: {
-          requires: typeof fm.capability === 'object' && fm.capability.requires ? String(fm.capability.requires).replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean) : [],
-          produces: typeof fm.capability === 'object' && fm.capability.produces ? String(fm.capability.produces).replace(/^\[|\]$/g, '').split(',').map(s => s.trim()).filter(Boolean) : [],
+          purpose: purposeNames,
+          not_for: notForNames,
+          requires: typedRequires,
+          produces: typedProduces,
+          consumes: consumesNames,
           deterministic: typeof fm.capability === 'object' && fm.capability.deterministic !== undefined ? String(fm.capability.deterministic) === 'true' : true,
+          risk: { level: fm.risk_level || 'medium', human_review_required: (fm.risk_level === 'high' || fm.risk_level === 'critical') },
           cross_domain_relevance: typeof fm.capability === 'object' && fm.capability.cross_domain_relevance ? fm.capability.cross_domain_relevance : {}
         }
       };

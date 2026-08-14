@@ -7,8 +7,11 @@ rule_type: statutory
 quality_tier: tested
 allowed-tools: bash
 capability:
+  purpose: [labor_compliance, severance_calculation]
+  not_for: [unmediated_employee_termination, autonomous_legal_notice]
   requires: [<monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>]
   produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  consumes: [context.employeeCount, context.scale]
   deterministic: true
   cross_domain_relevance:
     tax: high

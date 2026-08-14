@@ -7,8 +7,11 @@ rule_type: statutory
 quality_tier: tested
 allowed-tools: bash
 capability:
+  purpose: [labor_compliance, severance_calculation]
+  not_for: [unmediated_employee_termination, autonomous_legal_notice]
   requires: [<gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>]
   produces: [payoutAmount, statutoryEntitlements, complianceStatus]
+  consumes: [context.employeeCount, context.scale]
   deterministic: true
   cross_domain_relevance:
     tax: high

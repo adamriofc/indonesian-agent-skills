@@ -1,6 +1,6 @@
 {
-  "version": "6.14.0",
-  "generated_at": "2026-08-12T08:00:00Z",
+  "version": "6.15.0",
+  "generated_at": "2026-08-14T23:25:48.337Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
   "total_skills": 88,
@@ -22,20 +22,72 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<paste_contract_text>"
+          {
+            "name": "paste_contract_text",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "riskScore",
+            "type": "integer"
+          },
+          {
+            "name": "detectedViolations",
+            "type": "array"
+          },
+          {
+            "name": "redlines",
+            "type": "array"
+          },
+          {
+            "name": "safeToUse",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -50,20 +102,78 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<contractor_role> <project_name> <price_termijn>"
+          {
+            "name": "contractor_role",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "project_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "price_termijn",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "spkDraft",
+            "type": "string"
+          },
+          {
+            "name": "keyTerms",
+            "type": "array"
+          },
+          {
+            "name": "complianceStatus",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -78,20 +188,78 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<disclosing_party> <receiving_party> <duration_years>"
+          {
+            "name": "disclosing_party",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "receiving_party",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "duration_years",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "ndaDraft",
+            "type": "string"
+          },
+          {
+            "name": "keyClauseSummary",
+            "type": "array"
+          },
+          {
+            "name": "complianceStatus",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -106,20 +274,72 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<process_description>"
+          {
+            "name": "process_description",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "lawfulBasisAssessment",
+            "type": "array"
+          },
+          {
+            "name": "complianceGaps",
+            "type": "array"
+          },
+          {
+            "name": "complianceScore",
+            "type": "integer"
+          },
+          {
+            "name": "remediationPlan",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -134,20 +354,73 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<dispute_facts> <questions_of_law>"
+          {
+            "name": "dispute_facts",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "questions_of_law",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "legalOpinionDraft",
+            "type": "string"
+          },
+          {
+            "name": "applicableLaws",
+            "type": "array"
+          },
+          {
+            "name": "legalPosition",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -162,20 +435,77 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<brand_name> <business_category_or_products>"
+          {
+            "name": "brand_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "business_category_or_products",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "niceClassifications",
+            "type": "array"
+          },
+          {
+            "name": "conflictRisk",
+            "type": "enum"
+          },
+          {
+            "name": "registrationFeasibility",
+            "type": "enum"
+          },
+          {
+            "name": "rejectionRisks",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -190,20 +520,72 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<business_description_or_services>"
+          {
+            "name": "business_description_or_services",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "kbliCode",
+            "type": "string"
+          },
+          {
+            "name": "riskLevel",
+            "type": "enum"
+          },
+          {
+            "name": "pbUmkuRequirements",
+            "type": "array"
+          },
+          {
+            "name": "ossLicenseType",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -218,20 +600,83 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<debtor_party> <breach_facts> <demanded_action> <deadline_days>"
+          {
+            "name": "debtor_party",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "breach_facts",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "demanded_action",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "deadline_days",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "somasiLetter",
+            "type": "string"
+          },
+          {
+            "name": "legalBasis",
+            "type": "string"
+          },
+          {
+            "name": "deadlineDate",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -246,20 +691,93 @@
       "rule_type": "statutory",
       "engine": "engines/pph21-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<gross_salary> <ptkp_status> <has_npwp> [is_december] [jan_nov_withheld]"
+          {
+            "name": "gross_salary",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "ptkp_status",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "has_npwp",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "is_december",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "name": "jan_nov_withheld",
+            "type": "string",
+            "required": false
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "pph21MonthlyAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "effectiveTerRate",
+            "type": "percentage"
+          },
+          {
+            "name": "takehomePay",
+            "type": "money_idr"
+          },
+          {
+            "name": "ptkpApplied",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -274,20 +792,88 @@
       "rule_type": "statutory",
       "engine": "engines/pph21-grossup-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<base_salary> <regular_allowances> <ptkp_status> <natura_amount>"
+          {
+            "name": "base_salary",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "regular_allowances",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ptkp_status",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "natura_amount",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "grossUpSalary",
+            "type": "money_idr"
+          },
+          {
+            "name": "pph21Amount",
+            "type": "money_idr"
+          },
+          {
+            "name": "totalCostToCompany",
+            "type": "money_idr"
+          },
+          {
+            "name": "iterationConverged",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -302,20 +888,88 @@
       "rule_type": "statutory",
       "engine": "engines/pph23-26-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<gross_amount> <transaction_type> <has_npwp> [has_dgt_form]"
+          {
+            "name": "gross_amount",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "transaction_type",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "has_npwp",
+            "type": "boolean",
+            "required": true
+          },
+          {
+            "name": "has_dgt_form",
+            "type": "boolean",
+            "required": false
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "withholdingTaxAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "applicableRate",
+            "type": "percentage"
+          },
+          {
+            "name": "treatyBenefit",
+            "type": "boolean"
+          },
+          {
+            "name": "dgtFormRequired",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -330,20 +984,83 @@
       "rule_type": "statutory",
       "engine": "engines/umkm-tax-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<ytd_revenue> <current_month_revenue> <taxpayer_type_individual_or_single_person_company_or_cooperative>"
+          {
+            "name": "ytd_revenue",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "current_month_revenue",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "taxpayer_type_individual_or_single_person_company_or_cooperative",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "monthlyTaxAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "ytdRevenue",
+            "type": "money_idr"
+          },
+          {
+            "name": "thresholdStatus",
+            "type": "enum"
+          },
+          {
+            "name": "effectiveRatePercent",
+            "type": "percentage"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -358,20 +1075,88 @@
       "rule_type": "statutory",
       "engine": "engines/pph-badan-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<gross_turnover> <commercial_net_profit> <positive_fiscal_adjustments> <negative_fiscal_adjustments>"
+          {
+            "name": "gross_turnover",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "commercial_net_profit",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "positive_fiscal_adjustments",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "negative_fiscal_adjustments",
+            "type": "array",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "pkhpAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "pphBadan22Percent",
+            "type": "money_idr"
+          },
+          {
+            "name": "article31eFacility",
+            "type": "boolean"
+          },
+          {
+            "name": "effectiveRate",
+            "type": "percentage"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -386,20 +1171,92 @@
       "rule_type": "statutory",
       "engine": "engines/transfer-pricing-engine.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<total_interest_bearing_debt> <total_equity> <annual_interest_expense> <is_affiliate_lender>"
+          {
+            "name": "total_interest_bearing_debt",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "total_equity",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "annual_interest_expense",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "is_affiliate_lender",
+            "type": "boolean",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "derRatio",
+            "type": "number"
+          },
+          {
+            "name": "deductibleInterest",
+            "type": "money_idr"
+          },
+          {
+            "name": "disallowedInterest",
+            "type": "money_idr"
+          },
+          {
+            "name": "secondaryAdjustment",
+            "type": "money_idr"
+          },
+          {
+            "name": "complianceStatus",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -414,20 +1271,83 @@
       "rule_type": "statutory",
       "engine": "engines/ppn-ppnbm-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<transaction_type> <selling_price_or_cif> <ppnbm_rate_percent>"
+          {
+            "name": "transaction_type",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "selling_price_or_cif",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "ppnbm_rate_percent",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "ppnAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "ppnbmAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "effectivePpnRate",
+            "type": "percentage"
+          },
+          {
+            "name": "taxScheme",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -442,20 +1362,69 @@
       "rule_type": "statutory",
       "engine": "engines/umkm-tax-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<entity_type_and_revenue_data>"
+          {
+            "name": "entity_type_and_revenue_data",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "taxPlanningStrategy",
+            "type": "object"
+          },
+          {
+            "name": "estimatedTaxLiability",
+            "type": "money_idr"
+          },
+          {
+            "name": "optimizationOptions",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -470,20 +1439,69 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<expense_breakdown_or_payroll_reconciliation>"
+          {
+            "name": "expense_breakdown_or_payroll_reconciliation",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "taxSavingOpportunities",
+            "type": "array"
+          },
+          {
+            "name": "estimatedSavings",
+            "type": "money_idr"
+          },
+          {
+            "name": "complianceRisks",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -498,20 +1516,73 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<financial_data_or_affiliate_transactions>"
+          {
+            "name": "financial_data_or_affiliate_transactions",
+            "type": "boolean",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "riskScore",
+            "type": "integer"
+          },
+          {
+            "name": "highRiskAreas",
+            "type": "array"
+          },
+          {
+            "name": "transferPricingRisk",
+            "type": "enum"
+          },
+          {
+            "name": "auditProbability",
+            "type": "percentage"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -526,20 +1597,73 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<sp2dk_letter_details_or_tax_audit_year>"
+          {
+            "name": "sp2dk_letter_details_or_tax_audit_year",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "auditReadinessScore",
+            "type": "integer"
+          },
+          {
+            "name": "requiredDocuments",
+            "type": "array"
+          },
+          {
+            "name": "riskAreas",
+            "type": "array"
+          },
+          {
+            "name": "preparationChecklist",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -554,20 +1678,83 @@
       "rule_type": "statutory",
       "engine": "engines/pph23-26-calculator.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<offshore_vendor_country> <payment_type_service_royalty_software> <amount_idr>"
+          {
+            "name": "offshore_vendor_country",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "payment_type_service_royalty_software",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "amount_idr",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "withholdingTaxAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "treatyApplicable",
+            "type": "boolean"
+          },
+          {
+            "name": "effectiveRate",
+            "type": "percentage"
+          },
+          {
+            "name": "dgtFormRequired",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -582,20 +1769,79 @@
       "rule_type": "statutory",
       "engine": "engines/regulatory-diff.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<domain_umkm_bpjs_pph21_marketplace> <old_ruleset_id> <new_ruleset_id>"
+          {
+            "name": "domain_umkm_bpjs_pph21_marketplace",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "old_ruleset_id",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "new_ruleset_id",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "changedRules",
+            "type": "array"
+          },
+          {
+            "name": "effectiveDate",
+            "type": "string"
+          },
+          {
+            "name": "impactSummary",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -610,20 +1856,78 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<trial_balance_data> <accounting_standard>"
+          {
+            "name": "trial_balance_data",
+            "type": "object",
+            "required": true
+          },
+          {
+            "name": "accounting_standard",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "incomeStatement",
+            "type": "object"
+          },
+          {
+            "name": "balanceSheet",
+            "type": "object"
+          },
+          {
+            "name": "cashFlowStatement",
+            "type": "object"
+          },
+          {
+            "name": "sakEmkmCompliance",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -638,20 +1942,73 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<paste_invoice_details_or_qr_url>"
+          {
+            "name": "paste_invoice_details_or_qr_url",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "fakturPajakValid",
+            "type": "boolean"
+          },
+          {
+            "name": "ppnAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "validationErrors",
+            "type": "array"
+          },
+          {
+            "name": "npwpLawanTransaksi",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -666,19 +2023,80 @@
       "rule_type": "statutory",
       "engine": "engines/thr-calculator.js",
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<gaji_pokok> <tunjangan_tetap> <masa_kerja_bulan>"
+          {
+            "name": "gaji_pokok",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "tunjangan_tetap",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "masa_kerja_bulan",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "thrAmount",
+            "type": "money_idr"
+          },
+          {
+            "name": "prorationFactor",
+            "type": "number"
+          },
+          {
+            "name": "paymentDeadline",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -693,19 +2111,78 @@
       "rule_type": "statutory",
       "engine": "engines/bpjs-calculator.js",
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<base_salary>"
+          {
+            "name": "base_salary",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "bpjsKesehatanEmployee",
+            "type": "money_idr"
+          },
+          {
+            "name": "bpjsKesehatanEmployer",
+            "type": "money_idr"
+          },
+          {
+            "name": "bpjsKetenagakerjaanJHT",
+            "type": "money_idr"
+          },
+          {
+            "name": "bpjsKetenagakerjaanJP",
+            "type": "money_idr"
+          },
+          {
+            "name": "totalMonthlyContribution",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -720,19 +2197,75 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<spt_form_type> <has_1721_a1>"
+          {
+            "name": "spt_form_type",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "has_1721_a1",
+            "type": "boolean",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "sptFormGuide",
+            "type": "string"
+          },
+          {
+            "name": "requiredAttachments",
+            "type": "array"
+          },
+          {
+            "name": "filingDeadline",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -747,19 +2280,80 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<employee_name> <violation_reason> <warning_level_1_2_3>"
+          {
+            "name": "employee_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "violation_reason",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "warning_level_1_2_3",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "spDraft",
+            "type": "string"
+          },
+          {
+            "name": "warningLevel",
+            "type": "enum"
+          },
+          {
+            "name": "legalBasis",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -774,19 +2368,75 @@
       "rule_type": "internal-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<department> <process_scope>"
+          {
+            "name": "department",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "process_scope",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "sopDocument",
+            "type": "string"
+          },
+          {
+            "name": "processSteps",
+            "type": "array"
+          },
+          {
+            "name": "responsibilityMatrix",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -801,19 +2451,75 @@
       "rule_type": "internal-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<candidate_role> <job_specifications>"
+          {
+            "name": "candidate_role",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "job_specifications",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "structuredQuestions",
+            "type": "array"
+          },
+          {
+            "name": "scorecardTemplate",
+            "type": "object"
+          },
+          {
+            "name": "competencyMatrix",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -828,19 +2534,70 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<task_description_e_g_register_new_hire>"
+          {
+            "name": "task_description_e_g_register_new_hire",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "sippActionGuide",
+            "type": "string"
+          },
+          {
+            "name": "requiredDocuments",
+            "type": "array"
+          },
+          {
+            "name": "submissionDeadline",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -855,19 +2612,89 @@
       "rule_type": "statutory",
       "engine": "engines/phk-calculator.js",
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<gaji_pokok_tunjangan_tetap> <masa_kerja_tahun> <alasan_phk> [sisa_cuti]"
+          {
+            "name": "gaji_pokok_tunjangan_tetap",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "masa_kerja_tahun",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "alasan_phk",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "sisa_cuti",
+            "type": "string",
+            "required": false
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "pesangon",
+            "type": "money_idr"
+          },
+          {
+            "name": "penghargaanMasaKerja",
+            "type": "money_idr"
+          },
+          {
+            "name": "penggantiHak",
+            "type": "money_idr"
+          },
+          {
+            "name": "totalPHKPayout",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -882,19 +2709,93 @@
       "rule_type": "statutory",
       "engine": "engines/phk-calculator.js",
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<monthly_wage> <tenure_years> <phk_reason_code> <unused_leave_days>"
+          {
+            "name": "monthly_wage",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "tenure_years",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "phk_reason_code",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "unused_leave_days",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "pesangon",
+            "type": "money_idr"
+          },
+          {
+            "name": "penghargaanMasaKerja",
+            "type": "money_idr"
+          },
+          {
+            "name": "penggantiHak",
+            "type": "money_idr"
+          },
+          {
+            "name": "totalPHKPayout",
+            "type": "money_idr"
+          },
+          {
+            "name": "statutory_multiplier",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -909,19 +2810,79 @@
       "rule_type": "statutory",
       "engine": "engines/pkwt-compensation-calculator.js",
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<monthly_wage> <tenure_months>"
+          {
+            "name": "monthly_wage",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "tenure_months",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "pkwtCompensation",
+            "type": "money_idr"
+          },
+          {
+            "name": "maxContractMonths",
+            "type": "integer"
+          },
+          {
+            "name": "complianceStatus",
+            "type": "enum"
+          },
+          {
+            "name": "autoConversionRisk",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -936,19 +2897,99 @@
       "rule_type": "statutory",
       "engine": "engines/pkwtt-calculator.js",
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<monthly_wage> <probation_months> <minimum_wage_ump> <job_type_permanent_or_temporary> <contract_type_pkwt_or_pkwtt> <tenure_months>"
+          {
+            "name": "monthly_wage",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "probation_months",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "minimum_wage_ump",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "job_type_permanent_or_temporary",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "contract_type_pkwt_or_pkwtt",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "tenure_months",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "pkwttStatus",
+            "type": "enum"
+          },
+          {
+            "name": "probationCompliance",
+            "type": "boolean"
+          },
+          {
+            "name": "minimumWageCompliance",
+            "type": "boolean"
+          },
+          {
+            "name": "complianceFlags",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -963,19 +3004,75 @@
       "rule_type": "statutory",
       "engine": null,
       "capability": {
+        "purpose": [
+          "labor_compliance",
+          "severance_calculation"
+        ],
+        "not_for": [
+          "unmediated_employee_termination",
+          "autonomous_legal_notice"
+        ],
         "requires": [
-          "<job_positions_list> <ump_umr_minimum>"
+          {
+            "name": "job_positions_list",
+            "type": "array",
+            "required": true
+          },
+          {
+            "name": "ump_umr_minimum",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "payoutAmount",
-          "statutoryEntitlements",
-          "complianceStatus"
+          {
+            "name": "wageStructure",
+            "type": "object"
+          },
+          {
+            "name": "salaryGrades",
+            "type": "array"
+          },
+          {
+            "name": "complianceStatus",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.employeeCount",
+          "context.scale"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "tax": "high",
-          "finance": "high",
-          "legal": "high"
+          "tax": {
+            "relevance": "high",
+            "outputs": [
+              "payrollTax",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "payoutAmount",
+              "totalCTC"
+            ]
+          },
+          "legal": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractType"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -990,21 +3087,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<product_name> <features_specs> <brand>"
+          {
+            "name": "product_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "features_specs",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "brand",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "productTitle",
+            "type": "string"
+          },
+          {
+            "name": "productDescription",
+            "type": "string"
+          },
+          {
+            "name": "seoKeywords",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1019,21 +3178,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<customer_review_or_complaint> <issue_type_damaged_delayed_missing>"
+          {
+            "name": "customer_review_or_complaint",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "issue_type_damaged_delayed_missing",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "responseDraft",
+            "type": "string"
+          },
+          {
+            "name": "resolutionAction",
+            "type": "string"
+          },
+          {
+            "name": "escalationRequired",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1048,21 +3264,73 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<paste_competitor_reviews_or_specifications>"
+          {
+            "name": "paste_competitor_reviews_or_specifications",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "competitorMatrix",
+            "type": "object"
+          },
+          {
+            "name": "pricingGaps",
+            "type": "array"
+          },
+          {
+            "name": "winningAttributes",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1077,21 +3345,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<product_details> <discount_rate> <campaign_type>"
+          {
+            "name": "product_details",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "discount_rate",
+            "type": "percentage",
+            "required": true
+          },
+          {
+            "name": "campaign_type",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "liveScript",
+            "type": "string"
+          },
+          {
+            "name": "voucherDropTiming",
+            "type": "array"
+          },
+          {
+            "name": "productHighlights",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1106,21 +3436,88 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<brand_name> <product_type> <specifications> <target_keywords>"
+          {
+            "name": "brand_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "product_type",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "specifications",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "target_keywords",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "optimizedTitle",
+            "type": "string"
+          },
+          {
+            "name": "seoKeywords",
+            "type": "array"
+          },
+          {
+            "name": "searchRankingTips",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1135,21 +3532,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<buyer_type_distributor_retailer> <order_volume> <target_margin>"
+          {
+            "name": "buyer_type_distributor_retailer",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "order_volume",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "target_margin",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "negotiationScript",
+            "type": "string"
+          },
+          {
+            "name": "minimumAcceptablePrice",
+            "type": "money_idr"
+          },
+          {
+            "name": "dealTermsTemplate",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1164,21 +3623,97 @@
       "rule_type": "commercial-policy",
       "engine": "engines/marketplace-fee-calculator.js",
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<selling_price> <platform> <seller_tier> [free_shipping_extra] [ad_budget]"
+          {
+            "name": "selling_price",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "platform",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "seller_tier",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "free_shipping_extra",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ad_budget",
+            "type": "money_idr",
+            "required": false
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "adminFee",
+            "type": "money_idr"
+          },
+          {
+            "name": "netSellerPayout",
+            "type": "money_idr"
+          },
+          {
+            "name": "netMarginPercent",
+            "type": "percentage"
+          },
+          {
+            "name": "breakEvenPrice",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1193,21 +3728,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<waybill_number> <courier_name> <damage_or_lost_details>"
+          {
+            "name": "waybill_number",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "courier_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "damage_or_lost_details",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "claimLetter",
+            "type": "string"
+          },
+          {
+            "name": "compensationEstimate",
+            "type": "money_idr"
+          },
+          {
+            "name": "escalationSteps",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1222,21 +3819,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<product_category> <target_sales_volume> <margin_allowance>"
+          {
+            "name": "product_category",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "target_sales_volume",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "margin_allowance",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "affiliatePlan",
+            "type": "object"
+          },
+          {
+            "name": "commissionStructure",
+            "type": "object"
+          },
+          {
+            "name": "creatorBriefTemplate",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1251,21 +3910,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<product_name> <promo_angle>"
+          {
+            "name": "product_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "promo_angle",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "videoScript",
+            "type": "string"
+          },
+          {
+            "name": "productTagSuggestions",
+            "type": "array"
+          },
+          {
+            "name": "promoAngle",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1280,21 +3996,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<promo_angle> <product_features> <cta_link>"
+          {
+            "name": "promo_angle",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "product_features",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cta_link",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "broadcastMessage",
+            "type": "string"
+          },
+          {
+            "name": "cta",
+            "type": "string"
+          },
+          {
+            "name": "riskFlags",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1309,21 +4087,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<business_case_or_milestone> <key_takeaways>"
+          {
+            "name": "business_case_or_milestone",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "key_takeaways",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "threadScript",
+            "type": "string"
+          },
+          {
+            "name": "hookPost",
+            "type": "string"
+          },
+          {
+            "name": "callToAction",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1338,21 +4173,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<product_hook> <story_outline>"
+          {
+            "name": "product_hook",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "story_outline",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "videoScript",
+            "type": "string"
+          },
+          {
+            "name": "visualDirections",
+            "type": "array"
+          },
+          {
+            "name": "audioOverlay",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1367,21 +4259,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<original_english_or_formal_text> <target_tone_casual_jaksel>"
+          {
+            "name": "original_english_or_formal_text",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "target_tone_casual_jaksel",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "localizedText",
+            "type": "string"
+          },
+          {
+            "name": "slangUsed",
+            "type": "array"
+          },
+          {
+            "name": "toneMatch",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1396,21 +4345,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<corporate_event_announcement> <quotes_from_key_executives>"
+          {
+            "name": "corporate_event_announcement",
+            "type": "percentage",
+            "required": true
+          },
+          {
+            "name": "quotes_from_key_executives",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "pressReleaseDraft",
+            "type": "string"
+          },
+          {
+            "name": "headline",
+            "type": "string"
+          },
+          {
+            "name": "distributionChannels",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1425,21 +4431,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<topic_or_product> <target_audience> <post_format_reels_or_carousel>"
+          {
+            "name": "topic_or_product",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "target_audience",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "post_format_reels_or_carousel",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "reelsScript",
+            "type": "string"
+          },
+          {
+            "name": "carouselSlides",
+            "type": "array"
+          },
+          {
+            "name": "hookText",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1454,21 +4522,78 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<video_topic> <video_format_shorts_or_longform>"
+          {
+            "name": "video_topic",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "video_format_shorts_or_longform",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "shortsScript",
+            "type": "string"
+          },
+          {
+            "name": "longformOutline",
+            "type": "array"
+          },
+          {
+            "name": "seoTitle",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1483,21 +4608,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<kol_tier_nano_micro_macro> <deliverables_sow> <exclusivity_period>"
+          {
+            "name": "kol_tier_nano_micro_macro",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "deliverables_sow",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "exclusivity_period",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "briefDocument",
+            "type": "string"
+          },
+          {
+            "name": "sowClauses",
+            "type": "array"
+          },
+          {
+            "name": "exclusivityTerms",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1512,21 +4699,83 @@
       "rule_type": "commercial-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<business_name> <location_city> <service_category>"
+          {
+            "name": "business_name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "location_city",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "service_category",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "gmbOptimizationPlan",
+            "type": "string"
+          },
+          {
+            "name": "localKeywords",
+            "type": "array"
+          },
+          {
+            "name": "reviewResponseTemplate",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1541,20 +4790,71 @@
       "rule_type": "internal-policy",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<transaction>"
+          {
+            "name": "transaction",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "journalEntries",
+            "type": "array"
+          },
+          {
+            "name": "accountingEquationCheck",
+            "type": "boolean"
+          },
+          {
+            "name": "debitCreditSummary",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1569,20 +4869,80 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<trial_balance> <period>"
+          {
+            "name": "trial_balance",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "period",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "incomeStatement",
+            "type": "object"
+          },
+          {
+            "name": "balanceSheet",
+            "type": "object"
+          },
+          {
+            "name": "cashFlowStatement",
+            "type": "object"
+          },
+          {
+            "name": "netProfit",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1597,20 +4957,85 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<cash_flow_statement> <capex> <monthly_burn>"
+          {
+            "name": "cash_flow_statement",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "capex",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "monthly_burn",
+            "type": "integer",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "operatingCashFlow",
+            "type": "money_idr"
+          },
+          {
+            "name": "freeCashFlow",
+            "type": "money_idr"
+          },
+          {
+            "name": "cashRunwayMonths",
+            "type": "integer"
+          },
+          {
+            "name": "burnRateMonthly",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1625,20 +5050,85 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<target> <history> <assumptions>"
+          {
+            "name": "target",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "history",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "assumptions",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "annualBudget",
+            "type": "money_idr"
+          },
+          {
+            "name": "monthlyForecast",
+            "type": "array"
+          },
+          {
+            "name": "varianceAnalysis",
+            "type": "object"
+          },
+          {
+            "name": "revenueGrowthPercent",
+            "type": "percentage"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1653,20 +5143,84 @@
       "rule_type": "professional-standard",
       "engine": "engines/financial-ratios.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<balance_sheet> <income_statement>"
+          {
+            "name": "balance_sheet",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "income_statement",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "currentRatio",
+            "type": "number"
+          },
+          {
+            "name": "debtToEquity",
+            "type": "number"
+          },
+          {
+            "name": "netProfitMargin",
+            "type": "percentage"
+          },
+          {
+            "name": "returnOnEquity",
+            "type": "percentage"
+          },
+          {
+            "name": "ratioSummary",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1681,20 +5235,90 @@
       "rule_type": "professional-standard",
       "engine": "engines/working-capital.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<current_assets> <current_liabilities> <cycle_days> <daily_cogs>"
+          {
+            "name": "current_assets",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "current_liabilities",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cycle_days",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "daily_cogs",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "workingCapital",
+            "type": "money_idr"
+          },
+          {
+            "name": "currentRatio",
+            "type": "number"
+          },
+          {
+            "name": "cashConversionCycleDays",
+            "type": "integer"
+          },
+          {
+            "name": "workingCapitalRequirement",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1709,20 +5333,85 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<beginning_inventory> <purchases> <ending_inventory>"
+          {
+            "name": "beginning_inventory",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "purchases",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "ending_inventory",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "cogsTotal",
+            "type": "money_idr"
+          },
+          {
+            "name": "grossMargin",
+            "type": "percentage"
+          },
+          {
+            "name": "inventoryTurnover",
+            "type": "number"
+          },
+          {
+            "name": "costPerUnit",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1737,20 +5426,94 @@
       "rule_type": "professional-standard",
       "engine": "engines/break-even.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<fixed_costs> <selling_price> <variable_cost> <actual_revenue>"
+          {
+            "name": "fixed_costs",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "selling_price",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "variable_cost",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "actual_revenue",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "bep_units",
+            "type": "integer"
+          },
+          {
+            "name": "bep_revenue",
+            "type": "money_idr"
+          },
+          {
+            "name": "contribution_margin",
+            "type": "money_idr"
+          },
+          {
+            "name": "contribution_margin_ratio",
+            "type": "percentage"
+          },
+          {
+            "name": "margin_of_safety",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1765,20 +5528,89 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<arppu> <churn> <cac>"
+          {
+            "name": "arppu",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "churn",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cac",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "ltv",
+            "type": "money_idr"
+          },
+          {
+            "name": "cac",
+            "type": "money_idr"
+          },
+          {
+            "name": "ltvCacRatio",
+            "type": "number"
+          },
+          {
+            "name": "churnRatePercent",
+            "type": "percentage"
+          },
+          {
+            "name": "paybackPeriodMonths",
+            "type": "integer"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "low",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1793,20 +5625,89 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<business_idea> <investment> <projections>"
+          {
+            "name": "business_idea",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "investment",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "projections",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "feasibilityScore",
+            "type": "integer"
+          },
+          {
+            "name": "paybackPeriodMonths",
+            "type": "integer"
+          },
+          {
+            "name": "npv",
+            "type": "money_idr"
+          },
+          {
+            "name": "irr",
+            "type": "percentage"
+          },
+          {
+            "name": "recommendation",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1821,20 +5722,80 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<assumptions> <scenarios>"
+          {
+            "name": "assumptions",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "scenarios",
+            "type": "array",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "revenueModel",
+            "type": "object"
+          },
+          {
+            "name": "sensitivityTable",
+            "type": "array"
+          },
+          {
+            "name": "scenarioComparison",
+            "type": "object"
+          },
+          {
+            "name": "breakEvenMonth",
+            "type": "integer"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1849,20 +5810,85 @@
       "rule_type": "professional-standard",
       "engine": "engines/npv.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<investment> <annual_cashflow> <wacc>"
+          {
+            "name": "investment",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "annual_cashflow",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "wacc",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "npv",
+            "type": "money_idr"
+          },
+          {
+            "name": "irr",
+            "type": "percentage"
+          },
+          {
+            "name": "paybackPeriodYears",
+            "type": "number"
+          },
+          {
+            "name": "profitabilityIndex",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1877,20 +5903,85 @@
       "rule_type": "professional-standard",
       "engine": "engines/term-sheet-waterfall.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<exit_valuation> <investor_tiers_json> <common_ownership_percent>"
+          {
+            "name": "exit_valuation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "investor_tiers_json",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "common_ownership_percent",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "investorPayout",
+            "type": "money_idr"
+          },
+          {
+            "name": "founderPayout",
+            "type": "money_idr"
+          },
+          {
+            "name": "liquidationWaterfall",
+            "type": "array"
+          },
+          {
+            "name": "dilutionPercent",
+            "type": "percentage"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1905,20 +5996,83 @@
       "rule_type": "statutory",
       "engine": "engines/regulatory-impact-engine.js",
       "capability": {
+        "purpose": [
+          "tax_calculation",
+          "statutory_compliance"
+        ],
+        "not_for": [
+          "tax_legal_opinion",
+          "autonomous_filing"
+        ],
         "requires": [
-          "<domain: umkm|bpjs|phk> <fromRuleset> <toRuleset>"
+          {
+            "name": "domain",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "fromRuleset",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "toRuleset",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "taxAmount",
-          "effectiveRatePercent",
-          "statutoryReference",
-          "safeToUse"
+          {
+            "name": "impactedCalculations",
+            "type": "array"
+          },
+          {
+            "name": "financialImpact",
+            "type": "money_idr"
+          },
+          {
+            "name": "complianceDeadline",
+            "type": "string"
+          },
+          {
+            "name": "actionRequired",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "hr.payroll_cost",
+          "context.asOfDate"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "hr": "high",
-          "finance": "high",
-          "legal": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "pph21MonthlyAmount",
+              "bpjsContribution"
+            ]
+          },
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "taxAmount",
+              "effectiveRate"
+            ]
+          },
+          "legal": {
+            "relevance": "medium",
+            "outputs": [
+              "statutoryReference"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1933,20 +6087,72 @@
       "rule_type": "statutory",
       "engine": "engines/compliance-risk-engine.js",
       "capability": {
+        "purpose": [
+          "contract_audit",
+          "regulatory_compliance"
+        ],
+        "not_for": [
+          "court_representation",
+          "formal_advocate_opinion"
+        ],
         "requires": [
-          "<company_profile_and_practices_json>"
+          {
+            "name": "company_profile_and_practices_json",
+            "type": "object",
+            "required": true
+          }
         ],
         "produces": [
-          "riskScore",
-          "detectedViolations",
-          "redlines",
-          "safeToUse"
+          {
+            "name": "riskScore",
+            "type": "integer"
+          },
+          {
+            "name": "detectedViolations",
+            "type": "array"
+          },
+          {
+            "name": "complianceGrade",
+            "type": "enum"
+          },
+          {
+            "name": "remediationSteps",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.entity",
+          "context.kbli"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "tax": "medium",
-          "hr": "high",
-          "finance": "medium"
+          "hr": {
+            "relevance": "high",
+            "outputs": [
+              "complianceStatus",
+              "contractCompliance"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "taxObligations"
+            ]
+          },
+          "finance": {
+            "relevance": "medium",
+            "outputs": [
+              "riskScore"
+            ]
+          },
+          "strategy": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1961,20 +6167,90 @@
       "rule_type": "statutory",
       "engine": "engines/business-scenario-engine.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<entityType> <annualRevenue> <employeeCount> <salesChannels>"
+          {
+            "name": "entityType",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "annualRevenue",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "employeeCount",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "salesChannels",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "businessArchetype",
+            "type": "enum"
+          },
+          {
+            "name": "scenarioOutputs",
+            "type": "object"
+          },
+          {
+            "name": "riskFlags",
+            "type": "array"
+          },
+          {
+            "name": "complianceSummary",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -1989,20 +6265,100 @@
       "rule_type": "professional-standard",
       "engine": "engines/decision-engine.js",
       "capability": {
+        "purpose": [
+          "financial_analysis",
+          "unit_economics_modelling"
+        ],
+        "not_for": [
+          "certified_audit_opinion",
+          "public_offering_prospectus"
+        ],
         "requires": [
-          "<monthlyRevenue> <monthlyOpEx> <cashBalance> <cogs> <totalDebt> <totalEquity>"
+          {
+            "name": "monthlyRevenue",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "monthlyOpEx",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "cashBalance",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cogs",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "totalDebt",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "totalEquity",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "financialRatio",
-          "cashRunwayMonths",
-          "netProfit",
-          "feasible"
+          {
+            "name": "compositeScore",
+            "type": "number"
+          },
+          {
+            "name": "financialHealthGrade",
+            "type": "enum"
+          },
+          {
+            "name": "topRiskFlags",
+            "type": "array"
+          },
+          {
+            "name": "recommendation",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.scale",
+          "marketing.cac"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "strategy": "high",
-          "marketing": "medium",
-          "tax": "medium"
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "irr",
+              "bep_revenue"
+            ]
+          },
+          "marketing": {
+            "relevance": "medium",
+            "outputs": [
+              "margin",
+              "cac",
+              "ltv"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "netProfit"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2017,21 +6373,88 @@
       "rule_type": "professional-standard",
       "engine": "engines/strategic-framework-engine.js",
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<kbliCode> <targetIndustry> <costOfEntry> <expectedSynergies>"
+          {
+            "name": "kbliCode",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "targetIndustry",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "costOfEntry",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "expectedSynergies",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "attractivenessScore",
+            "type": "number"
+          },
+          {
+            "name": "costOfEntryAssessment",
+            "type": "string"
+          },
+          {
+            "name": "synergyScore",
+            "type": "number"
+          },
+          {
+            "name": "entryRecommendation",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2046,21 +6469,69 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<industry_name_and_market_context>"
+          {
+            "name": "industry_name_and_market_context",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "forceScores",
+            "type": "object"
+          },
+          {
+            "name": "industryAttractiveness",
+            "type": "enum"
+          },
+          {
+            "name": "strategicImplications",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2075,21 +6546,79 @@
       "rule_type": "professional-standard",
       "engine": "engines/strategic-framework-engine.js",
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<kbliCode> <marketGrowthRatePercent> <relativeMarketShare>"
+          {
+            "name": "kbliCode",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "marketGrowthRatePercent",
+            "type": "percentage",
+            "required": true
+          },
+          {
+            "name": "relativeMarketShare",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "bcgQuadrant",
+            "type": "enum"
+          },
+          {
+            "name": "investmentRecommendation",
+            "type": "string"
+          },
+          {
+            "name": "marketPositionScore",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2104,21 +6633,74 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<productType: existing|new> <marketType: existing|new>"
+          {
+            "name": "productType",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "marketType",
+            "type": "enum",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "ansoffQuadrant",
+            "type": "enum"
+          },
+          {
+            "name": "strategicRecommendation",
+            "type": "string"
+          },
+          {
+            "name": "riskLevel",
+            "type": "enum"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2133,21 +6715,69 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<resource_or_capability_description>"
+          {
+            "name": "resource_or_capability_description",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "vrioScores",
+            "type": "object"
+          },
+          {
+            "name": "competitiveImplication",
+            "type": "enum"
+          },
+          {
+            "name": "sustainableAdvantage",
+            "type": "boolean"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2162,21 +6792,78 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<kbliCode> <company_operations_description>"
+          {
+            "name": "kbliCode",
+            "type": "enum",
+            "required": true
+          },
+          {
+            "name": "company_operations_description",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "primaryActivities",
+            "type": "array"
+          },
+          {
+            "name": "supportActivities",
+            "type": "array"
+          },
+          {
+            "name": "valueDrivers",
+            "type": "array"
+          },
+          {
+            "name": "optimizationOpportunities",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2191,21 +6878,69 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<company_vision_and_objectives>"
+          {
+            "name": "company_vision_and_objectives",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "strategicPlan",
+            "type": "object"
+          },
+          {
+            "name": "kpiTargets",
+            "type": "array"
+          },
+          {
+            "name": "initiativeRoadmap",
+            "type": "array"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2220,21 +6955,69 @@
       "rule_type": "professional-standard",
       "engine": "engines/decision-analysis-engine.js",
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<decision_title_and_alternatives_json>"
+          {
+            "name": "decision_title_and_alternatives_json",
+            "type": "object",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "mcdaScores",
+            "type": "array"
+          },
+          {
+            "name": "recommendedOption",
+            "type": "string"
+          },
+          {
+            "name": "sensitivityAnalysis",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2249,21 +7032,93 @@
       "rule_type": "professional-standard",
       "engine": "engines/scenario-analysis-engine.js",
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<baseCaseRevenue> <cogs> <opex> <revenueDeltaPercent> <cogsDeltaPercent>"
+          {
+            "name": "baseCaseRevenue",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "cogs",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "opex",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "revenueDeltaPercent",
+            "type": "money_idr",
+            "required": true
+          },
+          {
+            "name": "cogsDeltaPercent",
+            "type": "percentage",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "baseCase",
+            "type": "object"
+          },
+          {
+            "name": "optimisticCase",
+            "type": "object"
+          },
+          {
+            "name": "pessimisticCase",
+            "type": "object"
+          },
+          {
+            "name": "resilienceScore",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2278,21 +7133,73 @@
       "rule_type": "professional-standard",
       "engine": "engines/strategic-risk-engine.js",
       "capability": {
+        "purpose": [
+          "framework_evaluation",
+          "scenario_planning"
+        ],
+        "not_for": [
+          "board_of_directors_guarantee",
+          "hostile_takeover_advisory"
+        ],
         "requires": [
-          "<risks_list_json>"
+          {
+            "name": "risks_list_json",
+            "type": "array",
+            "required": true
+          }
         ],
         "produces": [
-          "businessArchetype",
-          "compositeScore",
-          "resilienceAssessment",
-          "topOption"
+          {
+            "name": "riskMatrix",
+            "type": "array"
+          },
+          {
+            "name": "topRisks",
+            "type": "array"
+          },
+          {
+            "name": "mitigationStrategies",
+            "type": "array"
+          },
+          {
+            "name": "residualRiskScore",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.businessArchetype",
+          "finance.netProfit"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "marketing": "high",
-          "hr": "medium",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "npv",
+              "compositeScore"
+            ]
+          },
+          "marketing": {
+            "relevance": "high",
+            "outputs": [
+              "positioningStatement",
+              "gtmStrategy"
+            ]
+          },
+          "hr": {
+            "relevance": "medium",
+            "outputs": [
+              "organizationalCapacity"
+            ]
+          },
+          "tax": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2307,21 +7214,87 @@
       "rule_type": "professional-standard",
       "engine": "engines/market-sizing-engine.js",
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<totalPopulation> <adoptionPercent> <avgAnnualSpend>"
+          {
+            "name": "totalPopulation",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "adoptionPercent",
+            "type": "percentage",
+            "required": true
+          },
+          {
+            "name": "avgAnnualSpend",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "tam",
+            "type": "money_idr"
+          },
+          {
+            "name": "sam",
+            "type": "money_idr"
+          },
+          {
+            "name": "som",
+            "type": "money_idr"
+          },
+          {
+            "name": "targetablePopulation",
+            "type": "integer"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2336,21 +7309,73 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<market_and_customer_data>"
+          {
+            "name": "market_and_customer_data",
+            "type": "object",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "segments",
+            "type": "array"
+          },
+          {
+            "name": "primarySegment",
+            "type": "object"
+          },
+          {
+            "name": "segmentationBasis",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2365,21 +7390,77 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<customer_context_and_use_case>"
+          {
+            "name": "customer_context_and_use_case",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "jtbdStatement",
+            "type": "string"
+          },
+          {
+            "name": "functionalJobs",
+            "type": "array"
+          },
+          {
+            "name": "emotionalJobs",
+            "type": "array"
+          },
+          {
+            "name": "opportunityScore",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2394,21 +7475,77 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<customer_feedback_transcripts_or_reviews>"
+          {
+            "name": "customer_feedback_transcripts_or_reviews",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "vocSummary",
+            "type": "object"
+          },
+          {
+            "name": "topComplaints",
+            "type": "array"
+          },
+          {
+            "name": "featureRequests",
+            "type": "array"
+          },
+          {
+            "name": "sentimentScore",
+            "type": "number"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2423,21 +7560,83 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<targetSegment> <categoryReference> <pointOfDifference>"
+          {
+            "name": "targetSegment",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "categoryReference",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "pointOfDifference",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "positioningStatement",
+            "type": "string"
+          },
+          {
+            "name": "differentiationFactors",
+            "type": "array"
+          },
+          {
+            "name": "competitiveAdvantage",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2452,21 +7651,87 @@
       "rule_type": "professional-standard",
       "engine": null,
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "<productName> <targetMarket> <launchBudget>"
+          {
+            "name": "productName",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "targetMarket",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "launchBudget",
+            "type": "money_idr",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "gtmStrategy",
+            "type": "object"
+          },
+          {
+            "name": "channelPriority",
+            "type": "array"
+          },
+          {
+            "name": "launchTimeline",
+            "type": "object"
+          },
+          {
+            "name": "budgetAllocation",
+            "type": "object"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": false,
+        "risk": {
+          "level": "high",
+          "human_review_required": true
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     },
@@ -2481,25 +7746,81 @@
       "rule_type": "statutory",
       "engine": "engines/product-context.js",
       "capability": {
+        "purpose": [
+          "market_sizing",
+          "commodity_classification"
+        ],
+        "not_for": [
+          "guaranteed_revenue_forecasting",
+          "customs_auto_clearance"
+        ],
         "requires": [
-          "productName",
-          "description",
-          "attributes",
-          "targetHsCode",
-          "cifValueIdr"
+          {
+            "name": "input",
+            "type": "string",
+            "required": true
+          }
         ],
         "produces": [
-          "cac",
-          "ltv",
-          "btkiCode",
-          "classificationStatus",
-          "landedCost"
+          {
+            "name": "btkiCode",
+            "type": "string"
+          },
+          {
+            "name": "bm_rate",
+            "type": "percentage"
+          },
+          {
+            "name": "ppn_rate",
+            "type": "percentage"
+          },
+          {
+            "name": "classificationStatus",
+            "type": "enum"
+          },
+          {
+            "name": "landedCostEstimate",
+            "type": "money_idr"
+          }
+        ],
+        "consumes": [
+          "context.productContext",
+          "finance.unitCostIdr"
         ],
         "deterministic": true,
+        "risk": {
+          "level": "medium",
+          "human_review_required": false
+        },
         "cross_domain_relevance": {
-          "finance": "high",
-          "strategy": "high",
-          "tax": "medium"
+          "finance": {
+            "relevance": "high",
+            "outputs": [
+              "cac",
+              "ltv",
+              "netMarginPercent"
+            ]
+          },
+          "strategy": {
+            "relevance": "high",
+            "outputs": [
+              "tam",
+              "sam",
+              "som",
+              "positioningStatement"
+            ]
+          },
+          "tax": {
+            "relevance": "medium",
+            "outputs": [
+              "landedCostEstimate",
+              "btkiCode"
+            ]
+          },
+          "hr": {
+            "relevance": "low",
+            "outputs": []
+          }
         }
       }
     }
