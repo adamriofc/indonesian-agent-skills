@@ -4,9 +4,9 @@
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "releaseVersion": "v6.16.2",
   "releaseTag": "v6.16.2",
-  "releaseSourceCommitHash": "ab4dd2b47b67e1c8e0614c73e958d354affea750",
-  "releaseSourceDescription": "Feature commit pointed to by tag v6.16.1 (suite distribution layer, 5 bundle profiles, 18-check release gate, typed capability contracts)",
-  "generatedAt": "2026-08-15T22:39:14.679Z",
+  "releaseSourceCommitHash": "fb62e6cf363540af242bdacd6ad31c1f20273dd0",
+  "releaseSourceDescription": "Feature commit for v6.16.2: non-self-referential provenance design (manifest schema v1.2.0), validator redesign, docs/RELEASE.md provenance architecture section",
+  "generatedAt": "2026-08-15T22:50:03.890Z",
   "metrics": {
     "plugins": 6,
     "skills": 88,
