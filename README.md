@@ -51,20 +51,6 @@ This repository decouples AI **reasoning** from **calculation**:
 
 ---
 
-## ⚡ 30-Second Killer Cross-Domain Demo
-
-```text
-User: "My company is a PT Management Consulting firm (KBLI 70209) with IDR 5 Billion turnover and 15 employees.
-       We want to open a second branch and add 10 employees. Is this expansion compliant across Tax, HR, Legal, and Strategy?"
-
-Agent (Skill-Assisted Execution):
-1. [KBLI Router]: KBLI 70209 ➔ PROFESSIONAL_SERVICE Archetype (Capacity Unit: Service Practice Lines).
-2. [Tax Engine]: PP 20/2026 Ineligibility Flagged (PT Corporate must use General PPh 31E at 11%/22%, not 0.5% UMKM).
-3. [HR Engine]: 25 Total Employees ➔ Mandatory Wage Structure & Scale (Permenaker 1/2017) + BPJS JP Cap update.
-4. [Legal Engine]: Audit Article 1266 KUHPerdata waiver & PDP Data Processing Addendum (UU 27/2022).
-5. [Decision Engine]: MCDA Weighted Score = 8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH).
-```
-
 ## ⚙️ Compatibility & Testing Matrix
 
 | Agent Runtime / Environment | Integration Level | Status | Verification Mechanism |
@@ -393,6 +379,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 **Cross-domain**: `tax-id` + `hr-id` — combined payroll cost + tax liability report for CFO.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"A manufacturing client (KBLI 22220, 20 employees) wants to hire 5 new staff at Rp 12M gross each. What is the true monthly cost-to-company, and does the PT's Rp 3.8B turnover qualify for UMKM final tax?"*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Tax Engine]** → PPh 21 TER monthly per new hire (`pph21-calculator`, TK/0) = Rp 240,000 each.
+> 2. **[HR Engine]** → BPJS employer share (JHT + JP + JKK + JKM + Kes) per hire (`bpjs-calculator`) = Rp 1.08M each.
+> 3. **[Tax Engine]** → UMKM eligibility check (`pph-final-umkm`): PT corporate turnover Rp 3.8B → **NOT eligible** for 0.5% (must use PPh Badan 22%).
+> 4. **[Finance Engine]** → Total incremental cost-to-company per month = 5 × (12M + 1.08M + 0.24M) = **Rp 66.6M**.
+> 5. **[Regulatory]** → PP 20/2026 effective-date check confirmed for FY 2026 calculations.
+
 ---
 
 ### 👔 HR Manager / People Operations
@@ -408,6 +405,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 | THR religious holiday allowance calculation | `thr-calculator` |
 
 **Cross-domain**: `hr-id` + `tax-id` — complete payroll cost-to-company including PPh 21 gross-up.
+
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"We must lay off 3 staff (7 years tenure, Rp 15M wage) for company efficiency (PHK reason 5) and also convert one 3-year PKWT contract — what is the total payout and PPh 21 withholding?"*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[HR Engine]** → PHK severance per employee (`phk-calculator`): Pesangon 7×2 + PMK 3×1 + Pengganti Hak ≈ **Rp 187.5M** each.
+> 2. **[HR Engine]** → PKWT conversion audit (`pkwt-pkwtt-checker`): 3-year contract → below 5-year cap → convert to PKWTT with compensation due.
+> 3. **[Tax Engine]** → PPh 21 on severance (pesangon bracket per PMK 16/2010) withheld at source.
+> 4. **[Finance Engine]** → Total cash outlay + net payout after tax = consolidated settlement report for CFO.
+> 5. **[Legal]** → `surat-peringatan` compliance chain verified before termination letter is issued.
 
 ---
 
@@ -425,6 +433,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 **Cross-domain**: `legal-id` + `hr-id` — PHK legal compliance review → severance + warning letter chain.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"Client wants to terminate a sales manager for gross misconduct, but the employee's contract has no misconduct clause and the firm stores employee personal data with no PDP safeguards. Assess the legal exposure."*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Legal Engine]** → `contract-reviewer` finds missing Article 1266 KUHPerdata waiver + no gross-misconduct clause → termination at risk.
+> 2. **[Legal Engine]** → `pdp-compliance` flags UU 27/2022 gaps on employee HRIS data processing → remediation steps + DPA template.
+> 3. **[HR Engine]** → `phk-calculator` computes lawful-exit severance if restructuring is chosen instead of misconduct → comparison table.
+> 4. **[Legal Engine]** → `somasi-draft-id` / `surat-peringatan` sequence draft = **Compliance Risk Score 72/100** (HIGH).
+> 5. **[Decision]** → Recommended path: restructure under PP 35/2021 instead of misconduct to avoid unfair-dismissal claim.
+
 ---
 
 ### 📊 CFO / Finance Director
@@ -440,6 +459,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 | VC term-sheet waterfall exit distribution | `vc-term-sheet-waterfall` |
 
 **Cross-domain**: `finance-id` + `tax-id` + `strategic-id` — full corporate expansion feasibility with tax regime, NPV, and strategic risk scoring.
+
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"Should we build a new Rp 25B production line (9% affiliate loan funding)? Assess NPV, IRR, thin-cap interest deductibility, and strategic fit for our KBLI 22220 business."*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Finance Engine]** → `capital-budgeting`: NPV = **+Rp 2.3B**, IRR = **14.2%** (> 12% hurdle), payback 5.1 yrs → **ACCEPT**.
+> 2. **[Tax Engine]** → `transfer-pricing-audit`: DER = 3.9:1 (< 4:1) → interest fully deductible; secondary adjustment risk = LOW.
+> 3. **[Finance Engine]** → `break-even-analysis`: new line needs 2,150 units/mo to break even vs 1,800 forecast → thin margin flagged.
+> 4. **[Strategic Engine]** → `strategic-risk-analysis`: velocity-adjusted risk score 34/100 (moderate) on execution, supply, and FX.
+> 5. **[Decision Engine]** → MCDA weighted = **7.6/10 (PROCEED WITH RISK CONTINGENCY)**.
 
 ---
 
@@ -457,6 +487,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 **Cross-domain**: `marketing-id` + `finance-id` + `tax-id` — launch pricing → margin → tax obligation in one session.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"I sell bags on Shopee at Rp 150,000 (cost Rp 90,000). What is my real net profit after fees, and how much UMKM final tax do I owe this month if my YTD revenue is Rp 420M?"*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Marketing Engine]** → `margin-pricing-calculator`: Shopee admin fee 6.5% + Rp 2,000 shipping subsidy → net seller payout = **Rp 138,250** → net margin **34.9%**.
+> 2. **[Finance Engine]** → `break-even-analysis`: margin of safety at current volume = **22%** → price floor Rp 96,000 before loss.
+> 3. **[Tax Engine]** → `pph-final-umkm`: individual, YTD Rp 420M (< Rp 500M threshold, PP 20/2026) → 0.5% × monthly revenue Rp 45M = **Rp 225,000** monthly final tax.
+> 4. **[Compliance]** → `product-classification` confirms no BTKI import duty exposure (local production).
+> 5. **[Summary]** → "Net margin 34.9% — tax Rp 225K/month — keep under Rp 500M to stay exempt from general regime."
+
 ---
 
 ### 📈 Business Consultant / Strategy Advisor
@@ -472,6 +513,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 | Weighted MCDA multi-criteria decision scoring | `decision-making` |
 
 **Cross-domain**: `strategic-id` + `finance-id` + `legal-id` — full business expansion report: strategy score + NPV + compliance risk.
+
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"My consulting client (KBLI 70209) wants to enter the Surabaya market. Is the move attractive, affordable, and compliant?"*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Strategic Engine]** → `porter-five-forces`: East Java consulting market = moderate attractiveness (high rivalry, low supplier power) → **ENTER WITH DIFFERENTIATION**.
+> 2. **[Strategic Engine]** → `bcg-matrix`: service line classifies as Question Mark → selective investment.
+> 3. **[Finance Engine]** → `capital-budgeting`: branch setup NPV = +Rp 850M, payback 3.2 yrs → **ACCEPT**.
+> 4. **[Legal Engine]** → `oss-kbli-navigator`: KBLI 70209 OSS-RBA = **LOW-risk, NIB + Sertifikat Standar** only → low licensing friction.
+> 5. **[Decision Engine]** → MCDA = **7.8/10 (ENTER with 12-month pilot + localization KPI)**.
 
 ---
 
@@ -489,6 +541,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 **Cross-domain**: `marketing-id` + `finance-id` + `strategic-id` — from market size → unit economics → strategic positioning in one agent session.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"Validating a bookkeeping app for Indonesian MSMEs. What is the addressable market, are the unit economics viable, and should we raise?"*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Marketing Engine]** → `market-sizing`: TAM = **Rp 8.4T** (65M MSMEs × Rp 130K ARPU), SAM = Rp 2.1T, SOM (Yr-3) = Rp 85B.
+> 2. **[Finance Engine]** → `unit-economics`: LTV = Rp 2.6M, CAC = Rp 1.1M → **LTV/CAC = 2.4×**, payback 14 months → viable.
+> 3. **[Strategic Engine]** → `vrio-analysis`: proprietary ruleset engines = VRIO-compliant → sustained moat.
+> 4. **[Finance Engine]** → `business-feasibility`: 3-yr NPV = **+Rp 4.9B**, IRR 31% → investor-ready.
+> 5. **[Decision]** → Recommendation: raise Seed for SAM capture; positioning = *"deterministic Indonesian compliance"*.
+
 ---
 
 ### 🛒 E-Commerce Seller / D2C Brand
@@ -504,6 +567,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 | Claim template for damaged / lost logistics parcels | `klaim-logistik-retur` |
 
 **Cross-domain**: `marketing-id` + `finance-id` — pricing strategy → margin → tax obligation (UMKM 0.5%) in one query.
+
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"I want to expand a Rp 99,000 skincare product from Shopee to TikTok Shop. Compare net payout on both platforms, plan a live-selling campaign, and verify the tax impact."*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Marketing Engine]** → `margin-pricing-calculator`: Shopee net = Rp 89,200 vs TikTok Shop (3% affiliate + commission 1.8%) net = **Rp 87,900** → platform comparison table.
+> 2. **[Marketing Engine]** → `tiktok-shop-affiliate`: commission structure Rp 3,000/order + creator brief template for 10 nano creators.
+> 3. **[Marketing Engine]** → `shopee-live-script`: hook + voucher-drop timing (10th/30th min) for conversion.
+> 4. **[Marketing Engine]** → `tokopedia-seo-optimizer`: title rewrite + keyword set for discovery.
+> 5. **[Tax/Finance]** → `pph-final-umkm` + break-even cross-check → net margin holds at **33%** post-tax.
 
 ---
 
@@ -521,6 +595,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 **Cross-domain**: `marketing-id` + `strategic-id` — content strategy anchored to competitive positioning and brand VRIO.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"We are launching a premium skincare brand. Build a 30-day campaign: 3 KOL briefs, Reels + TikTok scripts, a WhatsApp broadcast, and a LinkedIn founder thread."*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Strategic Engine]** → `positioning-analysis`: premium anti-aging in saturated market → differentiation = *"dermatologist-formulated, BPOM-cleared, Indonesian botanicals"*.
+> 2. **[Marketing Engine]** → `kol-brief-contract`: tier, deliverables SOW, exclusivity window (60 days), usage rights → 3 KOL contracts.
+> 3. **[Marketing Engine]** → `script-reels-tiktok` + `instagram-reels-carousel`: hook + 3-visual beats + CTA per format.
+> 4. **[Marketing Engine]** → `whatsapp-broadcast`: spam-trigger-safe blast + `linkedin-x-thread-id` founder narrative.
+> 5. **[Cross-Check]** → `vrio-analysis` confirms botanical-ingredient sourcing is rare + hard to imitate → defensible campaign claim.
+
 ---
 
 ### 🏦 Corporate Finance / Investment Analyst
@@ -537,6 +622,17 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 **Cross-domain**: `finance-id` + `tax-id` + `legal-id` — full M&A due diligence financial + tax + contract risk in one suite.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"Acquiring a Jakarta e-commerce company (Rp 50B EV). Structuring Rp 12B as cross-border royalty to an SG affiliate. Audit the financials, withholding tax, and thin-cap exposure."*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Finance Engine]** → `financial-statements` + `financial-ratio-analysis`: normalized EBITDA Rp 6.8B → **EV/EBITDA = 7.4×** (fair for sector).
+> 2. **[Tax Engine]** → `tax-cross-border`: royalty to SG affiliate → PPh 26 20% (or 15% under Indonesia–SG DGT treaty with CoR) → **Rp 2.4B→1.8B** withholding.
+> 3. **[Tax Engine]** → `transfer-pricing-audit`: pro-forma DER = 5.2:1 (> 4:1) → **Rp 900M interest disallowed** → secondary adjustment risk flagged.
+> 4. **[Legal Engine]** → `contract-reviewer`: SPA redlines on reps & warranties → **Risk Score 68/100**.
+> 5. **[Decision]** → Price adjustment: EV − disallowed interest − contingent PDP remediation = **recommended bid Rp 48.2B**.
+
 ---
 
 ### 🏢 HR-Tech / Payroll SaaS Developer
@@ -552,25 +648,33 @@ This suite is designed for **any professional who needs accurate, regulation-gro
 
 > **Developer Note**: All engines are pure Node.js with no external dependencies. Import directly: `const { calculatePPh21Monthly } = require('./engines/pph21-calculator')`.
 
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"I am wiring a payroll module for 5,000 employees. Validate PPh 21, BPJS, and THR engines against statutory rulesets, and flag when PP 20/2026 changes affect calculations."*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[Engine]** → `calculatePPh21Monthly(12000000,'TK/0',true,'2026-03-01')` → **Rp 240,000** verified against `PPH21-2024` ruleset (PMK 168/2023).
+> 2. **[Engine]** → `engines/bpjs-calculator.js` → JP wage-cap transition (March 2025 vs 2026) handled by temporal ruleset.
+> 3. **[Engine]** → `engines/thr-calculator.js` → Eid THR = 1× monthly wage for ≥12 months tenure.
+> 4. **[Tax Engine]** → `regulatory-diff` (`compareRulesets('umkm','UMKM-2022','UMKM-2026')`) → auto-detect effective-date change 2026-04-22 → CI test gate for payroll regression.
+> 5. **[Integrity]** → `npm run validate:release` confirms golden-corpus pass (121 cases) before deploy.
+
 ---
 
 ### 🌐 Cross-Domain Agent — Full Business Intelligence (Most Powerful Use)
 **Problem**: Real business questions rarely belong to one domain. A company expansion decision touches tax, HR, legal, finance, and strategy simultaneously.
 
-**Example Query**:
-> *"My PT Management Consulting (KBLI 70209) has IDR 5B turnover and 15 employees. We want to open a second branch and add 10 employees. Is this expansion compliant and financially sound?"*
-
-**Agent Execution (with Full Suite installed)**:
-```text
-1. [KBLI Router]     → KBLI 70209 → PROFESSIONAL_SERVICE archetype
-2. [Tax Engine]      → PT Corporate: NOT eligible for 0.5% UMKM (must use PPh Badan 22%)
-3. [HR Engine]       → 25 employees → mandatory Wage Structure (Permenaker 1/2017)
-                     → BPJS JP wage cap update verification
-4. [Legal Engine]    → Audit PDP data processing addendum (UU 27/2022)
-                     → KBLI OSS-RBA licensing level check
-5. [Finance Engine]  → Break-even for new branch → NPV/IRR feasibility
-6. [Decision Engine] → MCDA weighted score = 8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH)
-```
+> ⚡ **30-Second Killer Cross-Domain Demo**
+>
+> **User**: *"My PT Management Consulting (KBLI 70209) has IDR 5B turnover and 15 employees. We want to open a second branch and add 10 employees. Is this expansion compliant and financially sound?"*
+>
+> **Agent (Skill-Assisted Execution)**:
+> 1. **[KBLI Router]** → KBLI 70209 → PROFESSIONAL_SERVICE archetype.
+> 2. **[Tax Engine]** → PT Corporate: **NOT eligible** for 0.5% UMKM (must use PPh Badan 22%).
+> 3. **[HR Engine]** → 25 employees → mandatory Wage Structure (Permenaker 1/2017) + BPJS JP cap update.
+> 4. **[Legal Engine]** → PDP data-processing addendum (UU 27/2022) + KBLI OSS-RBA licensing level.
+> 5. **[Finance Engine]** → Break-even for new branch → NPV/IRR feasibility.
+> 6. **[Decision Engine]** → MCDA weighted score = **8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH)**.
 
 **Skills used**: `pph-badan-calculator` + `bpjs-calculator` + `struktur-skala-upah` + `pdp-compliance` + `oss-kbli-navigator` + `break-even-analysis` + `capital-budgeting` + `decision-engine`
 
