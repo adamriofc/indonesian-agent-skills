@@ -373,7 +373,210 @@ All skills and computational engines are mapped in the **Machine-Readable Regist
 
 ---
 
-## 📊 Real-World Execution Examples
+## 👥 Who Uses This — Profession-Based Use Cases
+
+This suite is designed for **any professional who needs accurate, regulation-grounded Indonesian business intelligence inside their AI agent**. Below are real-world use cases organized by profession — single-domain and cross-domain.
+
+---
+
+### 🧾 Tax Consultant / Tax Advisor
+**Problem**: Clients ask about PPh 21, BPJS, transfer pricing, and PPN at the same time — standard AI gives wrong formulas or outdated rates.
+
+| Task | Skills Used |
+|---|---|
+| Monthly PPh 21 TER calculation for 50-employee payroll | `pph21-calculator` + engine |
+| Gross-up salary so employee receives net target | `pph21-grossup` |
+| UMKM final tax eligibility (PP 20/2026 threshold) | `pph-final-umkm` |
+| Audit thin-cap DER 4:1 for affiliated lender interest | `transfer-pricing-audit` |
+| PPN 12% DPP Nilai Lain effective burden check | `ppn-ppnbm-advanced` |
+| SP2DK response preparation & audit documentation | `tax-audit-preparation` |
+
+**Cross-domain**: `tax-id` + `hr-id` — combined payroll cost + tax liability report for CFO.
+
+---
+
+### 👔 HR Manager / People Operations
+**Problem**: PHK process, PKWT contract limits, and wage structure compliance require exact statutory math that AI gets wrong.
+
+| Task | Skills Used |
+|---|---|
+| PHK severance payout (PP 35/2021) for multiple termination reasons | `phk-calculator` + `phk-advanced-matrix` |
+| PKWT contract audit — max 5-year limit & auto-conversion risk | `pkwt-pkwtt-checker` |
+| Monthly BPJS Ketenagakerjaan + Kesehatan contributions | `bpjs-calculator` |
+| Wage structure & salary grade design (Permenaker 1/2017) | `struktur-skala-upah` |
+| SP1/SP2/SP3 warning letter drafting | `surat-peringatan` |
+| THR religious holiday allowance calculation | `thr-calculator` |
+
+**Cross-domain**: `hr-id` + `tax-id` — complete payroll cost-to-company including PPh 21 gross-up.
+
+---
+
+### ⚖️ Corporate Lawyer / Legal Counsel
+**Problem**: Contract review, NDA drafting, and PDP compliance need Indonesian law context that generic AI cannot anchor reliably.
+
+| Task | Skills Used |
+|---|---|
+| Commercial contract audit → Contract Risk Score 0–100 with redlines | `contract-reviewer` |
+| NDA drafting with DJKI & trade secret protections | `nda-indonesia` |
+| UU PDP No. 27/2022 data processing compliance assessment | `pdp-compliance` |
+| OSS-RBA KBLI 2020 business licensing classification | `oss-kbli-navigator` |
+| HAKI trademark class conflict check (Classes 1–45) | `haki-trademark-check` |
+| Somasi (formal demand letter) drafting (SP1→SP3) | `somasi-draft-id` |
+
+**Cross-domain**: `legal-id` + `hr-id` — PHK legal compliance review → severance + warning letter chain.
+
+---
+
+### 📊 CFO / Finance Director
+**Problem**: Investment decisions, financial modeling, and tax planning need deterministic numbers — not AI guesses.
+
+| Task | Skills Used |
+|---|---|
+| NPV / IRR / payback period for capital investment | `capital-budgeting` |
+| Break-even analysis for pricing & production targets | `break-even-analysis` |
+| 14-ratio financial health assessment from balance sheet | `financial-ratio-analysis` |
+| Cash runway & burn rate for board presentation | `cash-flow-analysis` |
+| PPh Badan 22% + Article 31E sliding scale facility | `pph-badan-calculator` |
+| VC term-sheet waterfall exit distribution | `vc-term-sheet-waterfall` |
+
+**Cross-domain**: `finance-id` + `tax-id` + `strategic-id` — full corporate expansion feasibility with tax regime, NPV, and strategic risk scoring.
+
+---
+
+### 🏪 Business Owner / UMKM Entrepreneur
+**Problem**: Daily decisions about pricing, taxes, and marketplace fees need exact numbers — but hiring a consultant for every question is not practical.
+
+| Task | Skills Used |
+|---|---|
+| Shopee / Tokopedia / TikTok Shop net margin after admin fee | `margin-pricing-calculator` |
+| UMKM final tax 0.5% eligibility & monthly calculation | `pph-final-umkm` |
+| Product BTKI HS-code classification & landed cost | `product-classification` |
+| Break-even unit & revenue for a new product | `break-even-analysis` |
+| Go-to-market strategy for new product launch | `go-to-market` |
+| Customer complaint response for marketplace reviews | `cs-komplain-handler` |
+
+**Cross-domain**: `marketing-id` + `finance-id` + `tax-id` — launch pricing → margin → tax obligation in one session.
+
+---
+
+### 📈 Business Consultant / Strategy Advisor
+**Problem**: Client engagements need structured frameworks, scenario analysis, and multi-domain synthesis — not one-off AI responses.
+
+| Task | Skills Used |
+|---|---|
+| BCG Matrix portfolio positioning by KBLI archetype | `bcg-matrix` |
+| Porter Five Forces industry attractiveness assessment | `porter-five-forces` |
+| VRIO resource & capability competitive advantage audit | `vrio-analysis` |
+| Scenario planning (base / optimistic / pessimistic) | `scenario-planning` |
+| Corporate expansion Porter Three Tests (attraction, cost, synergy) | `porter-three-tests` |
+| Weighted MCDA multi-criteria decision scoring | `decision-making` |
+
+**Cross-domain**: `strategic-id` + `finance-id` + `legal-id` — full business expansion report: strategy score + NPV + compliance risk.
+
+---
+
+### 🚀 Startup Founder / Product Manager
+**Problem**: Market validation, unit economics, and investor readiness need real Indonesian market numbers — not global benchmarks.
+
+| Task | Skills Used |
+|---|---|
+| TAM / SAM / SOM market sizing for Indonesia | `market-sizing` |
+| LTV / CAC / churn / payback period unit economics | `unit-economics` |
+| Customer segmentation by KBLI archetype & scale | `customer-segmentation` |
+| Jobs-to-be-done framework for product-market fit | `jobs-to-be-done` |
+| VC term sheet waterfall for exit distribution modeling | `vc-term-sheet-waterfall` |
+| Business feasibility → NPV + IRR + payback | `business-feasibility` |
+
+**Cross-domain**: `marketing-id` + `finance-id` + `strategic-id` — from market size → unit economics → strategic positioning in one agent session.
+
+---
+
+### 🛒 E-Commerce Seller / D2C Brand
+**Problem**: Multi-platform selling across Shopee, Tokopedia, TikTok Shop creates pricing, margin, and content complexity.
+
+| Task | Skills Used |
+|---|---|
+| Net seller payout after platform admin fee + shipping | `margin-pricing-calculator` |
+| Tokopedia product title & keyword SEO optimization | `tokopedia-seo-optimizer` |
+| Shopee Live hosting script + voucher-drop timing | `shopee-live-script` |
+| TikTok Shop affiliate commission structure & creator brief | `tiktok-shop-affiliate` |
+| Competitor listing & review analysis for gap identification | `analisis-kompetitor-marketplace` |
+| Claim template for damaged / lost logistics parcels | `klaim-logistik-retur` |
+
+**Cross-domain**: `marketing-id` + `finance-id` — pricing strategy → margin → tax obligation (UMKM 0.5%) in one query.
+
+---
+
+### 🎨 Content Creator / KOL / Marketing Agency
+**Problem**: Creating platform-native content that converts — Reels, TikTok, WhatsApp, LinkedIn — while staying brand-safe.
+
+| Task | Skills Used |
+|---|---|
+| TikTok / Instagram Reels script with visual direction | `script-reels-tiktok` + `instagram-reels-carousel` |
+| YouTube Shorts script + long-form video outline | `youtube-shorts-script` |
+| WhatsApp broadcast copy that avoids spam triggers | `whatsapp-broadcast` |
+| LinkedIn / X professional business narrative thread | `linkedin-x-thread-id` |
+| KOL campaign brief + SOW + exclusivity contract | `kol-brief-contract` |
+| Indonesian slang localization of formal marketing copy | `lokalisasi-slang-indonesia` |
+
+**Cross-domain**: `marketing-id` + `strategic-id` — content strategy anchored to competitive positioning and brand VRIO.
+
+---
+
+### 🏦 Corporate Finance / Investment Analyst
+**Problem**: Detailed financial modeling, valuation, and cross-border tax structuring for Indonesian deals.
+
+| Task | Skills Used |
+|---|---|
+| Financial model with revenue, cost, and scenario sensitivity | `financial-modeling` |
+| Cross-border payment withholding tax PPh 26 + tax treaty DGT | `tax-cross-border` |
+| Transfer pricing thin-cap DER 4:1 + secondary adjustment | `transfer-pricing-audit` |
+| Working capital cycle days & WCR calculation | `working-capital` |
+| Regulatory change impact on financial projections | `regulatory-impact` |
+| Laporan keuangan (income statement / balance sheet) per SAK EMKM | `laporan-keuangan-psak` |
+
+**Cross-domain**: `finance-id` + `tax-id` + `legal-id` — full M&A due diligence financial + tax + contract risk in one suite.
+
+---
+
+### 🏢 HR-Tech / Payroll SaaS Developer
+**Problem**: Building payroll software that handles Indonesian statutory rules requires accurate engine math — not hardcoded assumptions.
+
+| Task | Skills Used |
+|---|---|
+| Embed `calculatePPh21Monthly()` engine directly into payroll system | `pph21-calculator` + engine import |
+| BPJS calculation engine with temporal wage cap transitions | `bpjs-calculator` + `engines/bpjs-calculator.js` |
+| PHK severance matrix engine for all reason codes | `phk-calculator` + `engines/phk-calculator.js` |
+| PKWT/PKWTT compliance audit engine | `pkwt-pkwtt-checker` |
+| Regulatory diff engine to auto-detect ruleset changes | `regulatory-diff` |
+
+> **Developer Note**: All engines are pure Node.js with no external dependencies. Import directly: `const { calculatePPh21Monthly } = require('./engines/pph21-calculator')`.
+
+---
+
+### 🌐 Cross-Domain Agent — Full Business Intelligence (Most Powerful Use)
+**Problem**: Real business questions rarely belong to one domain. A company expansion decision touches tax, HR, legal, finance, and strategy simultaneously.
+
+**Example Query**:
+> *"My PT Management Consulting (KBLI 70209) has IDR 5B turnover and 15 employees. We want to open a second branch and add 10 employees. Is this expansion compliant and financially sound?"*
+
+**Agent Execution (with Full Suite installed)**:
+```text
+1. [KBLI Router]     → KBLI 70209 → PROFESSIONAL_SERVICE archetype
+2. [Tax Engine]      → PT Corporate: NOT eligible for 0.5% UMKM (must use PPh Badan 22%)
+3. [HR Engine]       → 25 employees → mandatory Wage Structure (Permenaker 1/2017)
+                     → BPJS JP wage cap update verification
+4. [Legal Engine]    → Audit PDP data processing addendum (UU 27/2022)
+                     → KBLI OSS-RBA licensing level check
+5. [Finance Engine]  → Break-even for new branch → NPV/IRR feasibility
+6. [Decision Engine] → MCDA weighted score = 8.2/10 (RECOMMENDED WITH TAX REGIME SWITCH)
+```
+
+**Skills used**: `pph-badan-calculator` + `bpjs-calculator` + `struktur-skala-upah` + `pdp-compliance` + `oss-kbli-navigator` + `break-even-analysis` + `capital-budgeting` + `decision-engine`
+
+> **The Agent owns all orchestration** — it selects which skills and engines to call based on the query context. The suite simply exposes all 88 capabilities for the agent to discover.
+
+---
 
 All outputs below are **actual engine outputs** (run on Node.js 20+, `npm test` green).
 
