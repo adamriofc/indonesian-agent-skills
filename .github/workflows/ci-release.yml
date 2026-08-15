@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -41,6 +44,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -70,6 +76,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -86,6 +95,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Node.js 22
         uses: actions/setup-node@v4
@@ -104,7 +116,7 @@ jobs:
       - name: Run Documentation SSOT Validator
         run: npm run validate:docs
 
-      - name: Execute 17-Check Release Gate
+      - name: Execute 18-Check Release Gate
         run: REQUIRE_RELEASE_TAG=true npm run validate:release
 
       - name: Upload Benchmark Results Artifact
