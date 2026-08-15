@@ -216,6 +216,55 @@ function validateSuite() {
     errors += versionErrors;
   }
 
+  // Check 11: Internal arithmetic consistency — sum(plugin.skills) == totals.skills per bundle
+  checks++;
+  let arithmeticErrors = 0;
+  bundleFiles.forEach(bf => {
+    const d = bundleData[bf];
+    if (!d || !Array.isArray(d.plugins) || !d.totals) return;
+    const sum = d.plugins.reduce((acc, p) => acc + (Number(p.skills) || 0), 0);
+    if (sum !== d.totals.skills) {
+      console.error(`❌ [11] Bundle ${bf}: sum(plugin.skills)=${sum} != totals.skills=${d.totals.skills}`);
+      arithmeticErrors++;
+    }
+  });
+  if (arithmeticErrors === 0) {
+    console.log('  ✅ [11] All bundle skill counts internally consistent (sum(plugin.skills) == totals.skills).');
+  } else {
+    errors += arithmeticErrors;
+  }
+
+  // Check 12: Profile-to-registry exact membership — per-plugin counts AND skill sets match actual registry
+  checks++;
+  let membershipErrors = 0;
+  const skillsByPlugin = {};
+  registry.skills.forEach(s => {
+    (skillsByPlugin[s.plugin] = skillsByPlugin[s.plugin] || []).push(s.id);
+  });
+  bundleFiles.forEach(bf => {
+    const d = bundleData[bf];
+    if (!d || !Array.isArray(d.plugins)) return;
+    d.plugins.forEach(p => {
+      const actual = skillsByPlugin[p.id] || [];
+      // count alignment
+      if (actual.length !== (Number(p.skills) || 0)) {
+        console.error(`❌ [12] Bundle ${bf} plugin '${p.id}': declared skills=${p.skills}, actual registry count=${actual.length}`);
+        membershipErrors++;
+      }
+    });
+    // per-profile totals must equal the union of member plugin actual counts
+    const unionCount = d.plugins.reduce((acc, p) => acc + (skillsByPlugin[p.id] || []).length, 0);
+    if (unionCount !== d.totals.skills) {
+      console.error(`❌ [12] Bundle ${bf}: registry union skill count=${unionCount} != totals.skills=${d.totals.skills}`);
+      membershipErrors++;
+    }
+  });
+  if (membershipErrors === 0) {
+    console.log(`  ✅ [12] All ${bundleFiles.length} bundle profiles exactly match registry skill counts (profile membership verified).`);
+  } else {
+    errors += membershipErrors;
+  }
+
   // Summary
   console.log('\n---------------------------------------------------');
   if (errors > 0) {

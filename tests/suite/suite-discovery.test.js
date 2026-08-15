@@ -24,6 +24,7 @@ const assert = require('assert');
 
 const ROOT = path.join(__dirname, '../..');
 const plugins = ['finance-id', 'hr-id', 'legal-id', 'marketing-id', 'strategic-id', 'tax-id'];
+const CANONICAL_PLUGINS = plugins;
 
 console.log('🏢 Running Suite Discovery & Installation Integrity Tests...\n');
 
@@ -198,6 +199,69 @@ check('All registry skill IDs present in capability catalog', () => {
   const missing = registry.skills.filter(s => !catalogIds.has(s.id));
   assert.strictEqual(missing.length, 0,
     `Skills in registry but not in catalog: ${missing.map(s => s.id).join(', ')}`);
+});
+
+// ── [9] Bundle Arithmetic & Membership (P0/P1 audit fixes) ───────────────────
+console.log('\n  [9/10] Bundle Arithmetic & Registry Membership...');
+check('sum(plugin.skills) == totals.skills for every bundle', () => {
+  expectedBundles.forEach(bf => {
+    const b = JSON.parse(fs.readFileSync(path.join(bundlesDir, bf), 'utf8'));
+    const sum = b.plugins.reduce((acc, p) => acc + (Number(p.skills) || 0), 0);
+    assert.strictEqual(sum, b.totals.skills,
+      `Bundle ${bf}: sum(plugin.skills)=${sum} != totals.skills=${b.totals.skills}`);
+  });
+});
+check('Per-plugin declared skill counts == actual registry counts', () => {
+  const actual = {};
+  registry.skills.forEach(s => { actual[s.plugin] = (actual[s.plugin] || 0) + 1; });
+  expectedBundles.forEach(bf => {
+    const b = JSON.parse(fs.readFileSync(path.join(bundlesDir, bf), 'utf8'));
+    b.plugins.forEach(p => {
+      assert.strictEqual(actual[p.id], Number(p.skills),
+        `Bundle ${bf} plugin ${p.id}: declared=${p.skills}, actual=${actual[p.id]}`);
+    });
+  });
+});
+check('Full suite plugin set == all registry skill IDs (exact membership)', () => {
+  const actualById = {};
+  registry.skills.forEach(s => { actualById[s.id] = s.plugin; });
+  fullBundle.plugins.forEach(p => {
+    // every skill in this plugin's directory must exist in registry
+    const dir = path.join(ROOT, p.id, 'skills');
+    if (!fs.existsSync(dir)) return;
+    fs.readdirSync(dir).filter(f => fs.existsSync(path.join(dir, f, 'SKILL.md'))).forEach(id => {
+      assert.strictEqual(actualById[id], p.id,
+        `Skill '${id}' in ${p.id}/skills but registry maps it to '${actualById[id]}'`);
+    });
+  });
+});
+
+// ── [10] Installation Command Smoke Verification (P1 audit fix) ──────────────
+console.log('\n  [10/10] Installation Command Smoke Verification...');
+check('Full-suite installation command present in full-business-suite.json', () => {
+  const install = fullBundle.installation;
+  assert.ok(install, 'full-business-suite.json missing installation block');
+  assert.ok(install.oneCommand, 'missing installation.oneCommand');
+  assert.ok(install.oneCommand.includes('indonesian-business-agent-skills'),
+    `oneCommand must reference the suite repo: ${install.oneCommand}`);
+  assert.ok(install.opencode.includes('indonesian-business-agent-skills'),
+    `opencode command must reference the suite repo: ${install.opencode}`);
+});
+check('Suite repository constant referenced by all installation modes', () => {
+  const SUITE_REPO = 'adamriofc/indonesian-business-agent-skills';
+  const install = fullBundle.installation;
+  [install.oneCommand, install.opencode, install.git].forEach(cmd => {
+    assert.ok(cmd.includes(SUITE_REPO), `Install command missing ${SUITE_REPO}: ${cmd}`);
+  });
+  assert.ok(fullBundle.repository.includes(SUITE_REPO), 'bundle repository URL mismatch');
+});
+check('Selective profile commands reference only member plugins', () => {
+  expectedBundles.forEach(bf => {
+    const b = JSON.parse(fs.readFileSync(path.join(bundlesDir, bf), 'utf8'));
+    b.plugins.forEach(p => {
+      assert.ok(CANONICAL_PLUGINS.includes(p.id), `Bundle ${bf} references unknown plugin '${p.id}'`);
+    });
+  });
 });
 
 // ── Summary ───────────────────────────────────────────────────────────────────

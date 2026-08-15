@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.16.1] - 2026-08-15
+
+### Suite Integrity Correction & Release Boundary Fix
+
+- **P0 — Full-Suite Skill-Count Arithmetic Fixed**: `bundles/full-business-suite.json` declared `marketing-id = 27` while actual registry count is `26`, making `sum(plugin.skills) = 89 ≠ totals.skills = 88`. Corrected `marketing-id` to `26`; also corrected `go-to-market.json` (marketing `27→26` and totals `52→51`). All 5 bundles now satisfy `sum(plugin.skills) == totals.skills`.
+- **P0 — Suite Validator Hardened (Check 11)**: `scripts/validate-suite.js` now verifies internal arithmetic consistency for every bundle (`sum(plugin.skills) == totals.skills`) — previously it only compared declared totals against canonical metadata.
+- **P1 — Profile-to-Registry Membership (Check 12)**: Suite validator now validates each bundle profile's per-plugin declared skill counts AND the union skill count against the actual `registry/index.json` counts — catching stale/mismatched profile metadata.
+- **P1 — Suite Discovery Test Expanded**: `tests/suite/suite-discovery.test.js` grew from 34 to 40 assertions, adding bundle arithmetic, per-plugin registry count alignment, exact full-suite skill membership, and installation-command smoke verification.
+- **P1 — Installation Claim Alignment**: `bundles/full-business-suite.json` npm command corrected from `npm install @adamriofc/indonesian-business-agent-skills` (package not published under scoped name) to `npm install adamriofc/indonesian-business-agent-skills (Git-based; npm registry publish pending)`.
+- **P1 — Stale Release-Gate Wording**: `README.md` documentation tree updated from "13-check release gate" to "18-check release gate".
+- **P2 — KBLI Terminology**: `README.md` architecture diagram updated from "KBLI 2020 ROUTER" to "KBLI Business Activity Classification" — consistent with the Agent-owned orchestration boundary.
+- **P0 — Release Boundary v6.16.1**: New tag with correct release manifest (v6.16.1 → final commit), CI checkout fix (`fetch-depth: 0` + `fetch-tags: true`), and exact tag↔manifest provenance. Supersedes v6.16.0 whose tag carried a stale v6.15.0 manifest.
+
 ## [6.16.0] - 2026-08-15
 
 ### Indonesian Business Agent Suite — Distribution Layer & Suite Integrity

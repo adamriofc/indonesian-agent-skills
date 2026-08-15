@@ -5,7 +5,7 @@
 **Open-source Indonesian business intelligence for AI agents — combining regulatory-grounded skills, temporal rulesets, deterministic engines, and auditable provenance.**
 
 <p align="center">
-  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.16.0" alt="Indonesian Business Agent Skills Banner" width="100%">
+  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.16.1" alt="Indonesian Business Agent Skills Banner" width="100%">
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 <!-- GENERATED:STATS -->
 | Metric | Single Source of Truth Value | Measurement Scope |
 |---|---|---|
-| **Repository Version** | `v6.16.0` | SemVer release boundary |
+| **Repository Version** | `v6.16.1` | SemVer release boundary |
 | **Canonical Plugins** | `6` | Active plugin packages (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Machine-readable `SKILL.md` capability packs |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
@@ -92,9 +92,10 @@ Agent (Skill-Assisted Execution):
                         ┌──────────────────┴───────────────────┐
                         ▼                                      ▼
             ┌──────────────────────┐               ┌──────────────────────┐
-            │   KBLI 2020 ROUTER   │               │   PRODUCT CONTEXT    │
-            │  Business Activity   │               │ BTKI 2022 / HS-6 /   │
-            │  ➔ Business Archetype│               │ Lartas / Landed Cost │
+            │  KBLI BUSINESS       │               │   PRODUCT CONTEXT    │
+            │  ACTIVITY            │               │ BTKI 2022 / HS-6 /   │
+            │  CLASSIFICATION      │               │ Lartas / Landed Cost │
+            │  ➔ Business Archetype│               │                     │
             └───────────┬──────────┘               └──────────┬───────────┘
                         │                                     │
                         └──────────────────┬──────────────────┘
@@ -137,7 +138,7 @@ README.md (What / Why / Overview & Demo)
   ├── BENCHMARK.md (How measurement works & 3-Tier evaluation taxonomy)
   ├── PROVENANCE.md (Where statutory rules come from & JDIH sources)
   ├── PRODUCTION_READINESS.md (Readiness levels L0–L4 & human review matrix)
-  ├── RELEASE.md (How releases are verified & 13-check release gate)
+  ├── RELEASE.md (How releases are verified & 18-check release gate)
   ├── METRICS.md (Single source of truth metrics & definitions)
   └── OPERATIONAL_RUNBOOK.md (Incident handling & emergency procedures)
 ```
@@ -150,7 +151,7 @@ README.md (What / Why / Overview & Demo)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
-│              INDONESIAN BUSINESS AGENT SUITE v6.16.0            │
+│              INDONESIAN BUSINESS AGENT SUITE v6.16.1            │
 │         88 Skills · 6 Domains · 39 Deterministic Engines        │
 ├──────────────────────────┬──────────────────────────────────────┤
 │  FULL SUITE              │  SELECTIVE PROFILES                  │
