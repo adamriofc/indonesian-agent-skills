@@ -10,10 +10,11 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
-  <a href="https://github.com/adamriofc/indonesian-business-agent-skills/actions/workflows/ci.yml"><img src="https://github.com/adamriofc/indonesian-business-agent-skills/actions/workflows/ci.yml/badge.svg" alt="CI Pipeline"></a>
+  <a href="https://github.com/adamriofc/indonesian-business-agent-skills/actions/workflows/ci-release.yml"><img src="https://github.com/adamriofc/indonesian-business-agent-skills/actions/workflows/ci-release.yml/badge.svg" alt="CI Pipeline"></a>
   <a href="https://app.openworklabs.com/"><img src="https://img.shields.io/badge/OpenCode-Compatible-brightgreen.svg" alt="OpenCode Compatibility"></a>
   <a href="engines/"><img src="https://img.shields.io/badge/Hybrid%20Engine-LLM--Safe-orange.svg" alt="LLM-Safe Hybrid Engine"></a>
   <a href="tests/"><img src="https://img.shields.io/badge/Test%20Suite-526%2B%20Assertions-success.svg" alt="526+ Test Assertions"></a>
+  <a href="bundles/full-business-suite.json"><img src="https://img.shields.io/badge/Suite-88%20Skills%20%C2%B7%206%20Domains-blueviolet.svg" alt="88 Skills · 6 Domains"></a>
 </p>
 
 ---
@@ -35,7 +36,7 @@
 
 > **Evidence Boundary Note**: Independent external domain validation and enterprise production proof are still pending.
 
-**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, and custom agent frameworks, this repository integrates **88 Agent Skills** across **6 canonical plugins** (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) with **39 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
+**Indonesian Business Agent Skills** is an open-source domain-intelligence infrastructure designed to give AI agents an authentic Indonesian business and regulatory intelligence layer. Built for **OpenWork Desktop**, **OpenCode CLI**, **Claude Code (CLI)**, **Cursor IDE**, **Codex**, **OpenClaw**, **Hermes**, and custom agent frameworks, this repository integrates **88 Agent Skills** across **6 canonical plugins** (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) with **39 Deterministic Computational & Regulatory Diff Engines** (`engines/`) and single-source-of-truth temporal JSON rulesets (`engines/rules/`).
 
 ### 💡 Why Standard LLMs Fail at Indonesian Business & Compliance Calculations
 Generic AI models (such as unassisted ChatGPT or Claude) predict words probabilistically (*token prediction*). When tasked with calculating TER PPh 21 income tax, PHK severance payouts, or corporate loan interest, standard LLMs encounter 3 critical failure modes:
@@ -74,7 +75,11 @@ Agent (Skill-Assisted Execution):
 | **Claude Code (CLI)** | Native Plugin Installer (`npx skills`) | ✅ **Verified** | Universal Skill Protocol (`SKILL_PROTOCOL.md`) |
 | **Cursor IDE** | Skill Shorthand (`.cursor/skills/`) | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) |
 | **Codex** | Skill Shorthand (`.agents/skills/`) | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) |
+| **OpenClaw** | Skill Shorthand via `.openclaw/skills/` or MCP tool directory | 🟡 **Compatible** | Agent Skill Standard Structure (`SKILL.md`) — copy skills to OpenClaw skill path |
+| **Hermes (via MCP or tool-use)** | Tool-use / function-calling via skill YAML + engine exports | 🟡 **Compatible** | Engine outputs are pure JSON; skill `argument-hint` maps to Hermes tool parameters |
 | **Custom SDK / REST Adapters** | Protocol-Level Adapter | ⚪ **Planned** | Pure Math Engines & Decoupled JSON Rulesets |
+
+> **Integration Note — OpenClaw & Hermes**: These runtimes consume skills via their own tool-directory or MCP mechanism. Copy the relevant `*/skills/*/SKILL.md` files to your runtime's skill path, and import engine functions from `engines/*.js` directly. All engines are pure Node.js with no external dependencies.
 
 ---
 
@@ -216,7 +221,7 @@ npx skills add adamriofc/indonesian-business-agent-skills --domains marketing-id
 ## 🛠️ Installation & Integration Guide
 
 ### 1. Universal Agent Skills CLI (Recommended / Universal)
-Install skills directly across any supported agent framework (Claude Code, OpenCode, Codex, Cursor, Antigravity) using `npx`:
+Install skills directly across any supported agent framework (Claude Code, OpenCode, Codex, Cursor, OpenClaw, Hermes, Antigravity) using `npx`:
 ```bash
 # Install all skills across the repository
 npx skills add adamriofc/indonesian-business-agent-skills

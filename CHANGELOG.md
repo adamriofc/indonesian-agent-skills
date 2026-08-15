@@ -15,6 +15,8 @@ All notable changes to this project are documented here in reverse chronological
 - **P2 — KBLI Terminology**: `README.md` architecture diagram updated from "KBLI 2020 ROUTER" to "KBLI Business Activity Classification" — consistent with the Agent-owned orchestration boundary.
 - **P0 — Release Boundary v6.16.1**: New tag with correct release manifest (v6.16.1 → final commit), CI checkout fix (`fetch-depth: 0` + `fetch-tags: true`), and exact tag↔manifest provenance. Supersedes v6.16.0 whose tag carried a stale v6.15.0 manifest.
 - **CI Provenance Policy Fix**: Release workflow now triggers on `branches: [master, main]` only (removed `tags: ['v*']`). A tag points to a feature commit whose manifest cannot reference its own commit hash (self-referential hash is impossible), so a strict provenance gate always failed on tag pushes. Full 18-check release gate — including exact tag↔manifest provenance — is verified on every branch push where the manifest is locked to the already-tagged feature commit. Tags remain immutable pointers to commits that already passed the gate.
+- **README & Hero SVG Updated**: CI badge fixed from broken `ci.yml` → correct `ci-release.yml`. Hero SVG updated: version badge `v6.14.0` → `v6.16.1`, assertions `424` → `526+`, added runtime compatibility pill row (OpenWork, OpenCode, Claude Code, Cursor, Codex, OpenClaw, Hermes). Suite badge added to README header.
+- **Compatibility Matrix Expanded**: Added **OpenClaw** and **Hermes** as compatible runtimes with integration guidance. Updated opening paragraph and installation guide to reference both runtimes.
 
 ## [6.16.0] - 2026-08-15
 
