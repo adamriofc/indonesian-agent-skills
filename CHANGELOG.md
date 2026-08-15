@@ -14,6 +14,7 @@ All notable changes to this project are documented here in reverse chronological
 - **P1 — Stale Release-Gate Wording**: `README.md` documentation tree updated from "13-check release gate" to "18-check release gate".
 - **P2 — KBLI Terminology**: `README.md` architecture diagram updated from "KBLI 2020 ROUTER" to "KBLI Business Activity Classification" — consistent with the Agent-owned orchestration boundary.
 - **P0 — Release Boundary v6.16.1**: New tag with correct release manifest (v6.16.1 → final commit), CI checkout fix (`fetch-depth: 0` + `fetch-tags: true`), and exact tag↔manifest provenance. Supersedes v6.16.0 whose tag carried a stale v6.15.0 manifest.
+- **CI Provenance Policy Fix**: Release workflow now triggers on `branches: [master, main]` only (removed `tags: ['v*']`). A tag points to a feature commit whose manifest cannot reference its own commit hash (self-referential hash is impossible), so a strict provenance gate always failed on tag pushes. Full 18-check release gate — including exact tag↔manifest provenance — is verified on every branch push where the manifest is locked to the already-tagged feature commit. Tags remain immutable pointers to commits that already passed the gate.
 
 ## [6.16.0] - 2026-08-15
 

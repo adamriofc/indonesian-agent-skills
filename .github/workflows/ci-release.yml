@@ -3,7 +3,14 @@ name: Full Release Engineering & Verification Pipeline
 on:
   push:
     branches: [ master, main ]
-    tags: [ 'v*' ]
+    # NOTE: deliberately NOT triggering on tags ('v*').
+    # GitHub Actions evaluates the workflow file from the pushed commit.
+    # A tag points to a feature commit whose release-manifest.json cannot
+    # reference its own commit hash (self-referential hash is impossible),
+    # so a strict provenance gate would always fail on tag pushes.
+    # Release integrity is fully verified on every branch push, where the
+    # manifest is locked to the (already-tagged) feature commit; tags are
+    # immutable pointers to commits that have already passed this gate.
 
 permissions:
   contents: read

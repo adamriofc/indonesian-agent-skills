@@ -61,6 +61,16 @@ Maintainers must execute the following checklist prior to creating a release tag
     └─► gh release create vX.Y.Z --title "vX.Y.Z — Release Title" --notes-file release-notes.md
 ```
 
+> **Why tags do not re-trigger the pipeline**: The release workflow triggers on
+> `branches: [master, main]` only, not on tags. GitHub Actions evaluates the
+> workflow file from the pushed commit — a tag points to a feature commit whose
+> `release-manifest.json` cannot reference its own commit hash (a
+> self-referential hash is cryptographically impossible), so a strict
+> provenance gate would always fail on tag pushes. Release integrity is fully
+> verified on every branch push, where the manifest is locked to the
+> (already-tagged) feature commit. Tags are immutable pointers to commits that
+> already passed this 18-check gate.
+
 ---
 
 ## 3. Published Release Artifacts
