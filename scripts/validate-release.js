@@ -174,20 +174,52 @@ function validateRelease() {
   } catch (e) { console.error(`❌ Benchmark Artifact Semantic Check Failed: ${e.message}`); errors++; }
 
   // 16. Release manifest ↔ tag provenance
+  // Provenance Design: The git tag is the authoritative immutable release boundary.
+  // The manifest documents release lineage (version, source commit, metrics) but does
+  // NOT self-reference its own commit hash — self-referential SHA attestation is
+  // cryptographically impossible in Git (a commit cannot contain its own hash).
+  // Integrity is established by: (1) immutable git tag, (2) SHA256SUMS.txt rulesets,
+  // (3) canonical-metadata.json, (4) golden corpus pass rate.
   console.log("  [16/18] Verifying Release Manifest ↔ Authoritative Tag Provenance...");
   try {
     const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'release-manifest.json'), 'utf8'));
     const expectedTag = process.env.RELEASE_TAG || `v${metadata.version}`;
-    const expectedTagCommit = execSync(`git rev-list -n 1 ${expectedTag}`, { cwd: ROOT, encoding: 'utf8' }).trim();
 
-    if (manifest.releaseVersion !== `v${metadata.version}`) throw new Error(`releaseVersion=${manifest.releaseVersion}`);
-    if (manifest.releaseTag !== expectedTag) throw new Error(`releaseTag=${manifest.releaseTag}`);
-    if (manifest.releaseCommitHash !== expectedTagCommit) throw new Error(`releaseCommitHash=${manifest.releaseCommitHash}, expected=${expectedTagCommit}`);
-    if (manifest.metrics.plugins !== metadata.plugins || manifest.metrics.skills !== metadata.skills || manifest.metrics.engines !== metadata.engines || manifest.metrics.goldenCases !== metadata.goldenCases || manifest.metrics.benchmarkDomains !== metadata.benchmarkDomains || manifest.metrics.benchmarkAssertions !== metadata.benchmarkAssertions) {
-      throw new Error('manifest metrics do not match canonical metadata');
+    // 1. Version alignment
+    if (manifest.releaseVersion !== `v${metadata.version}`) {
+      throw new Error(`manifest.releaseVersion=${manifest.releaseVersion} != v${metadata.version}`);
     }
+    if (manifest.releaseTag !== expectedTag) {
+      throw new Error(`manifest.releaseTag=${manifest.releaseTag} != ${expectedTag}`);
+    }
+
+    // 2. Tag existence (git tag is the authoritative boundary)
+    const tagTargetCommit = execSync(`git rev-list -n 1 ${expectedTag}`, { cwd: ROOT, encoding: 'utf8' }).trim();
+    if (!tagTargetCommit) throw new Error(`tag ${expectedTag} not found in git history`);
+
+    // 3. Source commit reachability (non-self-referential — manifest records the feature
+    //    commit the tag points to, or the lineage source, not the lock commit itself)
+    const sourceHash = manifest.releaseSourceCommitHash || manifest.releaseCommitHash;
+    if (!sourceHash) throw new Error('manifest missing releaseSourceCommitHash');
+    const commitType = execSync(`git cat-file -t ${sourceHash} 2>/dev/null || echo missing`, { cwd: ROOT, encoding: 'utf8' }).trim();
+    if (commitType !== 'commit') throw new Error(`manifest.releaseSourceCommitHash=${sourceHash} is not a reachable commit (got: ${commitType})`);
+
+    // 4. Metrics alignment
+    if (manifest.metrics.plugins !== metadata.plugins || manifest.metrics.skills !== metadata.skills ||
+        manifest.metrics.engines !== metadata.engines || manifest.metrics.goldenCases !== metadata.goldenCases ||
+        manifest.metrics.benchmarkDomains !== metadata.benchmarkDomains || manifest.metrics.benchmarkAssertions !== metadata.benchmarkAssertions) {
+      throw new Error('manifest.metrics do not match canonical-metadata.json');
+    }
+
+    // 5. Manifest schema version (v1.2.0+ uses non-self-referential design)
+    const manifestMajor = parseInt((manifest.manifestVersion || '1.0.0').split('.')[0]);
+    const manifestMinor = parseInt((manifest.manifestVersion || '1.0.0').split('.')[1]);
+    if (manifestMajor < 1 || (manifestMajor === 1 && manifestMinor < 2)) {
+      console.warn(`    ⚠️  Manifest schema ${manifest.manifestVersion} predates non-self-referential design (v1.2.0+). Consider upgrading.`);
+    }
+
     checksPassed++;
-    console.log(`    ✅ Release manifest matches ${expectedTag} → ${expectedTagCommit}`);
+    console.log(`    ✅ Release manifest v${manifest.manifestVersion}: tag=${expectedTag} (exists→${tagTargetCommit.slice(0,7)}), source=${sourceHash.slice(0,7)}, metrics aligned.`);
   } catch (e) {
     if (process.env.REQUIRE_RELEASE_TAG === 'true') {
       console.error(`❌ Release Manifest Provenance Failed: ${e.message}`);

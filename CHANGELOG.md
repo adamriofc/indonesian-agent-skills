@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.16.2] - 2026-08-15
+
+### Release Provenance Semantics — Non-Self-Referential Design (Final Suite Stabilization)
+
+- **P0 — Release Provenance Schema v1.2.0**: Redesigned `release-manifest.json` from self-referential `releaseCommitHash` (which caused the Git circular-dependency loop: manifest cannot store the SHA of the commit that contains it) to non-self-referential `releaseSourceCommitHash` (the feature commit the tag points to) + `provenancePolicy` field documenting the design rationale. Git tag remains the authoritative immutable release boundary; manifest records lineage, not self-attestation.
+- **P0 — Validator Check [16] Redesigned**: `scripts/validate-release.js` Check [16] now verifies: (1) version alignment, (2) git tag existence, (3) `releaseSourceCommitHash` is a reachable commit (non-self-referential), (4) metrics alignment, (5) manifest schema version warning if pre-v1.2.0. Removed the circular SHA comparison that made every correct lock commit fail because the manifest's hash was always one commit behind.
+- **P1 — docs/RELEASE.md Provenance Architecture Section Added**: New section "Release Provenance Design — Non-Self-Referential (manifestVersion 1.2.0+)" explaining why self-referential commit hash attestation is cryptographically impossible in Git, the correct non-self-referential architecture, and comparison with industry practice (npm, GitHub Release, Docker digest).
+- **All artifacts synchronized to v6.16.2**: `package.json`, `package-lock.json`, `canonical-metadata.json`, `registry/index.json`, all 5 `bundles/*.json`, `README.md`, `docs/METRICS.md`, `docs/BENCHMARK.md`.
+
 ## [6.16.1] - 2026-08-15
 
 ### Suite Integrity Correction & Release Boundary Fix

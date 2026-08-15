@@ -5,7 +5,7 @@
 **Open-source Indonesian business intelligence for AI agents — combining regulatory-grounded skills, temporal rulesets, deterministic engines, and auditable provenance.**
 
 <p align="center">
-  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.16.1" alt="Indonesian Business Agent Skills Banner" width="100%">
+  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.16.2" alt="Indonesian Business Agent Skills Banner" width="100%">
 </p>
 
 <p align="center">
@@ -24,7 +24,7 @@
 <!-- GENERATED:STATS -->
 | Metric | Single Source of Truth Value | Measurement Scope |
 |---|---|---|
-| **Repository Version** | `v6.16.1` | SemVer release boundary |
+| **Repository Version** | `v6.16.2` | SemVer release boundary |
 | **Canonical Plugins** | `6` | Active plugin packages (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Machine-readable `SKILL.md` capability packs |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
@@ -142,7 +142,7 @@ README.md (What / Why / Overview & Demo)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
-│              INDONESIAN BUSINESS AGENT SUITE v6.16.1            │
+│              INDONESIAN BUSINESS AGENT SUITE v6.16.2            │
 │         88 Skills · 6 Domains · 39 Deterministic Engines        │
 ├──────────────────────────┬──────────────────────────────────────┤
 │  FULL SUITE              │  SELECTIVE PROFILES                  │
