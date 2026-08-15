@@ -5,7 +5,7 @@
 **Open-source Indonesian business intelligence for AI agents — combining regulatory-grounded skills, temporal rulesets, deterministic engines, and auditable provenance.**
 
 <p align="center">
-  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.15.0" alt="Indonesian Business Agent Skills Banner" width="100%">
+  <img src="docs/indonesian-business-agent-skills-hero.svg?v=6.16.0" alt="Indonesian Business Agent Skills Banner" width="100%">
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 <!-- GENERATED:STATS -->
 | Metric | Single Source of Truth Value | Measurement Scope |
 |---|---|---|
-| **Repository Version** | `v6.15.0` | SemVer release boundary |
+| **Repository Version** | `v6.16.0` | SemVer release boundary |
 | **Canonical Plugins** | `6` | Active plugin packages (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Machine-readable `SKILL.md` capability packs |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engines (`engines/`) |
@@ -141,6 +141,74 @@ README.md (What / Why / Overview & Demo)
   ├── METRICS.md (Single source of truth metrics & definitions)
   └── OPERATIONAL_RUNBOOK.md (Incident handling & emergency procedures)
 ```
+
+---
+
+## 🏢 Indonesian Business Agent Suite — Installation Profiles
+
+**One ecosystem. Six business domains. Choose your installation profile.**
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│              INDONESIAN BUSINESS AGENT SUITE v6.16.0            │
+│         88 Skills · 6 Domains · 39 Deterministic Engines        │
+├──────────────────────────┬──────────────────────────────────────┤
+│  FULL SUITE              │  SELECTIVE PROFILES                  │
+│  All 6 domains           │  Finance & Strategy                  │
+│  88 skills               │  People & Payroll                    │
+│  39 engines              │  Compliance                          │
+│                          │  Go-to-Market                        │
+└──────────────────────────┴──────────────────────────────────────┘
+```
+
+### Profile A — Full Business Suite (Recommended)
+> All 6 domains · 88 skills · 39 engines
+
+```bash
+npx skills add adamriofc/indonesian-business-agent-skills
+```
+
+**Use case**: Business owners, consultants, enterprise AI agents, general-purpose assistants.
+
+### Profile B — Finance & Strategy Pack
+> `finance-id` + `strategic-id` · 25 skills
+
+```bash
+npx skills add adamriofc/indonesian-business-agent-skills --domains finance-id,strategic-id
+```
+
+**Use case**: Investment analysis, NPV/IRR modeling, BCG/Porter/VRIO frameworks, scenario planning.
+
+### Profile C — People & Payroll Pack
+> `hr-id` + `tax-id` · 28 skills
+
+```bash
+npx skills add adamriofc/indonesian-business-agent-skills --domains hr-id,tax-id
+```
+
+**Use case**: HR managers, payroll teams, HR-tech platforms. PPh 21 TER, BPJS, PHK severance, THR.
+
+### Profile D — Compliance Pack
+> `legal-id` + `tax-id` + `hr-id` · 37 skills
+
+```bash
+npx skills add adamriofc/indonesian-business-agent-skills --domains legal-id,tax-id,hr-id
+```
+
+**Use case**: Legal teams, compliance officers, enterprise governance, PDP/OSS/HAKI audit.
+
+### Profile E — Go-to-Market Pack
+> `marketing-id` + `finance-id` + `strategic-id` · 52 skills
+
+```bash
+npx skills add adamriofc/indonesian-business-agent-skills --domains marketing-id,finance-id,strategic-id
+```
+
+**Use case**: Startup founders, D2C brands, ecommerce sellers. Market sizing, pricing, SEO, GTM.
+
+> **Architecture Note**: The Agent (LLM) owns orchestration. The Suite exposes capabilities — it does not route, plan, or execute reasoning on behalf of the agent. Each domain plugin remains independently installable and versioned in lockstep.
+
+> Bundle manifests are located in [`bundles/`](bundles/) and validated by the 18-check release gate.
 
 ---
 

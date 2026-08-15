@@ -8,11 +8,12 @@ Automated release pipeline, immutable boundaries, and release engineering checkl
 
 Every official release (e.g. \`v6.5.0\`) represents an immutable release boundary locking:
 - Source code state at tag creation.
-- Machines-readable skill definitions (\`SKILL.md\` files across 6 canonical plugins).
-- Pure Node.js calculation & regulatory diff engines (\`engines/*.js\`).
-- Statutory ruleset JSON files & cryptographic SHA256 hashes (\`SHA256SUMS.txt\`).
-- Automated benchmark artifacts (\`docs/benchmark-results/latest.json\`).
-- Documentation & metadata SSOT (\`canonical-metadata.json\`).
+- Machines-readable skill definitions (`SKILL.md` files across 6 canonical plugins).
+- Pure Node.js calculation & regulatory diff engines (`engines/*.js`).
+- Statutory ruleset JSON files & cryptographic SHA256 hashes (`SHA256SUMS.txt`).
+- Automated benchmark artifacts (`docs/benchmark-results/latest.json`).
+- Documentation & metadata SSOT (`canonical-metadata.json`).
+- Suite bundle manifests (`bundles/*.json`) validated in lockstep.
 
 Users and downstream AI agents consume explicit SemVer release tags (e.g. \`v6.5.0\`) rather than unpinned commit hashes.
 
@@ -53,7 +54,7 @@ Maintainers must execute the following checklist prior to creating a release tag
 
 [8] Automated Release Gate
     └─► npm run validate:release
-        (Executes 17-check automated release gate pipeline including blocking npm audit & release manifest validation)
+        (Executes 18-check automated release gate pipeline including blocking npm audit & release manifest validation)
 
 [9] Git Tagging & GitHub Release
     └─► git tag vX.Y.Z && git push origin vX.Y.Z

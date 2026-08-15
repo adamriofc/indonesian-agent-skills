@@ -18,7 +18,7 @@ const { execSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 
 function validateRelease() {
-  console.log("🚪 Running Automated Release Gate (17-Check Pipeline)...\n");
+  console.log("🚪 Running Automated Release Gate (18-Check Pipeline)...\n");
   let errors = 0;
   let checksPassed = 0;
 
@@ -30,7 +30,7 @@ function validateRelease() {
   const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
 
   // 1. Version Alignment Check
-  console.log("  [1/16] Checking Package, Lockfile, Registry & Metadata Version Alignment...");
+  console.log("  [1/18] Checking Package, Lockfile, Registry & Metadata Version Alignment...");
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const lock = fs.existsSync(path.join(ROOT, 'package-lock.json')) ? JSON.parse(fs.readFileSync(path.join(ROOT, 'package-lock.json'), 'utf8')) : null;
   const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'registry/index.json'), 'utf8'));
@@ -43,7 +43,7 @@ function validateRelease() {
   }
 
   // 2. CHANGELOG Release Entry Check
-  console.log("  [2/16] Verifying CHANGELOG.md Release Entry...");
+  console.log("  [2/18] Verifying CHANGELOG.md Release Entry...");
   const changelog = fs.readFileSync(path.join(ROOT, 'CHANGELOG.md'), 'utf8');
   if (!changelog.includes(`## [${metadata.version}]`)) {
     console.error(`❌ CHANGELOG Mismatch: missing '## [${metadata.version}]'`);
@@ -54,35 +54,35 @@ function validateRelease() {
   }
 
   // 3. Plugin Count
-  console.log("  [3/16] Verifying Canonical Plugin Count...");
+  console.log("  [3/18] Verifying Canonical Plugin Count...");
   if (registry.total_plugins !== metadata.plugins) {
     console.error(`❌ Plugin Count Mismatch: registry=${registry.total_plugins}, metadata=${metadata.plugins}`);
     errors++;
   } else { checksPassed++; console.log(`    ✅ Canonical plugin count verified: ${metadata.plugins}`); }
 
   // 4. Skill Count
-  console.log("  [4/16] Verifying Machine-Readable Skill Count...");
+  console.log("  [4/18] Verifying Machine-Readable Skill Count...");
   if (registry.total_skills !== metadata.skills) {
     console.error(`❌ Skill Count Mismatch: registry=${registry.total_skills}, metadata=${metadata.skills}`);
     errors++;
   } else { checksPassed++; console.log(`    ✅ Machine-readable skills count verified: ${metadata.skills}`); }
 
   // 5. Engine Count
-  console.log("  [5/16] Verifying Deterministic Engine Count...");
+  console.log("  [5/18] Verifying Deterministic Engine Count...");
   if (registry.total_engines !== metadata.engines) {
     console.error(`❌ Engine Count Mismatch: registry=${registry.total_engines}, metadata=${metadata.engines}`);
     errors++;
   } else { checksPassed++; console.log(`    ✅ Deterministic engine count verified: ${metadata.engines}`); }
 
   // 6. Golden Corpus
-  console.log("  [6/16] Verifying Golden Test Corpus...");
+  console.log("  [6/18] Verifying Golden Test Corpus...");
   if (metadata.goldenCases !== 121 || metadata.benchmarkDomains !== 27) {
     console.error(`❌ Golden Corpus Mismatch: expected 121/27, got ${metadata.goldenCases}/${metadata.benchmarkDomains}`);
     errors++;
   } else { checksPassed++; console.log(`    ✅ Golden corpus verified: 121 cases across 27 domains`); }
 
   // 7. Benchmark artifact
-  console.log("  [7/16] Verifying Latest Benchmark Results Artifact...");
+  console.log("  [7/18] Verifying Latest Benchmark Results Artifact...");
   const artifactPath = path.join(ROOT, 'docs/benchmark-results/latest.json');
   if (!fs.existsSync(artifactPath)) {
     console.error(`❌ Benchmark Artifact Missing: ${artifactPath}`);
@@ -96,21 +96,21 @@ function validateRelease() {
   }
 
   // 8. SHA256 integrity
-  console.log("  [8/16] Verifying SHA256 Ruleset Integrity Hashes...");
+  console.log("  [8/18] Verifying SHA256 Ruleset Integrity Hashes...");
   try {
     execSync('bash scripts/sha256sums.sh verify', { cwd: ROOT, stdio: 'pipe' });
     checksPassed++; console.log(`    ✅ Ruleset SHA256 trust anchor hashes verified`);
   } catch (e) { console.error(`❌ SHA256 Verification Failed: ${e.message}`); errors++; }
 
   // 9. Schema validator
-  console.log("  [9/16] Executing Dynamic Skill & Plugin Schema Validator...");
+  console.log("  [9/18] Executing Dynamic Skill & Plugin Schema Validator...");
   try {
     execSync('node tests/schema/validator.test.js', { cwd: ROOT, stdio: 'pipe' });
     checksPassed++; console.log(`    ✅ Dynamic schema validator passed`);
   } catch (e) { console.error(`❌ Schema Validation Failed: ${e.stdout ? e.stdout.toString() : e.message}`); errors++; }
 
   // 10. Stale taxonomy
-  console.log("  [10/16] Checking for Stale Taxonomy References...");
+  console.log("  [10/18] Checking for Stale Taxonomy References...");
   const stalePlugins = ['tax-payroll-id', 'ecommerce-id', 'content-lokal-id'];
   const staleDocFiles = ['README.md', 'SKILL_PROTOCOL.md', 'ROADMAP.md', 'PROVENANCE.md', 'REGULATORY_CHANGELOG.md'];
   let staleFound = false;
@@ -129,7 +129,7 @@ function validateRelease() {
   else errors++;
 
   // 11. Required files
-  console.log("  [11/16] Checking Required Production & Governance Files...");
+  console.log("  [11/18] Checking Required Production & Governance Files...");
   const requiredFiles = [
     'README.md', 'LICENSE', 'CHANGELOG.md', 'SECURITY.md', 'PROVENANCE.md',
     'SKILL_PROTOCOL.md', 'REGULATORY_CHANGELOG.md', 'PRODUCTION_READINESS.md',
@@ -142,7 +142,7 @@ function validateRelease() {
   else { checksPassed++; console.log(`    ✅ All ${requiredFiles.length} required production & governance files present`); }
 
   // 12. Git cleanliness
-  console.log("  [12/16] Checking Git Workspace Cleanliness...");
+  console.log("  [12/18] Checking Git Workspace Cleanliness...");
   try {
     const gitStatus = execSync('git status --porcelain', { cwd: ROOT, encoding: 'utf8' }).trim();
     if (gitStatus.length > 0 && process.env.REQUIRE_CLEAN_GIT === 'true') {
@@ -151,20 +151,20 @@ function validateRelease() {
   } catch { checksPassed++; console.log(`    ⚠️ Git status check skipped (not a git repo directory)`); }
 
   // 13. BENCHMARK.md version
-  console.log("  [13/16] Verifying BENCHMARK.md Version Alignment...");
+  console.log("  [13/18] Verifying BENCHMARK.md Version Alignment...");
   const benchmarkMd = fs.readFileSync(path.join(ROOT, 'docs/BENCHMARK.md'), 'utf8');
   if (!benchmarkMd.includes(`v${metadata.version}`)) { console.error(`❌ BENCHMARK.md Version Mismatch: expected v${metadata.version}`); errors++; }
   else { checksPassed++; console.log(`    ✅ BENCHMARK.md version verified`); }
 
   // 14. High/Critical npm audit
-  console.log("  [14/16] Executing High & Critical Dependency Vulnerability Audit Check...");
+  console.log("  [14/18] Executing High & Critical Dependency Vulnerability Audit Check...");
   try {
     execSync('npm audit --audit-level=high', { cwd: ROOT, stdio: 'pipe' });
     checksPassed++; console.log(`    ✅ High & Critical dependency audit passed`);
   } catch { console.error(`❌ Dependency Security Audit Failed: high or critical vulnerabilities detected.`); errors++; }
 
   // 15. Benchmark semantic alignment
-  console.log("  [15/16] Verifying Benchmark Artifact Semantic Alignment...");
+  console.log("  [15/18] Verifying Benchmark Artifact Semantic Alignment...");
   try {
     const artifact = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
     const domainCount = artifact.domains ? Object.keys(artifact.domains).length : 0;
@@ -174,7 +174,7 @@ function validateRelease() {
   } catch (e) { console.error(`❌ Benchmark Artifact Semantic Check Failed: ${e.message}`); errors++; }
 
   // 16. Release manifest ↔ tag provenance
-  console.log("  [16/16] Verifying Release Manifest ↔ Authoritative Tag Provenance...");
+  console.log("  [16/18] Verifying Release Manifest ↔ Authoritative Tag Provenance...");
   try {
     const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'release-manifest.json'), 'utf8'));
     const expectedTag = process.env.RELEASE_TAG || `v${metadata.version}`;
@@ -199,18 +199,25 @@ function validateRelease() {
   }
 
   // 17. Agent capability contract validation
-  console.log("  [17/17] Executing Agent Capability Contract Validator...");
+  console.log("  [17/18] Executing Agent Capability Contract Validator...");
   try {
     execSync('npm run validate:capabilities', { cwd: ROOT, stdio: 'pipe' });
     checksPassed++; console.log(`    ✅ Agent capability contract validator passed`);
   } catch (e) { console.error(`❌ Agent Capability Contract Validation Failed: ${e.message}`); errors++; }
 
+  // 18. Suite bundle integrity validation
+  console.log("  [18/18] Executing Suite Bundle Integrity Validator...");
+  try {
+    execSync('npm run validate:suite', { cwd: ROOT, stdio: 'pipe' });
+    checksPassed++; console.log(`    ✅ Suite bundle integrity validator passed`);
+  } catch (e) { console.error(`❌ Suite Bundle Integrity Validation Failed: ${e.message}`); errors++; }
+
   console.log(`\n---------------------------------------------------`);
   if (errors > 0) {
-    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/17 checks passed)`);
+    console.error(`❌ Release Gate Failed with ${errors} error(s). (${checksPassed}/18 checks passed)`);
     process.exit(1);
   } else {
-    console.log(`✅ Release Gate PASSED. All 17 Release Integrity Checks Passed.`);
+    console.log(`✅ Release Gate PASSED. All 18 Release Integrity Checks Passed.`);
   }
 }
 

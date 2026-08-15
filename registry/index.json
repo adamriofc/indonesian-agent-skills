@@ -1,6 +1,6 @@
 {
-  "version": "6.15.0",
-  "generated_at": "2026-08-14T23:25:48.337Z",
+  "version": "6.16.0",
+  "generated_at": "2026-08-15T00:00:55.617Z",
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "total_plugins": 6,
   "total_skills": 88,
@@ -89,7 +89,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.contract-reviewer"
     },
     {
       "id": "spk-generator",
@@ -175,7 +176,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.spk-generator"
     },
     {
       "id": "nda-indonesia",
@@ -261,7 +263,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.nda-indonesia"
     },
     {
       "id": "pdp-compliance",
@@ -341,7 +344,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.pdp-compliance"
     },
     {
       "id": "legal-memo-id",
@@ -422,7 +426,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.legal-memo-id"
     },
     {
       "id": "haki-trademark-check",
@@ -507,7 +512,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.haki-trademark-check"
     },
     {
       "id": "oss-kbli-navigator",
@@ -587,7 +593,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.oss-kbli-navigator"
     },
     {
       "id": "somasi-draft-id",
@@ -678,7 +685,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.somasi-draft-id"
     },
     {
       "id": "pph21-calculator",
@@ -779,7 +787,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.pph21-calculator"
     },
     {
       "id": "pph21-grossup",
@@ -875,7 +884,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.pph21-grossup"
     },
     {
       "id": "pph23-26-calculator",
@@ -971,7 +981,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.pph23-26-calculator"
     },
     {
       "id": "pph-final-umkm",
@@ -1062,7 +1073,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.pph-final-umkm"
     },
     {
       "id": "pph-badan-calculator",
@@ -1158,7 +1170,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.pph-badan-calculator"
     },
     {
       "id": "transfer-pricing-audit",
@@ -1258,7 +1271,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.transfer-pricing-audit"
     },
     {
       "id": "ppn-ppnbm-advanced",
@@ -1349,7 +1363,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.ppn-ppnbm-advanced"
     },
     {
       "id": "tax-planning",
@@ -1426,7 +1441,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.tax-planning"
     },
     {
       "id": "tax-optimization",
@@ -1503,7 +1519,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.tax-optimization"
     },
     {
       "id": "tax-risk-analysis",
@@ -1584,7 +1601,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.tax-risk-analysis"
     },
     {
       "id": "tax-audit-preparation",
@@ -1665,7 +1683,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.tax-audit-preparation"
     },
     {
       "id": "tax-cross-border",
@@ -1756,7 +1775,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.tax-cross-border"
     },
     {
       "id": "regulatory-diff",
@@ -1843,7 +1863,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.regulatory-diff"
     },
     {
       "id": "laporan-keuangan-psak",
@@ -1929,7 +1950,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.laporan-keuangan-psak"
     },
     {
       "id": "efaktur-helper",
@@ -2010,7 +2032,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.efaktur-helper"
     },
     {
       "id": "thr-calculator",
@@ -2098,7 +2121,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.thr-calculator"
     },
     {
       "id": "bpjs-calculator",
@@ -2184,7 +2208,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.bpjs-calculator"
     },
     {
       "id": "spt-tahunan-guide",
@@ -2267,7 +2292,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.spt-tahunan-guide"
     },
     {
       "id": "surat-peringatan",
@@ -2355,7 +2381,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.surat-peringatan"
     },
     {
       "id": "sop-perusahaan",
@@ -2438,7 +2465,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.sop-perusahaan"
     },
     {
       "id": "interview-id",
@@ -2521,7 +2549,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.interview-id"
     },
     {
       "id": "bpjs-tenagakerja-admin",
@@ -2599,7 +2628,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.bpjs-tenagakerja-admin"
     },
     {
       "id": "phk-calculator",
@@ -2696,7 +2726,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.phk-calculator"
     },
     {
       "id": "phk-advanced-matrix",
@@ -2797,7 +2828,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.phk-advanced-matrix"
     },
     {
       "id": "pkwt-pkwtt-checker",
@@ -2884,7 +2916,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.pkwt-pkwtt-checker"
     },
     {
       "id": "pkwtt-checker",
@@ -2991,7 +3024,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.pkwtt-checker"
     },
     {
       "id": "struktur-skala-upah",
@@ -3074,7 +3108,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "hr.struktur-skala-upah"
     },
     {
       "id": "deskripsi-produk-seo",
@@ -3165,7 +3200,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.deskripsi-produk-seo"
     },
     {
       "id": "cs-komplain-handler",
@@ -3251,7 +3287,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.cs-komplain-handler"
     },
     {
       "id": "analisis-kompetitor-marketplace",
@@ -3332,7 +3369,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.analisis-kompetitor-marketplace"
     },
     {
       "id": "shopee-live-script",
@@ -3423,7 +3461,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.shopee-live-script"
     },
     {
       "id": "tokopedia-seo-optimizer",
@@ -3519,7 +3558,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.tokopedia-seo-optimizer"
     },
     {
       "id": "buyer-negotiator",
@@ -3610,7 +3650,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.buyer-negotiator"
     },
     {
       "id": "margin-pricing-calculator",
@@ -3715,7 +3756,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.margin-pricing-calculator"
     },
     {
       "id": "klaim-logistik-retur",
@@ -3806,7 +3848,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.klaim-logistik-retur"
     },
     {
       "id": "tiktok-shop-affiliate",
@@ -3897,7 +3940,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.tiktok-shop-affiliate"
     },
     {
       "id": "shopee-video-creator",
@@ -3983,7 +4027,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.shopee-video-creator"
     },
     {
       "id": "whatsapp-broadcast",
@@ -4074,7 +4119,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.whatsapp-broadcast"
     },
     {
       "id": "linkedin-x-thread-id",
@@ -4160,7 +4206,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.linkedin-x-thread-id"
     },
     {
       "id": "script-reels-tiktok",
@@ -4246,7 +4293,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.script-reels-tiktok"
     },
     {
       "id": "lokalisasi-slang-indonesia",
@@ -4332,7 +4380,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.lokalisasi-slang-indonesia"
     },
     {
       "id": "press-release-id",
@@ -4418,7 +4467,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.press-release-id"
     },
     {
       "id": "instagram-reels-carousel",
@@ -4509,7 +4559,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.instagram-reels-carousel"
     },
     {
       "id": "youtube-shorts-script",
@@ -4595,7 +4646,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.youtube-shorts-script"
     },
     {
       "id": "kol-brief-contract",
@@ -4686,7 +4738,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.kol-brief-contract"
     },
     {
       "id": "gmb-local-seo",
@@ -4777,7 +4830,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.gmb-local-seo"
     },
     {
       "id": "accounting-basics",
@@ -4856,7 +4910,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.accounting-basics"
     },
     {
       "id": "financial-statements",
@@ -4944,7 +4999,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.financial-statements"
     },
     {
       "id": "cash-flow-analysis",
@@ -5037,7 +5093,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.cash-flow-analysis"
     },
     {
       "id": "budgeting-forecasting",
@@ -5130,7 +5187,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.budgeting-forecasting"
     },
     {
       "id": "financial-ratio-analysis",
@@ -5222,7 +5280,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.financial-ratio-analysis"
     },
     {
       "id": "working-capital",
@@ -5320,7 +5379,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.working-capital"
     },
     {
       "id": "cost-accounting",
@@ -5413,7 +5473,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.cost-accounting"
     },
     {
       "id": "break-even-analysis",
@@ -5515,7 +5576,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.break-even-analysis"
     },
     {
       "id": "unit-economics",
@@ -5612,7 +5674,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.unit-economics"
     },
     {
       "id": "business-feasibility",
@@ -5709,7 +5772,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.business-feasibility"
     },
     {
       "id": "financial-modeling",
@@ -5797,7 +5861,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.financial-modeling"
     },
     {
       "id": "capital-budgeting",
@@ -5890,7 +5955,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.capital-budgeting"
     },
     {
       "id": "vc-term-sheet-waterfall",
@@ -5983,7 +6049,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.vc-term-sheet-waterfall"
     },
     {
       "id": "regulatory-impact",
@@ -6074,7 +6141,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "tax.regulatory-impact"
     },
     {
       "id": "compliance-risk",
@@ -6154,7 +6222,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "legal.compliance-risk"
     },
     {
       "id": "business-scenario",
@@ -6252,7 +6321,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.business-scenario"
     },
     {
       "id": "decision-engine",
@@ -6360,7 +6430,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "finance.decision-engine"
     },
     {
       "id": "porter-three-tests",
@@ -6456,7 +6527,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.porter-three-tests"
     },
     {
       "id": "porter-five-forces",
@@ -6533,7 +6605,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.porter-five-forces"
     },
     {
       "id": "bcg-matrix",
@@ -6620,7 +6693,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.bcg-matrix"
     },
     {
       "id": "ansoff-matrix",
@@ -6702,7 +6776,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.ansoff-matrix"
     },
     {
       "id": "vrio-analysis",
@@ -6779,7 +6854,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.vrio-analysis"
     },
     {
       "id": "value-chain-analysis",
@@ -6865,7 +6941,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.value-chain-analysis"
     },
     {
       "id": "strategic-planning",
@@ -6942,7 +7019,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.strategic-planning"
     },
     {
       "id": "decision-making",
@@ -7019,7 +7097,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.decision-making"
     },
     {
       "id": "scenario-planning",
@@ -7120,7 +7199,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.scenario-planning"
     },
     {
       "id": "strategic-risk-analysis",
@@ -7201,7 +7281,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "strategic.strategic-risk-analysis"
     },
     {
       "id": "market-sizing",
@@ -7296,7 +7377,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.market-sizing"
     },
     {
       "id": "customer-segmentation",
@@ -7377,7 +7459,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.customer-segmentation"
     },
     {
       "id": "jobs-to-be-done",
@@ -7462,7 +7545,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.jobs-to-be-done"
     },
     {
       "id": "voice-of-customer",
@@ -7547,7 +7631,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.voice-of-customer"
     },
     {
       "id": "positioning-analysis",
@@ -7638,7 +7723,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.positioning-analysis"
     },
     {
       "id": "go-to-market",
@@ -7733,7 +7819,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.go-to-market"
     },
     {
       "id": "product-classification",
@@ -7822,7 +7909,8 @@
             "outputs": []
           }
         }
-      }
+      },
+      "canonical_id": "marketing.product-classification"
     }
   ]
 }

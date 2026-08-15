@@ -53,7 +53,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.accounting-basics"
     },
     {
       "id": "break-even-analysis",
@@ -127,7 +128,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.break-even-analysis"
     },
     {
       "id": "budgeting-forecasting",
@@ -192,7 +194,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.budgeting-forecasting"
     },
     {
       "id": "business-feasibility",
@@ -261,7 +264,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.business-feasibility"
     },
     {
       "id": "business-scenario",
@@ -331,7 +335,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.business-scenario"
     },
     {
       "id": "capital-budgeting",
@@ -396,7 +401,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.capital-budgeting"
     },
     {
       "id": "cash-flow-analysis",
@@ -461,7 +467,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.cash-flow-analysis"
     },
     {
       "id": "cost-accounting",
@@ -526,7 +533,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.cost-accounting"
     },
     {
       "id": "decision-engine",
@@ -606,7 +614,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.decision-engine"
     },
     {
       "id": "financial-modeling",
@@ -666,7 +675,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.financial-modeling"
     },
     {
       "id": "financial-ratio-analysis",
@@ -730,7 +740,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.financial-ratio-analysis"
     },
     {
       "id": "financial-statements",
@@ -790,7 +801,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.financial-statements"
     },
     {
       "id": "unit-economics",
@@ -859,7 +871,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.unit-economics"
     },
     {
       "id": "vc-term-sheet-waterfall",
@@ -924,7 +937,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.vc-term-sheet-waterfall"
     },
     {
       "id": "working-capital",
@@ -994,7 +1008,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "finance.working-capital"
     },
     {
       "id": "bpjs-calculator",
@@ -1053,7 +1068,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.bpjs-calculator"
     },
     {
       "id": "bpjs-tenagakerja-admin",
@@ -1104,7 +1120,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.bpjs-tenagakerja-admin"
     },
     {
       "id": "interview-id",
@@ -1160,7 +1177,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.interview-id"
     },
     {
       "id": "phk-advanced-matrix",
@@ -1234,7 +1252,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.phk-advanced-matrix"
     },
     {
       "id": "phk-calculator",
@@ -1304,7 +1323,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.phk-calculator"
     },
     {
       "id": "pkwt-pkwtt-checker",
@@ -1364,7 +1384,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.pkwt-pkwtt-checker"
     },
     {
       "id": "pkwtt-checker",
@@ -1444,7 +1465,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.pkwtt-checker"
     },
     {
       "id": "sop-perusahaan",
@@ -1500,7 +1522,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.sop-perusahaan"
     },
     {
       "id": "spt-tahunan-guide",
@@ -1556,7 +1579,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.spt-tahunan-guide"
     },
     {
       "id": "struktur-skala-upah",
@@ -1612,7 +1636,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.struktur-skala-upah"
     },
     {
       "id": "surat-peringatan",
@@ -1673,7 +1698,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.surat-peringatan"
     },
     {
       "id": "thr-calculator",
@@ -1734,7 +1760,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "hr.thr-calculator"
     },
     {
       "id": "compliance-risk",
@@ -1789,7 +1816,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.compliance-risk"
     },
     {
       "id": "contract-reviewer",
@@ -1844,7 +1872,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.contract-reviewer"
     },
     {
       "id": "haki-trademark-check",
@@ -1904,7 +1933,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.haki-trademark-check"
     },
     {
       "id": "legal-memo-id",
@@ -1960,7 +1990,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.legal-memo-id"
     },
     {
       "id": "nda-indonesia",
@@ -2021,7 +2052,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.nda-indonesia"
     },
     {
       "id": "oss-kbli-navigator",
@@ -2076,7 +2108,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.oss-kbli-navigator"
     },
     {
       "id": "pdp-compliance",
@@ -2131,7 +2164,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.pdp-compliance"
     },
     {
       "id": "somasi-draft-id",
@@ -2197,7 +2231,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.somasi-draft-id"
     },
     {
       "id": "spk-generator",
@@ -2258,7 +2293,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "legal.spk-generator"
     },
     {
       "id": "analisis-kompetitor-marketplace",
@@ -2309,7 +2345,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.analisis-kompetitor-marketplace"
     },
     {
       "id": "buyer-negotiator",
@@ -2370,7 +2407,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.buyer-negotiator"
     },
     {
       "id": "cs-komplain-handler",
@@ -2426,7 +2464,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.cs-komplain-handler"
     },
     {
       "id": "customer-segmentation",
@@ -2477,7 +2516,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.customer-segmentation"
     },
     {
       "id": "deskripsi-produk-seo",
@@ -2538,7 +2578,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.deskripsi-produk-seo"
     },
     {
       "id": "gmb-local-seo",
@@ -2599,7 +2640,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.gmb-local-seo"
     },
     {
       "id": "go-to-market",
@@ -2664,7 +2706,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.go-to-market"
     },
     {
       "id": "instagram-reels-carousel",
@@ -2725,7 +2768,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.instagram-reels-carousel"
     },
     {
       "id": "jobs-to-be-done",
@@ -2780,7 +2824,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.jobs-to-be-done"
     },
     {
       "id": "klaim-logistik-retur",
@@ -2841,7 +2886,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.klaim-logistik-retur"
     },
     {
       "id": "kol-brief-contract",
@@ -2902,7 +2948,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.kol-brief-contract"
     },
     {
       "id": "linkedin-x-thread-id",
@@ -2958,7 +3005,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.linkedin-x-thread-id"
     },
     {
       "id": "lokalisasi-slang-indonesia",
@@ -3014,7 +3062,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.lokalisasi-slang-indonesia"
     },
     {
       "id": "margin-pricing-calculator",
@@ -3089,7 +3138,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.margin-pricing-calculator"
     },
     {
       "id": "market-sizing",
@@ -3154,7 +3204,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.market-sizing"
     },
     {
       "id": "positioning-analysis",
@@ -3215,7 +3266,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.positioning-analysis"
     },
     {
       "id": "press-release-id",
@@ -3271,7 +3323,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.press-release-id"
     },
     {
       "id": "product-classification",
@@ -3330,7 +3383,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.product-classification"
     },
     {
       "id": "script-reels-tiktok",
@@ -3386,7 +3440,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.script-reels-tiktok"
     },
     {
       "id": "shopee-live-script",
@@ -3447,7 +3502,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.shopee-live-script"
     },
     {
       "id": "shopee-video-creator",
@@ -3503,7 +3559,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.shopee-video-creator"
     },
     {
       "id": "tiktok-shop-affiliate",
@@ -3564,7 +3621,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.tiktok-shop-affiliate"
     },
     {
       "id": "tokopedia-seo-optimizer",
@@ -3630,7 +3688,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.tokopedia-seo-optimizer"
     },
     {
       "id": "voice-of-customer",
@@ -3685,7 +3744,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.voice-of-customer"
     },
     {
       "id": "whatsapp-broadcast",
@@ -3746,7 +3806,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.whatsapp-broadcast"
     },
     {
       "id": "youtube-shorts-script",
@@ -3802,7 +3863,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "marketing.youtube-shorts-script"
     },
     {
       "id": "ansoff-matrix",
@@ -3858,7 +3920,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.ansoff-matrix"
     },
     {
       "id": "bcg-matrix",
@@ -3919,7 +3982,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.bcg-matrix"
     },
     {
       "id": "decision-making",
@@ -3970,7 +4034,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.decision-making"
     },
     {
       "id": "porter-five-forces",
@@ -4021,7 +4086,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.porter-five-forces"
     },
     {
       "id": "porter-three-tests",
@@ -4091,7 +4157,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.porter-three-tests"
     },
     {
       "id": "scenario-planning",
@@ -4166,7 +4233,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.scenario-planning"
     },
     {
       "id": "strategic-planning",
@@ -4217,7 +4285,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.strategic-planning"
     },
     {
       "id": "strategic-risk-analysis",
@@ -4272,7 +4341,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.strategic-risk-analysis"
     },
     {
       "id": "value-chain-analysis",
@@ -4332,7 +4402,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.value-chain-analysis"
     },
     {
       "id": "vrio-analysis",
@@ -4383,7 +4454,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "strategic.vrio-analysis"
     },
     {
       "id": "efaktur-helper",
@@ -4438,7 +4510,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.efaktur-helper"
     },
     {
       "id": "laporan-keuangan-psak",
@@ -4498,7 +4571,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.laporan-keuangan-psak"
     },
     {
       "id": "pph-badan-calculator",
@@ -4568,7 +4642,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.pph-badan-calculator"
     },
     {
       "id": "pph-final-umkm",
@@ -4633,7 +4708,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.pph-final-umkm"
     },
     {
       "id": "pph21-calculator",
@@ -4708,7 +4784,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.pph21-calculator"
     },
     {
       "id": "pph21-grossup",
@@ -4778,7 +4855,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.pph21-grossup"
     },
     {
       "id": "pph23-26-calculator",
@@ -4848,7 +4926,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.pph23-26-calculator"
     },
     {
       "id": "ppn-ppnbm-advanced",
@@ -4913,7 +4992,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.ppn-ppnbm-advanced"
     },
     {
       "id": "regulatory-diff",
@@ -4974,7 +5054,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.regulatory-diff"
     },
     {
       "id": "regulatory-impact",
@@ -5039,7 +5120,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.regulatory-impact"
     },
     {
       "id": "tax-audit-preparation",
@@ -5094,7 +5176,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.tax-audit-preparation"
     },
     {
       "id": "tax-cross-border",
@@ -5159,7 +5242,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.tax-cross-border"
     },
     {
       "id": "tax-optimization",
@@ -5210,7 +5294,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.tax-optimization"
     },
     {
       "id": "tax-planning",
@@ -5261,7 +5346,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.tax-planning"
     },
     {
       "id": "tax-risk-analysis",
@@ -5316,7 +5402,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.tax-risk-analysis"
     },
     {
       "id": "transfer-pricing-audit",
@@ -5390,7 +5477,8 @@
           "human_review_required": false
         },
         "cross_domain_relevance": {}
-      }
+      },
+      "canonical_id": "tax.transfer-pricing-audit"
     }
   ]
 }

@@ -2,7 +2,20 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
-## [6.15.0] - 2026-08-15
+## [6.16.0] - 2026-08-15
+
+### Indonesian Business Agent Suite — Distribution Layer & Suite Integrity
+
+- **Suite/Bundle Distribution Architecture**: Added `bundles/` directory with 5 curated installation profiles: `full-business-suite.json` (all 6 domains, 88 skills), `finance-strategy.json`, `people-payroll.json`, `compliance.json`, `go-to-market.json`. Suite is a **distribution layer only** — no orchestration logic, no reasoning, no LLM calls. Agent owns all orchestration.
+- **Lockstep Versioning**: All 5 bundle manifests versioned in lockstep with repository (`v6.16.0`). Plugin versions within bundles match repository version. No independent plugin versioning complexity.
+- **Suite Integrity Validator (`scripts/validate-suite.js`)**: 10-check validator covering: bundles/ directory presence, full-business-suite existence, valid JSON + required fields, canonical plugin ID match, no duplicate plugin IDs per bundle, full suite covers all 6 plugins, totals match canonical metadata, globally unique capability IDs, domain-namespaced canonical IDs, lockstep version alignment.
+- **Suite Discovery Test (`tests/suite/suite-discovery.test.js`)**: 34-assertion test verifying all 6 plugins discoverable, 88 skills present (no duplicate IDs), capability catalog covers all 6 domains, all 88 capabilities have `canonical_id` in `domain.skill-id` format with no collisions, engines + rulesets present, bundle manifests consistent with registry.
+- **Namespaced Canonical IDs (`canonical_id` field)**: Added `canonical_id` in `domain.skill-id` format to all 88 entries in `registry/capabilities.json` and `registry/index.json` for globally unique machine-readable identification across the unified catalog.
+- **18-Check Release Gate**: Upgraded `scripts/validate-release.js` from 17-check to 18-check pipeline; added Check 18 (`npm run validate:suite`) as a blocking gate in CI and local validation.
+- **README Suite UX Section**: Added "Indonesian Business Agent Suite — Installation Profiles" section with 5 profile choices, architecture diagram, and agent-boundary note. Updated test assertion badge to `526+`.
+- **`package.json` scripts**: Added `validate:suite` and `test:suite` scripts; added `bundles/` and `schemas/` to `files` array for npm distribution.
+
+
 
 ### Last-Mile Integrity Hardening — Typed Capability Contracts & SSOT Audit Completion
 
