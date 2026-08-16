@@ -4,9 +4,9 @@
   "repository": "https://github.com/adamriofc/indonesian-business-agent-skills",
   "releaseVersion": "v6.16.3",
   "releaseTag": "v6.16.3",
-  "releaseSourceCommitHash": "fb62e6cf363540af242bdacd6ad31c1f20273dd0",
-  "releaseSourceDescription": "Feature commit for v6.16.2: non-self-referential provenance design (manifest schema v1.2.0), validator redesign, docs/RELEASE.md provenance architecture section",
-  "generatedAt": "2026-08-16T00:56:16.189Z",
+  "releaseSourceCommitHash": "aaf5950f0e9218fee7dce55fb94ed3f79ce18edd",
+  "releaseSourceDescription": "Feature commit for v6.16.3: final release lock — tag boundary hygiene, ancestor-verified provenance lineage in validator Check [16]",
+  "generatedAt": "2026-08-16T01:07:41.359Z",
   "metrics": {
     "plugins": 6,
     "skills": 88,
