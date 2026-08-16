@@ -27,7 +27,7 @@ Users and downstream AI agents consume explicit SemVer release tags (e.g. `v6.5.
 Authoritative Release Boundary
           │
           ▼
-    Git Tag (e.g. v6.16.2)   ← immutable, cryptographically secured by Git
+    Git Tag (e.g. v6.16.3)   ← immutable, cryptographically secured by Git
           │
           ▼
     Feature Commit (SHA)     ← what the tag points to
@@ -50,7 +50,7 @@ In Git, a commit SHA is the cryptographic hash of the commit object contents (tr
 Attempting to store `releaseCommitHash = <SHA of the commit that stores this manifest>` always produces a mismatch — a new commit must be created to store the updated hash, which itself cannot contain its own new hash.
 
 **The correct provenance model (v1.2.0+)**:
-- `releaseTag` = the SemVer tag (e.g. `v6.16.2`) — **this is the authoritative release boundary**
+- `releaseTag` = the SemVer tag (e.g. `v6.16.3`) — **this is the authoritative release boundary**
 - `releaseSourceCommitHash` = the SHA of the feature commit that the tag points to — **non-self-referential**
 - The release gate verifies: (1) tag exists, (2) source commit is reachable, (3) version alignment, (4) metric alignment
 - Git tag immutability + SHA256SUMS + golden corpus = the full integrity proof

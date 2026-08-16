@@ -12,7 +12,7 @@ Official measurement definitions and exact metrics for `indonesian-business-agen
 
 | Metric Name | Value | Exact Definition & Measurement Source |
 |---|---|---|
-| **Repository Version** | `v6.16.2` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
+| **Repository Version** | `v6.16.3` | SemVer string in `package.json`, `package-lock.json`, and `registry/index.json` |
 | **Canonical Plugins** | `6` | Plugin directories containing `.claude-plugin/plugin.json` (`legal-id`, `tax-id`, `hr-id`, `finance-id`, `marketing-id`, `strategic-id`) |
 | **Agent Skills** | `88` | Total `SKILL.md` files registered across the 6 canonical plugins |
 | **Deterministic Engines** | `39` | Pure Node.js calculation & regulatory diff engine modules in `engines/*.js` |

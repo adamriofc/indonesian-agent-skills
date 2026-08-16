@@ -197,12 +197,24 @@ function validateRelease() {
     const tagTargetCommit = execSync(`git rev-list -n 1 ${expectedTag}`, { cwd: ROOT, encoding: 'utf8' }).trim();
     if (!tagTargetCommit) throw new Error(`tag ${expectedTag} not found in git history`);
 
-    // 3. Source commit reachability (non-self-referential — manifest records the feature
-    //    commit the tag points to, or the lineage source, not the lock commit itself)
+    // 3. Source commit reachability + lineage (non-self-referential — manifest records
+    //    the feature commit the release was built from, not the lock commit itself)
     const sourceHash = manifest.releaseSourceCommitHash || manifest.releaseCommitHash;
     if (!sourceHash) throw new Error('manifest missing releaseSourceCommitHash');
     const commitType = execSync(`git cat-file -t ${sourceHash} 2>/dev/null || echo missing`, { cwd: ROOT, encoding: 'utf8' }).trim();
     if (commitType !== 'commit') throw new Error(`manifest.releaseSourceCommitHash=${sourceHash} is not a reachable commit (got: ${commitType})`);
+
+    // 3a. Source commit MUST be an ancestor of the release tag target — this proves the
+    //     manifest's recorded lineage genuinely belongs to this release's history
+    //     (git merge-base --is-ancestor exits 0 when source is an ancestor of tag target)
+    let isAncestor = false;
+    try {
+      execSync(`git merge-base --is-ancestor ${sourceHash} ${tagTargetCommit}`, { cwd: ROOT, stdio: 'ignore' });
+      isAncestor = true;
+    } catch (e) { isAncestor = false; }
+    if (!isAncestor) {
+      throw new Error(`manifest.releaseSourceCommitHash=${sourceHash} is NOT an ancestor of release tag ${expectedTag} (${tagTargetCommit}) — lineage breach`);
+    }
 
     // 4. Metrics alignment
     if (manifest.metrics.plugins !== metadata.plugins || manifest.metrics.skills !== metadata.skills ||

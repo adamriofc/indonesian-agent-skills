@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "version": "6.16.2",
+  "version": "6.16.3",
   "plugins": 6,
   "skills": 88,
   "engines": 39,
@@ -13,6 +13,6 @@
     "ltsRecommended": "22",
     "currentTested": "24"
   },
-  "generatedAt": "2026-08-15T22:39:14.679Z",
+  "generatedAt": "2026-08-16T00:56:16.189Z",
   "generator": "scripts/generate-metadata.js"
 }
