@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here in reverse chronological order. Regulatory/statutory changes are additionally tracked per-rule in [REGULATORY_CHANGELOG.md](./REGULATORY_CHANGELOG.md); provenance of every rule in [PROVENANCE.md](./PROVENANCE.md); release cadence in [REGULATORY_PIPELINE.md](./REGULATORY_PIPELINE.md).
 
+## [6.16.3] - 2026-08-16
+
+### Final Release Lock — Tag Boundary Hygiene & Ancestor-Verified Lineage
+
+- **P0 — Tag Boundary Corrected**: `v6.16.2` pointed to the feature commit (`fb62e6c`) whose tree still carried the pre-final manifest (`releaseSourceCommitHash=ab4dd2b`); the final manifest lived one commit later on master (`f133335`). `v6.16.3` fixes this: the tag now points to the **manifest-final lock commit** itself, so checking out the tag yields the exact final manifest — GitHub compare shows tag == master (0 commits ahead).
+- **P0 — Validator Lineage Hardening**: `scripts/validate-release.js` Check [16] now additionally verifies `git merge-base --is-ancestor <releaseSourceCommitHash> <tagCommit>` — the recorded source commit must be an **ancestor of the release tag**, proving the manifest's lineage genuinely belongs to this release's history. Provenance check score target rises from 9.4 → 9.8.
+- **Provenance schema stays `manifestVersion 1.2.0`** (non-self-referential design retained).
+- **All artifacts synchronized to v6.16.3**: `package.json`, `package-lock.json`, `canonical-metadata.json`, `registry/index.json`, all `bundles/*.json`, `README.md`, `docs/METRICS.md`, `docs/BENCHMARK.md`.
+
 ## [6.16.2] - 2026-08-15
 
 ### Release Provenance Semantics — Non-Self-Referential Design (Final Suite Stabilization)

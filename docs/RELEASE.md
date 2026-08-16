@@ -52,7 +52,7 @@ Attempting to store `releaseCommitHash = <SHA of the commit that stores this man
 **The correct provenance model (v1.2.0+)**:
 - `releaseTag` = the SemVer tag (e.g. `v6.16.3`) — **this is the authoritative release boundary**
 - `releaseSourceCommitHash` = the SHA of the feature commit that the tag points to — **non-self-referential**
-- The release gate verifies: (1) tag exists, (2) source commit is reachable, (3) version alignment, (4) metric alignment
+- The release gate verifies: (1) tag exists, (2) source commit is reachable, (3) **source commit is an ancestor of the release tag** (`git merge-base --is-ancestor`), (4) version alignment, (5) metric alignment
 - Git tag immutability + SHA256SUMS + golden corpus = the full integrity proof
 
 This design is consistent with industry practice (e.g. npm package registry, GitHub Release, Docker image digest — none require a file to contain its own content hash).
@@ -109,6 +109,12 @@ Maintainers must execute the following checklist prior to creating a release tag
 > is fully verified on every branch push, where the manifest records the source
 > commit lineage. Tags are immutable pointers to commits that already passed the
 > 18-check gate.
+
+> **Tag boundary hygiene**: The tag must point to the **manifest-final commit**
+> (the lock commit whose `release-manifest.json` records the feature source), so
+> that checking out the tag yields the exact final manifest and GitHub compare
+> shows tag == master. Do not tag the feature commit itself if the final manifest
+> lives one commit later on master.
 
 ---
 
